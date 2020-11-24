@@ -4,8 +4,10 @@ channels:
   - defaults
 dependencies:
   - python=3.8
-  - numpy
+  - numpy=1.19.*
   - scipy
   - pandas=1.*
   - matplotlib
   - statsmodels
+  - ipympl
+  - xlrd
