@@ -157,7 +157,7 @@
     \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
     % Document parameters
     % Document title
-    \newcommand*{\mytitle}{Unit 5: Basic plotting}
+    \newcommand*{\mytitle}{Unit 5: Plotting}
 
     \input{overrides-post}
     
@@ -384,8 +384,8 @@
     
 
     
-    \hypertarget{unit-5-basic-plotting}{%
-\section{Unit 5: Basic plotting}\label{unit-5-basic-plotting}}
+    \hypertarget{plotting}{%
+\section{Plotting}\label{plotting}}
 
 In this unit, we take a first look at plotting numerical data. Python
 itself does not have any built-in plotting capabilities, so we will be
@@ -395,8 +395,8 @@ Python.
 \begin{itemize}
 \tightlist
 \item
-  For details on a plotting function, have a look at the official
-  documentation at https://matplotlib.org/
+  For details on a particular plotting function, see the
+  \href{https://matplotlib.org/contents.html}{official documentation}.
 \item
   There is an official introductory
   \href{https://matplotlib.org/tutorials/introductory/pyplot.html}{tutorial}
@@ -416,16 +416,27 @@ For this to work, the \texttt{ipympl} package needs to be installed, see
 this is not supported or required (and in fact produces a syntax error)
 in regular \texttt{*.py} Python script files.
 
+In order to access the functions and objects from matplotlib, we first
+need to import them. The general convention is to use the namespace
+\texttt{plt} for this purpose:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+\end{tcolorbox}
+
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{line-and-scatter-plots}{%
 \subsection{Line and scatter plots}\label{line-and-scatter-plots}}
 
-One of the simplest plots we can generate is a line decribed by a list
+One of the simplest plots we can generate is a line described by a list
 of points.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{1}{\boxspacing}
+\prompt{In}{incolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} import matplotlib library}
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
@@ -437,38 +448,39 @@ of points.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{1}{\boxspacing}
+\prompt{Out}{outcolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f27613a0f10>]
+[<matplotlib.lines.Line2D at 0x7f73bd187810>]
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_2_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_3_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
     We didn't even have to specify the corresponding \(x\)-values, as MPL
-automatically assumes them to be {[}0, 1, 2, \ldots{]}
+automatically assumes them to be {[}0, 1, 2, \ldots{]}. Usually, we want
+to plot for a given set of \(x\)-values like this:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{2}{\boxspacing}
+\prompt{In}{incolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} explicitly specify x\PYZhy{}values}
-\PY{n}{xvalues} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+\PY{n}{xvalues} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{]}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{yvalues}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{2}{\boxspacing}
+\prompt{Out}{outcolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f2734e8cbd0>]
+[<matplotlib.lines.Line2D at 0x7f73ad089f90>]
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_4_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_5_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -476,7 +488,7 @@ automatically assumes them to be {[}0, 1, 2, \ldots{]}
 a single graph:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{3}{\boxspacing}
+\prompt{In}{incolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{yvalues2} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{]}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{yvalues}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xvalues}\PY{p}{,} \PY{n}{yvalues2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -484,53 +496,82 @@ a single graph:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{3}{\boxspacing}
+\prompt{Out}{outcolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f2734e0c510>,
- <matplotlib.lines.Line2D at 0x7f2734e0c390>]
+[<matplotlib.lines.Line2D at 0x7f73ad00b910>,
+ <matplotlib.lines.Line2D at 0x7f73ad00b9d0>]
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_6_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_7_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
     The characters following each set of \(y\)-values are style
 specifications that are very similar to the ones used in Matlab. More
-specifically, the letters are short-hand notations for colours: -
-\texttt{b}: blue - \texttt{g}: green - \texttt{r}: red - \texttt{c}:
-cyan - \texttt{m}: magenta - \texttt{y}: yellow - \texttt{k}: black -
-\texttt{w}: white
+specifically, the letters are short-hand notations for colours:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{b}: blue
+\item
+  \texttt{g}: green
+\item
+  \texttt{r}: red
+\item
+  \texttt{c}: cyan
+\item
+  \texttt{m}: magenta
+\item
+  \texttt{y}: yellow
+\item
+  \texttt{k}: black
+\item
+  \texttt{w}: white
+\end{itemize}
 
 The remaining characters set the line styles. Valid values are
-\texttt{-}, \texttt{-\/-}, \texttt{-.} and \texttt{:}, with the obvious
-interpretation.
 
-It is possible to use any RGB colour or used one of the many predefined
-ones (see
+\begin{itemize}
+\tightlist
+\item
+  \texttt{-} solid line
+\item
+  \texttt{-\/-} dashed line
+\item
+  \texttt{-.} dash-dotted line
+\item
+  \texttt{:} dotted line
+\end{itemize}
+
+It is possible to use any RGB colour or one of the many predefined named
+colors such as \texttt{\textquotesingle{}red\textquotesingle{}} or
+\texttt{\textquotesingle{}blue\textquotesingle{}} (see
 \href{https://matplotlib.org/tutorials/colors/colors.html}{here} for
-details), and to create your own line styles.
+details). Additionally, we can define line styles with custom spacings
+between dashes.
 
-    We use the \texttt{scatter()} routine to create scatter plots in a
+    We use the \texttt{scatter()} function to create scatter plots in a
 similar fashion:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{4}{\boxspacing}
+\prompt{In}{incolor}{5}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{yvalues}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{4}{\boxspacing}
+\prompt{Out}{outcolor}{5}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.collections.PathCollection at 0x7f2744809710>
+<matplotlib.collections.PathCollection at 0x7f73acf942d0>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_9_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_10_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -546,7 +587,7 @@ For example, assume we have three categorical ``groups'' and each has an
 associated numerical value:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{5}{\boxspacing}
+\prompt{In}{incolor}{6}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 
@@ -558,14 +599,14 @@ associated numerical value:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{5}{\boxspacing}
+\prompt{Out}{outcolor}{6}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Text(0.5, 1.0, 'Population')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_11_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_12_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -590,19 +631,19 @@ Matplotlib has numerous functions to add labels and annotations:
   To add a legend, call \texttt{legend()}, which in its most simple form
   takes a list of labels which are in the same order as the plotted
   data.
-  {[}\href{https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html}{docs}{]}
+  {[}\href{https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html}{documentation}{]}
 \item
   Use \texttt{text()} to add additional text at arbitrary locations.
-  {[}\href{https://matplotlib.org/api/_as_gen/matplotlib.pyplot.text.html}{docs}{]}
+  {[}\href{https://matplotlib.org/api/_as_gen/matplotlib.pyplot.text.html}{documentation}{]}
 \item
   Use \texttt{annotate()} to display text next to some data point; it's
   easier to position correctly than \texttt{text()} and you can add
   arrows!
-  {[}\href{https://matplotlib.org/api/_as_gen/matplotlib.pyplot.annotate.html}{docs}{]}
+  {[}\href{https://matplotlib.org/api/_as_gen/matplotlib.pyplot.annotate.html}{documentation}{]}
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{6}{\boxspacing}
+\prompt{In}{incolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 
@@ -629,14 +670,14 @@ Matplotlib has numerous functions to add labels and annotations:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{6}{\boxspacing}
+\prompt{Out}{outcolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Text(20, -20, 'Point 2')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_13_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_14_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -660,7 +701,7 @@ We adjust the plot limits, ticks and tick labels as follows:
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{7}{\boxspacing}
+\prompt{In}{incolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
@@ -668,29 +709,26 @@ We adjust the plot limits, ticks and tick labels as follows:
 \PY{n}{xvalues} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{xvalues}\PY{p}{)}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} Adjust plot limits in x and y direction}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{)}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.1}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{)}\PY{p}{)}
-
 \PY{c+c1}{\PYZsh{} Set major ticks for x and y axes, and xtick labels.}
 \PY{c+c1}{\PYZsh{} We can use LaTeX code in labels!}
 \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{pi\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}2}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{pi\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Adjust plot limits in x and y direction}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.1}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{7}{\boxspacing}
+\prompt{Out}{outcolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-([<matplotlib.axis.YTick at 0x7f2734c22350>,
-  <matplotlib.axis.YTick at 0x7f2734c1ce10>,
-  <matplotlib.axis.YTick at 0x7f2734c1ac90>],
- [Text(0, 0, ''), Text(0, 0, ''), Text(0, 0, '')])
+(-1.1, 1.1)
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_15_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_16_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -705,8 +743,8 @@ module. This interface is intended to be similar to Matlab, but is also
 somewhat limited and less clean.
 
 We can instead use the object-oriented interface (called this way
-because we call methods of the \texttt{Figure} and \texttt{Axes} objects
-instead). While there is not much point in using the object-oriented
+because we call methods of the \texttt{Figure} and \texttt{Axes}
+objects). While there is not much point in using the object-oriented
 interface in a Jupyter notebook, it should be the preferred method when
 writing re-usable code in Python files.
 
@@ -722,7 +760,7 @@ As an example, we recreate the graph from the section on labels and
 annotations using the object-oriented interface:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{8}{\boxspacing}
+\prompt{In}{incolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 
@@ -748,14 +786,14 @@ annotations using the object-oriented interface:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{8}{\boxspacing}
+\prompt{Out}{outcolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Text(20, -20, 'Point 2')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_17_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_18_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -778,13 +816,13 @@ ax.plot(xvalues, yvalues, property1=value1, property2=value2, ...)
 (axes)}\label{working-with-multiple-plots-axes}}
 
 The object-oriented interface becomes particularly useful if we want to
-create multiple axes (or figures), which is possible with the
-\texttt{pyplot} programming model, but more obscure.
+create multiple axes (or figures). This is possible to achieve with the
+\texttt{pyplot} programming model as well, but somewhat more obscure.
 
 For example, to create a row with two plots, we use:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{9}{\boxspacing}
+\prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
@@ -797,14 +835,14 @@ For example, to create a row with two plots, we use:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{9}{\boxspacing}
+\prompt{Out}{outcolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f2734dbefd0>]
+[<matplotlib.lines.Line2D at 0x7f73acfd2150>]
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_20_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_21_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -814,13 +852,16 @@ plots. If we request a \(2\times2\) plot, \texttt{ax{[}0,0{]}} will be
 the top-left axes object, \texttt{ax{[}0,1{]}} the top-right one, and so
 on.
 
+The next example illustrates how to create a figure with four panels:
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{10}{\boxspacing}
+\prompt{In}{incolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Plot the first four Chebyshev polynomials on the interval [\PYZhy{}1,1]}
 \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
 
 \PY{n}{xvalues} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Plot the first four Chebyshev polynomials on the interval [\PYZhy{}1,1]}
 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
     \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
         \PY{n}{yvalues} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{p}{(}\PY{n}{j} \PY{o}{+} \PY{n}{i}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{arccos}\PY{p}{(}\PY{n}{xvalues}\PY{p}{)}\PY{p}{)}
@@ -829,13 +870,13 @@ on.
 \end{tcolorbox}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_22_0.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_23_0.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
     Note the use of \texttt{sharex=True} and \texttt{sharey=True}. This
 tells matplotlib that all axes share the same plot limits, so the tick
-labels can be omitted in the figure's iterior to preserve space.
+labels can be omitted in the figure's interior to preserve space.
 
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -849,7 +890,8 @@ functions}\label{exercise-1-trigonometric-functions}}
 Plot the functions \(\sin(x)\) and \(\cos(x)\) on the interval
 \([-\pi, \pi]\), each in a separate graph. Include a legend for each
 plot, and add pretty tick labels at \([-\pi, 0, \pi]\) which use the
-\(\LaTeX\) symbol for \(\pi\).
+\(\LaTeX\) symbol for \(\pi\). Add an overall title ``Trigonometric
+functions''.
 
 \emph{Hint:} NumPy defines the functions \texttt{np.sin()} and
 \texttt{np.cos()} as well as the value \texttt{np.pi}.
@@ -880,7 +922,7 @@ the object-oriented interface.
 \subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{11}{\boxspacing}
+\prompt{In}{incolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
@@ -906,18 +948,21 @@ the object-oriented interface.
 \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{xticklabels}\PY{p}{)}
 \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{n}{yticks}\PY{p}{)}
 \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Add overall figure title (this is not axes\PYZhy{}specific)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trigonometric functions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{11}{\boxspacing}
+\prompt{Out}{outcolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f2734a02b90>
+Text(0.5, 0.98, 'Trigonometric functions')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_26_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_27_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -925,7 +970,7 @@ the object-oriented interface.
 \subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{12}{\boxspacing}
+\prompt{In}{incolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
@@ -943,14 +988,14 @@ the object-oriented interface.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{12}{\boxspacing}
+\prompt{Out}{outcolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Text(0.5, 1.0, 'Log scale')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_28_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit5_files/unit5_29_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
