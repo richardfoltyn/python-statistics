@@ -385,12 +385,11 @@
     
 
     
-    \hypertarget{unit-6-advanced-numpy}{%
-\section{Unit 6: Advanced NumPy}\label{unit-6-advanced-numpy}}
+    \hypertarget{advanced-numpy}{%
+\section{Advanced NumPy}\label{advanced-numpy}}
 
 We already encountered NumPy arrays and their basic usage throughout
-this tutorial. In this unit, we will take a more in-depth look at NumPy
-arrays.
+this tutorial. In this unit, we will take a more in-depth look at NumPy.
 
 \hypertarget{why-numpy-arrays}{%
 \subsection{Why NumPy arrays?}\label{why-numpy-arrays}}
@@ -420,12 +419,12 @@ items[0] = 1.0      # item was a string, now it's a float!
 \end{itemize}
 
 On the other hand, the approach taken by NumPy is to store and process
-data in a way very similar to low-level languages such as \emph{C} and
-\emph{Fortran}. This means that
+data in a way very similar to low-level languages such as C and Fortran.
+This means that
 
 \begin{itemize}
 \item
-  Arrays contain a \emph{homogenous} data type. \emph{All} elements are
+  arrays contain a \emph{homogenous} data type. \emph{All} elements are
   either 64-bit integers (\texttt{np.int64}), 64-bit floating-point
   numbers (\texttt{np.float64}), or some other of the many data types
   supported by NumPy.
@@ -436,10 +435,10 @@ data in a way very similar to low-level languages such as \emph{C} and
   numerical computations.
 \item
   NumPy arrays are usually \emph{contiguous} in memory. This means that
-  adjacent array elements are actually guaranteed to be next to each
-  other in memory, which allows for much more efficient computations.
+  adjacent array elements are actually guaranteed to be stored next to
+  each other, which allows for much more efficient computations.
 \item
-  NumPy array support numerous operations used in scientific computing.
+  NumPy arrays support numerous operations used in scientific computing.
   For example, with a NumPy array we can write
 
 \begin{verbatim}
@@ -458,8 +457,8 @@ y = x + 1       # Does not work!
   arguments, so this code triggers an error.
 \end{itemize}
 
-You can see performance uplift provided by NumPy arrays in this simple
-example:
+You can see the performance uplift provided by NumPy arrays in this
+simple example:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
@@ -473,7 +472,7 @@ example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-201 µs ± 1.51 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+205 µs ± 12.3 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -488,7 +487,7 @@ example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.07 µs ± 21.2 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+1.15 µs ± 28 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     \begin{itemize}
@@ -496,8 +495,8 @@ example:
 \item
   On my machine (not the fastest laptop), squaring 1000 elements of a
   \texttt{list} takes approximately 200 microseconds, while the
-  equivalent array-based operation takes only abount 1 microsecond.
-  NumPy is therefore approximately 200 times faster!
+  equivalent array-based operation takes only about 1 microsecond. NumPy
+  is therefore approximately 200 times faster!
 \item
   Also, as mentioned above, NumPy supports squaring an array directly,
   while we have to manually loop through the \texttt{list} and square
@@ -561,7 +560,7 @@ creation routines:
   \texttt{np.identity(n)} returns the identity matrix of a size
   \(n \times n\).
 \item
-  \texttt{np.eye()} is a more flexible variant of\texttt{identity()}
+  \texttt{np.eye()} is a more flexible variant of \texttt{identity()}
   that can, for example, also create non-squared matrices.
 \end{itemize}
 
@@ -671,8 +670,8 @@ array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. ])
 \hypertarget{array-shape}{%
 \subsection{Array shape}\label{array-shape}}
 
-Many of the array creation take the desired shape of the array as their
-first argument. Array shapes are usually specified as tuples:
+Many of the array creation routines take the desired shape of the array
+as their first argument. Array shapes are usually specified as tuples:
 
 \begin{itemize}
 \item
@@ -681,6 +680,10 @@ first argument. Array shapes are usually specified as tuples:
   Note the comma \texttt{,}: we need to specify a tuple with a single
   element using this comma, since \texttt{(5)} is just the integer 5,
   not a tuple.
+
+  It is worth pointing out that this is not the same as a 2-dimensional
+  array with shape \texttt{(1,\ 5)} or \texttt{(5,\ 1)}, even though
+  they have the same number of elements.
 \item
   A \(2\times2\) matrix has shape \texttt{(2,\ 2)}.
 \item
@@ -711,8 +714,8 @@ and the number of dimensions is stored in the \texttt{ndim} attribute.
 Scalar array with shape=() and ndim=0
     \end{Verbatim}
 
-    Note that the a scalar NumPy array is not the same as a Python scalar.
-The built-in type \texttt{float} has neither a \texttt{shape}, nor an
+    Note that a scalar NumPy array is not the same as a Python scalar. The
+built-in type \texttt{float} has neither a \texttt{shape}, nor an
 \texttt{ndim}, nor any other of the NumPy array attributes.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -753,24 +756,25 @@ array([0.0e+000, 4.9e-324, 9.9e-324, 1.5e-323, 2.0e-323])
 since the memory block assigned to the array is not initialised. The
 result will potentially differ on each invocation and across computers.
 
+Most function accept an integer value instead of a \texttt{tuple} when
+creating 1-dimensional arrays, which is interpreted as the number of
+elements:
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} 1\PYZhy{}dimensional array}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}     \PY{c+c1}{\PYZsh{} equivalent to np.empty((5,))}
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}         \PY{c+c1}{\PYZsh{} equivalent to np.empty((5,))}
 \end{Verbatim}
 \end{tcolorbox}
 
-    Most function accept an integer value instead of a \texttt{tuple} when
-creating 1-dimensional arrays, which is interpreted as the number of
-elements.
+    Higher-dimensional arrays are creating by passing in tuples with more
+than one element:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} 3d\PYZhy{}array}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
-\PY{n}{x}
+\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}      \PY{c+c1}{\PYZsh{} 3d\PYZhy{}array}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -989,17 +993,17 @@ array([1, 2, 9])
 also be a list (not a tuple, though!).
 
 In general, if we are using an index array to select elements along an
-axis of length \(n\), the index
+axis of length \(n\), then
 
 \begin{itemize}
 \tightlist
 \item
-  must only contain integers between \(0\) and \(n-1\), or negative
-  integers from \(-n\) to \(-1\) (which, as usual, count from the end of
-  the axis).
+  the index must only contain integers between \(0\) and \(n-1\), or
+  negative integers from \(-n\) to \(-1\) (which, as usual, count from
+  the end of the axis).
 \item
-  can be of arbitrary length. We can therefore select the same element
-  multiple times.
+  the index can be of arbitrary length. We can therefore select the same
+  element multiple times.
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1032,9 +1036,17 @@ array([5, 6, 6, 7, 7, 8, 8, 9, 9])
 \end{Verbatim}
 \end{tcolorbox}
         
-    With multi-dimensional data arrays, the same restrictions apply, and
-additionally - if more than one axis is indexed using index arrays, the
-index arrays have to be of equal length.
+    With multi-dimensional arrays, the same restrictions apply. Moreover,
+
+\begin{itemize}
+\tightlist
+\item
+  if more than one axis is indexed using index arrays, the index arrays
+  have to be of equal length.
+\item
+  we can combine integer array indexing on one axis with other types of
+  indices on the remaining axes.
+\end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{24}{\boxspacing}
@@ -1164,11 +1176,19 @@ element-wise, so \texttt{x\ *\ y} is \textbf{not} matrix multiplication!
 \end{Verbatim}
 \end{tcolorbox}
 
-    \emph{Case 3:} Applying element-wise functions This case covers numerous
-functions defined by NumPy, such as - \texttt{np.sqrt}: square root -
-\texttt{np.exp}, \texttt{np.log}, \texttt{np.log10}: exponential and
-logarithmic functions - \texttt{np.sin}, \texttt{np.cos}, etc.:
-trigonometric functions
+    \emph{Case 3:} Applying element-wise functions. This case covers
+numerous functions defined in NumPy, such as
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{np.sqrt}: square root
+\item
+  \texttt{np.exp}, \texttt{np.log}, \texttt{np.log10}: exponential and
+  logarithmic functions
+\item
+  \texttt{np.sin}, \texttt{np.cos}, etc.: trigonometric functions
+\end{itemize}
 
     You can find a complete list of mathematical functions in the NumPy
 \href{https://numpy.org/doc/stable/reference/routines.math.html}{documentation}
@@ -1187,8 +1207,7 @@ trigonometric functions
     \hypertarget{matrix-operations}{%
 \subsubsection{Matrix operations}\label{matrix-operations}}
 
-\hypertarget{transpose}{%
-\paragraph{Transpose}\label{transpose}}
+\textbf{Transpose}
 
 You can transpose a matrix using the \texttt{T} attribute:
 
@@ -1224,14 +1243,17 @@ array([[0, 3],
 \end{Verbatim}
 \end{tcolorbox}
         
-    \hypertarget{array-multiplication}{%
-\paragraph{Array multiplication}\label{array-multiplication}}
+    For higher-dimensional arrays, the \texttt{np.transpose()} function can
+be used to permute the axes of an array. For two-dimensional arrays,
+\texttt{np.transpose(mat)} and \texttt{mat.T} are equivalent.
+
+\textbf{Array multiplication}
 
 Matrix multiplication is performed using the \texttt{np.dot()} function
-(``dot product''). The operands need not be matrices, but can be vectors
+(``dot product''). The operands need not be matrices but can be vectors
 as well, or even high-dimensional arrays (the result is then not
 entirely obvious and one should check the
-\href{https://numpy.org/doc/stable/reference/generated/numpy.dot.html}{docs}).
+\href{https://numpy.org/doc/stable/reference/generated/numpy.dot.html}{documentation}).
 
 Every newer version of Python and NumPy additionally interprets
 \texttt{@} as the matrix multiplication operator.
@@ -1379,8 +1401,8 @@ restricts the operation to a specific axis.
 \item
   The resulting array will have one dimension less than the input.
 \item
-  If no axis is specified, the operation is applied to the flattened
-  array
+  If no axis is specified, the operation is applied to the whole
+  (flattened) array.
 \end{itemize}
 
 \emph{Examples:}
@@ -1444,14 +1466,20 @@ array([0.15, 0.5 , 0.85])
 
 Element-wise operations in most programming languages require input
 arrays to have identical shapes. NumPy relaxes this constraint and
-allows us to use arrays with different shares that can be ``broadcast''
+allows us to use arrays with different shapes that can be ``broadcast''
 to identical shapes.
 
-What do we mean by ``broadcast''? - Imagine we want to add a
-\(2 \times 3\) matrix to a length-2 vector. - This operation does not
-make sense, unless we interpret the (column) vector as a \(2 \times 1\)
-matrix, and replicate it 3 times to obtain a \(2 \times 3\) matrix. This
-is exactly what NumPy does.
+What do we mean by ``broadcasting''?
+
+\begin{itemize}
+\tightlist
+\item
+  Imagine we want to add a \(2 \times 3\) matrix to a length-2 vector.
+\item
+  This operation does not make sense, unless we interpret the (column)
+  vector as a \(2 \times 1\) matrix, and replicate it 3 times to obtain
+  a \(2 \times 3\) matrix. This is exactly what NumPy does.
+\end{itemize}
 
 \emph{Examples:}
 
@@ -1580,7 +1608,6 @@ keyword argument, NumPy by default behaves as follows:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   The default data type for most array creation routines which create
   arrays of a given shape or size, such as \texttt{np.empty()},
@@ -1589,27 +1616,17 @@ keyword argument, NumPy by default behaves as follows:
 \item
   Array creation routines that accept numerical input data will use the
   data type of this input data to determine the array data type.
-\end{enumerate}
 
-\begin{verbatim}
-Examples of such functions are `np.arange()` and
-`np.array()`.
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\tightlist
+  Examples of such functions are \texttt{np.arange()} and
+  \texttt{np.array()}.
 \item
   Arrays that are implicitly created as a result of an operation
   (addition, etc.) are assigned the most suitable type to represent the
   result.
-\end{enumerate}
 
-\begin{verbatim}
-For example, when adding a floating-point and an
-integer array, the result will be a floating-point array.
-\end{verbatim}
+  For example, when adding a floating-point and an integer array, the
+  result will be a floating-point array.
+\end{enumerate}
 
 \emph{Examples:}
 
@@ -1639,7 +1656,7 @@ dtype('float64')
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Argument is an integer}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
-\PY{n}{x}\PY{o}{.}\PY{n}{dtype}     \PY{c+c1}{\PYZsh{} data type is np.int64 (on most platforms)}
+\PY{n}{x}\PY{o}{.}\PY{n}{dtype}             \PY{c+c1}{\PYZsh{} data type is np.int64 (on most platforms)}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1655,7 +1672,7 @@ dtype('int64')
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Argument is a float}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{5.0}\PY{p}{)}
-\PY{n}{x}\PY{o}{.}\PY{n}{dtype}     \PY{c+c1}{\PYZsh{} data type is np.float64}
+\PY{n}{x}\PY{o}{.}\PY{n}{dtype}             \PY{c+c1}{\PYZsh{} data type is np.float64}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1675,9 +1692,14 @@ dtype('float64')
 \PY{n}{arr1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
 \PY{n}{arr2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}      \PY{c+c1}{\PYZsh{} creates [3, 2, 1]}
 \PY{n}{result} \PY{o}{=} \PY{n}{arr1} \PY{o}{+} \PY{n}{arr2}
-\PY{n}{result}\PY{o}{.}\PY{n}{dtype}        \PY{c+c1}{\PYZsh{} data type is np.int64}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+\PY{n}{result}\PY{o}{.}\PY{n}{dtype}                    \PY{c+c1}{\PYZsh{} data type is np.int64}
 \end{Verbatim}
 \end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[3 3 3]
+    \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{50}{\boxspacing}
@@ -1694,7 +1716,7 @@ dtype('int64')
 \PY{n}{arr2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{3.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{p}{)}    \PY{c+c1}{\PYZsh{} creates [3.0, 2.0, 1.0]}
 \PY{n}{result} \PY{o}{=} \PY{n}{arr1} \PY{o}{+} \PY{n}{arr2}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{result}\PY{p}{)}
-\PY{n}{result}\PY{o}{.}\PY{n}{dtype}        \PY{c+c1}{\PYZsh{} data type is np.float64}
+\PY{n}{result}\PY{o}{.}\PY{n}{dtype}                        \PY{c+c1}{\PYZsh{} data type is np.float64}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1709,11 +1731,10 @@ dtype('float64')
 \end{Verbatim}
 \end{tcolorbox}
         
-    Observe that even though the resulting array is
-\texttt{{[}3.0,\ 3.0,\ 3.0{]}} and can thus be represented as integers
-without loss of data, NumPy only takes into account that one of the
-operands is floating-point, and thus the result has to be of
-floating-point type!
+    Even though the resulting array is \texttt{{[}3.0,\ 3.0,\ 3.0{]}} and
+can thus be represented as integers without loss of data, NumPy only
+takes into account that one of the operands is floating-point, and thus
+the result has to be of floating-point type!
 
     \hypertarget{explicit-data-types}{%
 \subsubsection{Explicit data types}\label{explicit-data-types}}
@@ -1734,9 +1755,8 @@ common types are:
   \texttt{np.int64}: a 64-bit integer which can represent integer values
   on the interval of (approximately) \(\pm10^{19}\).
 
-  Unlike with floating-point, the integer representation is
-  \emph{exact}, but covers a much smaller range (and, obviously, no
-  fractional numbers)
+  Unlike floating-point, the integer representation is \emph{exact}, but
+  covers a much smaller range (and, obviously, no fractional numbers)
 \item
   \texttt{np.float32}, \texttt{np.float16}: single-precision and
   half-precision floating-point numbers. These occupy only 32 and 16
@@ -1750,7 +1770,7 @@ common types are:
 
   They require less memory, but can represent only a smaller range of
   integers. For example, \texttt{np.int8} can only store integer values
-  from \$-\$128 to 127.
+  from -128 to 127.
 \item
   NumPy also supports complex numerical types to represent imaginary
   numbers. We will not be using those in this tutorial.
@@ -1773,7 +1793,7 @@ where other data types need to be used:
   \texttt{np.float64}, which halves the storage requirement.
 
   Similarly, if you know that your integer data only takes on values
-  between \$-\$128 and 127, you can store them as \texttt{np.int8} which
+  between -128 and 127, you can store them as \texttt{np.int8} which
   consumes only 1/8 of the space compared to \texttt{np.int64}!
 \item
   \emph{Performance:} Some tasks simply don't require high precision or
@@ -1782,13 +1802,14 @@ where other data types need to be used:
   dedicated processors to considerably speed up workloads using 8-bit
   integers.
 
-  Even if you are not using any dedicated CPUs or GPUs, data has to be
-  transferred from memory to the processor, and this is a major
+  Even if you are not using any specialised CPUs or GPUs, data has to be
+  transferred from memory to the processor and this is a major
   performance bottleneck. The less data needs to be transferred, the
   better!
 
   In general, this is nothing you need to worry about at this point, but
-  might become relevant in the future.
+  might become relevant once you start writing complex high-performance
+  code.
 \end{enumerate}
 
 \emph{Examples:}
@@ -1878,7 +1899,7 @@ dtype('int64')
 {[}advanced{]}}\label{copies-and-views-advanced}}
 
 Recall that assignment in Python does \emph{not} create a copy (unlike
-in \emph{C}, \emph{Fortran} or \emph{Matlab}):
+in C, Fortran or Matlab):
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{56}{\boxspacing}
@@ -1900,7 +1921,7 @@ True
     NumPy adds another layer to this sort of data sharing: whenever you
 perform an assignment or indexing operation, NumPy tries hard \emph{not}
 to copy the underlying data but instead creates a so-called view which
-points to the same block of memory. It does this for performance reasons
+points to the same block of memory. It does so for performance reasons
 (copying is expensive).
 
 We can illustrate this using array slicing:
@@ -1949,8 +1970,8 @@ verify using the built-in \texttt{id()} function:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-139975814880992
-139975814503360
+140335487563856
+140335181380224
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -2003,8 +2024,8 @@ array([0, 1, 2, 0, 0, 0, 0, 0, 8, 9])
 \end{tcolorbox}
         
     This behaviour is even triggered when \texttt{y} references non-adjacent
-elements in \texttt{x}. For example, we can let \texttt{y} be a view on
-every \emph{second} element in \texttt{x}:
+elements in \texttt{x}. For example, we can let \texttt{y} be a view
+onto every \emph{second} element in \texttt{x}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{63}{\boxspacing}
@@ -2029,7 +2050,7 @@ if
 \begin{itemize}
 \tightlist
 \item
-  An array is created from another array via slicing (ie indexing using
+  An array is created from another array via slicing (ie. indexing using
   the \texttt{start:stop:step} triplet)
 \end{itemize}
 
@@ -2070,7 +2091,7 @@ array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{65}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Copies are creating with integer array indexing}
+\PY{c+c1}{\PYZsh{} Copies are created with integer array indexing}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
 \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}   \PY{c+c1}{\PYZsh{} List of indices to include in y}
 \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{index}\PY{p}{]}
@@ -2104,7 +2125,7 @@ array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 \end{Verbatim}
 \end{tcolorbox}
         
-    As an alterantive to \texttt{np.copy()} we can directly call the
+    As an alternative to \texttt{np.copy()} we can directly call the
 \texttt{copy()} method of an array:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -2128,11 +2149,11 @@ one-dimensional block in memory. This can be done in two ways:
 \tightlist
 \item
   NumPy uses the so-called \emph{row-major order} (also called \emph{C
-  order}, because its the same as in \emph{C} programming language)
+  order}, because its the same as in C programming language)
 \item
   This is exactly the opposite of Matlab, which uses \emph{column-major
   order} (also called \emph{F order}, because its the same as in the
-  \emph{Fortran} programming language)
+  Fortran programming language)
 \end{enumerate}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
