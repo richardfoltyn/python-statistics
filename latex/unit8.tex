@@ -1,0 +1,1638 @@
+\documentclass[10pt]{scrartcl}
+
+    \input{overrides-pre}
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+    \usepackage{iftex}
+    \ifPDFTeX
+    	\usepackage[T1]{fontenc}
+    	\usepackage{mathpazo}
+    \else
+    	\usepackage{fontspec}
+    \fi
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \newcommand*{\mytitle}{Unit 8: Handling data with pandas}
+
+    \input{overrides-post}
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb. 
+    \makeatletter
+        \newbox\Wrappedcontinuationbox 
+        \newbox\Wrappedvisiblespacebox 
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}} 
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}} 
+        \newcommand*\Wrappedcontinuationindent {3ex } 
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox} 
+        % Take advantage of the already applied Pygments mark-up to insert 
+        % potential linebreaks for TeX processing. 
+        %        {, <, #, %, $, ' and ": go to next line. 
+        %        _, }, ^, &, >, - and ~: stay at end of broken line. 
+        % Use of \textquotesingle for straight quote. 
+        \newcommand*\Wrappedbreaksatspecials {% 
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}% 
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}% 
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}% 
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}% 
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}% 
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}% 
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}% 
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}% 
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}% 
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}% 
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}% 
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}% 
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}% 
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}% 
+        } 
+        % Some characters . , ; ? ! / are not pygmentized. 
+        % This macro makes them "active" and they will insert potential linebreaks 
+        \newcommand*\Wrappedbreaksatpunct {% 
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}% 
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}% 
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}% 
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}% 
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}% 
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}% 
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}% 
+            \catcode`\.\active
+            \catcode`\,\active 
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active 
+            \lccode`\~`\~ 	
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+        
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
+        \OriginalVerbatim[#1,fontsize=\small,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+    
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \maketitle
+    \tableofcontents
+
+    
+
+    
+    \hypertarget{handling-data-with-pandas}{%
+\section{Handling data with pandas}\label{handling-data-with-pandas}}
+
+\hypertarget{motivation}{%
+\subsection{Motivation}\label{motivation}}
+
+So far, we have encountered NumPy arrays as the only way to store
+numerical data (we mostly ignored the built-in contains provided
+directly in Python).
+
+However, while NumPy arrays are great for storing homogenous data which
+does not have any particular structure, they are somewhat limited when
+we want to use them for high-level data analysis.
+
+For example, we usually want to process data sets with
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  several variables
+\item
+  multiple observations, which need not be identical across variables
+  (imagine we have some missing values)
+\item
+  non-homogenous data types: for examples, names need to be stored as
+  strings, birthdays as dates and income as a floating-point number.
+\end{enumerate}
+
+While NumPy can in principle handle such situations, it puts all the
+burden on the user. Most users would prefer to not have to deal with
+such low-level details.
+
+Imagine we want to store names, birth dates and annual income for two
+persons:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Name & Date of birth & Income\tabularnewline
+\midrule
+\endhead
+Alice & 1985-01-01 & 30,000\tabularnewline
+Bob & 1997-05-12 & -\tabularnewline
+\bottomrule
+\end{longtable}
+
+No income was reported for Bob, so it's missing. With NumPy, we could do
+this as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k+kn}{import} \PY{n}{date}
+
+\PY{n}{date1} \PY{o}{=} \PY{n}{date}\PY{p}{(}\PY{l+m+mi}{1985}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}            \PY{c+c1}{\PYZsh{} birth date for Alice}
+\PY{n}{date2} \PY{o}{=} \PY{n}{date}\PY{p}{(}\PY{l+m+mi}{1997}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{)}           \PY{c+c1}{\PYZsh{} birth date for Bob}
+
+\PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{date1}\PY{p}{,} \PY{l+m+mf}{30000.0}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{date2}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+
+\PY{n}{data}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([['Alice', datetime.date(1985, 1, 1), 30000.0],
+       ['Bob', datetime.date(1997, 5, 12), None]], dtype=object)
+\end{Verbatim}
+\end{tcolorbox}
+        
+    While we can create such arrays, they are almost useless for data
+analysis, in particular since everything is stored as a generic
+\texttt{object}.
+
+\begin{itemize}
+\tightlist
+\item
+  To be fair, NumPy offers an alternative array type called
+  \href{https://numpy.org/doc/stable/user/basics.rec.html}{``record'' or
+  ``structured'' array} which can handle fields of different data types,
+  but the pandas library offers much more beyond that, so there is
+  little reason to use it.
+\end{itemize}
+
+\emph{Pandas} was created to offer more versatile data structures that
+are straightforward to use for storing, manipulating and analysing
+heterogeneous data:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Data is clearly organised in variables and observations, similar to
+  econometrics programs such as Stata.
+\item
+  Each variable is permitted to have a different data type.
+\item
+  We can use \emph{labels} to select observations, instead of having to
+  use a linear numerical index as with NumPy.
+
+  We could, for example, index a data set using National Insurance
+  Numbers.
+\item
+  Pandas offers many convenient data aggregation and reduction routines
+  that can be applied to subsets of data.
+
+  For example, we can easily group observations by city and compute
+  average incomes.
+\item
+  Pandas also offers many convenient data import / export functions that
+  go beyond what's in NumPy.
+\end{enumerate}
+
+Should we be using pandas at all times, then? No!
+
+\begin{itemize}
+\tightlist
+\item
+  For low-level tasks where performance is essential, use NumPy.
+\item
+  For homogenous data without any particular data structure, use NumPy.
+\item
+  On the other hand, if data is heterogeneous, needs to be imported from
+  an external data source and cleaned or transformed before performing
+  computations, use pandas.
+\end{itemize}
+
+There are numerous tutorials on pandas on the internet, so we will keep
+this unit short and illustrate only the main concepts. Useful references
+to additional material include:
+
+\begin{itemize}
+\tightlist
+\item
+  The official
+  \href{https://pandas.pydata.org/docs/user_guide/index.html}{user
+  guide}.
+\item
+  The official
+  \href{https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf}{pandas cheat
+  sheet} which nicely illustrates the most frequently used operations.
+\item
+  The official
+  \href{https://pandas.pydata.org/docs/reference/index.html}{API
+  reference} with details on every pandas object and function.
+\item
+  There are numerous tutorials (including videos) available on the
+  internet. See
+  \href{https://pandas.pydata.org/docs/getting_started/tutorials.html}{here}
+  for a list.
+\end{itemize}
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{creating-pandas-data-structures}{%
+\subsection{Creating pandas data
+structures}\label{creating-pandas-data-structures}}
+
+Pandas has two main data structures:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{Series} represents observations of a single variable.
+\item
+  \texttt{DataFrame} is a container for several variables. You can think
+  of each individual column of a \texttt{DataFrame} as a
+  \texttt{Series}.
+\end{enumerate}
+
+The easiest way to get a \texttt{Series} or \texttt{DataFrame} is to
+create them from pre-existing data.
+
+To access pandas data structures and routines, we need to import them
+first. The near-universal convention is to make pandas available using
+the name \texttt{pd}:
+
+\begin{verbatim}
+import pandas as pd
+\end{verbatim}
+
+\emph{Examples:}
+
+We can create a \texttt{DataFrame} from a NumPy array:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}             \PY{c+c1}{\PYZsh{} universal convention: import using pd}
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{random} \PY{k+kn}{import} \PY{n}{default\PYZus{}rng}
+
+\PY{c+c1}{\PYZsh{} Draw normally distributed data}
+\PY{n}{rng} \PY{o}{=} \PY{n}{default\PYZus{}rng}\PY{p}{(}\PY{l+m+mi}{123}\PY{p}{)}
+\PY{n}{data} \PY{o}{=} \PY{n}{rng}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create pandas DataFrame}
+\PY{n}{varnames} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{varnames}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+          A         B         C
+0 -0.989121 -0.367787  1.287925
+1  0.193974  0.920231  0.577104
+2 -0.636464  0.541952 -0.316595
+3 -0.322389  0.097167 -1.525930
+4  1.192166 -0.671090  1.000269
+5  0.136321  1.532033 -0.659969
+6 -0.311795  0.337769 -2.207471
+7  0.827921  1.541630  1.126807
+8  0.754770 -0.145978  1.281902
+9  1.074031  0.392621  0.005114
+\end{Verbatim}
+\end{tcolorbox}
+        
+    This code creates a \texttt{DataFrame} of three variables called
+\texttt{A}, \texttt{B} and \texttt{C} with 10 observations each.
+
+Alternatively, we can create a \texttt{DataFrame} from non-homogenous
+data as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Names (strings)}
+\PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+\PY{c+c1}{\PYZsh{} Birth dates (datetime objects)}
+\PY{n}{bdates} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1985\PYZhy{}01\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1997\PYZhy{}05\PYZhy{}12}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Incomes (floats)}
+\PY{n}{incomes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{35000}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{)}         \PY{c+c1}{\PYZsh{} code missing income as NaN}
+
+\PY{c+c1}{\PYZsh{} create DataFrame from dictionary}
+\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{names}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Birthdate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{bdates}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{incomes}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+    Name  Birthdate   Income
+0  Alice 1985-01-01  35000.0
+1    Bob 1997-05-12      NaN
+\end{Verbatim}
+\end{tcolorbox}
+        
+    If data types differ across columns, as in the above example, it is
+often convenient to create the \texttt{DataFrame} by passing a
+dictionary as an argument, where each key contains a column name and
+each corresponding value the data for that variable.
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{viewing-data}{%
+\subsection{Viewing data}\label{viewing-data}}
+
+With large data sets, you hardly ever want to print the entire
+\texttt{DataFrame}. Pandas by default limits the amount of data shown.
+You can use the \texttt{head()} and \texttt{tail()} methods to
+explicitly display a specific number of rows from the top or the end of
+a \texttt{DataFrame}.
+
+To illustrate, we use a data set of a few UK universities that contains
+their name, number of students and budget in million pounds (both from
+Wikipedia), and their
+\href{https://www.timeshighereducation.com/world-university-rankings}{Times
+Higher Education (THE) ranking}.
+
+We can read in the data stored in \texttt{universities.csv} and display
+the first three rows like this:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{c+c1}{\PYZsh{} Load sample data set of UK universities}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}      \PY{c+c1}{\PYZsh{} show first three rows}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                Institution   Country  Founded  Students  Budget  Rank
+0     University of Glasgow  Scotland     1451     30805   626.5    92
+1   University of Edinburgh  Scotland     1583     34275  1102.0    30
+2  University of St Andrews  Scotland     1413      8984   251.2   201
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}      \PY{c+c1}{\PYZsh{} show last three rows}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                   Institution           Country  Founded  Students  Budget  \textbackslash{}
+20      University of Stirling          Scotland     1967      9548   113.3
+21  Queen’s University Belfast  Northern Ireland     1810     18438   369.2
+22          Swansea University             Wales     1920     20620     NaN
+
+    Rank
+20   301
+21   200
+22   251
+\end{Verbatim}
+\end{tcolorbox}
+        
+    To quickly compute some descriptive statistics for the \emph{numerical}
+variables in the \texttt{DataFrame}, we use \texttt{describe()}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+           Founded      Students       Budget        Rank
+count    23.000000     23.000000    22.000000   23.000000
+mean   1745.652174  24106.782609   768.609091  124.739130
+std     256.992149   9093.000735   608.234948  104.498463
+min    1096.000000   8984.000000   113.300000    1.000000
+25\%    1589.000000  18776.500000   340.850000   32.500000
+50\%    1826.000000  23247.000000   643.750000  107.000000
+75\%    1941.500000  30801.500000  1023.500000  195.500000
+max    2004.000000  41180.000000  2450.000000  401.000000
+\end{Verbatim}
+\end{tcolorbox}
+        
+    To see low-level information about the data type used in each column, we
+call \texttt{info()}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 23 entries, 0 to 22
+Data columns (total 6 columns):
+ \#   Column       Non-Null Count  Dtype
+---  ------       --------------  -----
+ 0   Institution  23 non-null     object
+ 1   Country      23 non-null     object
+ 2   Founded      23 non-null     int64
+ 3   Students     23 non-null     int64
+ 4   Budget       22 non-null     float64
+ 5   Rank         23 non-null     int64
+dtypes: float64(1), int64(3), object(2)
+memory usage: 1.2+ KB
+    \end{Verbatim}
+
+    Note that pandas automatically discards missing information in
+computations. For example, the budget for Swansea University is missing,
+and this observation is therefore dropped when computing descriptive
+statistics.
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{indexing}{%
+\subsection{Indexing}\label{indexing}}
+
+Pandas supports two types of indexing:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Indexing by position. This is basically identical indexing of other
+  Python and NumPy containers.
+\item
+  Indexing by label, ie. by the values assigned to the row or column
+  index. These labels need not be integers in increasing order, as is
+  the case for NumPy.
+\end{enumerate}
+
+Pandas indexing is performed either by using brackets \texttt{{[}{]}},
+or by using \texttt{.loc{[}{]}} for label indexing, or
+\texttt{.iloc{[}{]}} for position indexing.
+
+Indexing via \texttt{{[}{]}} can be somewhat confusing:
+
+\begin{itemize}
+\tightlist
+\item
+  specifying \texttt{df{[}\textquotesingle{}name\textquotesingle{}{]}}
+  returns the column \texttt{name} as a \texttt{Series} object.
+\item
+  On the other hand, specifying a range such as \texttt{df{[}5:10{]}}
+  returns the \emph{rows} associated with the \emph{positions}
+  5,\ldots,9.
+\end{itemize}
+
+\emph{Examples:}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{c+c1}{\PYZsh{} Load sample data set of UK universities}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}               \PY{c+c1}{\PYZsh{} select a single column}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+0               University of Glasgow
+1             University of Edinburgh
+2            University of St Andrews
+3              University of Aberdeen
+4           University of Strathclyde
+5                                 LSE
+6                                 UCL
+7             University of Cambridge
+8                University of Oxford
+9               University of Warwick
+10            Imperial College London
+11              King’s College London
+12           University of Manchester
+13              University of Bristol
+14           University of Birmingham
+15    Queen Mary University of London
+16                 University of York
+17           University of Nottingham
+18               University of Dundee
+19                 Cardiff University
+20             University of Stirling
+21         Queen’s University Belfast
+22                 Swansea University
+Name: Institution, dtype: object
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}     \PY{c+c1}{\PYZsh{} select multiple columns using a list}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                        Institution  Rank
+0             University of Glasgow    92
+1           University of Edinburgh    30
+2          University of St Andrews   201
+3            University of Aberdeen   178
+4         University of Strathclyde   401
+5                               LSE    27
+6                               UCL    16
+7           University of Cambridge     6
+8              University of Oxford     1
+9             University of Warwick    77
+10          Imperial College London    11
+11            King’s College London    35
+12         University of Manchester    51
+13            University of Bristol    91
+14         University of Birmingham   107
+15  Queen Mary University of London   110
+16               University of York   133
+17         University of Nottingham   158
+18             University of Dundee   201
+19               Cardiff University   191
+20           University of Stirling   301
+21       Queen’s University Belfast   200
+22               Swansea University   251
+\end{Verbatim}
+\end{tcolorbox}
+        
+    To return the rows at positions 1, 2 and 3 we use
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                Institution   Country  Founded  Students  Budget  Rank
+1   University of Edinburgh  Scotland     1583     34275  1102.0    30
+2  University of St Andrews  Scotland     1413      8984   251.2   201
+3    University of Aberdeen  Scotland     1495     14775   219.5   178
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Pandas follows the Python convention that indices are 0-based, and the
+endpoint of a slice is not included.
+
+    \hypertarget{selection-by-label}{%
+\subsubsection{Selection by label}\label{selection-by-label}}
+
+Pandas uses \emph{labels} to index and align data. These can be integer
+values starting at 0 with increments of 1 for each additional element,
+but they need not be.
+
+For example, we can replace the row index and use the labels \texttt{a},
+\texttt{b}, \texttt{c}, \ldots{} instead of integers as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Map list of integers to lower\PYZhy{}case roman letters}
+\PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{n+nb}{chr}\PY{p}{(}\PY{l+m+mi}{97}\PY{o}{+}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{p}{]}
+\PY{n}{index}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+['a',
+ 'b',
+ 'c',
+ 'd',
+ 'e',
+ 'f',
+ 'g',
+ 'h',
+ 'i',
+ 'j',
+ 'k',
+ 'l',
+ 'm',
+ 'n',
+ 'o',
+ 'p',
+ 'q',
+ 'r',
+ 's',
+ 't',
+ 'u',
+ 'v',
+ 'w']
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{index}                             \PY{c+c1}{\PYZsh{} create new column \PYZsq{}index\PYZsq{}}
+\PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{n}{keys}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}      \PY{c+c1}{\PYZsh{} set letters as index!}
+\PY{c+c1}{\PYZsh{} print first 3 rows using labels}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}             \PY{c+c1}{\PYZsh{} This is the same as df[:3]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                    Institution   Country  Founded  Students  Budget  Rank
+index
+a         University of Glasgow  Scotland     1451     30805   626.5    92
+b       University of Edinburgh  Scotland     1583     34275  1102.0    30
+c      University of St Andrews  Scotland     1413      8984   251.2   201
+\end{Verbatim}
+\end{tcolorbox}
+        
+    To add to the confusion, note that when specifying a range in terms of
+labels, the last element \emph{is} included!
+
+To more clearly distinguish between selection by label and by position,
+pandas provides the \texttt{.loc{[}{]}} and \texttt{.iloc{[}{]}} methods
+of indexing. To make your intention obvious, you should therefore adhere
+to the following rules:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Use \texttt{df{[}\textquotesingle{}name\textquotesingle{}{]}} only to
+  select \emph{columns} and nothing else.
+\item
+  Use \texttt{.loc{[}{]}} to select by label.
+\item
+  Use \texttt{.iloc{[}{]}} to select by position.
+\end{enumerate}
+
+To illustrate, using \texttt{.loc{[}{]}} unambiguously indexes by label:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                    Institution  Students
+index
+a         University of Glasgow     30805
+b       University of Edinburgh     34275
+c      University of St Andrews      8984
+\end{Verbatim}
+\end{tcolorbox}
+        
+    With \texttt{.loc{[}{]}} we can even perform slicing on column names,
+which is not possible with the simpler \texttt{df{[}{]}} syntax:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+       Students  Budget  Rank
+index
+a         30805   626.5    92
+b         34275  1102.0    30
+c          8984   251.2   201
+\end{Verbatim}
+\end{tcolorbox}
+        
+    This includes all the columns between \texttt{Students} and
+\texttt{Rank}, where the latter is again included since we are slicing
+by label.
+
+Trying to pass in positional arguments will return an error if the index
+does not happen to be of type integer and the given values are actual
+labels:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
+\textcolor{ansi-red}{---------------------------------------------------------------------------}
+\textcolor{ansi-red}{TypeError}                                 Traceback (most recent call last)
+\textcolor{ansi-green}{<ipython-input-1-11cc54301474>} in \textcolor{ansi-cyan}{<module>}
+\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }df\textcolor{ansi-blue}{.}loc\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{:}\textcolor{ansi-cyan}{4}\textcolor{ansi-blue}{]}
+
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_\_getitem\_\_}\textcolor{ansi-blue}{(self, key)}
+\textcolor{ansi-green-intense}{\textbf{    877}} 
+\textcolor{ansi-green-intense}{\textbf{    878}}             maybe\_callable \textcolor{ansi-blue}{=} com\textcolor{ansi-blue}{.}apply\_if\_callable\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} self\textcolor{ansi-blue}{.}obj\textcolor{ansi-blue}{)}
+\textcolor{ansi-green}{--> 879}\textcolor{ansi-red}{             }\textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_getitem\_axis\textcolor{ansi-blue}{(}maybe\_callable\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{    880}} 
+\textcolor{ansi-green-intense}{\textbf{    881}}     \textcolor{ansi-green}{def} \_is\_scalar\_access\textcolor{ansi-blue}{(}self\textcolor{ansi-blue}{,} key\textcolor{ansi-blue}{:} Tuple\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
+
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_getitem\_axis}\textcolor{ansi-blue}{(self, key, axis)}
+\textcolor{ansi-green-intense}{\textbf{   1086}}         \textcolor{ansi-green}{if} isinstance\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} slice\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
+\textcolor{ansi-green-intense}{\textbf{   1087}}             self\textcolor{ansi-blue}{.}\_validate\_key\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{)}
+\textcolor{ansi-green}{-> 1088}\textcolor{ansi-red}{             }\textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_get\_slice\_axis\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{   1089}}         \textcolor{ansi-green}{elif} com\textcolor{ansi-blue}{.}is\_bool\_indexer\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
+\textcolor{ansi-green-intense}{\textbf{   1090}}             \textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_getbool\_axis\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
+
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_get\_slice\_axis}\textcolor{ansi-blue}{(self, slice\_obj, axis)}
+\textcolor{ansi-green-intense}{\textbf{   1121}}         labels \textcolor{ansi-blue}{=} obj\textcolor{ansi-blue}{.}\_get\_axis\textcolor{ansi-blue}{(}axis\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{   1122}}         indexer = labels.slice\_indexer(
+\textcolor{ansi-green}{-> 1123}\textcolor{ansi-red}{             }slice\_obj\textcolor{ansi-blue}{.}start\textcolor{ansi-blue}{,} slice\_obj\textcolor{ansi-blue}{.}stop\textcolor{ansi-blue}{,} slice\_obj\textcolor{ansi-blue}{.}step\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{"loc"}
+\textcolor{ansi-green-intense}{\textbf{   1124}}         )
+\textcolor{ansi-green-intense}{\textbf{   1125}} 
+
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{slice\_indexer}\textcolor{ansi-blue}{(self, start, end, step, kind)}
+\textcolor{ansi-green-intense}{\textbf{   4964}}         slice\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{,} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{   4965}}         """
+\textcolor{ansi-green}{-> 4966}\textcolor{ansi-red}{         }start\_slice\textcolor{ansi-blue}{,} end\_slice \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}slice\_locs\textcolor{ansi-blue}{(}start\textcolor{ansi-blue}{,} end\textcolor{ansi-blue}{,} step\textcolor{ansi-blue}{=}step\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{=}kind\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{   4967}} 
+\textcolor{ansi-green-intense}{\textbf{   4968}}         \textcolor{ansi-red}{\# return a slice}
+
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{slice\_locs}\textcolor{ansi-blue}{(self, start, end, step, kind)}
+\textcolor{ansi-green-intense}{\textbf{   5165}}         start\_slice \textcolor{ansi-blue}{=} \textcolor{ansi-green}{None}
+\textcolor{ansi-green-intense}{\textbf{   5166}}         \textcolor{ansi-green}{if} start \textcolor{ansi-green}{is} \textcolor{ansi-green}{not} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
+\textcolor{ansi-green}{-> 5167}\textcolor{ansi-red}{             }start\_slice \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}get\_slice\_bound\textcolor{ansi-blue}{(}start\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{"left"}\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{   5168}}         \textcolor{ansi-green}{if} start\_slice \textcolor{ansi-green}{is} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
+\textcolor{ansi-green-intense}{\textbf{   5169}}             start\_slice \textcolor{ansi-blue}{=} \textcolor{ansi-cyan}{0}
+
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{get\_slice\_bound}\textcolor{ansi-blue}{(self, label, side, kind)}
+\textcolor{ansi-green-intense}{\textbf{   5077}}         \textcolor{ansi-red}{\# For datetime indices label may be a string that has to be converted}
+\textcolor{ansi-green-intense}{\textbf{   5078}}         \textcolor{ansi-red}{\# to datetime boundary according to its resolution.}
+\textcolor{ansi-green}{-> 5079}\textcolor{ansi-red}{         }label \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}\_maybe\_cast\_slice\_bound\textcolor{ansi-blue}{(}label\textcolor{ansi-blue}{,} side\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{   5080}} 
+\textcolor{ansi-green-intense}{\textbf{   5081}}         \textcolor{ansi-red}{\# we need to look up the label}
+
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{\_maybe\_cast\_slice\_bound}\textcolor{ansi-blue}{(self, label, side, kind)}
+\textcolor{ansi-green-intense}{\textbf{   5029}}         \textcolor{ansi-red}{\# this is rejected (generally .loc gets you here)}
+\textcolor{ansi-green-intense}{\textbf{   5030}}         \textcolor{ansi-green}{elif} is\_integer\textcolor{ansi-blue}{(}label\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
+\textcolor{ansi-green}{-> 5031}\textcolor{ansi-red}{             }self\textcolor{ansi-blue}{.}\_invalid\_indexer\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{"slice"}\textcolor{ansi-blue}{,} label\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{   5032}} 
+\textcolor{ansi-green-intense}{\textbf{   5033}}         \textcolor{ansi-green}{return} label
+
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{\_invalid\_indexer}\textcolor{ansi-blue}{(self, form, key)}
+\textcolor{ansi-green-intense}{\textbf{   3266}}         """
+\textcolor{ansi-green-intense}{\textbf{   3267}}         raise TypeError(
+\textcolor{ansi-green}{-> 3268}\textcolor{ansi-red}{             }\textcolor{ansi-blue}{f"cannot do \{form\} indexing on \{type(self).\_\_name\_\_\} with these "}
+\textcolor{ansi-green-intense}{\textbf{   3269}}             \textcolor{ansi-blue}{f"indexers [\{key\}] of type \{type(key).\_\_name\_\_\}"}
+\textcolor{ansi-green-intense}{\textbf{   3270}}         )
+
+\textcolor{ansi-red}{TypeError}: cannot do slice indexing on Index with these indexers [0] of type int
+    \end{Verbatim}
+
+    Somewhat surprisingly, we can also pass boolean arrays to
+\texttt{.loc{[}{]}} even though these are clearly not labels:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scotland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                     Institution   Country  Founded  Students  Budget  Rank
+index
+a          University of Glasgow  Scotland     1451     30805   626.5    92
+b        University of Edinburgh  Scotland     1583     34275  1102.0    30
+c       University of St Andrews  Scotland     1413      8984   251.2   201
+d         University of Aberdeen  Scotland     1495     14775   219.5   178
+e      University of Strathclyde  Scotland     1964     22640   304.4   401
+s           University of Dundee  Scotland     1967     15915   256.4   201
+u         University of Stirling  Scotland     1967      9548   113.3   301
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Indexing via \texttt{.loc{[}{]}} supports a few more types of arguments,
+see the
+\href{https://pandas.pydata.org/docs/user_guide/indexing.html\#selection-by-label}{official
+documentation} for details.
+
+    \hypertarget{selection-by-position}{%
+\subsubsection{Selection by position}\label{selection-by-position}}
+
+Conversely, if we want to select items exclusively by their position and
+ignore their labels, we use \texttt{.iloc{[}{]}}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}           \PY{c+c1}{\PYZsh{} select first 4 rows, first 2 columns}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                    Institution   Country
+index
+a         University of Glasgow  Scotland
+b       University of Edinburgh  Scotland
+c      University of St Andrews  Scotland
+d        University of Aberdeen  Scotland
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Again, \texttt{.iloc{[}{]}} supports a multitude of other arguments,
+including boolean arrays. See the
+\href{https://pandas.pydata.org/docs/user_guide/indexing.html\#selection-by-position}{official
+documentation} for details.
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{aggregation-and-reduction}{%
+\subsection{Aggregation and reduction}\label{aggregation-and-reduction}}
+
+\hypertarget{working-with-entire-dataframes}{%
+\subsubsection{Working with entire
+DataFrames}\label{working-with-entire-dataframes}}
+
+The simplest way to perform data reduction is to invoke the desired
+routine on the entire \texttt{DataFrame}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{df}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Founded      1745.652174
+Students    24106.782609
+Budget        768.609091
+Rank          124.739130
+dtype: float64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Methods such as \texttt{mean()} are by default applied column-wise to
+each numerical column.
+
+One big advantage over NumPy is that missing values (represented by
+\texttt{np.nan}) are automatically ignored:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Set Aberdeen\PYZsq{}s THE ranking to missing}
+\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{University of Aberdeen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{University of Aberdeen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+              Institution   Country  Founded  Students  Budget  Rank
+3  University of Aberdeen  Scotland     1495     14775   219.5   NaN
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} mean() automatically drops missing observations}
+\PY{n}{df}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Founded      1745.652174
+Students    24106.782609
+Budget        768.609091
+Rank          122.318182
+dtype: float64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{splitting-and-grouping}{%
+\subsubsection{Splitting and grouping}\label{splitting-and-grouping}}
+
+Applying aggregation functions to the entire \texttt{DataFrame} is
+similar to what we can do with NumPy. The added flexibility of pandas
+becomes obvious once we want to apply these functions to subsets of
+data, ie. groups, which we can define based on values or index labels.
+
+For example, we can easily group our university data by country:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{21}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{n}{groups} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Here \texttt{groups} is a special pandas objects which can be
+subsequently be used to process group-specific data. To compute the
+group-wise averages, we can simply run
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                      Founded      Students       Budget        Rank
+Country
+England           1745.923077  27119.846154  1001.700000   63.307692
+Northern Ireland  1810.000000  18438.000000   369.200000  200.000000
+Scotland          1691.428571  19563.142857   410.471429  200.571429
+Wales             1901.500000  23259.000000   644.800000  221.000000
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Groups support column indexing. If we want to only compute the total
+number of students for each country in our sample, we can do this as
+follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Country
+England             352558
+Northern Ireland     18438
+Scotland            136942
+Wales                46518
+Name: Students, dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    There are numerous routines available to aggregate grouped data, for
+example:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{mean()}, \texttt{sum()}: averages and sums over numerical
+  items within groups.
+\item
+  \texttt{std()}, \texttt{var()}: within-group std. dev. and variances
+\item
+  \texttt{size()}: group sizes
+\item
+  \texttt{first()}, \texttt{last()}: first and last elements in each
+  group
+\item
+  \texttt{min()}, \texttt{max()}: minimum and maximum elements within a
+  group
+\end{itemize}
+
+    \emph{Examples:}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}       \PY{c+c1}{\PYZsh{} return number of elements in each group}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Country
+England             13
+Northern Ireland     1
+Scotland             7
+Wales                2
+dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{o}{.}\PY{n}{first}\PY{p}{(}\PY{p}{)}      \PY{c+c1}{\PYZsh{} return first element in each group}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                                 Institution  Founded  Students  Budget  Rank
+Country
+England                                  LSE     1895     11850   415.1    27
+Northern Ireland  Queen’s University Belfast     1810     18438   369.2   200
+Scotland               University of Glasgow     1451     30805   626.5    92
+Wales                     Cardiff University     1883     25898   644.8   191
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We can create custom aggregation routines by calling \texttt{agg()} or
+\texttt{aggregate()} on the grouped object. To illustrate, we count the
+number of universities in each country that have more than 20,000
+students:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{26}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{20000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{26}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Country
+England             10
+Northern Ireland     0
+Scotland             3
+Wales                2
+Name: Students, dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Note that we called \texttt{agg()} only on the column \texttt{Students},
+otherwise the function would be applied to every column separately,
+which is not what we want.
+
+The most flexible aggregate function is \texttt{apply()}, which calls
+the given function with the entire group-specific subset of data
+(including all columns) and glues together the results.
+
+For example, if we want to compute the average budget per student (in
+pounds), we can do this as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{27}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{1.0e6}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{27}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Country
+England             36936.050239
+Northern Ireland    20023.863760
+Scotland            20981.875539
+Wales               13861.301002
+dtype: float64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We couldn't have done this with \texttt{agg()} since \texttt{agg()}
+never gets to see the entire chunk of data but only one column at a
+time.
+
+This section provided only a first look at pandas's
+``split-apply-combine'' functionality implemented via \texttt{groupby}.
+See the
+\href{https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html}{official
+documentation} for more details.
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{visualisation}{%
+\subsection{Visualisation}\label{visualisation}}
+
+We covered plotting with Matplotlib in earlier units. Pandas itself
+implements some convenience wrappers around Matplotlib plotting routines
+which allow us to quickly inspect data stored in \texttt{DataFrames}. We
+can of course alternatively extract the numerical data and pass it to
+Matplotlib's routines instead.
+
+For example, to plot student numbers as a bar chart, we can directly use
+Pandas:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{28}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} set institution as label so they automatically show up in plot}
+\PY{n}{df2} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{n}{keys}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{28}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:xlabel='Institution'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_58_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Alternatively, we can construct the graph using Matplotlib ourselves:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{29}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+
+\PY{n}{labels} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}list}\PY{p}{(}\PY{p}{)}        \PY{c+c1}{\PYZsh{} labels as list}
+\PY{n}{values} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}          \PY{c+c1}{\PYZsh{} data as NumPy array}
+\PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{values}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{tick\PYZus{}params}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labelrotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_60_0.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Sometimes Matplotlib's routines directly work with pandas's data
+structures, sometimes they don't. In cases where they don't, we can
+convert a \texttt{DataFrame} or \texttt{Series} object to a NumPy array
+using the \texttt{to\_numpy()} method, and convert a \texttt{Series} to
+a Python list using \texttt{to\_list()}, as illustrated in the example
+above.
+
+To plot timeseries-like data, we can use the \texttt{plot()} method,
+which optionally accepts arguments to specify which columns should be
+used for the x-axis and which for the y-axis:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{30}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{c+c1}{\PYZsh{} Instantiate RNG}
+\PY{n}{rng} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{default\PYZus{}rng}\PY{p}{(}\PY{l+m+mi}{123}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create pandas DataFrame}
+\PY{n}{nobs} \PY{o}{=} \PY{l+m+mi}{50}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nobs}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{rng}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{n}{nobs}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+
+\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}       \PY{c+c1}{\PYZsh{} plot A on x\PYZhy{}axis, B on y\PYZhy{}axis}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{30}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:xlabel='A'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_62_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    To quickly generate some descriptive statistics, we can use the built-in
+box plot:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{31}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{c+c1}{\PYZsh{} Instantiate RNG}
+\PY{n}{rng} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{default\PYZus{}rng}\PY{p}{(}\PY{l+m+mi}{123}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create pandas DataFrame}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{rng}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                  \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{box}\PY{p}{(}\PY{p}{)}           \PY{c+c1}{\PYZsh{} same as df.plot(kind=\PYZsq{}box\PYZsq{})}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{31}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_64_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Similarly, we can generate scatter plots, plotting one column against
+another:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{32}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Create pandas DataFrame}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{rng}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                  \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pandas scatter plot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{32}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:xlabel='A', ylabel='E'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_66_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{33}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} We can even use a column to specify the dot size!}
+\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{l+m+mf}{100.0}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{33}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:xlabel='A', ylabel='E'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_67_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In general, the wrappers implemented in Pandas are useful to get an idea
+how the data looks like. For reusable code or more complex graphs, we'll
+usually want to directly use Matplotlib and pass the data converted to
+NumPy arrays.
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exercises}{%
+\section{Exercises}\label{exercises}}
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{solutions}{%
+\section{Solutions}\label{solutions}}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}
