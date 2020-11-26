@@ -28,6 +28,7 @@ cache/
 *.run.xml
 
 .ipynb_checkpoints/
+latex/*/*.png
 
 # Compiled Python bytecode
 *.py[cod]
