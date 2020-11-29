@@ -391,12 +391,12 @@
 \subsection{Motivation}\label{motivation}}
 
 So far, we have encountered NumPy arrays as the only way to store
-numerical data (we mostly ignored the built-in contains provided
+numerical data (we mostly ignored the built-in containers provided
 directly in Python).
 
-However, while NumPy arrays are great for storing homogenous data which
-does not have any particular structure, they are somewhat limited when
-we want to use them for high-level data analysis.
+However, while NumPy arrays are great for storing homogenous data
+without any particular structure, they are somewhat limited when we want
+to use them for high-level data analysis.
 
 For example, we usually want to process data sets with
 
@@ -673,11 +673,34 @@ You can use the \texttt{head()} and \texttt{tail()} methods to
 explicitly display a specific number of rows from the top or the end of
 a \texttt{DataFrame}.
 
-To illustrate, we use a data set of a few UK universities that contains
-their name, number of students and budget in million pounds (both from
-Wikipedia), and their
-\href{https://www.timeshighereducation.com/world-university-rankings}{Times
-Higher Education (THE) ranking}.
+To illustrate, we use a data set of 23 UK universities that contains the
+following variables:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Instititution}: Name of the institution
+\item
+  \texttt{Country}: Country/nation within the UK (England, Scotland,
+  \ldots)
+\item
+  \texttt{Founded}: Year in which university (or a predecessor
+  institution) was founded
+\item
+  \texttt{Students}: Total number of students
+\item
+  \texttt{Staff}: Number of academic staff
+\item
+  \texttt{Admin}: Number of administrative staff
+\item
+  \texttt{Budget}: Budget in million pounds
+\item
+  \texttt{Russell}: Binary indicator whether university is a member of
+  the \href{https://en.wikipedia.org/wiki/Russell_Group}{Russell Group},
+  an association of the UK's top research universities.
+\end{itemize}
+
+The data was compiled based on information from Wikipedia.
 
 We read in the data stored in the file \texttt{universities.csv} (from
 the \texttt{data/} folder) like this:
@@ -707,10 +730,15 @@ the \texttt{data/} folder) like this:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                Institution   Country  Founded  Students  Budget  Rank
-0     University of Glasgow  Scotland     1451     30805   626.5    92
-1   University of Edinburgh  Scotland     1583     34275  1102.0    30
-2  University of St Andrews  Scotland     1413      8984   251.2   201
+                Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
+0     University of Glasgow  Scotland     1451     30805  2942.0  4003.0
+1   University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
+2  University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+
+   Budget  Russell
+0   626.5        1
+1  1102.0        1
+2   251.2        0
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -724,15 +752,15 @@ the \texttt{data/} folder) like this:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                   Institution           Country  Founded  Students  Budget  \textbackslash{}
-20      University of Stirling          Scotland     1967      9548   113.3
-21  Queen’s University Belfast  Northern Ireland     1810     18438   369.2
+                   Institution           Country  Founded  Students   Staff  \textbackslash{}
+20      University of Stirling          Scotland     1967      9548     NaN
+21  Queen’s University Belfast  Northern Ireland     1810     18438  2414.0
 22          Swansea University             Wales     1920     20620     NaN
 
-    Rank
-20   301
-21   200
-22   251
+     Admin  Budget  Russell
+20  1872.0   113.3        0
+21  1489.0   369.2        1
+22  3290.0     NaN        0
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -749,21 +777,31 @@ variables in the \texttt{DataFrame}, we use \texttt{describe()}:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-           Founded      Students       Budget        Rank
-count    23.000000     23.000000    22.000000   23.000000
-mean   1745.652174  24106.782609   768.609091  124.739130
-std     256.992149   9093.000735   608.234948  104.498463
-min    1096.000000   8984.000000   113.300000    1.000000
-25\%    1589.000000  18776.500000   340.850000   32.500000
-50\%    1826.000000  23247.000000   643.750000  107.000000
-75\%    1941.500000  30801.500000  1023.500000  195.500000
-max    2004.000000  41180.000000  2450.000000  401.000000
+           Founded      Students        Staff        Admin       Budget  \textbackslash{}
+count    23.000000     23.000000    20.000000    19.000000    22.000000
+mean   1745.652174  24106.782609  3664.250000  3556.736842   768.609091
+std     256.992149   9093.000735  2025.638038  1550.434342   608.234948
+min    1096.000000   8984.000000  1086.000000  1489.000000   113.300000
+25\%    1589.000000  18776.500000  2294.250000  2193.500000   340.850000
+50\%    1826.000000  23247.000000  3307.500000  3485.000000   643.750000
+75\%    1941.500000  30801.500000  4439.750000  4347.500000  1023.500000
+max    2004.000000  41180.000000  7913.000000  6199.000000  2450.000000
+
+         Russell
+count  23.000000
+mean    0.739130
+std     0.448978
+min     0.000000
+25\%     0.500000
+50\%     1.000000
+75\%     1.000000
+max     1.000000
 \end{Verbatim}
 \end{tcolorbox}
         
     Note that this automatically ignores the columns \texttt{Institution}
 and \texttt{Country} as they contain strings and computing the mean,
-etc. of a string variable does not make sense.
+\etc of a string variable does not make sense.
 
 To see low-level information about the data type used in each column, we
 call \texttt{info()}:
@@ -778,24 +816,25 @@ call \texttt{info()}:
     \begin{Verbatim}[commandchars=\\\{\}]
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 23 entries, 0 to 22
-Data columns (total 6 columns):
+Data columns (total 8 columns):
  \#   Column       Non-Null Count  Dtype
 ---  ------       --------------  -----
  0   Institution  23 non-null     object
  1   Country      23 non-null     object
  2   Founded      23 non-null     int64
  3   Students     23 non-null     int64
- 4   Budget       22 non-null     float64
- 5   Rank         23 non-null     int64
-dtypes: float64(1), int64(3), object(2)
-memory usage: 1.2+ KB
+ 4   Staff        20 non-null     float64
+ 5   Admin        19 non-null     float64
+ 6   Budget       22 non-null     float64
+ 7   Russell      23 non-null     int64
+dtypes: float64(3), int64(3), object(2)
+memory usage: 1.6+ KB
     \end{Verbatim}
 
-    Note that pandas automatically discards missing information in
-computations. For example, the budget for Swansea University is missing,
-and this observation is therefore dropped when computing descriptive
-statistics. Consequently, you see in the above table that the column
-\texttt{Budget} contains only 22 \emph{non-null} entries.
+    Pandas automatically discards missing information in computations. For
+example, the number of academic staff is missing for several
+universities, so the number of \emph{non-null} entries reported in the
+table above is less than 23, the overall sample size.
 
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -810,7 +849,7 @@ Pandas supports two types of indexing:
   Indexing by position. This is basically identical to the indexing of
   other Python and NumPy containers.
 \item
-  Indexing by label, ie. by the values assigned to the row or column
+  Indexing by label, \ie by the values assigned to the row or column
   index. These labels need not be integers in increasing order, as is
   the case for NumPy.
 
@@ -880,37 +919,37 @@ Name: Institution, dtype: object
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}     \PY{c+c1}{\PYZsh{} select multiple columns using a list}
+\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}     \PY{c+c1}{\PYZsh{} select multiple columns using a list}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                        Institution  Rank
-0             University of Glasgow    92
-1           University of Edinburgh    30
-2          University of St Andrews   201
-3            University of Aberdeen   178
-4         University of Strathclyde   401
-5                               LSE    27
-6                               UCL    16
-7           University of Cambridge     6
-8              University of Oxford     1
-9             University of Warwick    77
-10          Imperial College London    11
-11            King’s College London    35
-12         University of Manchester    51
-13            University of Bristol    91
-14         University of Birmingham   107
-15  Queen Mary University of London   110
-16               University of York   133
-17         University of Nottingham   158
-18             University of Dundee   201
-19               Cardiff University   191
-20           University of Stirling   301
-21       Queen’s University Belfast   200
-22               Swansea University   251
+                        Institution  Students
+0             University of Glasgow     30805
+1           University of Edinburgh     34275
+2          University of St Andrews      8984
+3            University of Aberdeen     14775
+4         University of Strathclyde     22640
+5                               LSE     11850
+6                               UCL     41180
+7           University of Cambridge     23247
+8              University of Oxford     24515
+9             University of Warwick     27278
+10          Imperial College London     19115
+11            King’s College London     32895
+12         University of Manchester     40250
+13            University of Bristol     25955
+14         University of Birmingham     35445
+15  Queen Mary University of London     20560
+16               University of York     19470
+17         University of Nottingham     30798
+18             University of Dundee     15915
+19               Cardiff University     25898
+20           University of Stirling      9548
+21       Queen’s University Belfast     18438
+22               Swansea University     20620
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -926,22 +965,43 @@ Name: Institution, dtype: object
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                Institution   Country  Founded  Students  Budget  Rank
-1   University of Edinburgh  Scotland     1583     34275  1102.0    30
-2  University of St Andrews  Scotland     1413      8984   251.2   201
-3    University of Aberdeen  Scotland     1495     14775   219.5   178
+                Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
+1   University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
+2  University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+3    University of Aberdeen  Scotland     1495     14775  1086.0  1489.0
+
+   Budget  Russell
+1  1102.0        1
+2   251.2        0
+3   219.5        0
 \end{Verbatim}
 \end{tcolorbox}
         
     Pandas follows the Python convention that indices are 0-based, and the
 endpoint of a slice is not included.
 
-    \hypertarget{selection-by-label}{%
-\subsubsection{Selection by label}\label{selection-by-label}}
+    \hypertarget{manipulating-indices}{%
+\subsubsection{Manipulating indices}\label{manipulating-indices}}
 
 Pandas uses \emph{labels} to index and align data. These can be integer
 values starting at 0 with increments of 1 for each additional element,
-which is the default, but they need not be.
+which is the default, but they need not be. The two main methods to
+manipulate indices are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{set\_index(keys={[}\textquotesingle{}column1\textquotesingle{},\ ...{]})}:
+  uses the values of \texttt{column1} and optionally additional columns
+  as indices, discarding the current index.
+\item
+  \texttt{reset\_index()}: resets the index to its default value, a
+  sequence increasing integers starting at 0.
+\end{itemize}
+
+Both methods return a new \texttt{DataFrame} and leave the original
+\texttt{DataFrame} unchanged. If we want to change the existing
+\texttt{DataFrame}, we need to pass the argument \texttt{inplace=True}.
 
 For example, we can replace the row index and use the Roman lower-case
 characters \texttt{a}, \texttt{b}, \texttt{c}, \ldots{} as labels
@@ -1003,17 +1063,56 @@ instead of integers:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                    Institution   Country  Founded  Students  Budget  Rank
+                    Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
 index
-a         University of Glasgow  Scotland     1451     30805   626.5    92
-b       University of Edinburgh  Scotland     1583     34275  1102.0    30
-c      University of St Andrews  Scotland     1413      8984   251.2   201
+a         University of Glasgow  Scotland     1451     30805  2942.0  4003.0
+b       University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
+c      University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+
+       Budget  Russell
+index
+a       626.5        1
+b      1102.0        1
+c       251.2        0
 \end{Verbatim}
 \end{tcolorbox}
         
     To add to the confusion, note that when specifying a range in terms of
 labels, the last element \emph{is} included! Hence the row with index
 \texttt{c} in the above example is shown.
+
+We can reset the index to its default integer values using the
+\texttt{reset\_index()} method:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Reset index labels to default value (integers 0, 1, 2, ...)}
+\PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}       \PY{c+c1}{\PYZsh{} print first 3 rows of new DataFrame}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
+0     University of Glasgow  Scotland     1451     30805  2942.0  4003.0
+1   University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
+2  University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+
+   Budget  Russell
+0   626.5        1
+1  1102.0        1
+2   251.2        0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The \texttt{drop=True} argument tells pandas to throw away the old index
+values instead of storing them as a column of the resulting
+\texttt{DataFrame}.
+
+\hypertarget{selecting-elements}{%
+\subsubsection{Selecting elements}\label{selecting-elements}}
 
 To more clearly distinguish between selection by label and by position,
 pandas provides the \texttt{.loc{[}{]}} and \texttt{.iloc{[}{]}} methods
@@ -1032,17 +1131,19 @@ to the following rules:
   Use \texttt{.iloc{[}{]}} to select by position.
 \end{enumerate}
 
+\textbf{Selection by label}
+
 To illustrate, using \texttt{.loc{[}{]}} unambiguously indexes by label:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\prompt{In}{incolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{16}{\boxspacing}
+\prompt{Out}{outcolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                      Institution  Students
 index
@@ -1056,14 +1157,14 @@ f                            LSE     11850
 which is not possible with the simpler \texttt{df{[}{]}} syntax:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{17}{\boxspacing}
+\prompt{In}{incolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Founded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{17}{\boxspacing}
+\prompt{Out}{outcolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                      Institution   Country  Founded
 index
@@ -1074,15 +1175,15 @@ f                            LSE   England     1895
 \end{tcolorbox}
         
     This includes all the columns between \texttt{Institution} and
-\texttt{Founded}, where the latter is again included since we are
-slicing by label.
+\texttt{Founded}, where the latter is included since we are slicing by
+label.
 
-Trying to pass in positional arguments will return an error if the index
-does not happen to be of type integer and the given values are actual
-labels:
+Trying to pass in positional arguments will return an error for the
+given \texttt{DataFrame} since the index labels are \texttt{a},
+\texttt{b}, \texttt{c},\ldots{} and not 0, 1, 2\ldots{}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{18}{\boxspacing}
+\prompt{In}{incolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
 \end{Verbatim}
@@ -1094,87 +1195,130 @@ labels:
 \textcolor{ansi-green}{<ipython-input-1-11cc54301474>} in \textcolor{ansi-cyan}{<module>}
 \textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }df\textcolor{ansi-blue}{.}loc\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{:}\textcolor{ansi-cyan}{4}\textcolor{ansi-blue}{]}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_\_getitem\_\_}\textcolor{ansi-blue}{(self, key)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_\_getitem\_\_}\textcolor{ansi-blue}{(self, key)}
 \textcolor{ansi-green-intense}{\textbf{    877}} 
 \textcolor{ansi-green-intense}{\textbf{    878}}             maybe\_callable \textcolor{ansi-blue}{=} com\textcolor{ansi-blue}{.}apply\_if\_callable\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} self\textcolor{ansi-blue}{.}obj\textcolor{ansi-blue}{)}
 \textcolor{ansi-green}{--> 879}\textcolor{ansi-red}{             }\textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_getitem\_axis\textcolor{ansi-blue}{(}maybe\_callable\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
 \textcolor{ansi-green-intense}{\textbf{    880}} 
 \textcolor{ansi-green-intense}{\textbf{    881}}     \textcolor{ansi-green}{def} \_is\_scalar\_access\textcolor{ansi-blue}{(}self\textcolor{ansi-blue}{,} key\textcolor{ansi-blue}{:} Tuple\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_getitem\_axis}\textcolor{ansi-blue}{(self, key, axis)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_getitem\_axis}\textcolor{ansi-blue}{(self, key, axis)}
 \textcolor{ansi-green-intense}{\textbf{   1086}}         \textcolor{ansi-green}{if} isinstance\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} slice\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green-intense}{\textbf{   1087}}             self\textcolor{ansi-blue}{.}\_validate\_key\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{)}
 \textcolor{ansi-green}{-> 1088}\textcolor{ansi-red}{             }\textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_get\_slice\_axis\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
 \textcolor{ansi-green-intense}{\textbf{   1089}}         \textcolor{ansi-green}{elif} com\textcolor{ansi-blue}{.}is\_bool\_indexer\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green-intense}{\textbf{   1090}}             \textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_getbool\_axis\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_get\_slice\_axis}\textcolor{ansi-blue}{(self, slice\_obj, axis)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_get\_slice\_axis}\textcolor{ansi-blue}{(self, slice\_obj, axis)}
+\textcolor{ansi-green-intense}{\textbf{   1120}} 
 \textcolor{ansi-green-intense}{\textbf{   1121}}         labels \textcolor{ansi-blue}{=} obj\textcolor{ansi-blue}{.}\_get\_axis\textcolor{ansi-blue}{(}axis\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{   1122}}         indexer = labels.slice\_indexer(
-\textcolor{ansi-green}{-> 1123}\textcolor{ansi-red}{             }slice\_obj\textcolor{ansi-blue}{.}start\textcolor{ansi-blue}{,} slice\_obj\textcolor{ansi-blue}{.}stop\textcolor{ansi-blue}{,} slice\_obj\textcolor{ansi-blue}{.}step\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{"loc"}
+\textcolor{ansi-green}{-> 1122}\textcolor{ansi-red}{         indexer = labels.slice\_indexer(
+}\textcolor{ansi-green-intense}{\textbf{   1123}}             slice\_obj\textcolor{ansi-blue}{.}start\textcolor{ansi-blue}{,} slice\_obj\textcolor{ansi-blue}{.}stop\textcolor{ansi-blue}{,} slice\_obj\textcolor{ansi-blue}{.}step\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{"loc"}
 \textcolor{ansi-green-intense}{\textbf{   1124}}         )
-\textcolor{ansi-green-intense}{\textbf{   1125}} 
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{slice\_indexer}\textcolor{ansi-blue}{(self, start, end, step, kind)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{slice\_indexer}\textcolor{ansi-blue}{(self, start, end, step, kind)}
 \textcolor{ansi-green-intense}{\textbf{   4964}}         slice\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{,} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{)}
 \textcolor{ansi-green-intense}{\textbf{   4965}}         """
 \textcolor{ansi-green}{-> 4966}\textcolor{ansi-red}{         }start\_slice\textcolor{ansi-blue}{,} end\_slice \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}slice\_locs\textcolor{ansi-blue}{(}start\textcolor{ansi-blue}{,} end\textcolor{ansi-blue}{,} step\textcolor{ansi-blue}{=}step\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{=}kind\textcolor{ansi-blue}{)}
 \textcolor{ansi-green-intense}{\textbf{   4967}} 
 \textcolor{ansi-green-intense}{\textbf{   4968}}         \textcolor{ansi-red}{\# return a slice}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{slice\_locs}\textcolor{ansi-blue}{(self, start, end, step, kind)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{slice\_locs}\textcolor{ansi-blue}{(self, start, end, step, kind)}
 \textcolor{ansi-green-intense}{\textbf{   5165}}         start\_slice \textcolor{ansi-blue}{=} \textcolor{ansi-green}{None}
 \textcolor{ansi-green-intense}{\textbf{   5166}}         \textcolor{ansi-green}{if} start \textcolor{ansi-green}{is} \textcolor{ansi-green}{not} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green}{-> 5167}\textcolor{ansi-red}{             }start\_slice \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}get\_slice\_bound\textcolor{ansi-blue}{(}start\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{"left"}\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{)}
 \textcolor{ansi-green-intense}{\textbf{   5168}}         \textcolor{ansi-green}{if} start\_slice \textcolor{ansi-green}{is} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green-intense}{\textbf{   5169}}             start\_slice \textcolor{ansi-blue}{=} \textcolor{ansi-cyan}{0}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{get\_slice\_bound}\textcolor{ansi-blue}{(self, label, side, kind)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{get\_slice\_bound}\textcolor{ansi-blue}{(self, label, side, kind)}
 \textcolor{ansi-green-intense}{\textbf{   5077}}         \textcolor{ansi-red}{\# For datetime indices label may be a string that has to be converted}
 \textcolor{ansi-green-intense}{\textbf{   5078}}         \textcolor{ansi-red}{\# to datetime boundary according to its resolution.}
 \textcolor{ansi-green}{-> 5079}\textcolor{ansi-red}{         }label \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}\_maybe\_cast\_slice\_bound\textcolor{ansi-blue}{(}label\textcolor{ansi-blue}{,} side\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{)}
 \textcolor{ansi-green-intense}{\textbf{   5080}} 
 \textcolor{ansi-green-intense}{\textbf{   5081}}         \textcolor{ansi-red}{\# we need to look up the label}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{\_maybe\_cast\_slice\_bound}\textcolor{ansi-blue}{(self, label, side, kind)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{\_maybe\_cast\_slice\_bound}\textcolor{ansi-blue}{(self, label, side, kind)}
 \textcolor{ansi-green-intense}{\textbf{   5029}}         \textcolor{ansi-red}{\# this is rejected (generally .loc gets you here)}
 \textcolor{ansi-green-intense}{\textbf{   5030}}         \textcolor{ansi-green}{elif} is\_integer\textcolor{ansi-blue}{(}label\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green}{-> 5031}\textcolor{ansi-red}{             }self\textcolor{ansi-blue}{.}\_invalid\_indexer\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{"slice"}\textcolor{ansi-blue}{,} label\textcolor{ansi-blue}{)}
 \textcolor{ansi-green-intense}{\textbf{   5032}} 
 \textcolor{ansi-green-intense}{\textbf{   5033}}         \textcolor{ansi-green}{return} label
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{\_invalid\_indexer}\textcolor{ansi-blue}{(self, form, key)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{\_invalid\_indexer}\textcolor{ansi-blue}{(self, form, key)}
+\textcolor{ansi-green-intense}{\textbf{   3265}}         Consistent invalid indexer message\textcolor{ansi-blue}{.}
 \textcolor{ansi-green-intense}{\textbf{   3266}}         """
-\textcolor{ansi-green-intense}{\textbf{   3267}}         raise TypeError(
-\textcolor{ansi-green}{-> 3268}\textcolor{ansi-red}{             }\textcolor{ansi-blue}{f"cannot do \{form\} indexing on \{type(self).\_\_name\_\_\} with these "}
+\textcolor{ansi-green}{-> 3267}\textcolor{ansi-red}{         raise TypeError(
+}\textcolor{ansi-green-intense}{\textbf{   3268}}             \textcolor{ansi-blue}{f"cannot do \{form\} indexing on \{type(self).\_\_name\_\_\} with these "}
 \textcolor{ansi-green-intense}{\textbf{   3269}}             \textcolor{ansi-blue}{f"indexers [\{key\}] of type \{type(key).\_\_name\_\_\}"}
-\textcolor{ansi-green-intense}{\textbf{   3270}}         )
 
 \textcolor{ansi-red}{TypeError}: cannot do slice indexing on Index with these indexers [0] of type int
     \end{Verbatim}
 
-    Somewhat surprisingly, we can also pass boolean arrays to
+    However, we can reset the index to its default value. Then the index
+labels are integers and coincide with their position, so that
+\texttt{.loc{[}{]}} works:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}     \PY{c+c1}{\PYZsh{} reset index labels to integers,}
+                                            \PY{c+c1}{\PYZsh{} drop original index}
+\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                 Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
+0      University of Glasgow  Scotland     1451     30805  2942.0  4003.0
+1    University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
+2   University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+3     University of Aberdeen  Scotland     1495     14775  1086.0  1489.0
+4  University of Strathclyde  Scotland     1964     22640     NaN  3200.0
+
+   Budget  Russell
+0   626.5        1
+1  1102.0        1
+2   251.2        0
+3   219.5        0
+4   304.4        0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Again, the end point with label \texttt{4} is included because we are
+selecting by label.
+
+Somewhat surprisingly, we can also pass boolean arrays to
 \texttt{.loc{[}{]}} even though these are clearly not labels:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{19}{\boxspacing}
+\prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scotland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{19}{\boxspacing}
+\prompt{Out}{outcolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                     Institution   Country  Founded  Students  Budget  Rank
-index
-a          University of Glasgow  Scotland     1451     30805   626.5    92
-b        University of Edinburgh  Scotland     1583     34275  1102.0    30
-c       University of St Andrews  Scotland     1413      8984   251.2   201
-d         University of Aberdeen  Scotland     1495     14775   219.5   178
-e      University of Strathclyde  Scotland     1964     22640   304.4   401
-s           University of Dundee  Scotland     1967     15915   256.4   201
-u         University of Stirling  Scotland     1967      9548   113.3   301
+                  Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
+0       University of Glasgow  Scotland     1451     30805  2942.0  4003.0
+1     University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
+2    University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+3      University of Aberdeen  Scotland     1495     14775  1086.0  1489.0
+4   University of Strathclyde  Scotland     1964     22640     NaN  3200.0
+18       University of Dundee  Scotland     1967     15915  1410.0  1805.0
+20     University of Stirling  Scotland     1967      9548     NaN  1872.0
+
+    Budget  Russell
+0    626.5        1
+1   1102.0        1
+2    251.2        0
+3    219.5        0
+4    304.4        0
+18   256.4        0
+20   113.3        0
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1183,28 +1327,26 @@ see the
 \href{https://pandas.pydata.org/docs/user_guide/indexing.html\#selection-by-label}{official
 documentation} for details.
 
-    \hypertarget{selection-by-position}{%
-\subsubsection{Selection by position}\label{selection-by-position}}
+    \textbf{Selection by position}
 
 Conversely, if we want to select items exclusively by their position and
 ignore their labels, we use \texttt{.iloc{[}{]}}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}           \PY{c+c1}{\PYZsh{} select first 4 rows, first 2 columns}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{20}{\boxspacing}
+\prompt{Out}{outcolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                    Institution   Country
-index
-a         University of Glasgow  Scotland
-b       University of Edinburgh  Scotland
-c      University of St Andrews  Scotland
-d        University of Aberdeen  Scotland
+                Institution   Country
+0     University of Glasgow  Scotland
+1   University of Edinburgh  Scotland
+2  University of St Andrews  Scotland
+3    University of Aberdeen  Scotland
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1226,7 +1368,7 @@ The simplest way to perform data reduction is to invoke the desired
 routine on the entire \texttt{DataFrame}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{21}{\boxspacing}
+\prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -1236,12 +1378,14 @@ routine on the entire \texttt{DataFrame}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{21}{\boxspacing}
+\prompt{Out}{outcolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Founded      1745.652174
 Students    24106.782609
+Staff        3664.250000
+Admin        3556.736842
 Budget        768.609091
-Rank          124.739130
+Russell         0.739130
 dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
@@ -1253,34 +1397,17 @@ One big advantage over NumPy is that missing values (represented by
 \texttt{np.nan}) are automatically ignored:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
+\prompt{In}{incolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Set Aberdeen\PYZsq{}s THE ranking to missing}
-\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{University of Aberdeen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
-\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{University of Aberdeen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{c+c1}{\PYZsh{} mean() automatically drops 3 missing observations}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{22}{\boxspacing}
+\prompt{Out}{outcolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-              Institution   Country  Founded  Students  Budget  Rank
-3  University of Aberdeen  Scotland     1495     14775   219.5   NaN
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} mean() automatically drops missing observations}
-\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{23}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-122.31818181818181
+3664.25
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1290,12 +1417,12 @@ One big advantage over NumPy is that missing values (represented by
 Applying aggregation functions to the entire \texttt{DataFrame} is
 similar to what we can do with NumPy. The added flexibility of pandas
 becomes obvious once we want to apply these functions to subsets of
-data, ie. groups, which we can define based on values or index labels.
+data, \ie groups, which we can define based on values or index labels.
 
 For example, we can easily group our universities by country:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -1310,21 +1437,28 @@ be used to process group-specific data. To compute the group-wise
 averages, we can simply run
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{groups}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{25}{\boxspacing}
+\prompt{Out}{outcolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                      Founded      Students       Budget        Rank
+                      Founded      Students        Staff        Admin  \textbackslash{}
 Country
-England           1745.923077  27119.846154  1001.700000   63.307692
-Northern Ireland  1810.000000  18438.000000   369.200000  200.000000
-Scotland          1691.428571  19563.142857   410.471429  200.571429
-Wales             1901.500000  23259.000000   644.800000  221.000000
+England           1745.923077  27119.846154  4336.692308  4112.000000
+Northern Ireland  1810.000000  18438.000000  2414.000000  1489.000000
+Scotland          1691.428571  19563.142857  2232.800000  2864.571429
+Wales             1901.500000  23259.000000  3330.000000  4514.500000
+
+                       Budget   Russell
+Country
+England           1001.700000  1.000000
+Northern Ireland   369.200000  1.000000
+Scotland           410.471429  0.285714
+Wales              644.800000  0.500000
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1333,14 +1467,14 @@ number of students for each country in our sample, we can do this as
 follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{groups}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{26}{\boxspacing}
+\prompt{Out}{outcolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country
 England             352558
@@ -1373,14 +1507,14 @@ Name: Students, dtype: int64
     \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{27}{\boxspacing}
+\prompt{In}{incolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{groups}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}       \PY{c+c1}{\PYZsh{} return number of elements in each group}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{27}{\boxspacing}
+\prompt{Out}{outcolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country
 England             13
@@ -1392,21 +1526,28 @@ dtype: int64
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{28}{\boxspacing}
+\prompt{In}{incolor}{29}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{groups}\PY{o}{.}\PY{n}{first}\PY{p}{(}\PY{p}{)}      \PY{c+c1}{\PYZsh{} return first element in each group}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{28}{\boxspacing}
+\prompt{Out}{outcolor}{29}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                                 Institution  Founded  Students  Budget  Rank
+                                 Institution  Founded  Students   Staff  \textbackslash{}
 Country
-England                                  LSE     1895     11850   415.1    27
-Northern Ireland  Queen’s University Belfast     1810     18438   369.2   200
-Scotland               University of Glasgow     1451     30805   626.5    92
-Wales                     Cardiff University     1883     25898   644.8   191
+England                                  LSE     1895     11850  1725.0
+Northern Ireland  Queen’s University Belfast     1810     18438  2414.0
+Scotland               University of Glasgow     1451     30805  2942.0
+Wales                     Cardiff University     1883     25898  3330.0
+
+                   Admin  Budget  Russell
+Country
+England           2515.0   415.1        1
+Northern Ireland  1489.0   369.2        1
+Scotland          4003.0   626.5        1
+Wales             5739.0   644.8        1
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1416,14 +1557,14 @@ number of universities in each country that have more than 20,000
 students:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{29}{\boxspacing}
+\prompt{In}{incolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{groups}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{20000}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{29}{\boxspacing}
+\prompt{Out}{outcolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country
 England             10
@@ -1446,7 +1587,7 @@ For example, if we want to compute the average budget per student (in
 pounds), we can do this as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
+\prompt{In}{incolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Budget is in millions of pounds, rescale by 1.0e6}
 \PY{n}{groups}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{1.0e6}\PY{p}{)}
@@ -1454,7 +1595,7 @@ pounds), we can do this as follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{30}{\boxspacing}
+\prompt{Out}{outcolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country
 England             36936.050239
@@ -1490,7 +1631,7 @@ For example, to plot student numbers as a bar chart, we can directly use
 pandas:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{31}{\boxspacing}
+\prompt{In}{incolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -1503,21 +1644,21 @@ pandas:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{31}{\boxspacing}
+\prompt{Out}{outcolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <AxesSubplot:xlabel='Institution'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_63_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_66_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
     Alternatively, we can construct the graph using Matplotlib ourselves:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{32}{\boxspacing}
+\prompt{In}{incolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 
@@ -1529,7 +1670,7 @@ pandas:
 \end{tcolorbox}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_65_0.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_68_0.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1545,7 +1686,7 @@ which optionally accepts arguments to specify which columns should be
 used for the x-axis and which for the y-axis:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{33}{\boxspacing}
+\prompt{In}{incolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
@@ -1562,14 +1703,14 @@ used for the x-axis and which for the y-axis:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{33}{\boxspacing}
+\prompt{Out}{outcolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <AxesSubplot:xlabel='A'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_67_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_70_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1577,7 +1718,7 @@ used for the x-axis and which for the y-axis:
 box plot:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{34}{\boxspacing}
+\prompt{In}{incolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
@@ -1594,14 +1735,14 @@ box plot:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{34}{\boxspacing}
+\prompt{Out}{outcolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <AxesSubplot:>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_69_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_72_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1609,33 +1750,13 @@ box plot:
 another:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{35}{\boxspacing}
+\prompt{In}{incolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create pandas DataFrame}
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{rng}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{,}
                   \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pandas scatter plot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{35}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-<AxesSubplot:xlabel='A', ylabel='E'>
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_71_1.pdf}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{36}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} We can even use a column to specify the dot size!}
-\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{l+m+mf}{100.0}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1647,7 +1768,27 @@ another:
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_72_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_74_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{37}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} We can even use a column to specify the dot size!}
+\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{l+m+mf}{100.0}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{37}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:xlabel='A', ylabel='E'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_75_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
