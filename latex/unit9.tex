@@ -387,9 +387,9 @@
     \hypertarget{input-and-output}{%
 \section{Input and output}\label{input-and-output}}
 
-In this unit we discuss input and output, or I/O for short. In doing so,
-we focus exclusively on I/O routines used to load and store data from
-files that are relevant for numerical computation and data analysis.
+In this unit we discuss input and output, or I/O for short. We focus
+exclusively on I/O routines used to load and store data from files that
+are relevant for numerical computation and data analysis.
 
 \hypertarget{io-with-numpy}{%
 \subsection{I/O with NumPy}\label{io-with-numpy}}
@@ -463,7 +463,7 @@ following arguments to override the defaults:
 \tightlist
 \item
   \texttt{delimiter}: Character used to separate individual fields
-  (default: space)
+  (default: space).
 \item
   \texttt{skiprows=n}: Skip the first \texttt{n} rows. For example, if
   the CSV file contains a header with variable names,
@@ -503,28 +503,28 @@ of universities with \texttt{loadtxt()}, we get the following error:
 \textcolor{ansi-green-intense}{\textbf{      6}} \textcolor{ansi-red}{\# This will result in an error!}
 \textcolor{ansi-green}{----> 7}\textcolor{ansi-red}{ }data \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}loadtxt\textcolor{ansi-blue}{(}file\textcolor{ansi-blue}{,} delimiter\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{';'}\textcolor{ansi-blue}{,} skiprows\textcolor{ansi-blue}{=}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{)}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{loadtxt}\textcolor{ansi-blue}{(fname, dtype, comments, delimiter, converters, skiprows, usecols, unpack, ndmin, encoding, max\_rows)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{loadtxt}\textcolor{ansi-blue}{(fname, dtype, comments, delimiter, converters, skiprows, usecols, unpack, ndmin, encoding, max\_rows)}
 \textcolor{ansi-green-intense}{\textbf{   1137}}         \textcolor{ansi-red}{\# converting the data}
 \textcolor{ansi-green-intense}{\textbf{   1138}}         X \textcolor{ansi-blue}{=} \textcolor{ansi-green}{None}
 \textcolor{ansi-green}{-> 1139}\textcolor{ansi-red}{         }\textcolor{ansi-green}{for} x \textcolor{ansi-green}{in} read\_data\textcolor{ansi-blue}{(}\_loadtxt\_chunksize\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green-intense}{\textbf{   1140}}             \textcolor{ansi-green}{if} X \textcolor{ansi-green}{is} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green-intense}{\textbf{   1141}}                 X \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}array\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{,} dtype\textcolor{ansi-blue}{)}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{read\_data}\textcolor{ansi-blue}{(chunk\_size)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{read\_data}\textcolor{ansi-blue}{(chunk\_size)}
 \textcolor{ansi-green-intense}{\textbf{   1065}} 
 \textcolor{ansi-green-intense}{\textbf{   1066}}             \textcolor{ansi-red}{\# Convert each value according to its column and store}
 \textcolor{ansi-green}{-> 1067}\textcolor{ansi-red}{             }items \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{[}conv\textcolor{ansi-blue}{(}val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{for} \textcolor{ansi-blue}{(}conv\textcolor{ansi-blue}{,} val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{in} zip\textcolor{ansi-blue}{(}converters\textcolor{ansi-blue}{,} vals\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{]}
 \textcolor{ansi-green-intense}{\textbf{   1068}} 
 \textcolor{ansi-green-intense}{\textbf{   1069}}             \textcolor{ansi-red}{\# Then pack it according to the dtype's nesting}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{<listcomp>}\textcolor{ansi-blue}{(.0)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{<listcomp>}\textcolor{ansi-blue}{(.0)}
 \textcolor{ansi-green-intense}{\textbf{   1065}} 
 \textcolor{ansi-green-intense}{\textbf{   1066}}             \textcolor{ansi-red}{\# Convert each value according to its column and store}
 \textcolor{ansi-green}{-> 1067}\textcolor{ansi-red}{             }items \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{[}conv\textcolor{ansi-blue}{(}val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{for} \textcolor{ansi-blue}{(}conv\textcolor{ansi-blue}{,} val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{in} zip\textcolor{ansi-blue}{(}converters\textcolor{ansi-blue}{,} vals\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{]}
 \textcolor{ansi-green-intense}{\textbf{   1068}} 
 \textcolor{ansi-green-intense}{\textbf{   1069}}             \textcolor{ansi-red}{\# Then pack it according to the dtype's nesting}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{floatconv}\textcolor{ansi-blue}{(x)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{floatconv}\textcolor{ansi-blue}{(x)}
 \textcolor{ansi-green-intense}{\textbf{    761}}         \textcolor{ansi-green}{if} \textcolor{ansi-blue}{'0x'} \textcolor{ansi-green}{in} x\textcolor{ansi-blue}{:}
 \textcolor{ansi-green-intense}{\textbf{    762}}             \textcolor{ansi-green}{return} float\textcolor{ansi-blue}{.}fromhex\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
 \textcolor{ansi-green}{--> 763}\textcolor{ansi-red}{         }\textcolor{ansi-green}{return} float\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
@@ -549,7 +549,7 @@ of universities with \texttt{loadtxt()}, we get the following error:
 
 We can address the first issue by creating a so-called
 \href{https://numpy.org/doc/stable/user/basics.rec.html}{structured
-array}, ie. an array that contains fields with mixed data. This is
+array}, \ie an array that contains fields with mixed data. This is
 accomplished by constructing a special \texttt{dtype} object that
 specifies the field names and their data types:
 
@@ -564,8 +564,9 @@ specifies the field names and their data types:
                    \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{U20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}          \PY{c+c1}{\PYZsh{} unicode string of length 20}
                    \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Founded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}           \PY{c+c1}{\PYZsh{} integer, 4 bytes}
                    \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
-                   \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}            \PY{c+c1}{\PYZsh{} float, 8 bytes}
-                   \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                   \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                   \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Admin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                   \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}           \PY{c+c1}{\PYZsh{} float, 8 bytes}
 
 \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{n}{file}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{dtypes}\PY{p}{)}
 \end{Verbatim}
@@ -574,74 +575,90 @@ specifies the field names and their data types:
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
 \textcolor{ansi-red}{---------------------------------------------------------------------------}
 \textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-e1c8dcd4434d>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{     10}}                    ('Ranking', 'i4')])
-\textcolor{ansi-green-intense}{\textbf{     11}} 
-\textcolor{ansi-green}{---> 12}\textcolor{ansi-red}{ }data \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}loadtxt\textcolor{ansi-blue}{(}file\textcolor{ansi-blue}{,} delimiter\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{';'}\textcolor{ansi-blue}{,} skiprows\textcolor{ansi-blue}{=}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} dtype\textcolor{ansi-blue}{=}dtypes\textcolor{ansi-blue}{)}
+\textcolor{ansi-green}{<ipython-input-1-6782620dfdeb>} in \textcolor{ansi-cyan}{<module>}
+\textcolor{ansi-green-intense}{\textbf{     11}}                    ('Budget', 'f8')])           \# float, 8 bytes
+\textcolor{ansi-green-intense}{\textbf{     12}} 
+\textcolor{ansi-green}{---> 13}\textcolor{ansi-red}{ }data \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}loadtxt\textcolor{ansi-blue}{(}file\textcolor{ansi-blue}{,} delimiter\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{';'}\textcolor{ansi-blue}{,} skiprows\textcolor{ansi-blue}{=}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} dtype\textcolor{ansi-blue}{=}dtypes\textcolor{ansi-blue}{)}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{loadtxt}\textcolor{ansi-blue}{(fname, dtype, comments, delimiter, converters, skiprows, usecols, unpack, ndmin, encoding, max\_rows)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{loadtxt}\textcolor{ansi-blue}{(fname, dtype, comments, delimiter, converters, skiprows, usecols, unpack, ndmin, encoding, max\_rows)}
 \textcolor{ansi-green-intense}{\textbf{   1137}}         \textcolor{ansi-red}{\# converting the data}
 \textcolor{ansi-green-intense}{\textbf{   1138}}         X \textcolor{ansi-blue}{=} \textcolor{ansi-green}{None}
 \textcolor{ansi-green}{-> 1139}\textcolor{ansi-red}{         }\textcolor{ansi-green}{for} x \textcolor{ansi-green}{in} read\_data\textcolor{ansi-blue}{(}\_loadtxt\_chunksize\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green-intense}{\textbf{   1140}}             \textcolor{ansi-green}{if} X \textcolor{ansi-green}{is} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
 \textcolor{ansi-green-intense}{\textbf{   1141}}                 X \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}array\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{,} dtype\textcolor{ansi-blue}{)}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{read\_data}\textcolor{ansi-blue}{(chunk\_size)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{read\_data}\textcolor{ansi-blue}{(chunk\_size)}
 \textcolor{ansi-green-intense}{\textbf{   1065}} 
 \textcolor{ansi-green-intense}{\textbf{   1066}}             \textcolor{ansi-red}{\# Convert each value according to its column and store}
 \textcolor{ansi-green}{-> 1067}\textcolor{ansi-red}{             }items \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{[}conv\textcolor{ansi-blue}{(}val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{for} \textcolor{ansi-blue}{(}conv\textcolor{ansi-blue}{,} val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{in} zip\textcolor{ansi-blue}{(}converters\textcolor{ansi-blue}{,} vals\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{]}
 \textcolor{ansi-green-intense}{\textbf{   1068}} 
 \textcolor{ansi-green-intense}{\textbf{   1069}}             \textcolor{ansi-red}{\# Then pack it according to the dtype's nesting}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{<listcomp>}\textcolor{ansi-blue}{(.0)}
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{<listcomp>}\textcolor{ansi-blue}{(.0)}
 \textcolor{ansi-green-intense}{\textbf{   1065}} 
 \textcolor{ansi-green-intense}{\textbf{   1066}}             \textcolor{ansi-red}{\# Convert each value according to its column and store}
 \textcolor{ansi-green}{-> 1067}\textcolor{ansi-red}{             }items \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{[}conv\textcolor{ansi-blue}{(}val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{for} \textcolor{ansi-blue}{(}conv\textcolor{ansi-blue}{,} val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{in} zip\textcolor{ansi-blue}{(}converters\textcolor{ansi-blue}{,} vals\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{]}
 \textcolor{ansi-green-intense}{\textbf{   1068}} 
 \textcolor{ansi-green-intense}{\textbf{   1069}}             \textcolor{ansi-red}{\# Then pack it according to the dtype's nesting}
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.7/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{floatconv}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{    761}}         \textcolor{ansi-green}{if} \textcolor{ansi-blue}{'0x'} \textcolor{ansi-green}{in} x\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{    762}}             \textcolor{ansi-green}{return} float\textcolor{ansi-blue}{.}fromhex\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{--> 763}\textcolor{ansi-red}{         }\textcolor{ansi-green}{return} float\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    764}} 
-\textcolor{ansi-green-intense}{\textbf{    765}}     typ \textcolor{ansi-blue}{=} dtype\textcolor{ansi-blue}{.}type
+\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{<lambda>}\textcolor{ansi-blue}{(x)}
+\textcolor{ansi-green-intense}{\textbf{    771}}         \textcolor{ansi-green}{return} np\textcolor{ansi-blue}{.}int64
+\textcolor{ansi-green-intense}{\textbf{    772}}     \textcolor{ansi-green}{if} issubclass\textcolor{ansi-blue}{(}typ\textcolor{ansi-blue}{,} np\textcolor{ansi-blue}{.}integer\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
+\textcolor{ansi-green}{--> 773}\textcolor{ansi-red}{         }\textcolor{ansi-green}{return} \textcolor{ansi-green}{lambda} x\textcolor{ansi-blue}{:} int\textcolor{ansi-blue}{(}float\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{)}
+\textcolor{ansi-green-intense}{\textbf{    774}}     \textcolor{ansi-green}{elif} issubclass\textcolor{ansi-blue}{(}typ\textcolor{ansi-blue}{,} np\textcolor{ansi-blue}{.}longdouble\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
+\textcolor{ansi-green-intense}{\textbf{    775}}         \textcolor{ansi-green}{return} np\textcolor{ansi-blue}{.}longdouble
 
-\textcolor{ansi-red}{ValueError}: could not convert string to float: 
+\textcolor{ansi-red}{ValueError}: could not convert string to float: ''
     \end{Verbatim}
 
-    However, this still fails because the budget for Swansea University is
-missing.
+    However, this still fails because the of a few missing values.
 
 We can get around this by using \texttt{genfromtxt()}, which is more
-flexible and can also deal with missing data. Missing values are
-assigned the value \texttt{np.nan}:
+flexible and can also deal with missing data:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} load data using genfromtxt()}
 \PY{c+c1}{\PYZsh{} We still need to specify the dtype defined above!}
-\PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{n}{file}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{dtypes}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{n}{file}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{dtypes}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{skip\PYZus{}header}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
 
-\PY{n}{data}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}        \PY{c+c1}{\PYZsh{} print last observation}
+\PY{c+c1}{\PYZsh{} Determine rows with missing data:}
+\PY{c+c1}{\PYZsh{}   \PYZhy{} missing integers are coded as \PYZhy{}1}
+\PY{c+c1}{\PYZsh{}   \PYZhy{} missing floats are coded as np.nan}
+\PY{n}{missing} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Admin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{|} \PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} print rows with missing values}
+\PY{n}{data}\PY{p}{[}\PY{n}{missing}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-('"Swansea University"', '"Wales"', 1920, 20620, nan, 251)
+array([('"University of Strathclyde"', '"Scotland"', 1964, 22640,   -1, 3200,
+304.4),
+       ('"University of Oxford"', '"England"', 1096, 24515, 7000,   -1, 2450. ),
+       ('"University of Manchester"', '"England"', 2004, 40250, 3849,   -1,
+1095.4),
+       ('"University of Birmingham"', '"England"', 1825, 35445, 4020,   -1,
+673.8),
+       ('"University of Nottingham"', '"England"', 1798, 30798, 3495,   -1,
+656.5),
+       ('"University of Stirling"', '"Scotland"', 1967,  9548,   -1, 1872,
+113.3),
+       ('"Swansea University"', '"Wales"', 1920, 20620,   -1, 3290,    nan)],
+      dtype=[('Institution', '<U30'), ('Country', '<U20'), ('Founded', '<i4'),
+('Students', '<i4'), ('Staff', '<i4'), ('Admin', '<i4'), ('Budget', '<f8')])
 \end{Verbatim}
 \end{tcolorbox}
         
     While the CSV file can now be processed without errors, you see that
 NumPy does not remove the double quotes around strings such as the
-university name.
-
-Instead of trying to fix this, it is advisable to just use pandas to
-load this kind of data which handles all these problems automatically.
-We examine this alternative below.
+university name. Instead of trying to fix this, it is advisable to just
+use pandas to load this kind of data which handles all these problems
+automatically. We examine this alternative below.
 
     Finally, to save a NumPy array to a CSV file, there is a logical
 counterpart to \texttt{np.loadtxt()} which is called
@@ -672,14 +689,32 @@ counterpart to \texttt{np.loadtxt()} which is called
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Saving CSV file to /tmp/tmpujo7sdo\_/data.csv
+Saving CSV file to /tmp/tmp7ojr0obz/data.csv
     \end{Verbatim}
 
     The above code creates a \(10 \times 5\) matrix of random floats and
 stores these in the file \texttt{data.csv} using 5 significant digits.
-The destination file is located in a temporary directory which will be
-different every time this code is run. We use the \texttt{tempfile}
-module to create this writeable temporary directory.
+
+We store the destination file in a temporary directory which we create
+as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  Because we cannot know in advance on which system this code is run
+  (e.g.~the operating system and directory layout), we cannot hard-code
+  a file path.
+\item
+  Moreover, we do not know whether the code is run with write
+  permissions in any particular folder.
+\item
+  We work around this issue by asking the Python runtime to create a
+  writable temporary directory \emph{for the system where the code is
+  being run}.
+\item
+  We use the routines in the \texttt{tempfile} module to create this
+  temporary directory.
+\end{itemize}
 
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -699,7 +734,7 @@ Pandas's I/O routines are more powerful than those implemented in NumPy:
   They gracefully handle missing values.
 \end{itemize}
 
-For these reasons, it is often preferrable to directly use pandas to
+For these reasons, it is often preferable to directly use pandas to
 process data instead of NumPy.
 
 The most important routines are:
@@ -709,8 +744,8 @@ The most important routines are:
 \item
   \texttt{read\_csv()}, \texttt{to\_csv()}: Read or write CSV text files
 \item
-  \texttt{read\_fwf()}: Read data with fixed field widths, ie. text data
-  that does not use delimiters to separate fields.
+  \texttt{read\_fwf()}: Read data with fixed field widths, \ie~text
+  data that does not use delimiters to separate fields.
 \item
   \texttt{read\_excel()}, \texttt{to\_excel()}: Read or write Excel
   spreadsheets
@@ -769,15 +804,15 @@ specify any data types or to handle missing values:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                   Institution           Country  Founded  Students  Budget  \textbackslash{}
-20      University of Stirling          Scotland     1967      9548   113.3
-21  Queen’s University Belfast  Northern Ireland     1810     18438   369.2
+                   Institution           Country  Founded  Students   Staff  \textbackslash{}
+20      University of Stirling          Scotland     1967      9548     NaN
+21  Queen’s University Belfast  Northern Ireland     1810     18438  2414.0
 22          Swansea University             Wales     1920     20620     NaN
 
-    Rank
-20   301
-21   200
-22   251
+     Admin  Budget  Russell
+20  1872.0   113.3        0
+21  1489.0   369.2        1
+22  3290.0     NaN        0
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -803,10 +838,15 @@ MS Excel files (or OpenDocument spreadsheets):
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-                Institution   Country  Founded  Students  Budget  Rank
-0     University of Glasgow  Scotland     1451     30805   626.5    92
-1   University of Edinburgh  Scotland     1583     34275  1102.0    30
-2  University of St Andrews  Scotland     1413      8984   251.2   201
+                Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
+0     University of Glasgow  Scotland     1451     30805  2942.0  4003.0
+1   University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
+2  University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+
+   Budget  Russell
+0   626.5        1
+1  1102.0        1
+2   251.2        0
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -836,7 +876,7 @@ Year GDP    CPI  UNRATE
 
 You see that the column \texttt{Year} occupies the first 5 characters,
 the \texttt{GDP} column the next 7 characters, and so on. To read such
-files, the width (ie. the number of characters) has to be explicitly
+files, the width (\ie~the number of characters) has to be explicitly
 specified:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -912,7 +952,7 @@ automatically supported. For example, we can pickle a list containing a
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Pickled data written to /tmp/tmp7t67n1ub/data.bin
+Pickled data written to /tmp/tmp76ooporv/data.bin
     \end{Verbatim}
 
     We can then read back the data as follows:
@@ -938,7 +978,7 @@ array([[0, 1, 2, 3, 4],
 \end{Verbatim}
 \end{tcolorbox}
         
-    The above example introduces a few concepts we have not countered so
+    The above example introduces a few concepts we have not encountered so
 far:
 
 \begin{enumerate}
@@ -953,8 +993,8 @@ far:
     The second argument indicates whether a file should be read-only,
     \texttt{r}, or writeable, \texttt{w}.
   \item
-    The \texttt{b} sets the file mode to \emph{binary}, ie. its contents
-    are \emph{not} human-readable text.
+    The \texttt{b} sets the file mode to \emph{binary}, \ie~its
+    contents are \emph{not} human-readable text.
   \end{itemize}
 \item
   We usually access files using a so-called \emph{context manager}. A
@@ -986,14 +1026,14 @@ So why not always use \texttt{pickle} to load and store data?
   that will execute arbitrary code when unpickling, so you don't want to
   unpickle data from untrusted sources.
 \item
-  Some object cannot be pickled automatically. For example, this applies
-  to any classes defined with Numba or Cython, unless special care is
-  taken to implement the pickle protocol.
+  Some objects cannot be pickled automatically. For example, this
+  applies to any classes defined with Numba or Cython, unless special
+  care is taken to implement the pickle protocol.
 \end{enumerate}
 
 \texttt{pickle} is great for internal use when you do not need to
 exchange data with others and have complete control over your computing
-environment (ie. you can enforce a specific version of Python and the
+environment (\ie~you can enforce a specific version of Python and the
 libraries you are using). For anything else, you should avoid it.
 
 
