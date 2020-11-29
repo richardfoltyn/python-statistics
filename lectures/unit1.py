@@ -70,7 +70,7 @@ y = np.arange(5,10)             # vector [5,6,7,8,9]
 # resulting vector is of the same size
 x + y                           # vector [5,7,9,11,13]
 x * y
-x + y
+x - y
 x / y
 
 ## Matrix operations
