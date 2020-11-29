@@ -397,14 +397,16 @@ Python has a very straightforward syntax:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   Everything following a \texttt{\#} is a comment
 \item
   Names are case sensitive.
 \item
   Variables are dynamically typed and are created by assignment:
-  \texttt{varname\ =\ value}
+
+\begin{verbatim}
+varname = value
+\end{verbatim}
 \item
   There is no need to terminate a statement with \texttt{;}
 \item
@@ -537,7 +539,7 @@ multiplication):
 \PY{c+c1}{\PYZsh{} resulting vector is of the same size}
 \PY{n}{x} \PY{o}{+} \PY{n}{y}                           \PY{c+c1}{\PYZsh{} vector [5,7,9,11,13]}
 \PY{n}{x} \PY{o}{*} \PY{n}{y}
-\PY{n}{x} \PY{o}{+} \PY{n}{y}
+\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{y}
 \PY{n}{x} \PY{o}{/} \PY{n}{y}
 \end{Verbatim}
 \end{tcolorbox}
@@ -675,7 +677,7 @@ data:
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
 \PY{c+c1}{\PYZsh{} Create figure with three panels (axes) arranged in three columns}
-\PY{n}{fix}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mf}{3.3}\PY{p}{)}\PY{p}{)}
+\PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mf}{3.3}\PY{p}{)}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} plot square\PYZhy{}root function}
 \PY{n}{xvalues} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
@@ -777,7 +779,7 @@ various values of \(\alpha\).
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f4ecd749990>
+<matplotlib.legend.Legend at 0x7ff8d9d85040>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -798,9 +800,19 @@ labels and legends.
 \subsubsection{Loading data}\label{loading-data}}
 
 The \texttt{data/} directory contains the text file \texttt{FRED.csv} of
-comma-separated annual data for the U.S. real GDP (in billions of
-chained 2012 dollars), the consumer price index (CPI) and the
-unemployment rate (UNRATE, in percent). The data was downloaded from the
+comma-separated annual U.S. data for
+
+\begin{itemize}
+\tightlist
+\item
+  real GDP (in billions of chained 2012 dollars);
+\item
+  the consumer price index (CPI); and
+\item
+  the unemployment rate (UNRATE, in percent).
+\end{itemize}
+
+The data was downloaded from the
 \href{https://fred.stlouisfed.org/}{FRED database}, a standard source
 for macroeconomic time series.
 
@@ -1003,7 +1015,7 @@ Unempl. rate: mean = 5.73, std. dev. = 1.61
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f4ecd888a10>
+<matplotlib.legend.Legend at 0x7ff8d9b0cee0>
 \end{Verbatim}
 \end{tcolorbox}
         
