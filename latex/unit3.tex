@@ -1166,6 +1166,62 @@ array([-0.5 , -0.35, -0.2 , -0.05,  0.1 ,  0.25,  0.4 ,  0.55,  0.7 ,
   \texttt{x{[}lbound{]}\ \textless{}=\ 0\ \textless{}\ x{[}ubound{]}}.
 \end{enumerate}
 
+    \hypertarget{exercise-4-diagonal-and-band-matrices}{%
+\subsection{Exercise 4: diagonal and band
+matrices}\label{exercise-4-diagonal-and-band-matrices}}
+
+Let \texttt{a} be a matrix of zeros with shape \texttt{(m,n)} and
+integer data type:
+
+\begin{verbatim}
+a = np.zeros((m,n), dtype=int)
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Set \texttt{m\ =\ n\ =\ 4}. Fill up the diagonal of \texttt{a} with
+  ones so that it becomes an identity matrix. Verify that
+  \texttt{np.identity()} gives the same result.
+\item
+  Recreate \texttt{a} to have dimensions \texttt{m\ =\ 4} and
+  \texttt{n\ =\ 5}. Modify the main, first lower and first upper
+  diagonals so that the resulting matrix looks like this, where omitted
+  elements are zeros: \[
+  \begin{bmatrix}
+  1 & 2 &   &   & \\
+  3 & 1 & 2 &   & \\
+    & 3 & 1 & 2 & \\
+    &   & 3 & 1 & 2
+  \end{bmatrix}
+  \]
+
+  \emph{Hint:} Use nested \texttt{for} loops to set the diagonal
+  elements.
+\end{enumerate}
+
+    \hypertarget{exercise-5-triangular-matrices}{%
+\subsection{Exercise 5: triangular
+matrices}\label{exercise-5-triangular-matrices}}
+
+Let \texttt{a} be a matrix of zeroes with shape \texttt{(m,n)} and
+integer data type:
+
+\begin{verbatim}
+a = np.zeros((m,n), dtype=int)
+\end{verbatim}
+
+Assume that \texttt{m\ =\ n\ =\ 4}. Using loops and \texttt{if}
+statements, modify the elements of \texttt{a} to obtain the following
+upper-triangular matrix, where omitted elements are set to zero: \[
+\begin{bmatrix}
+1 & 2 & 3 & 4  \\
+ & 5 & 6 & 7  \\
+  & & 8 & 9 \\
+  & & & 10 
+\end{bmatrix}
+\]
+
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{solutions}{%
@@ -1298,6 +1354,150 @@ Value at upper bound: 0.1
 
     In this implementation we use the fact that two non-zero real numbers
 \(a\) and \(b\) have the same sign whenever \(a \cdot b > 0\).
+
+    \hypertarget{solution-for-exercise-4}{%
+\subsection{Solution for exercise 4}\label{solution-for-exercise-4}}
+
+For the first part, we just need to loop over the diagonal elements and
+overwrite the zeros with ones:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{35}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Part 1: create identity matrix}
+
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} loop over diagonal elements, set them to 1}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+    \PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+
+\PY{n}{a}           \PY{c+c1}{\PYZsh{} print identity matrix}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{35}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[1, 0, 0, 0],
+       [0, 1, 0, 0],
+       [0, 0, 1, 0],
+       [0, 0, 0, 1]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    You can get the same result using NumPy's \texttt{np.identity()}
+function:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{36}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
+\PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{36}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[1, 0, 0, 0],
+       [0, 1, 0, 0],
+       [0, 0, 1, 0],
+       [0, 0, 0, 1]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    For the second part, we need nested loops over rows and columns and we
+check at each position \((i,j)\) whether it is on the main diagonal, or
+on the first upper or lower diagonals.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{37}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Part 2: create band matrix}
+
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{4}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} loop over rows}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} loop over columns}
+    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{n}{j}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} main diagonal element}
+            \PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{k}{elif} \PY{n}{i} \PY{o}{==} \PY{p}{(}\PY{n}{j} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} upper diagonal element}
+            \PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{k}{elif} \PY{n}{i} \PY{o}{==} \PY{p}{(}\PY{n}{j} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} lower diagonal element}
+            \PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{3}
+
+\PY{n}{a}   \PY{c+c1}{\PYZsh{} print final matrix}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{37}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[1, 2, 0, 0, 0],
+       [3, 1, 2, 0, 0],
+       [0, 3, 1, 2, 0],
+       [0, 0, 3, 1, 2]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{solution-for-exercise-5}{%
+\subsection{Solution for exercise 5}\label{solution-for-exercise-5}}
+
+We solve this exercise using two nested \texttt{for} loops, the first
+over rows, the second over columns:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{38}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} 
+
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{4}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
+
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} keep track of value to be inserted}
+\PY{n}{value} \PY{o}{=} \PY{l+m+mi}{1}
+
+\PY{c+c1}{\PYZsh{} loop over rows}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} loop over columns}
+    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+        \PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{value}
+        \PY{c+c1}{\PYZsh{} increment value for next matching element}
+        \PY{n}{value} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+
+\PY{n}{a}       \PY{c+c1}{\PYZsh{} print final matrix}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{38}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 1,  2,  3,  4],
+       [ 0,  5,  6,  7],
+       [ 0,  0,  8,  9],
+       [ 0,  0,  0, 10]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Note that the loop over columns uses the current row index as the lower
+bound, since we never need to insert anything at element \((i,j)\) if
+\(j < i\).
 
 
     % Add a bibliography block to the postdoc
