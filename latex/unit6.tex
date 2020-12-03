@@ -472,7 +472,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-205 µs ± 12.3 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+143 µs ± 187 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -487,7 +487,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.15 µs ± 28 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+887 ns ± 14.5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     \begin{itemize}
@@ -529,7 +529,7 @@ creation routines:
   \item
     a collection such as a list or tuple
   \item
-    some other iterable object, eg. something created by
+    some other iterable object, e.g.~something created by
     \texttt{range()}
   \end{itemize}
 \item
@@ -821,7 +821,7 @@ array([[0., 0.],
 \hypertarget{advanced-indexing}{%
 \subsection{Advanced indexing}\label{advanced-indexing}}
 
-We previously covered single element indexing and slicing, which works
+We previously discussed single element indexing and slicing, which works
 the same way for both Python \texttt{list} and \texttt{tuple} objects as
 well as NumPy arrays.
 
@@ -940,7 +940,7 @@ array([2, 3, 4, 5])
 \end{Verbatim}
 \end{tcolorbox}
         
-    Logical indexing does \textbf{not} work with \texttt{tuple} and
+    Note that logical indexing does \emph{not} work with \texttt{tuple} and
 \texttt{list}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1036,7 +1036,8 @@ array([5, 6, 6, 7, 7, 8, 8, 9, 9])
 \end{Verbatim}
 \end{tcolorbox}
         
-    With multi-dimensional arrays, the same restrictions apply. Moreover,
+    The same restrictions apply when indexing multi-dimensional arrays.
+Moreover,
 
 \begin{itemize}
 \tightlist
@@ -1081,11 +1082,11 @@ array([ 1, 11])
 \end{Verbatim}
 \end{tcolorbox}
         
-    The code above selects to elements, the first at position
+    The code above selects two elements, the first at position
 \texttt{(0,1)}, the second at position \texttt{(2,3)}.
 
-We can combine index arrays on one axis with other indexing methods used
-for another axis:
+We can combine index arrays on one axis with another indexing method on
+a different axis:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{26}{\boxspacing}
@@ -1154,7 +1155,7 @@ would expect:
 \end{tcolorbox}
 
     Note that unlike in Matlab, the ``standard'' operators work
-element-wise, so \texttt{x\ *\ y} is \textbf{not} matrix multiplication!
+element-wise, so \texttt{x\ *\ y} is \emph{not} matrix multiplication!
 
 \emph{Case 2:} Both operands are arrays of equal shape:
 
@@ -1192,7 +1193,7 @@ numerous functions defined in NumPy, such as
 
     You can find a complete list of mathematical functions in the NumPy
 \href{https://numpy.org/doc/stable/reference/routines.math.html}{documentation}
-(not all functions listed there operate element-wise!).
+(not all functions listed there operate element-wise, though!).
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{29}{\boxspacing}
@@ -1263,8 +1264,8 @@ Every newer version of Python and NumPy additionally interprets
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
-\PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
-\PY{n}{vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}      \PY{c+c1}{\PYZsh{} 3x3 matrix}
+\PY{n}{vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}                      \PY{c+c1}{\PYZsh{} vector of length 3}
 
 \PY{c+c1}{\PYZsh{} matrix\PYZhy{}matrix multiplication}
 \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{n}{mat}\PY{p}{)}    \PY{c+c1}{\PYZsh{} or: mat @ mat}
@@ -1460,16 +1461,18 @@ array([0.15, 0.5 , 0.85])
 \end{Verbatim}
 \end{tcolorbox}
         
-    \hypertarget{broadcasting-advanced}{%
-\subsubsection{Broadcasting
-{[}advanced{]}}\label{broadcasting-advanced}}
+    \hypertarget{broadcasting}{%
+\subsubsection{Broadcasting}\label{broadcasting}}
 
 Element-wise operations in most programming languages require input
 arrays to have identical shapes. NumPy relaxes this constraint and
 allows us to use arrays with different shapes that can be ``broadcast''
 to identical shapes.
 
-What do we mean by ``broadcasting''?
+\textbf{Simple example}
+
+What do we mean by ``broadcasting''? We introduce the concept using a
+specific example, and will discuss the techinical details below.
 
 \begin{itemize}
 \tightlist
@@ -1593,11 +1596,624 @@ array([[0, 1, 2],
 \href{https://numpy.org/doc/stable/user/theory.broadcasting.html}{tutorial}
 on broadcasting.
 
+\textbf{Technical details}
+
+We are now ready to look at the technical details underlying
+broadcasting. The NumPy
+\href{https://numpy.org/doc/stable/reference/ufuncs.html\#broadcasting}{documnetation}
+is quite helpful so we will just summarise the points made there.
+
+Broadcasting is applied in four steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Determine the largest dimension (\texttt{ndim} attribute) among all
+  arrays involved in an operation. Any array of smaller dimension will
+  have 1's \emph{prepended} to its shape until its dimension corresponds
+  to the largest one.
+
+  \emph{Example:} given array \texttt{a} with shape \texttt{(m,n)} and
+  array \texttt{b} with shape \texttt{(n,)}, the maximum dimension is 2,
+  and \texttt{b} will be implicitly reshaped to \texttt{(1,n)}.
+\item
+  The size of the output array is determined as the maximum size of all
+  arrays along each dimension.
+
+  \emph{Example:} Continuing with our example from above, the maximum
+  size along dimension 1 is \texttt{m}, and the maximum size along
+  dimension 2 is \texttt{n}, so the output array has shape
+  \texttt{(m,n)}.
+\item
+  An input array can be used in the computation if for every dimension
+  its size either matches the output size or is equal to 1. If this is
+  not the case, broadcasting cannot be applied and the operation fails.
+
+  \emph{Example:} In the above example, the shape of \texttt{a} matches
+  the output shape exactly. The implied shape of \texttt{b} is
+  \texttt{(1,n)}, so it matches exactly along the second dimension, and
+  is 1 along the first, and thus can be used.
+\item
+  For any input array with size 1 along some dimension, the (unique)
+  element in this dimension will be used for all calculations along that
+  dimension.
+
+  \emph{Example:} Any element \texttt{a{[}i,j{]}} will be matched with
+  the element \texttt{b{[}0,j{]}} to the calculate the output value at
+  \texttt{(i,j)}.
+\end{enumerate}
+
+Because additional dimensions are added \emph{at the beginning} to
+create the desired output shape, broadcasting will not work
+automatically if we want to multiply arrays of shape
+\texttt{a.shape\ =\ (m,n)} and \texttt{b.shape\ =\ (m,)}.
+
+\begin{itemize}
+\tightlist
+\item
+  Following the above steps, \texttt{b} will implicitly be reshaped to
+  \texttt{(1,m)} and the operation will fail at step 3:
+\end{itemize}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{47}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{3}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{2}
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}      \PY{c+c1}{\PYZsh{} matrix of shape (m,n)}
+\PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{m}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}                   \PY{c+c1}{\PYZsh{} vector of shape (m,)}
+
+\PY{n}{a} \PY{o}{*} \PY{n}{b}           \PY{c+c1}{\PYZsh{} will not work!}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
+\textcolor{ansi-red}{---------------------------------------------------------------------------}
+\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
+\textcolor{ansi-green}{<ipython-input-1-449a8f607184>} in \textcolor{ansi-cyan}{<module>}
+\textcolor{ansi-green-intense}{\textbf{      4}} b \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}arange\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} m\textcolor{ansi-blue}{+}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{)}                   \textcolor{ansi-red}{\# vector of shape (m,)}
+\textcolor{ansi-green-intense}{\textbf{      5}} 
+\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{ }a \textcolor{ansi-blue}{*} b           \textcolor{ansi-red}{\# will not work!}
+
+\textcolor{ansi-red}{ValueError}: operands could not be broadcast together with shapes (3,2) (3,) 
+    \end{Verbatim}
+
+    We therefore have to explicitly \emph{append} a degenerate axis to
+\texttt{b} such that both arrays have the same dimension:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{48}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{b} \PY{o}{=} \PY{n}{b}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
+\PY{n}{a} \PY{o}{*} \PY{n}{b}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{48}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 0,  1],
+       [ 4,  6],
+       [12, 15]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Because \texttt{a} has shape \texttt{(m,n)} and \texttt{b} now has shape
+\texttt{(m,1)}, \texttt{b{[}:,0{]}} will be replicated across all
+columns of \texttt{a} to perform the operation.
+
+It is worthwhile to take some time to master broadcasting as it's
+essential to using NumPy efficiently. You might think that one can
+simply replicate array operands along some dimension to get the same
+effect, which is what we do in languages that do not support
+broadcasting.
+
+\begin{itemize}
+\item
+  This included Matlab until release R2016b, where implicit expansion
+  for some arithmetic and logical operations was introduced.
+
+  Prior to that, users had to manually expand input arrays using
+  \texttt{repmat()}, or use the rather inelegant \texttt{bsxfun()}
+  function.
+
+  Note that even today, NumPy broadcasting goes beyond Matlab's
+  capabilities.
+\end{itemize}
+
+To illustrate the difference between broadcasting and manual replication
+of data, we perform the element-wise multiplication of a 3-dimensional
+array with a (1-dimensional) vector:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{49}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Dimensions of 3d array}
+\PY{n}{k} \PY{o}{=} \PY{l+m+mi}{10}
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{11}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{12}
+
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{k}\PY{o}{*}\PY{n}{m}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}     \PY{c+c1}{\PYZsh{} create 3d array}
+\PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)}                            \PY{c+c1}{\PYZsh{} create 1d vector}
+\end{Verbatim}
+\end{tcolorbox}
+
+    We can manually expand the vector to have the same shape as the array
+\texttt{a} using \texttt{np.tile()} which creates: \texttt{k\ *\ m}
+copies of the \texttt{n} elements in \texttt{b}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{b\PYZus{}exp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{tile}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n}{reps}\PY{o}{=}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\PY{n}{b\PYZus{}exp}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(10, 11, 12)
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The following code compares the execution time of computing
+\texttt{a\ *\ b} using broadcasting to the case where we first
+explicitly expand \texttt{b}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{51}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Multiplication with broadcasting}
+\PY{o}{\PYZpc{}}\PY{k}{timeit} a * b
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.86 µs ± 12.5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{52}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Multiplication with explicitly expanded operands}
+\PY{o}{\PYZpc{}}\PY{k}{timeit} a * np.tile(b, reps=(k, m, 1))
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6.39 µs ± 60.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+    \end{Verbatim}
+
+    As you see, not only is the second operation more complex and difficult
+to read, it also takes approximately three times as long to execute! The
+reason is that \texttt{np.tile()} replicates the data in memory, which
+is expensive. No copying is done when using broadcasting.
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{vectorisation}{%
+\subsection{Vectorisation}\label{vectorisation}}
+
+Vectorisation is the concept of applying operations to whole arrays of
+data instead of every singular element (note that the term also has
+other meanings in computer science). In Python, as well as languages
+such as Matlab and R, we use this programming technique to increase
+performance for two reasons:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Looping over elements is slow.
+\item
+  Calling a function on every single element is also slow.
+\end{enumerate}
+
+These performance penalties are less pronounced for compiled languages
+such as C or Fortran, so we try to move the looping to code written in
+one of these languages. In particular, since NumPy's core parts are
+implemented in C, we always want to do looping ``within'' NumPy.
+
+For example, consider element-wise addition of two arrays, \texttt{a}
+and \texttt{b}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{53}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{c+c1}{\PYZsh{} array size}
+\PY{n}{N} \PY{o}{=} \PY{l+m+mi}{100}
+
+\PY{c+c1}{\PYZsh{} input arrays}
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+\PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Benchmarking a non-vectorised loop in pure Python against NumPy's
+vectorised implementation reveals some striking differences:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{54}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}\PYZpc{}time}it
+\PY{c+c1}{\PYZsh{} Compute c = a + b using Python loops}
+\PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{N}\PY{p}{)}         \PY{c+c1}{\PYZsh{} allocate output array}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+    \PY{n}{c}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{b}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+28 µs ± 560 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{55}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Compute c = a + b using vectorised addition}
+\PY{o}{\PYZpc{}}\PY{k}{timeit} c = a + b
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+357 ns ± 1.47 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+    \end{Verbatim}
+
+    We see that the vectorised variant is about 100 times faster! What is
+going on?
+
+\begin{itemize}
+\tightlist
+\item
+  NumPy implements a vectorised operator \texttt{+} which accepts arrays
+  as operands.
+\item
+  NumPy performs looping over individual elements in C which is compiled
+  to high-performance machine code.
+\end{itemize}
+
+Of course this example is somewhat artificial: you would not have
+implemented a loop in Python in the first place, you probably just
+assumed that \texttt{+} works with array operands.
+
+However, we can easily construct more complex computations which may not
+be implemented in NumPy but which can use vectorised building blocks to
+speed up computations.
+
+As an example, consider the following function which computes the sum of
+finite of elements of an array, ignoring infinity and NaNs.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{56}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Compute sum of finite elements in x}
+\PY{k}{def} \PY{n+nf}{finite\PYZus{}sum}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} initialise sum}
+    \PY{n}{s} \PY{o}{=} \PY{l+m+mf}{0.0}
+    \PY{c+c1}{\PYZsh{} loop over array elements}
+    \PY{k}{for} \PY{n}{xi} \PY{o+ow}{in} \PY{n}{x}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{} Check whether a value is finite}
+        \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{isfinite}\PY{p}{(}\PY{n}{xi}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Add to running sum}
+            \PY{n}{s} \PY{o}{+}\PY{o}{=} \PY{n}{xi}
+    \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Next, we create a sample array with a few NaNs and infinite values and
+to test \texttt{finite\_sum()}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{57}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+\PY{n}{arr}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{inf}       \PY{c+c1}{\PYZsh{} assign infinity to every 3rd element}
+\PY{n}{arr}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}       \PY{c+c1}{\PYZsh{} assign NaN to every 5th element}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Comparing our \texttt{finite\_sum()} to a vectorised version again shows
+the performance advantage of vectorised code:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{58}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}}\PY{k}{timeit} finite\PYZus{}sum(arr)
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+111 µs ± 1.64 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{59}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}}\PY{k}{timeit} np.sum(arr[np.isfinite(arr)])
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3.74 µs ± 25.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+    \end{Verbatim}
+
+    The vectorised version is approximately 25 times faster, despite the
+fact that
+
+\begin{itemize}
+\item
+  NumPy does not implement this specific function; and
+\item
+  the vectorised implementation creates two temporary arrays:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    one when calling \texttt{np.isfinite()}; and
+  \item
+    one when indexing \texttt{arr} with the boolean array returned by
+    \texttt{np.isfinite()}. As we discuss below, indexing with boolean
+    arrays always creates a copy!
+  \end{itemize}
+\end{itemize}
+
+This illustrates that creating vectorised code by combining several
+vectorised functions also yields considerable speed-ups.
+
+As an aside, note that NumPy actually implements \texttt{np.nansum()}
+which drops NaNs, but it does not discard infinite values.
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{copies-and-views-advanced}{%
+\subsection{Copies and views
+(advanced)}\label{copies-and-views-advanced}}
+
+Recall that assignment in Python does \emph{not} create a copy (unlike
+in C, Fortran or Matlab):
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{60}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+\PY{n}{b} \PY{o}{=} \PY{n}{a}           \PY{c+c1}{\PYZsh{} b references the same object as a}
+\PY{n}{b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}        \PY{c+c1}{\PYZsh{} modify second element of b (and a!)}
+\PY{n}{a} \PY{o}{==} \PY{n}{b}          \PY{c+c1}{\PYZsh{} a and b are still the same}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{60}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+True
+\end{Verbatim}
+\end{tcolorbox}
+        
+    NumPy adds another layer to this sort of data sharing: whenever you
+perform an assignment or indexing operation, NumPy tries hard \emph{not}
+to copy the underlying data but instead creates a so-called view which
+points to the same block of memory. It does so for performance reasons
+(copying is expensive).
+
+We can illustrate this using array slicing:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{61}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{x}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{61}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{62}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}          \PY{c+c1}{\PYZsh{} Create array that points to elements 4\PYZhy{}8 of x}
+\PY{n}{y}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{62}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([3, 4, 5, 6, 7])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The arrays \texttt{x} and \texttt{y} are two different Python objects,
+which we can verify using the built-in \texttt{id()} function:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{63}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{id}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{id}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+140439437740432
+140439407314464
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{64}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{id}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{n+nb}{id}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{64}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+False
+\end{Verbatim}
+\end{tcolorbox}
+        
+    And yet, the NumPy implementation makes sure that they reference the
+same block of memory!
+
+We can see this easily by modifying \texttt{y}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{65}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}        \PY{c+c1}{\PYZsh{} overwrite all elements of y with zeros}
+\PY{n}{y}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{65}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 0, 0, 0, 0])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{66}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x}               \PY{c+c1}{\PYZsh{} elements of x that are also referenced by y}
+                \PY{c+c1}{\PYZsh{} are now also zero!}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{66}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 1, 2, 0, 0, 0, 0, 0, 8, 9])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    This behaviour is even triggered when \texttt{y} references non-adjacent
+elements in \texttt{x}. For example, we can let \texttt{y} be a view
+onto every \emph{second} element in \texttt{x}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{67}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}      \PY{c+c1}{\PYZsh{} y now points to every second element of x}
+\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}        \PY{c+c1}{\PYZsh{} overwrite all elements of y with zeros}
+\PY{n}{x}               \PY{c+c1}{\PYZsh{} every second element in x is now zero!}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{67}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 1, 0, 3, 0, 5, 0, 7, 0, 9])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    As a rule of thumb, NumPy will create a view as opposed to copying data
+if
+
+\begin{itemize}
+\tightlist
+\item
+  An array is created from another array via slicing (\ie indexing
+  using the \texttt{start:stop:step} triplet)
+\end{itemize}
+
+Conversely, a \emph{copy} is created whenever
+
+\begin{itemize}
+\tightlist
+\item
+  An array is created from another array via boolean (mask) indexing.
+\item
+  An array is created from another array via integer array indexing.
+\end{itemize}
+
+Moreover, you can always force NumPy to create a copy by calling
+\texttt{np.copy()}!
+
+\emph{Examples:}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{68}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Copies are created with boolean indexing}
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4}\PY{p}{)}      \PY{c+c1}{\PYZsh{} boolean mask}
+\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{mask}\PY{p}{]}         \PY{c+c1}{\PYZsh{} create y using boolean indexing}
+\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{68}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{69}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Copies are created with integer array indexing}
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}   \PY{c+c1}{\PYZsh{} List of indices to include in y}
+\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{index}\PY{p}{]}
+\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{69}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{70}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Forced copy with slicing}
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} force copy with np.copy()}
+\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{70}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    As an alternative to \texttt{np.copy()}, we can directly call the
+\texttt{copy()} method of an array:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{71}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{numpy-data-types-advanced}{%
 \subsection{NumPy data types
-{[}advanced{]}}\label{numpy-data-types-advanced}}
+(advanced)}\label{numpy-data-types-advanced}}
 
 \hypertarget{default-data-types}{%
 \subsubsection{Default data types}\label{default-data-types}}
@@ -1633,7 +2249,7 @@ keyword argument, NumPy by default behaves as follows:
 \emph{Case 1:} default data type is \texttt{np.float64}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{47}{\boxspacing}
+\prompt{In}{incolor}{72}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1643,7 +2259,7 @@ keyword argument, NumPy by default behaves as follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{47}{\boxspacing}
+\prompt{Out}{outcolor}{72}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('float64')
 \end{Verbatim}
@@ -1652,7 +2268,7 @@ dtype('float64')
     \emph{Case 2:} data type depends on input data:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{48}{\boxspacing}
+\prompt{In}{incolor}{73}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Argument is an integer}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
@@ -1661,14 +2277,14 @@ dtype('float64')
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{48}{\boxspacing}
+\prompt{Out}{outcolor}{73}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('int64')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{49}{\boxspacing}
+\prompt{In}{incolor}{74}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Argument is a float}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{5.0}\PY{p}{)}
@@ -1677,7 +2293,7 @@ dtype('int64')
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{49}{\boxspacing}
+\prompt{Out}{outcolor}{74}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('float64')
 \end{Verbatim}
@@ -1686,7 +2302,7 @@ dtype('float64')
     \emph{Case 3:} data type determined to accommodate result
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{50}{\boxspacing}
+\prompt{In}{incolor}{75}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Add two integer arrays}
 \PY{n}{arr1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
@@ -1702,14 +2318,14 @@ dtype('float64')
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{50}{\boxspacing}
+\prompt{Out}{outcolor}{75}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('int64')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{51}{\boxspacing}
+\prompt{In}{incolor}{76}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Add integer to floating\PYZhy{}point array}
 \PY{n}{arr1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
@@ -1725,7 +2341,7 @@ dtype('int64')
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{51}{\boxspacing}
+\prompt{Out}{outcolor}{76}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('float64')
 \end{Verbatim}
@@ -1815,7 +2431,7 @@ where other data types need to be used:
 \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{52}{\boxspacing}
+\prompt{In}{incolor}{77}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1826,7 +2442,7 @@ where other data types need to be used:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{52}{\boxspacing}
+\prompt{Out}{outcolor}{77}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([1.], dtype=float16)
 \end{Verbatim}
@@ -1836,7 +2452,7 @@ array([1.], dtype=float16)
 data:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{53}{\boxspacing}
+\prompt{In}{incolor}{78}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{lst} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{lst}\PY{p}{)}       \PY{c+c1}{\PYZsh{} given list of integers, creates integer array}
@@ -1845,14 +2461,14 @@ data:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{53}{\boxspacing}
+\prompt{Out}{outcolor}{78}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('int64')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{54}{\boxspacing}
+\prompt{In}{incolor}{79}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} override inferred data type:}
 \PY{c+c1}{\PYZsh{} created floating\PYZhy{}point array even if integers were given}
@@ -1862,14 +2478,14 @@ dtype('int64')
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{54}{\boxspacing}
+\prompt{Out}{outcolor}{79}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('float64')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{55}{\boxspacing}
+\prompt{In}{incolor}{80}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} override inferred data type:}
 \PY{c+c1}{\PYZsh{} created integer array even if floats were given,}
@@ -1886,7 +2502,7 @@ dtype('float64')
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{55}{\boxspacing}
+\prompt{Out}{outcolor}{80}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('int64')
 \end{Verbatim}
@@ -1894,252 +2510,9 @@ dtype('int64')
         
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{copies-and-views-advanced}{%
-\subsection{Copies and views
-{[}advanced{]}}\label{copies-and-views-advanced}}
-
-Recall that assignment in Python does \emph{not} create a copy (unlike
-in C, Fortran or Matlab):
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{56}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
-\PY{n}{b} \PY{o}{=} \PY{n}{a}           \PY{c+c1}{\PYZsh{} b references the same object as a}
-\PY{n}{b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}        \PY{c+c1}{\PYZsh{} modify second element of b (and a!)}
-\PY{n}{a} \PY{o}{==} \PY{n}{b}          \PY{c+c1}{\PYZsh{} a and b are still the same}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{56}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-True
-\end{Verbatim}
-\end{tcolorbox}
-        
-    NumPy adds another layer to this sort of data sharing: whenever you
-perform an assignment or indexing operation, NumPy tries hard \emph{not}
-to copy the underlying data but instead creates a so-called view which
-points to the same block of memory. It does so for performance reasons
-(copying is expensive).
-
-We can illustrate this using array slicing:
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{57}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
-\PY{n}{x}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{57}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{58}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}          \PY{c+c1}{\PYZsh{} Create array that points to elements 4\PYZhy{}8 of x}
-\PY{n}{y}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{58}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([3, 4, 5, 6, 7])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \texttt{x} and \texttt{y} are two different Python objects, which we can
-verify using the built-in \texttt{id()} function:
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{59}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{id}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
-\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{id}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-140335487563856
-140335181380224
-    \end{Verbatim}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{60}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n+nb}{id}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{n+nb}{id}\PY{p}{(}\PY{n}{y}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{60}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-False
-\end{Verbatim}
-\end{tcolorbox}
-        
-    And yet, the NumPy implementation makes sure that they reference the
-same block of memory!
-
-We can see this easily by modifying \texttt{y}:
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{61}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}        \PY{c+c1}{\PYZsh{} overwrite all elements of y with zeros}
-\PY{n}{y}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{61}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 0, 0, 0, 0])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{62}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{x}               \PY{c+c1}{\PYZsh{} elements of x that are also referenced by y}
-                \PY{c+c1}{\PYZsh{} are now also zero!}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{62}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 1, 2, 0, 0, 0, 0, 0, 8, 9])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    This behaviour is even triggered when \texttt{y} references non-adjacent
-elements in \texttt{x}. For example, we can let \texttt{y} be a view
-onto every \emph{second} element in \texttt{x}:
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{63}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
-\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}      \PY{c+c1}{\PYZsh{} y now points to every second element of x}
-\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}        \PY{c+c1}{\PYZsh{} overwrite all elements of y with zeros}
-\PY{n}{x}               \PY{c+c1}{\PYZsh{} every second element in x is now zero!}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{63}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 1, 0, 3, 0, 5, 0, 7, 0, 9])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    As a rule of thumb, NumPy will create a view as opposed to copying data
-if
-
-\begin{itemize}
-\tightlist
-\item
-  An array is created from another array via slicing (ie. indexing using
-  the \texttt{start:stop:step} triplet)
-\end{itemize}
-
-Conversely, a \emph{copy} is created whenever
-
-\begin{itemize}
-\tightlist
-\item
-  An array is created from another array via boolean (mask) indexing.
-\item
-  An array is created from another array via integer array indexing.
-\end{itemize}
-
-You can always force NumPy to create a copy by calling
-\texttt{np.copy()}!
-
-\emph{Examples:}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{64}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Copies are created with boolean indexing}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
-\PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4}\PY{p}{)}      \PY{c+c1}{\PYZsh{} boolean mask}
-\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{mask}\PY{p}{]}         \PY{c+c1}{\PYZsh{} create y using boolean indexing}
-\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
-\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{64}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{65}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Copies are created with integer array indexing}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
-\PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}   \PY{c+c1}{\PYZsh{} List of indices to include in y}
-\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{index}\PY{p}{]}
-\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
-\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{65}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{66}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Forced copy with slicing}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
-\PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} force copy with np.copy()}
-\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
-\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{66}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    As an alternative to \texttt{np.copy()} we can directly call the
-\texttt{copy()} method of an array:
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{67}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{array-storage-order-advanced}{%
 \subsection{Array storage order
-{[}advanced{]}}\label{array-storage-order-advanced}}
+(advanced)}\label{array-storage-order-advanced}}
 
 Computer memory is linear, so a multi-dimensional array is mapped to a
 one-dimensional block in memory. This can be done in two ways:
@@ -2157,7 +2530,7 @@ one-dimensional block in memory. This can be done in two ways:
 \end{enumerate}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{68}{\boxspacing}
+\prompt{In}{incolor}{81}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -2167,7 +2540,7 @@ one-dimensional block in memory. This can be done in two ways:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{68}{\boxspacing}
+\prompt{Out}{outcolor}{81}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [3, 4, 5]])
@@ -2175,7 +2548,7 @@ array([[0, 1, 2],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{69}{\boxspacing}
+\prompt{In}{incolor}{82}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} The matrix mat is stored in memory like this}
 \PY{n}{mat}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -2183,14 +2556,14 @@ array([[0, 1, 2],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{69}{\boxspacing}
+\prompt{Out}{outcolor}{82}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 1, 2, 3, 4, 5])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{70}{\boxspacing}
+\prompt{In}{incolor}{83}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} ... and NOT like this}
 \PY{n}{mat}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}      \PY{c+c1}{\PYZsh{} use order=\PYZsq{}F\PYZsq{} to convert to column\PYZhy{}major storage order}
@@ -2198,7 +2571,7 @@ array([0, 1, 2, 3, 4, 5])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{70}{\boxspacing}
+\prompt{Out}{outcolor}{83}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 3, 1, 4, 2, 5])
 \end{Verbatim}
@@ -2209,7 +2582,7 @@ you should remember that you never want to perform on non-contiguous
 blocks of memory. This can have devastating effects on performance!
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{71}{\boxspacing}
+\prompt{In}{incolor}{84}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Avoid operations on non\PYZhy{}contiguous array sections such as}
 \PY{n}{mat}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
@@ -2220,7 +2593,7 @@ blocks of memory. This can have devastating effects on performance!
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{71}{\boxspacing}
+\prompt{Out}{outcolor}{84}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([3, 4, 5])
 \end{Verbatim}
@@ -2231,12 +2604,1180 @@ array([3, 4, 5])
 \hypertarget{exercises}{%
 \section{Exercises}\label{exercises}}
 
-TBA
+    \hypertarget{exercise-1-broadcasting}{%
+\subsection{Exercise 1: Broadcasting}\label{exercise-1-broadcasting}}
+
+Let \texttt{m\ =\ 2}, \texttt{n\ =\ 3} and \texttt{k\ =\ 4}. Create an
+array \texttt{a} with shape \texttt{(m,n)} like this:
+
+\begin{verbatim}
+a = np.arange(m*n).reshape((m,n))
+\end{verbatim}
+
+Perform the following tasks:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Define the vector \texttt{b\ =\ np.arange(n)\ *\ 10} and use
+  broadcasting to compute \texttt{c\ =\ a\ *\ b} such that \texttt{c}
+  has shape \texttt{(m,n)}.
+\item
+  Define the vector \texttt{b\ =\ np.arange(m)\ *\ 10} and use
+  broadcasting to compute \texttt{c\ =\ a\ *\ b} such that \texttt{c}
+  has shape \texttt{(m,n)}.
+\item
+  Define the 3-dimensional array \texttt{b},
+
+\begin{verbatim}
+b = np.arange(m*n*k).reshape((m,k,n)) * 10
+\end{verbatim}
+
+  and use broadcasting to compute \texttt{c\ =\ a\ *\ b} such that
+  \texttt{c} has shape \texttt{(m,k,n)}.
+\end{enumerate}
+
+    \hypertarget{exercise-2-boolean-indexing}{%
+\subsection{Exercise 2: Boolean
+indexing}\label{exercise-2-boolean-indexing}}
+
+Let \texttt{m\ =\ 8} and \texttt{n\ =\ 9}. Create an array \texttt{a}
+with shape \texttt{(m,n)} as follows:
+
+\begin{verbatim}
+a = np.arange(m*n).reshape((m,n)) % 7
+\end{verbatim}
+
+The \texttt{\%} is the modulo operator which returns the remainder of a
+division of one number by another (in this case the division by 7). The
+resulting array \texttt{a} will therefore contain integers between 0 and
+6.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Create a boolean array called \texttt{mask} which has the same shape
+  as \texttt{a} and is \texttt{True} whenever an element in \texttt{a}
+  is between 1 and 4 (inclusive).
+
+  \emph{Hint:} The character \texttt{\&} works as a logical \texttt{and}
+  operator for NumPy arrays. Alternatively, you can use the function
+  \texttt{np.logical\_and()}.
+\item
+  Compute the number of elements in \texttt{a} that satisfy this
+  criterion.
+\item
+  Compute the average of these elements.
+\end{enumerate}
+
+    \hypertarget{exercise-3-diagonal-matrices}{%
+\subsection{Exercise 3: Diagonal
+matrices}\label{exercise-3-diagonal-matrices}}
+
+In this exercise, we'll create diagonal matrices using integer array
+indexing.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Create a square matrix of zeros with shape \texttt{(n,n)} for
+  \texttt{n\ =\ 5} and \texttt{dtype\ =\ int} as its data type:
+  \texttt{a\ =\ np.zeros((n,n),\ dtype=int)} Use integer array indexing
+  to modify its diagonal to construct the following matrix, where
+  omitted elements are zero: \[
+  \begin{bmatrix}
+  1 &   &   &   & \\
+    & 2 &   &   & \\
+    &   & 3 &   & \\
+    &   &   & 4 & \\
+    &   &   &   & 5     
+  \end{bmatrix}
+  \]
+\item
+  Repeat the exercise, but now use a non-squared matrix with shape
+  \texttt{(4,5)}, and insert \texttt{1,2,...} as the values of the first
+  diagonal above the main diagonal: \[
+  \begin{bmatrix}
+   0 & 1 &   &   &   \\
+   &   & 2 &   &   \\
+   &   &   & 3 &   \\
+   &   &   &   & 4 \\
+  \end{bmatrix}
+  \]
+\item
+  Repeat the exercise, but now use a matrix with shape \texttt{(6,5)}.
+  Adapt your code so that it can handle matrix shapes \texttt{(m,n)} for
+  cases \texttt{n\ \textgreater{}\ m}, \texttt{n\ =\ m} and
+  \texttt{n\ \textless{}\ m}: \[
+  \begin{bmatrix}
+   0 & 1 &   &   &   \\
+   &   & 2 &   &   \\
+   &   &   & 3 &   \\
+   &   &   &   & 4 \\
+   &&&& \\
+   &&&&
+  \end{bmatrix}
+  \]
+\end{enumerate}
+
+    \hypertarget{exercise-4-triangular-matrices}{%
+\subsection{Exercise 4: Triangular
+matrices}\label{exercise-4-triangular-matrices}}
+
+Create a matrix of zeros with shape \texttt{(m,n)}, \texttt{m\ =\ 4},
+\texttt{n\ =\ 5}, and \texttt{dtype\ =\ int}:
+
+\begin{verbatim}
+a = np.zeros((m,n), dtype=int)
+\end{verbatim}
+
+Transform it to an upper-triangular matrix so that it looks like this:
+\[
+\begin{bmatrix}
+1 & 2 & 3 & 4 & 5 \\
+ & 6 & 7 & 8 & 9 \\
+  & & 10 & 11 & 12 \\
+  & & & 13 & 14
+\end{bmatrix}
+\] where the omitted elements are zeros. Do this without using loops.
+
+\emph{Hint:} For any upper-diagonal element at position \((i,j)\) it
+holds that \(j \geq i\). Create arrays of row and column indices and use
+these to build a mask with shape \texttt{(m,n)} which selects all
+upper-triangular elements. Exploit the fact that logical array
+operations support broadcasting!
+
+\emph{Challenge:} Modify your code to construct the following
+upper-triangular matrix instead: \[
+\begin{bmatrix}
+1 & 2 & 4 & 7 & 11 \\
+  & 3 & 5 & 8 & 12 \\
+  &   & 6 & 9 & 13 \\
+  &   &   & 10 & 14 \\
+\end{bmatrix}
+\]
+
+\emph{Hint:} One solution is to build a lower-triangular matrix and
+transpose it!
+
+    \hypertarget{exercise-5-row-averages-ignoring-nans}{%
+\subsection{Exercise 5: Row averages (ignoring
+NaNs)}\label{exercise-5-row-averages-ignoring-nans}}
+
+Construct a matrix with shape \texttt{(m,n)} where \texttt{m\ =\ 5} and
+\texttt{n\ =\ 8} as follows:
+
+\begin{verbatim}
+a = np.arange(m*n, dtype=np.float).reshape((m, n))
+mask = (a % 5) == 0
+a[mask] = np.nan
+\end{verbatim}
+
+Lines two and three set all elements of \texttt{a} which are divisible
+by 5 without remainder to \texttt{np.nan}, the floating-point value
+signalling that something is ``not a number'' (NaN).
+
+Write code to perform the following tasks:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Define a function \texttt{rowmeans(x)} which takes a matrix \texttt{x}
+  as an argument and returns a vector of row averages of elements in
+  \texttt{x} which are not NaN. The return vector should therefore have
+  the same length as the number of rows in \texttt{x}.
+
+  \emph{Hint:} Use \texttt{np.isnan()} to check whether something is
+  NaN.
+\item
+  Compare your results to the output of \texttt{np.nanmean()} with
+  argument \texttt{axis\ =\ 1}.
+\item
+  Use the \texttt{\%timeit} magic to benchmark the run time of your
+  routine against the (vectorised) \texttt{np.nanmean()}.
+\end{enumerate}
+
+    \hypertarget{exercise-6-locating-maxima-advanced}{%
+\subsection{Exercise 6: Locating maxima
+(advanced)}\label{exercise-6-locating-maxima-advanced}}
+
+Consider the following quadratic polynomial in \(x\) which is
+parametrised by the positive real numbers \(a\), \(b\) and \(c\): \[
+p(x;a,b,c) = -a (x-b)^2 + c
+\]
+
+Imagine that we have a set of \texttt{m\ =\ 10} such functions, each
+with different values for \(a\), \(b\) and \(c\). These parameters take
+on the following values:
+
+\begin{verbatim}
+m = 10
+
+a = np.linspace(0.4, 2.0, m)
+b = np.linspace(-1.0, 0.0, m)
+c = np.linspace(0.0, 3.0, m)
+\end{verbatim}
+
+The parameters for the first polynomial are thus \texttt{a{[}0{]}},
+\texttt{b{[}0{]}} and \texttt{c{[}0{]}}, and similarly for the remaining
+polynomials.
+
+Perform the following tasks:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Evaluate each polynomial on an equidistant grid of \texttt{n\ =\ 50}
+  points on the interval \texttt{{[}-2.0,\ 2.0{]}}. Store the results as
+  an \(m \times n\) matrix called \texttt{pvalues}.
+\item
+  Create a (single) graph which plots all \texttt{m} polynomials.
+\item
+  Write a function \texttt{find\_max(pvalues)} which accepts this matrix
+  as an argument and returns an integer array of length \texttt{m}. Each
+  element \texttt{i} should contain the location of the maximumn for the
+  \texttt{i}-th row of \texttt{pvalues}.
+\item
+  Add the maxima you found to the graph you created: each maximum should
+  be marked as a black dot at the correct \((x,y)\) coordinates.
+\item
+  Use vectorised code to perform the same task as the function
+  \texttt{find\_max()}:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    You actually don't have to do anything here since NumPy implements
+    the function \texttt{np.argmax()} which does what you need (just
+    correctly specify the \texttt{axis} argument.)
+  \item
+    Use the \texttt{\%timeit} magic to compare the runtime of your
+    \texttt{find\_max()} to NumPy's \texttt{np.argmax()}.
+  \end{enumerate}
+\end{enumerate}
 
     \hypertarget{solutions}{%
 \section{Solutions}\label{solutions}}
 
-TBA
+    \hypertarget{solution-for-exercise-1}{%
+\subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+
+To solve this exercise, we need to make sure that the broadcasting rules
+can be applied by inserting an additional axis in either \texttt{a} or
+\texttt{b} as needed.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{85}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Define problem dimensions}
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{2}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{3}
+\PY{n}{k} \PY{o}{=} \PY{l+m+mi}{4}
+
+\PY{c+c1}{\PYZsh{} Create array a}
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+\PY{n}{a}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{85}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[0, 1, 2],
+       [3, 4, 5]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{86}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Task 1}
+\PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
+\PY{c+c1}{\PYZsh{} Broadcasing works as is, axis will be prepended to b}
+\PY{n}{c} \PY{o}{=} \PY{n}{a} \PY{o}{*} \PY{n}{b}
+
+\PY{c+c1}{\PYZsh{} If we really want, we can prepend new axis manually:}
+\PY{n}{c} \PY{o}{=} \PY{n}{a} \PY{o}{*} \PY{n}{b}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]}
+\PY{n}{c}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{86}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[  0,  10,  40],
+       [  0,  40, 100]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{87}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Task 2}
+\PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
+\PY{c+c1}{\PYZsh{} Manually append new axis to b to make broadcasing work}
+\PY{n}{c} \PY{o}{=} \PY{n}{a} \PY{o}{*} \PY{n}{b}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
+\PY{n}{c}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{87}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 0,  0,  0],
+       [30, 40, 50]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{88}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Task 3}
+\PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{o}{*}\PY{n}{m}\PY{o}{*}\PY{n}{k}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
+\PY{n}{b}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{88}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[[  0,  10,  20],
+        [ 30,  40,  50],
+        [ 60,  70,  80],
+        [ 90, 100, 110]],
+
+       [[120, 130, 140],
+        [150, 160, 170],
+        [180, 190, 200],
+        [210, 220, 230]]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{89}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Need to insert new axis inbetween existing axes in a}
+\PY{n}{c} \PY{o}{=} \PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]} \PY{o}{*} \PY{n}{b}
+\PY{n}{c}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{89}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[[   0,   10,   40],
+        [   0,   40,  100],
+        [   0,   70,  160],
+        [   0,  100,  220]],
+
+       [[ 360,  520,  700],
+        [ 450,  640,  850],
+        [ 540,  760, 1000],
+        [ 630,  880, 1150]]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{solution-for-exercise-2}{%
+\subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{90}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{c+c1}{\PYZsh{} Array dimensions}
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{8}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{9}
+
+\PY{c+c1}{\PYZsh{} Create array a}
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{l+m+mi}{7}
+
+\PY{c+c1}{\PYZsh{} Create mask that selects all elements }
+\PY{c+c1}{\PYZsh{} between 1 and 4}
+\PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZlt{}} \PY{l+m+mi}{5}\PY{p}{)}    \PY{c+c1}{\PYZsh{} same as np.logical\PYZus{}and(a \PYZgt{} 0, a \PYZlt{} 5)}
+\PY{n}{mask}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{90}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[False,  True,  True,  True,  True, False, False, False,  True],
+       [ True,  True,  True, False, False, False,  True,  True,  True],
+       [ True, False, False, False,  True,  True,  True,  True, False],
+       [False, False,  True,  True,  True,  True, False, False, False],
+       [ True,  True,  True,  True, False, False, False,  True,  True],
+       [ True,  True, False, False, False,  True,  True,  True,  True],
+       [False, False, False,  True,  True,  True,  True, False, False],
+       [False,  True,  True,  True,  True, False, False, False,  True]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We use \texttt{\&} to obtain the set of elements for which the
+conditions \texttt{a\ \textgreater{}\ 0} and \texttt{a\ \textless{}\ 5}
+are \texttt{True} at the same time.
+
+Boolean arrays only contain values \texttt{False} and \texttt{True}.
+However, arithmetic operations automatically interpret \texttt{False} as
+0 and \texttt{True} as 1, so we can simply sum over the array to obtain
+the number of elements that are \texttt{True}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{91}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Count number of elements}
+\PY{n}{nmask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mask}\PY{p}{)}
+\PY{n}{nmask}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{91}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+41
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Finally, we compute the average as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{92}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Compute average of elements selected by mask}
+\PY{c+c1}{\PYZsh{} We do this by summing over selected elements and}
+\PY{c+c1}{\PYZsh{} dividing by the number of such elements.}
+\PY{n}{mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{mask}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{nmask}
+\PY{n}{mean}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{92}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+2.4634146341463414
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{solution-for-exercise-3}{%
+\subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{93}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} 
+
+\PY{c+c1}{\PYZsh{} Square matrix with 1,2,...n diagonal}
+
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+\PY{c+c1}{\PYZsh{} Create matrix of zeros}
+\PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create row and column indices for the diagonal elements}
+\PY{n}{irow} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+\PY{n}{icol} \PY{o}{=} \PY{n}{irow}             \PY{c+c1}{\PYZsh{} column indices are the same since }
+                        \PY{c+c1}{\PYZsh{} this is the diagonal of a square matrix}
+
+\PY{c+c1}{\PYZsh{} Vector to insert as diagonal}
+\PY{n}{diag} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Set new diagonal}
+\PY{n}{mat}\PY{p}{[}\PY{n}{irow}\PY{p}{,} \PY{n}{icol}\PY{p}{]} \PY{o}{=} \PY{n}{diag}
+
+\PY{n}{mat}         \PY{c+c1}{\PYZsh{} print result}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{93}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[1, 0, 0, 0, 0],
+       [0, 2, 0, 0, 0],
+       [0, 0, 3, 0, 0],
+       [0, 0, 0, 4, 0],
+       [0, 0, 0, 0, 5]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    You can achieve the same result with NumPy's \texttt{np.diag()}
+function:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{94}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{94}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[1, 0, 0, 0, 0],
+       [0, 2, 0, 0, 0],
+       [0, 0, 3, 0, 0],
+       [0, 0, 0, 4, 0],
+       [0, 0, 0, 0, 5]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    For task 2, we need to specify row and column index arrays that are no
+longer identical:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{95}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Task 2: set upper diagonal elements of non\PYZhy{}square matrix}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{4}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+
+\PY{c+c1}{\PYZsh{} Create matrix of zeros}
+\PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Row and column indices}
+\PY{n}{irow} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+\PY{n}{icol} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+
+\PY{n}{diag} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+
+\PY{c+c1}{\PYZsh{} Set new diagonal}
+\PY{n}{mat}\PY{p}{[}\PY{n}{irow}\PY{p}{,} \PY{n}{icol}\PY{p}{]} \PY{o}{=} \PY{n}{diag}
+
+\PY{n}{mat}                 \PY{c+c1}{\PYZsh{} print result}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{95}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[0, 1, 0, 0, 0],
+       [0, 0, 2, 0, 0],
+       [0, 0, 0, 3, 0],
+       [0, 0, 0, 0, 4]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We now create a more generic version of the code above that can handle
+the cases \texttt{n\ \textgreater{}\ m}, \texttt{n\ =\ m} and
+\texttt{n\ \textless{}\ m}. The above code will fail for
+\texttt{m\ \textgreater{}\ n}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{96}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{6}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+
+\PY{c+c1}{\PYZsh{} Create matrix of zeros}
+\PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Row indices: this is the min. of the number of rows,}
+\PY{c+c1}{\PYZsh{}       and the number of cols\PYZhy{}1, since the first col}
+\PY{c+c1}{\PYZsh{}       is newer included.}
+\PY{n}{irow} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Col indices: array needs to have same length as}
+\PY{c+c1}{\PYZsh{} row indices. First col is omitted so we }
+\PY{c+c1}{\PYZsh{} need to shift all indices by 1.}
+\PY{n}{icol} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{irow}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+
+\PY{c+c1}{\PYZsh{} Number of elements to insert needs to be identical}
+\PY{c+c1}{\PYZsh{} to length of array index.}
+\PY{n}{diag} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{irow}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+
+\PY{c+c1}{\PYZsh{} Set new diagonal}
+\PY{n}{mat}\PY{p}{[}\PY{n}{irow}\PY{p}{,} \PY{n}{icol}\PY{p}{]} \PY{o}{=} \PY{n}{diag}
+
+\PY{n}{mat}                 \PY{c+c1}{\PYZsh{} print result}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{96}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[0, 1, 0, 0, 0],
+       [0, 0, 2, 0, 0],
+       [0, 0, 0, 3, 0],
+       [0, 0, 0, 0, 4],
+       [0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    For the special case of \texttt{m\ =\ n}, NumPy's \texttt{np.diag()} can
+also insert values at diagonals other than the main diagonal. For
+example, for \texttt{m\ =\ n\ =\ 5}, we can create a similar matrix as
+follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{97}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+\PY{c+c1}{\PYZsh{} the k argument tells diag() which diagonal to manipulate.}
+\PY{c+c1}{\PYZsh{} k = 1 corresponds to first diagonal above}
+\PY{c+c1}{\PYZsh{} the main diagonal.}
+\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{97}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[0, 1, 0, 0, 0],
+       [0, 0, 2, 0, 0],
+       [0, 0, 0, 3, 0],
+       [0, 0, 0, 0, 4],
+       [0, 0, 0, 0, 0]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{solution-for-exercise-4}{%
+\subsection{Solution for exercise 4}\label{solution-for-exercise-4}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{98}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{4}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+
+\PY{c+c1}{\PYZsh{} Create arrays of valid row and column indices.}
+\PY{n}{irow} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+\PY{n}{icol} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Use broadcasting to idetify all upper\PYZhy{}triangular elements}
+\PY{n}{mask} \PY{o}{=} \PY{n}{icol}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{irow}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
+\PY{n}{mask}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{98}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ True,  True,  True,  True,  True],
+       [False,  True,  True,  True,  True],
+       [False, False,  True,  True,  True],
+       [False, False, False,  True,  True]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{99}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Create matrix of zeros}
+\PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} count number of True values in mask}
+\PY{n}{ntrue} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mask}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Values to insert into upper\PYZhy{}triangular part:}
+\PY{c+c1}{\PYZsh{} 1, 2, ... }
+\PY{n}{values} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{ntrue}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+
+\PY{n}{mat}\PY{p}{[}\PY{n}{mask}\PY{p}{]} \PY{o}{=} \PY{n}{values}
+\PY{n}{mat}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{99}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 1,  2,  3,  4,  5],
+       [ 0,  6,  7,  8,  9],
+       [ 0,  0, 10, 11, 12],
+       [ 0,  0,  0, 13, 14]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    To create the second matrix, we need to make sure that the sequence of
+integers is arranged column-wise instead of by row, as in the code
+above.
+
+This is most likely not possible to achieve with masked indexing and
+C-ordered arrays. If we want to use masked indexing, we instead create
+the transposed matrix using the same approach as above, and then
+transpose it to get the final matrix.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{100}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} dimensions of TRANSPOSED matrix}
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{5}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
+
+\PY{c+c1}{\PYZsh{} row and column indices of TRANSPOSED matrix}
+\PY{n}{irow} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+\PY{n}{icol} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} mask to select lower\PYZhy{}triangular elements}
+\PY{c+c1}{\PYZsh{} of transposed matrix}
+\PY{n}{mask} \PY{o}{=} \PY{n}{irow}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{icol}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]}
+\PY{n}{mask}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{100}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ True, False, False, False],
+       [ True,  True, False, False],
+       [ True,  True,  True, False],
+       [ True,  True,  True,  True],
+       [ True,  True,  True,  True]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{101}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Create matrix of zeros}
+\PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Number of True elements in mask}
+\PY{n}{ntrue} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mask}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Values to insert into lower\PYZhy{}triangular part:}
+\PY{c+c1}{\PYZsh{} 1, 2, ... }
+\PY{n}{values} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{ntrue}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+\PY{n}{mat}\PY{p}{[}\PY{n}{mask}\PY{p}{]} \PY{o}{=} \PY{n}{values}
+
+\PY{c+c1}{\PYZsh{} Transpose to get final matrix}
+\PY{n}{mat} \PY{o}{=} \PY{n}{mat}\PY{o}{.}\PY{n}{T}
+\PY{n}{mat}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{101}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 1,  2,  4,  7, 11],
+       [ 0,  3,  5,  8, 12],
+       [ 0,  0,  6,  9, 13],
+       [ 0,  0,  0, 10, 14]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Of course, you can also solve this using the brute-force way with loops,
+but that does not help us practice using NumPy:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{102}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{4}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+
+\PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} keep track of current value to be inserted}
+\PY{c+c1}{\PYZsh{} into matrix}
+\PY{n}{value} \PY{o}{=} \PY{l+m+mi}{1}
+
+\PY{c+c1}{\PYZsh{} loop over columns}
+\PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} loop over rows}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{j} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{i}\PY{p}{:}
+            \PY{n}{mat}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{value}
+            \PY{c+c1}{\PYZsh{} increment value for next applicable}
+            \PY{c+c1}{\PYZsh{} element}
+            \PY{n}{value} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+
+\PY{n}{mat}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{102}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 1,  2,  4,  7, 11],
+       [ 0,  3,  5,  8, 12],
+       [ 0,  0,  6,  9, 13],
+       [ 0,  0,  0, 10, 14]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{solution-for-exercise-5}{%
+\subsection{Solution for exercise 5}\label{solution-for-exercise-5}}
+
+One implementation of \texttt{rowmeans()} could like as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{103}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{k}{def} \PY{n+nf}{rowmeans}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} Number of rows and columns in x}
+    \PY{n}{m}\PY{p}{,} \PY{n}{n} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{shape}
+
+    \PY{n}{means} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Loop over rows}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{} number of non\PYZhy{}NaN elements in current row}
+        \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{c+c1}{\PYZsh{} sum of non\PYZhy{}Nan elements in current row}
+        \PY{n}{s} \PY{o}{=} \PY{l+m+mf}{0.0}
+        \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{n}{value} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}
+            \PY{k}{if} \PY{o+ow}{not} \PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                \PY{n}{s} \PY{o}{+}\PY{o}{=} \PY{n}{value}
+                \PY{c+c1}{\PYZsh{} increments number of non\PYZhy{}NaN elements}
+                \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+
+        \PY{c+c1}{\PYZsh{} compute mean, store in output vector}
+        \PY{n}{means}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{s} \PY{o}{/} \PY{n}{count} 
+
+    \PY{k}{return} \PY{n}{means}
+\end{Verbatim}
+\end{tcolorbox}
+
+    We create the array given in the exercise to test our function:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{104}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{5}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{8}
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{o}{*}\PY{n}{n}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+\PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZpc{}} \PY{l+m+mi}{5}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}
+\PY{n}{a}\PY{p}{[}\PY{n}{mask}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+\PY{n}{a}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{104}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[nan,  1.,  2.,  3.,  4., nan,  6.,  7.],
+       [ 8.,  9., nan, 11., 12., 13., 14., nan],
+       [16., 17., 18., 19., nan, 21., 22., 23.],
+       [24., nan, 26., 27., 28., 29., nan, 31.],
+       [32., 33., 34., nan, 36., 37., 38., 39.]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    As you see, NumPy indicates elements that are NaN using the string
+`nan'.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{105}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} call rowmeans() using test data}
+\PY{n}{means} \PY{o}{=} \PY{n}{rowmeans}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\PY{n}{means} 
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{105}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([ 3.83333333, 11.16666667, 19.42857143, 27.5       , 35.57142857])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We verify our results using the NumPy routine \texttt{np.nanmean()}
+which implements the same functionality. Since we are computing row
+averages (and thus compute averages \emph{across} columns), we need to
+pass in the argument \texttt{axis\ =\ 1}: axes are numbered starting at
+0, so \texttt{axis\ =\ 1} refers to the second axis, \ie the columns.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{106}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{means2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{means2} 
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{106}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([ 3.83333333, 11.16666667, 19.42857143, 27.5       , 35.57142857])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    To test whether the results are the same, we check whether their
+absolute difference is below some tolerance level, in this case
+\(10^{-8}\). The routine \texttt{np.all()} evaluates to \texttt{True} if
+this is the case for \emph{all} elements.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{107}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{means} \PY{o}{\PYZhy{}} \PY{n}{means2}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1.0e\PYZhy{}8}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{107}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+True
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Note that we rarely want to compare floating-point numbers resulting
+from computations for exact equality using \texttt{==}. Floating-point
+has limited precision, and different implementations can potentially
+produce different rounding errors. It is therefore unlikely that two
+floating-point results will be \emph{exactly} identical.
+
+Finally, we use the \%timeit magic to benchmark our implementation
+against NumPy's.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{108}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}}\PY{k}{timeit} rowmeans(a)
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+52.6 µs ± 1.33 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{109}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}}\PY{k}{timeit} np.nanmean(a, axis=1)
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+26.5 µs ± 706 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+    \end{Verbatim}
+
+    You may be surprised that \texttt{np.nanmean()} is only twice as fast as
+our implementation, but this is purely due to the small array size, as
+then there are only a few iterations performed in our Python loop.
+
+Try increasing the array dimensons to \texttt{(500,800)} instead of
+\texttt{(5,8)} and you will see that then NumPy is about 500 times
+faster!
+
+    \hypertarget{solution-for-exercise-6}{%
+\subsection{Solution for exercise 6}\label{solution-for-exercise-6}}
+
+We first create the matrix \texttt{pvalues} which contains the all
+polynomials (for all \texttt{m\ =\ 10}) parametrisations evaluated on a
+common grid of x-values. Each row of this matrix represents a different
+polynomial parametrisation.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{110}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+
+\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{50}
+
+\PY{c+c1}{\PYZsh{} Parameters for each polynomial}
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+\PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+\PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} grid of x values on which to evaluate polynomials}
+\PY{n}{xgrid} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{n}{n}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} polynomials on x, for each parameter tuple (a,b,c)}
+\PY{n}{pvalues} \PY{o}{=} \PY{o}{\PYZhy{}} \PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{xgrid}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{b}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0} \PY{o}{+} \PY{n}{c}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Next, we create a function to plot all polynomials. We will be reusing
+this code, so it is convenient to encapsulate it in a function instead
+of copy-pasting it again and again!
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{111}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} function to plot quadratic polynomials}
+\PY{k}{def} \PY{n+nf}{plot\PYZus{}quad}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{pvalues}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} Number of different polynomials in pvalues}
+    \PY{n}{m} \PY{o}{=} \PY{n}{pvalues}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+    \PY{c+c1}{\PYZsh{} Use different transparency (alpha) level for each polynomial}
+    \PY{n}{alphas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+    
+    \PY{c+c1}{\PYZsh{} Plot each row against the common x\PYZhy{}values}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{pvalues}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{alphas}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+    
+    \PY{c+c1}{\PYZsh{} Label axes, figure}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}x\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}p(x;a,b,c)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quadratic functions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{112}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Call plotting routine, passing x\PYZhy{}values and y\PYZhy{}values}
+\PY{c+c1}{\PYZsh{} as arguments}
+\PY{n}{plot\PYZus{}quad}\PY{p}{(}\PY{n}{xgrid}\PY{p}{,} \PY{n}{pvalues}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit6_files/unit6_193_0.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{locating-maxima-using-loops}{%
+\subsubsection{Locating maxima using
+loops}\label{locating-maxima-using-loops}}
+
+Below is one possible way to implement a function that returns a vector
+of indices, each index storing the location of the maximum element in
+the corresponding row.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{113}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Function to locate the maximum value in each row}
+\PY{k}{def} \PY{n+nf}{find\PYZus{}max}\PY{p}{(}\PY{n}{pvalues}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} unpack rows and columns from shape attribute}
+    \PY{n}{nrow}\PY{p}{,} \PY{n}{ncol} \PY{o}{=} \PY{n}{pvalues}\PY{o}{.}\PY{n}{shape}
+    \PY{c+c1}{\PYZsh{} Create array to store location of maximum for each row.}
+    \PY{c+c1}{\PYZsh{} Location is an index, so choose integer array type!}
+    \PY{n}{imax} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nrow}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} iterate over all row}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nrow}\PY{p}{)}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{} initial guess for location of row maximum}
+        \PY{n}{jmax} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{c+c1}{\PYZsh{} iterate over all columns, locate index of maximum}
+        \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncol}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{pvalues}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{pvalues}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{jmax}\PY{p}{]}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} value at (i,j) is larger than}
+                \PY{c+c1}{\PYZsh{} value at current max: }
+                \PY{c+c1}{\PYZsh{} update jmax}
+                \PY{n}{jmax} \PY{o}{=} \PY{n}{j}
+        \PY{c+c1}{\PYZsh{} store index of maximum for current row}
+        \PY{n}{imax}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{jmax}
+    
+    \PY{k}{return} \PY{n}{imax}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{114}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} use find\PYZus{}max() to locale indices of each row maximum}
+\PY{n}{ipmax} \PY{o}{=} \PY{n}{find\PYZus{}max}\PY{p}{(}\PY{n}{pvalues}\PY{p}{)}
+\PY{n}{ipmax}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{114}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([12, 14, 15, 16, 18, 19, 20, 22, 23, 24])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We plot the polynomials using the function we defined above. We then add
+the maxima to the \emph{same} plot.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{115}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Recreate original plot from above}
+\PY{n}{plot\PYZus{}quad}\PY{p}{(}\PY{n}{xgrid}\PY{p}{,} \PY{n}{pvalues}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Plot maxima on top of previous graph}
+\PY{n}{ix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{xgrid}\PY{p}{[}\PY{n}{ipmax}\PY{p}{]}\PY{p}{,} \PY{n}{pvalues}\PY{p}{[}\PY{n}{ix}\PY{p}{,}\PY{n}{ipmax}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Maximum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{115}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<matplotlib.legend.Legend at 0x7fba87e7ad30>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit6_files/unit6_198_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{vectorised-version}{%
+\subsubsection{Vectorised version}\label{vectorised-version}}
+
+The vectorised version simply uses NumPy's \texttt{np.argmax()}
+function. We need to pass the argument \texttt{axis\ =\ 1} as the
+maximum should be computed across all columns for any given row.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{116}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Find row maxima using np.argmax()}
+
+\PY{n}{ipmax2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{pvalues}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{ipmax2}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{116}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([12, 14, 15, 16, 18, 19, 20, 22, 23, 24])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We verify that the results of our and NumPy's implementation are
+identical. Since the values here are integers, we can directly compare
+them using \texttt{==}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{117}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Check that these are the same as what we computed in ex. 1}
+\PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{ipmax} \PY{o}{==} \PY{n}{ipmax2}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{117}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+True
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Finally, we benchmark both implementations using \texttt{\%timeit}. The
+NumPy version is approximately 100 times faster!
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{118}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Time our manual implementation}
+\PY{o}{\PYZpc{}}\PY{k}{timeit} find\PYZus{}max(pvalues)
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+121 µs ± 2.41 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{119}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Time NumPy\PYZsq{}s implementation}
+\PY{o}{\PYZpc{}}\PY{k}{timeit} np.argmax(pvalues, axis=1)
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.48 µs ± 13.2 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+    \end{Verbatim}
 
 
     % Add a bibliography block to the postdoc
