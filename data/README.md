@@ -6,6 +6,8 @@ These data files are used for illustrative purposes throughout the course.
 
 Contains annual data from [FRED](https://fred.stlouisfed.org/).
 
+### Annual data
+
 Variables:
 
 -   `GDP`: Real gross domestic product in billions of chained
@@ -18,6 +20,18 @@ Variables:
 
 There is a comma-separated (`FRED.csv`) and a fixed-width
 (`FRED-fixed.csv`) version of this data.
+
+### Quarterly data
+
+The CSV file `FREQ_QTR.csv` contains data at quarterly frequencies.
+In addition to the variables listed above, it also includes
+
+-   `LFPART`: Labour force participation rate in percent
+    ([CIVPART](https://fred.stlouisfed.org/series/CIVPART))
+-   `GDPPOT`: Real potential GDP in billions of chained 
+    2012 US dollars ([GDPPOT](https://fred.stlouisfed.org/series/GDPPOT))
+-   `NROU`: Natural rate of unemployment in percent 
+    ([NROU](https://fred.stlouisfed.org/series/NROU))
 
 ## Universities data
 
