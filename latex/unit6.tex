@@ -341,7 +341,7 @@
         % Allow breaks at special characters using \PYG... macros.
         \Wrappedbreaksatspecials
         % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
-        \OriginalVerbatim[#1,fontsize=\small,codes*=\Wrappedbreaksatpunct]%
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
     }
     \makeatother
 
@@ -389,7 +389,7 @@
 \section{Advanced NumPy}\label{advanced-numpy}}
 
 We already encountered NumPy arrays and their basic usage throughout
-this tutorial. In this unit, we will take a more in-depth look at NumPy.
+this course. In this unit, we will take a more in-depth look at NumPy.
 
 \hypertarget{why-numpy-arrays}{%
 \subsection{Why NumPy arrays?}\label{why-numpy-arrays}}
@@ -472,7 +472,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-143 µs ± 187 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+146 µs ± 2.26 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -487,16 +487,15 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-887 ns ± 14.5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+942 ns ± 6.95 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     \begin{itemize}
 \tightlist
 \item
-  On my machine (not the fastest laptop), squaring 1000 elements of a
-  \texttt{list} takes approximately 200 microseconds, while the
-  equivalent array-based operation takes only about 1 microsecond. NumPy
-  is therefore approximately 200 times faster!
+  On my machine, squaring 1000 elements of a \texttt{list} takes
+  approximately 200 times longer than the computation using NumPy
+  arrays!
 \item
   Also, as mentioned above, NumPy supports squaring an array directly,
   while we have to manually loop through the \texttt{list} and square
@@ -551,7 +550,8 @@ creation routines:
     \texttt{start} and \texttt{step} can be omitted and then default to
     \texttt{start=0} and \texttt{step=1}.
   \item
-    Note that \texttt{stop} is not included!
+    Note that the number \texttt{stop} is never included in the
+    resulting array!
   \end{itemize}
 \item
   \texttt{np.linspace(start,stop,num)} returns a vector of \texttt{num}
@@ -754,7 +754,7 @@ array([0.0e+000, 4.9e-324, 9.9e-324, 1.5e-323, 2.0e-323])
         
     An array created with \texttt{empty()} will contain arbitrary garbage
 since the memory block assigned to the array is not initialised. The
-result will potentially differ on each invocation and across computers.
+result will most likely differ on each invocation and across computers.
 
 Most function accept an integer value instead of a \texttt{tuple} when
 creating 1-dimensional arrays, which is interpreted as the number of
@@ -1173,7 +1173,7 @@ element-wise, so \texttt{x\ *\ y} is \emph{not} matrix multiplication!
 \PY{n}{z} \PY{o}{=} \PY{n}{x} \PY{o}{/}\PY{o}{/} \PY{n}{y}          \PY{c+c1}{\PYZsh{} division with integer truncation}
 \PY{n}{z} \PY{o}{=} \PY{n}{x} \PY{o}{\PYZpc{}} \PY{n}{y}           \PY{c+c1}{\PYZsh{} modulo operator}
 \PY{n}{z} \PY{o}{=} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{n}{y}          \PY{c+c1}{\PYZsh{} power function}
-\PY{n}{y} \PY{o}{=} \PY{n}{x} \PY{o}{==} \PY{n}{y}          \PY{c+c1}{\PYZsh{} comparison: also \PYZgt{}, \PYZgt{}=, \PYZlt{}=, \PYZlt{}}
+\PY{n}{z} \PY{o}{=} \PY{n}{x} \PY{o}{==} \PY{n}{y}          \PY{c+c1}{\PYZsh{} comparison: also \PYZgt{}, \PYZgt{}=, \PYZlt{}=, \PYZlt{}}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1400,7 +1400,8 @@ restricts the operation to a specific axis.
 \begin{itemize}
 \tightlist
 \item
-  The resulting array will have one dimension less than the input.
+  If an axis is specified, the resulting array will have one dimension
+  less than the input.
 \item
   If no axis is specified, the operation is applied to the whole
   (flattened) array.
@@ -1472,7 +1473,7 @@ to identical shapes.
 \textbf{Simple example}
 
 What do we mean by ``broadcasting''? We introduce the concept using a
-specific example, and will discuss the techinical details below.
+specific example, and will discuss the technical details below.
 
 \begin{itemize}
 \tightlist
@@ -1600,8 +1601,8 @@ on broadcasting.
 
 We are now ready to look at the technical details underlying
 broadcasting. The NumPy
-\href{https://numpy.org/doc/stable/reference/ufuncs.html\#broadcasting}{documnetation}
-is quite helpful so we will just summarise the points made there.
+\href{https://numpy.org/doc/stable/reference/ufuncs.html\#broadcasting}{documentation}
+is quite helpful, so we will just summarise the points made there.
 
 Broadcasting is applied in four steps:
 
@@ -1770,7 +1771,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.86 µs ± 12.5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+1.94 µs ± 17.6 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1782,7 +1783,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-6.39 µs ± 60.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+6.23 µs ± 96.3 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
     \end{Verbatim}
 
     As you see, not only is the second operation more complex and difficult
@@ -1847,7 +1848,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-28 µs ± 560 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+29 µs ± 1.25 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1859,7 +1860,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-357 ns ± 1.47 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+364 ns ± 5.65 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     We see that the vectorised variant is about 100 times faster! What is
@@ -1926,7 +1927,7 @@ the performance advantage of vectorised code:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-111 µs ± 1.64 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+119 µs ± 1.89 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1937,7 +1938,7 @@ the performance advantage of vectorised code:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-3.74 µs ± 25.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+3.92 µs ± 59.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
     \end{Verbatim}
 
     The vectorised version is approximately 25 times faster, despite the
@@ -2044,8 +2045,8 @@ which we can verify using the built-in \texttt{id()} function:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-140439437740432
-140439407314464
+140515426526672
+140515426131120
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -2724,8 +2725,8 @@ indexing.
 \subsection{Exercise 4: Triangular
 matrices}\label{exercise-4-triangular-matrices}}
 
-Create a matrix of zeros with shape \texttt{(m,n)}, \texttt{m\ =\ 4},
-\texttt{n\ =\ 5}, and \texttt{dtype\ =\ int}:
+Create a matrix of zeros with shape \texttt{(m,n)}, with
+\texttt{m\ =\ 4}, \texttt{n\ =\ 5}, and \texttt{dtype\ =\ int}:
 
 \begin{verbatim}
 a = np.zeros((m,n), dtype=int)
@@ -2836,7 +2837,7 @@ Perform the following tasks:
 \item
   Write a function \texttt{find\_max(pvalues)} which accepts this matrix
   as an argument and returns an integer array of length \texttt{m}. Each
-  element \texttt{i} should contain the location of the maximumn for the
+  element \texttt{i} should contain the location of the maximum for the
   \texttt{i}-th row of \texttt{pvalues}.
 \item
   Add the maxima you found to the graph you created: each maximum should
@@ -3402,7 +3403,7 @@ array([[ 1,  2,  4,  7, 11],
     \hypertarget{solution-for-exercise-5}{%
 \subsection{Solution for exercise 5}\label{solution-for-exercise-5}}
 
-One implementation of \texttt{rowmeans()} could like as follows:
+One implementation of \texttt{rowmeans()} could look as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{103}{\boxspacing}
@@ -3536,7 +3537,7 @@ against NumPy's.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-52.6 µs ± 1.33 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+52.1 µs ± 263 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -3547,14 +3548,14 @@ against NumPy's.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-26.5 µs ± 706 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+26.9 µs ± 504 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     You may be surprised that \texttt{np.nanmean()} is only twice as fast as
 our implementation, but this is purely due to the small array size, as
 then there are only a few iterations performed in our Python loop.
 
-Try increasing the array dimensons to \texttt{(500,800)} instead of
+Try increasing the array dimensions to \texttt{(500,800)} instead of
 \texttt{(5,8)} and you will see that then NumPy is about 500 times
 faster!
 
@@ -3700,7 +3701,7 @@ the maxima to the \emph{same} plot.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{115}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7fba87e7ad30>
+<matplotlib.legend.Legend at 0x7fcc3c8d6a00>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -3740,7 +3741,7 @@ them using \texttt{==}.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{117}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Check that these are the same as what we computed in ex. 1}
+\PY{c+c1}{\PYZsh{} Check that these are the same as what we computed above}
 \PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{ipmax} \PY{o}{==} \PY{n}{ipmax2}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
@@ -3764,7 +3765,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-121 µs ± 2.41 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+124 µs ± 2.01 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -3776,7 +3777,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.48 µs ± 13.2 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+1.42 µs ± 5.76 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
 
