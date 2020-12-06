@@ -23,6 +23,35 @@ as a static PDF file.
 The the *launch binder* link at the top to start an interactive
 notebook.
 
+## Installation
+
+### Running without installation
+
+Click on the ![Binder](https://mybinder.org/badge_logo.svg) button
+above to use the notebooks directly the your web browser. No location
+Python environment is required.
+
+### Running locally
+
+To clone the repository, run
+
+    git clone https://github.com/richardfoltyn/python-statistics.git
+
+You will need a local Python environment (such as [Anaconda](https://www.anaconda.com/products/individual), the packages that come with your Linux distribution, etc.)
+with the following packages installed:
+
+-   Python >= 3.7
+-   NumPy >= 1.17
+-   SciPy
+-   pandas
+-   matplotlib
+-   xlrd
+
+To start the Jupyter notebook server, execute something like this
+
+    cd path/to/repository
+    jupyter notebook lectures/index.ipynb
+
 ## Licence
 
 This material is licensed under a 
