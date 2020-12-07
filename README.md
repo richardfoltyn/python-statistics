@@ -46,6 +46,7 @@ with the following packages installed:
 -   pandas
 -   matplotlib
 -   xlrd
+-   Jupyter notebook
 
 To start the Jupyter notebook server, execute something like this
 
