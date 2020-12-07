@@ -1,6 +1,4 @@
-\documentclass[10pt]{scrartcl}
-
-    \input{overrides-pre}
+\documentclass[11pt]{article}
 
     \usepackage[breakable]{tcolorbox}
     \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
@@ -157,10 +155,7 @@
     \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
     % Document parameters
     % Document title
-    \newcommand*{\mytitle}{Unit 6: Advanced NumPy}
-
-    \input{overrides-post}
-
+    \title{unit6}
     
     
     
@@ -380,8 +375,7 @@
 \begin{document}
     
     \maketitle
-    \tableofcontents
-
+    
     
 
     
@@ -464,7 +458,7 @@ simple example:
 \prompt{In}{incolor}{1}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create list 0, 1, 2, ..., 999}
-\PY{n}{lst} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{)}
+\PY{n}{lst} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Compute squares, time how long it takes}
 \PY{o}{\PYZpc{}}\PY{k}{timeit} [i**2 for i in lst]
@@ -472,7 +466,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-146 µs ± 2.26 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+146 µs ± 783 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -487,7 +481,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-942 ns ± 6.95 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+898 ns ± 8.32 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     \begin{itemize}
@@ -816,6 +810,41 @@ array([[0., 0.],
 \end{Verbatim}
 \end{tcolorbox}
         
+    We can reshape any array to a 1-dimensional vector using any of the
+following expressions:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{)}\PY{p}{)}          \PY{c+c1}{\PYZsh{} pass shape as tuple}
+\PY{n}{x}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}              \PY{c+c1}{\PYZsh{} pass shape as integer}
+\PY{n}{x}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0., 0., 0., 0., 0., 0.])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    This even works on scalar (0-dimensional) arrays:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0.])
+\end{Verbatim}
+\end{tcolorbox}
+        
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{advanced-indexing}{%
@@ -860,7 +889,7 @@ We can pass logical arrays as indices:
 \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{15}{\boxspacing}
+\prompt{In}{incolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -871,21 +900,21 @@ We can pass logical arrays as indices:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{15}{\boxspacing}
+\prompt{Out}{outcolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([False, False,  True,  True,  True])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\prompt{In}{incolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{vec}\PY{p}{[}\PY{n}{mask}\PY{p}{]}               \PY{c+c1}{\PYZsh{} use mask to retrieve only elements greater than 1}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{16}{\boxspacing}
+\prompt{Out}{outcolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([2, 3, 4])
 \end{Verbatim}
@@ -895,7 +924,7 @@ array([2, 3, 4])
 result will be flatted to a 1-dimensional array, though.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{17}{\boxspacing}
+\prompt{In}{incolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
 \PY{n}{mat}
@@ -903,7 +932,7 @@ result will be flatted to a 1-dimensional array, though.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{17}{\boxspacing}
+\prompt{Out}{outcolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [3, 4, 5]])
@@ -911,7 +940,7 @@ array([[0, 1, 2],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{18}{\boxspacing}
+\prompt{In}{incolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{n}{mat} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{)}        \PY{c+c1}{\PYZsh{} create boolean array}
 \PY{n}{mask}
@@ -919,7 +948,7 @@ array([[0, 1, 2],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{18}{\boxspacing}
+\prompt{Out}{outcolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[False, False,  True],
        [ True,  True,  True]])
@@ -927,14 +956,14 @@ array([[False, False,  True],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{19}{\boxspacing}
+\prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mat}\PY{p}{[}\PY{n}{mask}\PY{p}{]}            \PY{c+c1}{\PYZsh{} collapses result to 1\PYZhy{}d array}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{19}{\boxspacing}
+\prompt{Out}{outcolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([2, 3, 4, 5])
 \end{Verbatim}
@@ -944,7 +973,7 @@ array([2, 3, 4, 5])
 \texttt{list}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{tpl} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
 \PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{k+kc}{True}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
@@ -972,7 +1001,7 @@ elements on each axis. These are straightforward to use for
 dimensions.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{21}{\boxspacing}
+\prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -983,7 +1012,7 @@ dimensions.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{21}{\boxspacing}
+\prompt{Out}{outcolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([1, 2, 9])
 \end{Verbatim}
@@ -1007,7 +1036,7 @@ axis of length \(n\), then
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
+\prompt{In}{incolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}     \PY{c+c1}{\PYZsh{} array with 5 elements, [5,...,9]}
 \PY{n}{data}
@@ -1015,14 +1044,14 @@ axis of length \(n\), then
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{22}{\boxspacing}
+\prompt{Out}{outcolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([5, 6, 7, 8, 9])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
+\prompt{In}{incolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}         \PY{c+c1}{\PYZsh{} select elements multiple times}
 \PY{n}{data}\PY{p}{[}\PY{n}{index}\PY{p}{]}
@@ -1030,7 +1059,7 @@ array([5, 6, 7, 8, 9])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{23}{\boxspacing}
+\prompt{Out}{outcolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([5, 6, 6, 7, 7, 8, 8, 9, 9])
 \end{Verbatim}
@@ -1050,7 +1079,7 @@ Moreover,
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
 \PY{n}{data}
@@ -1058,7 +1087,7 @@ Moreover,
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{24}{\boxspacing}
+\prompt{Out}{outcolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 0,  1,  2,  3],
        [ 4,  5,  6,  7],
@@ -1067,7 +1096,7 @@ array([[ 0,  1,  2,  3],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{index1} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}     \PY{c+c1}{\PYZsh{} row indices}
 \PY{n}{index2} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}     \PY{c+c1}{\PYZsh{} column indices}
@@ -1076,7 +1105,7 @@ array([[ 0,  1,  2,  3],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{25}{\boxspacing}
+\prompt{Out}{outcolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([ 1, 11])
 \end{Verbatim}
@@ -1089,14 +1118,15 @@ We can combine index arrays on one axis with another indexing method on
 a different axis:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{data}\PY{p}{[}\PY{n}{index1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}     \PY{c+c1}{\PYZsh{} return elements in 3rd column from rows given in index1}
+\PY{n}{data}\PY{p}{[}\PY{n}{index1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}     \PY{c+c1}{\PYZsh{} return elements in 3rd column from rows given}
+                    \PY{c+c1}{\PYZsh{} in index1}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{26}{\boxspacing}
+\prompt{Out}{outcolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([ 2, 10])
 \end{Verbatim}
@@ -1135,7 +1165,7 @@ There are three types of such operations:
 would expect:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{27}{\boxspacing}
+\prompt{In}{incolor}{29}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1160,7 +1190,7 @@ element-wise, so \texttt{x\ *\ y} is \emph{not} matrix multiplication!
 \emph{Case 2:} Both operands are arrays of equal shape:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{28}{\boxspacing}
+\prompt{In}{incolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
 \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}       \PY{c+c1}{\PYZsh{} has same shape as x}
@@ -1196,7 +1226,7 @@ numerous functions defined in NumPy, such as
 (not all functions listed there operate element-wise, though!).
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{29}{\boxspacing}
+\prompt{In}{incolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} element\PYZhy{}wise functions}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}
@@ -1213,7 +1243,7 @@ numerous functions defined in NumPy, such as
 You can transpose a matrix using the \texttt{T} attribute:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
+\prompt{In}{incolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
 \PY{n}{mat}
@@ -1221,7 +1251,7 @@ You can transpose a matrix using the \texttt{T} attribute:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{30}{\boxspacing}
+\prompt{Out}{outcolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [3, 4, 5]])
@@ -1229,14 +1259,14 @@ array([[0, 1, 2],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{31}{\boxspacing}
+\prompt{In}{incolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mat}\PY{o}{.}\PY{n}{T}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{31}{\boxspacing}
+\prompt{Out}{outcolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 3],
        [1, 4],
@@ -1260,7 +1290,7 @@ Every newer version of Python and NumPy additionally interprets
 \texttt{@} as the matrix multiplication operator.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{32}{\boxspacing}
+\prompt{In}{incolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1273,7 +1303,7 @@ Every newer version of Python and NumPy additionally interprets
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{32}{\boxspacing}
+\prompt{Out}{outcolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 15,  18,  21],
        [ 42,  54,  66],
@@ -1282,7 +1312,7 @@ array([[ 15,  18,  21],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{33}{\boxspacing}
+\prompt{In}{incolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} vector dot product (returns a scalar)}
 \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{vec}\PY{p}{,} \PY{n}{vec}\PY{p}{)}    \PY{c+c1}{\PYZsh{} or: vec @ vec}
@@ -1290,14 +1320,14 @@ array([[ 15,  18,  21],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{33}{\boxspacing}
+\prompt{Out}{outcolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 5
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{34}{\boxspacing}
+\prompt{In}{incolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} matrix\PYZhy{}vector product (returns vector)}
 \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{n}{vec}\PY{p}{)}    \PY{c+c1}{\PYZsh{} or: mat @ vec}
@@ -1305,7 +1335,7 @@ array([[ 15,  18,  21],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{34}{\boxspacing}
+\prompt{Out}{outcolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([ 5, 14, 23])
 \end{Verbatim}
@@ -1315,7 +1345,7 @@ array([ 5, 14, 23])
 dimensions!
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{35}{\boxspacing}
+\prompt{In}{incolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
 \PY{n}{mat}
@@ -1323,7 +1353,7 @@ dimensions!
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{35}{\boxspacing}
+\prompt{Out}{outcolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [3, 4, 5]])
@@ -1331,17 +1361,19 @@ array([[0, 1, 2],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{36}{\boxspacing}
+\prompt{In}{incolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{n}{mat}\PY{p}{)}        \PY{c+c1}{\PYZsh{} raises error, cannot multiply 2x3 matrix with 2x3 matrix}
+\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{n}{mat}\PY{p}{)}        \PY{c+c1}{\PYZsh{} raises error, cannot multiply 2x3 matrix with }
+                        \PY{c+c1}{\PYZsh{} 2x3 matrix}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
 \textcolor{ansi-red}{---------------------------------------------------------------------------}
 \textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-5a8b21790e76>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }np\textcolor{ansi-blue}{.}dot\textcolor{ansi-blue}{(}mat\textcolor{ansi-blue}{,} mat\textcolor{ansi-blue}{)}        \textcolor{ansi-red}{\# raises error, cannot multiply 2x3 matrix with 2x3 matrix}
+\textcolor{ansi-green}{<ipython-input-1-6f2099a69a9c>} in \textcolor{ansi-cyan}{<module>}
+\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }np\textcolor{ansi-blue}{.}dot\textcolor{ansi-blue}{(}mat\textcolor{ansi-blue}{,} mat\textcolor{ansi-blue}{)}        \textcolor{ansi-red}{\# raises error, cannot multiply 2x3 matrix with}
+\textcolor{ansi-green-intense}{\textbf{      2}}                         \textcolor{ansi-red}{\# 2x3 matrix}
 
 \textcolor{ansi-green}{<\_\_array\_function\_\_ internals>} in \textcolor{ansi-cyan}{dot}\textcolor{ansi-blue}{(*args, **kwargs)}
 
@@ -1349,14 +1381,14 @@ array([[0, 1, 2],
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{37}{\boxspacing}
+\prompt{In}{incolor}{39}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{n}{mat}\PY{o}{.}\PY{n}{T}\PY{p}{)}      \PY{c+c1}{\PYZsh{} transpose second operand, works}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{37}{\boxspacing}
+\prompt{Out}{outcolor}{39}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 5, 14],
        [14, 50]])
@@ -1410,7 +1442,7 @@ restricts the operation to a specific axis.
 \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{38}{\boxspacing}
+\prompt{In}{incolor}{40}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1429,7 +1461,7 @@ Mean: 0.50, std. dev.: 0.32
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{39}{\boxspacing}
+\prompt{In}{incolor}{41}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} 2\PYZhy{}dimensional input data}
 \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
@@ -1438,7 +1470,7 @@ Mean: 0.50, std. dev.: 0.32
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{39}{\boxspacing}
+\prompt{Out}{outcolor}{41}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0.  , 0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 ],
        [0.35, 0.4 , 0.45, 0.5 , 0.55, 0.6 , 0.65],
@@ -1447,7 +1479,7 @@ array([[0.  , 0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 ],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{40}{\boxspacing}
+\prompt{In}{incolor}{42}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Compute mean of each row, ie along the column axis}
 \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
@@ -1456,7 +1488,7 @@ array([[0.  , 0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 ],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{40}{\boxspacing}
+\prompt{Out}{outcolor}{42}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0.15, 0.5 , 0.85])
 \end{Verbatim}
@@ -1488,7 +1520,7 @@ specific example, and will discuss the technical details below.
 \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{41}{\boxspacing}
+\prompt{In}{incolor}{43}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1499,7 +1531,7 @@ specific example, and will discuss the technical details below.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{41}{\boxspacing}
+\prompt{Out}{outcolor}{43}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [3, 4, 5]])
@@ -1507,7 +1539,7 @@ array([[0, 1, 2],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{42}{\boxspacing}
+\prompt{In}{incolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create 2\PYZhy{}element vector}
 \PY{n}{vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
@@ -1516,14 +1548,14 @@ array([[0, 1, 2],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{42}{\boxspacing}
+\prompt{Out}{outcolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 1])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{43}{\boxspacing}
+\prompt{In}{incolor}{45}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Trying to add matrix to vector fails}
 \PY{n}{mat} \PY{o}{+} \PY{n}{vec}
@@ -1541,7 +1573,7 @@ array([0, 1])
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{44}{\boxspacing}
+\prompt{In}{incolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} However, we can explicitly reshape the vector to a 2x1 column vector}
 \PY{n}{colvec} \PY{o}{=} \PY{n}{vec}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
@@ -1550,7 +1582,7 @@ array([0, 1])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{44}{\boxspacing}
+\prompt{Out}{outcolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0],
        [1]])
@@ -1558,7 +1590,7 @@ array([[0],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{45}{\boxspacing}
+\prompt{In}{incolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Now, broadcasting replicates column vector to match matrix columns}
 \PY{n}{mat} \PY{o}{+} \PY{n}{colvec}
@@ -1566,7 +1598,7 @@ array([[0],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{45}{\boxspacing}
+\prompt{Out}{outcolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [4, 5, 6]])
@@ -1578,7 +1610,7 @@ of NumPy that allows us to increase the number of dimensions on the
 spot:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{46}{\boxspacing}
+\prompt{In}{incolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} use vec[:, None] to append an additional dimension to vec}
 \PY{n}{mat} \PY{o}{+} \PY{n}{vec}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]}
@@ -1586,7 +1618,7 @@ spot:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{46}{\boxspacing}
+\prompt{Out}{outcolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [4, 5, 6]])
@@ -1657,7 +1689,7 @@ automatically if we want to multiply arrays of shape
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{47}{\boxspacing}
+\prompt{In}{incolor}{49}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{3}
 \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{2}
@@ -1683,7 +1715,7 @@ automatically if we want to multiply arrays of shape
 \texttt{b} such that both arrays have the same dimension:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{48}{\boxspacing}
+\prompt{In}{incolor}{50}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{b} \PY{o}{=} \PY{n}{b}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
 \PY{n}{a} \PY{o}{*} \PY{n}{b}
@@ -1691,7 +1723,7 @@ automatically if we want to multiply arrays of shape
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{48}{\boxspacing}
+\prompt{Out}{outcolor}{50}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 0,  1],
        [ 4,  6],
@@ -1727,7 +1759,7 @@ of data, we perform the element-wise multiplication of a 3-dimensional
 array with a (1-dimensional) vector:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{49}{\boxspacing}
+\prompt{In}{incolor}{51}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Dimensions of 3d array}
 \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{10}
@@ -1744,7 +1776,7 @@ array with a (1-dimensional) vector:
 copies of the \texttt{n} elements in \texttt{b}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{50}{\boxspacing}
+\prompt{In}{incolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{b\PYZus{}exp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{tile}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n}{reps}\PY{o}{=}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
 \PY{n}{b\PYZus{}exp}\PY{o}{.}\PY{n}{shape}
@@ -1752,7 +1784,7 @@ copies of the \texttt{n} elements in \texttt{b}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{50}{\boxspacing}
+\prompt{Out}{outcolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (10, 11, 12)
 \end{Verbatim}
@@ -1763,7 +1795,7 @@ copies of the \texttt{n} elements in \texttt{b}:
 explicitly expand \texttt{b}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{51}{\boxspacing}
+\prompt{In}{incolor}{53}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Multiplication with broadcasting}
 \PY{o}{\PYZpc{}}\PY{k}{timeit} a * b
@@ -1771,11 +1803,11 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.94 µs ± 17.6 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+1.9 µs ± 5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{52}{\boxspacing}
+\prompt{In}{incolor}{54}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Multiplication with explicitly expanded operands}
 \PY{o}{\PYZpc{}}\PY{k}{timeit} a * np.tile(b, reps=(k, m, 1))
@@ -1783,7 +1815,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-6.23 µs ± 96.3 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+6.22 µs ± 99.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
     \end{Verbatim}
 
     As you see, not only is the second operation more complex and difficult
@@ -1820,7 +1852,7 @@ For example, consider element-wise addition of two arrays, \texttt{a}
 and \texttt{b}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{53}{\boxspacing}
+\prompt{In}{incolor}{55}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1837,7 +1869,7 @@ and \texttt{b}:
 vectorised implementation reveals some striking differences:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{54}{\boxspacing}
+\prompt{In}{incolor}{56}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{o}{\PYZpc{}\PYZpc{}time}it
 \PY{c+c1}{\PYZsh{} Compute c = a + b using Python loops}
@@ -1848,11 +1880,11 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-29 µs ± 1.25 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+28.6 µs ± 624 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{55}{\boxspacing}
+\prompt{In}{incolor}{57}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Compute c = a + b using vectorised addition}
 \PY{o}{\PYZpc{}}\PY{k}{timeit} c = a + b
@@ -1860,7 +1892,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-364 ns ± 5.65 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+382 ns ± 3.63 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     We see that the vectorised variant is about 100 times faster! What is
@@ -1888,7 +1920,7 @@ As an example, consider the following function which computes the sum of
 finite of elements of an array, ignoring infinity and NaNs.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{56}{\boxspacing}
+\prompt{In}{incolor}{58}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Compute sum of finite elements in x}
 \PY{k}{def} \PY{n+nf}{finite\PYZus{}sum}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
@@ -1908,7 +1940,7 @@ finite of elements of an array, ignoring infinity and NaNs.
 to test \texttt{finite\_sum()}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{57}{\boxspacing}
+\prompt{In}{incolor}{59}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
 \PY{n}{arr}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{inf}       \PY{c+c1}{\PYZsh{} assign infinity to every 3rd element}
@@ -1920,25 +1952,25 @@ to test \texttt{finite\_sum()}:
 the performance advantage of vectorised code:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{58}{\boxspacing}
+\prompt{In}{incolor}{60}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{o}{\PYZpc{}}\PY{k}{timeit} finite\PYZus{}sum(arr)
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-119 µs ± 1.89 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+113 µs ± 1.07 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{59}{\boxspacing}
+\prompt{In}{incolor}{61}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{o}{\PYZpc{}}\PY{k}{timeit} np.sum(arr[np.isfinite(arr)])
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-3.92 µs ± 59.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+3.67 µs ± 16.3 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
     \end{Verbatim}
 
     The vectorised version is approximately 25 times faster, despite the
@@ -1977,7 +2009,7 @@ Recall that assignment in Python does \emph{not} create a copy (unlike
 in C, Fortran or Matlab):
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{60}{\boxspacing}
+\prompt{In}{incolor}{62}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
 \PY{n}{b} \PY{o}{=} \PY{n}{a}           \PY{c+c1}{\PYZsh{} b references the same object as a}
@@ -1987,7 +2019,7 @@ in C, Fortran or Matlab):
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{60}{\boxspacing}
+\prompt{Out}{outcolor}{62}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 True
 \end{Verbatim}
@@ -2002,7 +2034,7 @@ points to the same block of memory. It does so for performance reasons
 We can illustrate this using array slicing:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{61}{\boxspacing}
+\prompt{In}{incolor}{63}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -2012,14 +2044,14 @@ We can illustrate this using array slicing:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{61}{\boxspacing}
+\prompt{Out}{outcolor}{63}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{62}{\boxspacing}
+\prompt{In}{incolor}{64}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}          \PY{c+c1}{\PYZsh{} Create array that points to elements 4\PYZhy{}8 of x}
 \PY{n}{y}
@@ -2027,7 +2059,7 @@ array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{62}{\boxspacing}
+\prompt{Out}{outcolor}{64}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([3, 4, 5, 6, 7])
 \end{Verbatim}
@@ -2037,7 +2069,7 @@ array([3, 4, 5, 6, 7])
 which we can verify using the built-in \texttt{id()} function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{63}{\boxspacing}
+\prompt{In}{incolor}{65}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{id}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{id}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
@@ -2045,19 +2077,19 @@ which we can verify using the built-in \texttt{id()} function:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-140515426526672
-140515426131120
+139921660367136
+139921690825392
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{64}{\boxspacing}
+\prompt{In}{incolor}{66}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n+nb}{id}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{n+nb}{id}\PY{p}{(}\PY{n}{y}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{64}{\boxspacing}
+\prompt{Out}{outcolor}{66}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 False
 \end{Verbatim}
@@ -2069,7 +2101,7 @@ same block of memory!
 We can see this easily by modifying \texttt{y}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{65}{\boxspacing}
+\prompt{In}{incolor}{67}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}        \PY{c+c1}{\PYZsh{} overwrite all elements of y with zeros}
 \PY{n}{y}
@@ -2077,14 +2109,14 @@ We can see this easily by modifying \texttt{y}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{65}{\boxspacing}
+\prompt{Out}{outcolor}{67}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 0, 0, 0, 0])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{66}{\boxspacing}
+\prompt{In}{incolor}{68}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x}               \PY{c+c1}{\PYZsh{} elements of x that are also referenced by y}
                 \PY{c+c1}{\PYZsh{} are now also zero!}
@@ -2092,7 +2124,7 @@ array([0, 0, 0, 0, 0])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{66}{\boxspacing}
+\prompt{Out}{outcolor}{68}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 1, 2, 0, 0, 0, 0, 0, 8, 9])
 \end{Verbatim}
@@ -2103,7 +2135,7 @@ elements in \texttt{x}. For example, we can let \texttt{y} be a view
 onto every \emph{second} element in \texttt{x}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{67}{\boxspacing}
+\prompt{In}{incolor}{69}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
 \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}      \PY{c+c1}{\PYZsh{} y now points to every second element of x}
@@ -2113,7 +2145,7 @@ onto every \emph{second} element in \texttt{x}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{67}{\boxspacing}
+\prompt{Out}{outcolor}{69}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 1, 0, 3, 0, 5, 0, 7, 0, 9])
 \end{Verbatim}
@@ -2125,7 +2157,7 @@ if
 \begin{itemize}
 \tightlist
 \item
-  An array is created from another array via slicing (\ie indexing
+  An array is created from another array via slicing (i.e.~indexing
   using the \texttt{start:stop:step} triplet)
 \end{itemize}
 
@@ -2145,49 +2177,12 @@ Moreover, you can always force NumPy to create a copy by calling
 \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{68}{\boxspacing}
+\prompt{In}{incolor}{70}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Copies are created with boolean indexing}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
 \PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4}\PY{p}{)}      \PY{c+c1}{\PYZsh{} boolean mask}
 \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{mask}\PY{p}{]}         \PY{c+c1}{\PYZsh{} create y using boolean indexing}
-\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
-\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{68}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{69}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Copies are created with integer array indexing}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
-\PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}   \PY{c+c1}{\PYZsh{} List of indices to include in y}
-\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{index}\PY{p}{]}
-\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
-\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{69}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{70}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Forced copy with slicing}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
-\PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} force copy with np.copy()}
 \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
 \PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
 \end{Verbatim}
@@ -2200,11 +2195,48 @@ array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 \end{Verbatim}
 \end{tcolorbox}
         
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{71}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Copies are created with integer array indexing}
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}   \PY{c+c1}{\PYZsh{} List of indices to include in y}
+\PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{index}\PY{p}{]}
+\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{71}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{72}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Forced copy with slicing}
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} force copy with np.copy()}
+\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+\PY{n}{x}                   \PY{c+c1}{\PYZsh{} x is unmodified}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{72}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+\end{Verbatim}
+\end{tcolorbox}
+        
     As an alternative to \texttt{np.copy()}, we can directly call the
 \texttt{copy()} method of an array:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{71}{\boxspacing}
+\prompt{In}{incolor}{73}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
@@ -2250,46 +2282,12 @@ keyword argument, NumPy by default behaves as follows:
 \emph{Case 1:} default data type is \texttt{np.float64}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{72}{\boxspacing}
+\prompt{In}{incolor}{74}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}      \PY{c+c1}{\PYZsh{} length\PYZhy{}1 vector of ones}
 \PY{n}{x}\PY{o}{.}\PY{n}{dtype}             \PY{c+c1}{\PYZsh{} default type: float64}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{72}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-dtype('float64')
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \emph{Case 2:} data type depends on input data:
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{73}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Argument is an integer}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
-\PY{n}{x}\PY{o}{.}\PY{n}{dtype}             \PY{c+c1}{\PYZsh{} data type is np.int64 (on most platforms)}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{73}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-dtype('int64')
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{74}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Argument is a float}
-\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{5.0}\PY{p}{)}
-\PY{n}{x}\PY{o}{.}\PY{n}{dtype}             \PY{c+c1}{\PYZsh{} data type is np.float64}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -2300,10 +2298,44 @@ dtype('float64')
 \end{Verbatim}
 \end{tcolorbox}
         
-    \emph{Case 3:} data type determined to accommodate result
+    \emph{Case 2:} data type depends on input data:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{75}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Argument is an integer}
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\PY{n}{x}\PY{o}{.}\PY{n}{dtype}             \PY{c+c1}{\PYZsh{} data type is np.int64 (on most platforms)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{75}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+dtype('int64')
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{76}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Argument is a float}
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{5.0}\PY{p}{)}
+\PY{n}{x}\PY{o}{.}\PY{n}{dtype}             \PY{c+c1}{\PYZsh{} data type is np.float64}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{76}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+dtype('float64')
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \emph{Case 3:} data type determined to accommodate result
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{77}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Add two integer arrays}
 \PY{n}{arr1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
@@ -2319,14 +2351,14 @@ dtype('float64')
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{75}{\boxspacing}
+\prompt{Out}{outcolor}{77}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('int64')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{76}{\boxspacing}
+\prompt{In}{incolor}{78}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Add integer to floating\PYZhy{}point array}
 \PY{n}{arr1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
@@ -2342,7 +2374,7 @@ dtype('int64')
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{76}{\boxspacing}
+\prompt{Out}{outcolor}{78}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('float64')
 \end{Verbatim}
@@ -2432,7 +2464,7 @@ where other data types need to be used:
 \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{77}{\boxspacing}
+\prompt{In}{incolor}{79}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -2443,7 +2475,7 @@ where other data types need to be used:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{77}{\boxspacing}
+\prompt{Out}{outcolor}{79}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([1.], dtype=float16)
 \end{Verbatim}
@@ -2453,7 +2485,7 @@ array([1.], dtype=float16)
 data:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{78}{\boxspacing}
+\prompt{In}{incolor}{80}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{lst} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{lst}\PY{p}{)}       \PY{c+c1}{\PYZsh{} given list of integers, creates integer array}
@@ -2462,14 +2494,14 @@ data:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{78}{\boxspacing}
+\prompt{Out}{outcolor}{80}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('int64')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{79}{\boxspacing}
+\prompt{In}{incolor}{81}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} override inferred data type:}
 \PY{c+c1}{\PYZsh{} created floating\PYZhy{}point array even if integers were given}
@@ -2479,14 +2511,14 @@ dtype('int64')
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{79}{\boxspacing}
+\prompt{Out}{outcolor}{81}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('float64')
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{80}{\boxspacing}
+\prompt{In}{incolor}{82}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} override inferred data type:}
 \PY{c+c1}{\PYZsh{} created integer array even if floats were given,}
@@ -2503,7 +2535,7 @@ dtype('float64')
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{80}{\boxspacing}
+\prompt{Out}{outcolor}{82}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 dtype('int64')
 \end{Verbatim}
@@ -2531,7 +2563,7 @@ one-dimensional block in memory. This can be done in two ways:
 \end{enumerate}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{81}{\boxspacing}
+\prompt{In}{incolor}{83}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -2541,7 +2573,7 @@ one-dimensional block in memory. This can be done in two ways:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{81}{\boxspacing}
+\prompt{Out}{outcolor}{83}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [3, 4, 5]])
@@ -2549,7 +2581,7 @@ array([[0, 1, 2],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{82}{\boxspacing}
+\prompt{In}{incolor}{84}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} The matrix mat is stored in memory like this}
 \PY{n}{mat}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -2557,14 +2589,14 @@ array([[0, 1, 2],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{82}{\boxspacing}
+\prompt{Out}{outcolor}{84}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 1, 2, 3, 4, 5])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{83}{\boxspacing}
+\prompt{In}{incolor}{85}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} ... and NOT like this}
 \PY{n}{mat}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}      \PY{c+c1}{\PYZsh{} use order=\PYZsq{}F\PYZsq{} to convert to column\PYZhy{}major storage order}
@@ -2572,7 +2604,7 @@ array([0, 1, 2, 3, 4, 5])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{83}{\boxspacing}
+\prompt{Out}{outcolor}{85}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0, 3, 1, 4, 2, 5])
 \end{Verbatim}
@@ -2583,7 +2615,7 @@ you should remember that you never want to perform on non-contiguous
 blocks of memory. This can have devastating effects on performance!
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{84}{\boxspacing}
+\prompt{In}{incolor}{86}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Avoid operations on non\PYZhy{}contiguous array sections such as}
 \PY{n}{mat}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
@@ -2594,7 +2626,7 @@ blocks of memory. This can have devastating effects on performance!
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{84}{\boxspacing}
+\prompt{Out}{outcolor}{86}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([3, 4, 5])
 \end{Verbatim}
@@ -2870,7 +2902,7 @@ can be applied by inserting an additional axis in either \texttt{a} or
 \texttt{b} as needed.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{85}{\boxspacing}
+\prompt{In}{incolor}{87}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Define problem dimensions}
 \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{2}
@@ -2884,7 +2916,7 @@ can be applied by inserting an additional axis in either \texttt{a} or
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{85}{\boxspacing}
+\prompt{Out}{outcolor}{87}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 2],
        [3, 4, 5]])
@@ -2892,7 +2924,7 @@ array([[0, 1, 2],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{86}{\boxspacing}
+\prompt{In}{incolor}{88}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Task 1}
 \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
@@ -2906,7 +2938,7 @@ array([[0, 1, 2],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{86}{\boxspacing}
+\prompt{Out}{outcolor}{88}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[  0,  10,  40],
        [  0,  40, 100]])
@@ -2914,7 +2946,7 @@ array([[  0,  10,  40],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{87}{\boxspacing}
+\prompt{In}{incolor}{89}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Task 2}
 \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
@@ -2925,7 +2957,7 @@ array([[  0,  10,  40],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{87}{\boxspacing}
+\prompt{Out}{outcolor}{89}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 0,  0,  0],
        [30, 40, 50]])
@@ -2933,7 +2965,7 @@ array([[ 0,  0,  0],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{88}{\boxspacing}
+\prompt{In}{incolor}{90}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Task 3}
 \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{o}{*}\PY{n}{m}\PY{o}{*}\PY{n}{k}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
@@ -2942,7 +2974,7 @@ array([[ 0,  0,  0],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{88}{\boxspacing}
+\prompt{Out}{outcolor}{90}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[[  0,  10,  20],
         [ 30,  40,  50],
@@ -2957,7 +2989,7 @@ array([[[  0,  10,  20],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{89}{\boxspacing}
+\prompt{In}{incolor}{91}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Need to insert new axis inbetween existing axes in a}
 \PY{n}{c} \PY{o}{=} \PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]} \PY{o}{*} \PY{n}{b}
@@ -2966,7 +2998,7 @@ array([[[  0,  10,  20],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{89}{\boxspacing}
+\prompt{Out}{outcolor}{91}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[[   0,   10,   40],
         [   0,   40,  100],
@@ -2984,7 +3016,7 @@ array([[[   0,   10,   40],
 \subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{90}{\boxspacing}
+\prompt{In}{incolor}{92}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -3003,7 +3035,7 @@ array([[[   0,   10,   40],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{90}{\boxspacing}
+\prompt{Out}{outcolor}{92}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[False,  True,  True,  True,  True, False, False, False,  True],
        [ True,  True,  True, False, False, False,  True,  True,  True],
@@ -3026,7 +3058,7 @@ However, arithmetic operations automatically interpret \texttt{False} as
 the number of elements that are \texttt{True}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{91}{\boxspacing}
+\prompt{In}{incolor}{93}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Count number of elements}
 \PY{n}{nmask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mask}\PY{p}{)}
@@ -3035,7 +3067,7 @@ the number of elements that are \texttt{True}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{91}{\boxspacing}
+\prompt{Out}{outcolor}{93}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 41
 \end{Verbatim}
@@ -3044,7 +3076,7 @@ the number of elements that are \texttt{True}:
     Finally, we compute the average as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{92}{\boxspacing}
+\prompt{In}{incolor}{94}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Compute average of elements selected by mask}
 \PY{c+c1}{\PYZsh{} We do this by summing over selected elements and}
@@ -3055,7 +3087,7 @@ the number of elements that are \texttt{True}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{92}{\boxspacing}
+\prompt{Out}{outcolor}{94}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2.4634146341463414
 \end{Verbatim}
@@ -3065,7 +3097,7 @@ the number of elements that are \texttt{True}:
 \subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{93}{\boxspacing}
+\prompt{In}{incolor}{95}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} 
 
@@ -3091,7 +3123,7 @@ the number of elements that are \texttt{True}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{93}{\boxspacing}
+\prompt{Out}{outcolor}{95}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[1, 0, 0, 0, 0],
        [0, 2, 0, 0, 0],
@@ -3105,14 +3137,14 @@ array([[1, 0, 0, 0, 0],
 function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{94}{\boxspacing}
+\prompt{In}{incolor}{96}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{94}{\boxspacing}
+\prompt{Out}{outcolor}{96}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[1, 0, 0, 0, 0],
        [0, 2, 0, 0, 0],
@@ -3126,7 +3158,7 @@ array([[1, 0, 0, 0, 0],
 longer identical:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{95}{\boxspacing}
+\prompt{In}{incolor}{97}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Task 2: set upper diagonal elements of non\PYZhy{}square matrix}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
@@ -3151,7 +3183,7 @@ longer identical:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{95}{\boxspacing}
+\prompt{Out}{outcolor}{97}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 0, 0, 0],
        [0, 0, 2, 0, 0],
@@ -3166,7 +3198,7 @@ the cases \texttt{n\ \textgreater{}\ m}, \texttt{n\ =\ m} and
 \texttt{m\ \textgreater{}\ n}.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{96}{\boxspacing}
+\prompt{In}{incolor}{98}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -3198,7 +3230,7 @@ the cases \texttt{n\ \textgreater{}\ m}, \texttt{n\ =\ m} and
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{96}{\boxspacing}
+\prompt{Out}{outcolor}{98}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 0, 0, 0],
        [0, 0, 2, 0, 0],
@@ -3215,7 +3247,7 @@ example, for \texttt{m\ =\ n\ =\ 5}, we can create a similar matrix as
 follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{97}{\boxspacing}
+\prompt{In}{incolor}{99}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
 \PY{c+c1}{\PYZsh{} the k argument tells diag() which diagonal to manipulate.}
@@ -3226,7 +3258,7 @@ follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{97}{\boxspacing}
+\prompt{Out}{outcolor}{99}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0, 1, 0, 0, 0],
        [0, 0, 2, 0, 0],
@@ -3240,7 +3272,7 @@ array([[0, 1, 0, 0, 0],
 \subsection{Solution for exercise 4}\label{solution-for-exercise-4}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{98}{\boxspacing}
+\prompt{In}{incolor}{100}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{4}
 \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
@@ -3256,7 +3288,7 @@ array([[0, 1, 0, 0, 0],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{98}{\boxspacing}
+\prompt{Out}{outcolor}{100}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ True,  True,  True,  True,  True],
        [False,  True,  True,  True,  True],
@@ -3266,7 +3298,7 @@ array([[ True,  True,  True,  True,  True],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{99}{\boxspacing}
+\prompt{In}{incolor}{101}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create matrix of zeros}
 \PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
@@ -3284,7 +3316,7 @@ array([[ True,  True,  True,  True,  True],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{99}{\boxspacing}
+\prompt{Out}{outcolor}{101}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 1,  2,  3,  4,  5],
        [ 0,  6,  7,  8,  9],
@@ -3303,7 +3335,7 @@ the transposed matrix using the same approach as above, and then
 transpose it to get the final matrix.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{100}{\boxspacing}
+\prompt{In}{incolor}{102}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} dimensions of TRANSPOSED matrix}
 \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{5}
@@ -3321,7 +3353,7 @@ transpose it to get the final matrix.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{100}{\boxspacing}
+\prompt{Out}{outcolor}{102}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ True, False, False, False],
        [ True,  True, False, False],
@@ -3332,7 +3364,7 @@ array([[ True, False, False, False],
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{101}{\boxspacing}
+\prompt{In}{incolor}{103}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create matrix of zeros}
 \PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
@@ -3352,7 +3384,7 @@ array([[ True, False, False, False],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{101}{\boxspacing}
+\prompt{Out}{outcolor}{103}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 1,  2,  4,  7, 11],
        [ 0,  3,  5,  8, 12],
@@ -3365,7 +3397,7 @@ array([[ 1,  2,  4,  7, 11],
 but that does not help us practice using NumPy:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{102}{\boxspacing}
+\prompt{In}{incolor}{104}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{4}
 \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
@@ -3391,7 +3423,7 @@ but that does not help us practice using NumPy:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{102}{\boxspacing}
+\prompt{Out}{outcolor}{104}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 1,  2,  4,  7, 11],
        [ 0,  3,  5,  8, 12],
@@ -3406,7 +3438,7 @@ array([[ 1,  2,  4,  7, 11],
 One implementation of \texttt{rowmeans()} could look as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{103}{\boxspacing}
+\prompt{In}{incolor}{105}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -3439,7 +3471,7 @@ One implementation of \texttt{rowmeans()} could look as follows:
     We create the array given in the exercise to test our function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{104}{\boxspacing}
+\prompt{In}{incolor}{106}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{5}
 \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{8}
@@ -3451,7 +3483,7 @@ One implementation of \texttt{rowmeans()} could look as follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{104}{\boxspacing}
+\prompt{Out}{outcolor}{106}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[nan,  1.,  2.,  3.,  4., nan,  6.,  7.],
        [ 8.,  9., nan, 11., 12., 13., 14., nan],
@@ -3465,7 +3497,7 @@ array([[nan,  1.,  2.,  3.,  4., nan,  6.,  7.],
 `nan'.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{105}{\boxspacing}
+\prompt{In}{incolor}{107}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} call rowmeans() using test data}
 \PY{n}{means} \PY{o}{=} \PY{n}{rowmeans}\PY{p}{(}\PY{n}{a}\PY{p}{)}
@@ -3474,7 +3506,7 @@ array([[nan,  1.,  2.,  3.,  4., nan,  6.,  7.],
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{105}{\boxspacing}
+\prompt{Out}{outcolor}{107}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([ 3.83333333, 11.16666667, 19.42857143, 27.5       , 35.57142857])
 \end{Verbatim}
@@ -3484,10 +3516,10 @@ array([ 3.83333333, 11.16666667, 19.42857143, 27.5       , 35.57142857])
 which implements the same functionality. Since we are computing row
 averages (and thus compute averages \emph{across} columns), we need to
 pass in the argument \texttt{axis\ =\ 1}: axes are numbered starting at
-0, so \texttt{axis\ =\ 1} refers to the second axis, \ie the columns.
+0, so \texttt{axis\ =\ 1} refers to the second axis, i.e.~the columns.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{106}{\boxspacing}
+\prompt{In}{incolor}{108}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{means2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
 \PY{n}{means2} 
@@ -3495,7 +3527,7 @@ pass in the argument \texttt{axis\ =\ 1}: axes are numbered starting at
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{106}{\boxspacing}
+\prompt{Out}{outcolor}{108}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([ 3.83333333, 11.16666667, 19.42857143, 27.5       , 35.57142857])
 \end{Verbatim}
@@ -3507,14 +3539,14 @@ absolute difference is below some tolerance level, in this case
 this is the case for \emph{all} elements.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{107}{\boxspacing}
+\prompt{In}{incolor}{109}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{means} \PY{o}{\PYZhy{}} \PY{n}{means2}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1.0e\PYZhy{}8}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{107}{\boxspacing}
+\prompt{Out}{outcolor}{109}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 True
 \end{Verbatim}
@@ -3530,25 +3562,25 @@ Finally, we use the \%timeit magic to benchmark our implementation
 against NumPy's.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{108}{\boxspacing}
+\prompt{In}{incolor}{110}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{o}{\PYZpc{}}\PY{k}{timeit} rowmeans(a)
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-52.1 µs ± 263 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+52.6 µs ± 850 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{109}{\boxspacing}
+\prompt{In}{incolor}{111}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{o}{\PYZpc{}}\PY{k}{timeit} np.nanmean(a, axis=1)
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-26.9 µs ± 504 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+26.1 µs ± 154 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     You may be surprised that \texttt{np.nanmean()} is only twice as fast as
@@ -3568,7 +3600,7 @@ common grid of x-values. Each row of this matrix represents a different
 polynomial parametrisation.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{110}{\boxspacing}
+\prompt{In}{incolor}{112}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
@@ -3594,7 +3626,7 @@ this code, so it is convenient to encapsulate it in a function instead
 of copy-pasting it again and again!
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{111}{\boxspacing}
+\prompt{In}{incolor}{113}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} function to plot quadratic polynomials}
 \PY{k}{def} \PY{n+nf}{plot\PYZus{}quad}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{pvalues}\PY{p}{)}\PY{p}{:}
@@ -3616,7 +3648,7 @@ of copy-pasting it again and again!
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{112}{\boxspacing}
+\prompt{In}{incolor}{114}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Call plotting routine, passing x\PYZhy{}values and y\PYZhy{}values}
 \PY{c+c1}{\PYZsh{} as arguments}
@@ -3625,7 +3657,7 @@ of copy-pasting it again and again!
 \end{tcolorbox}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit6_files/unit6_193_0.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit6_files/unit6_197_0.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -3638,7 +3670,7 @@ of indices, each index storing the location of the maximum element in
 the corresponding row.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{113}{\boxspacing}
+\prompt{In}{incolor}{115}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Function to locate the maximum value in each row}
 \PY{k}{def} \PY{n+nf}{find\PYZus{}max}\PY{p}{(}\PY{n}{pvalues}\PY{p}{)}\PY{p}{:}
@@ -3667,7 +3699,7 @@ the corresponding row.
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{114}{\boxspacing}
+\prompt{In}{incolor}{116}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} use find\PYZus{}max() to locale indices of each row maximum}
 \PY{n}{ipmax} \PY{o}{=} \PY{n}{find\PYZus{}max}\PY{p}{(}\PY{n}{pvalues}\PY{p}{)}
@@ -3676,7 +3708,7 @@ the corresponding row.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{114}{\boxspacing}
+\prompt{Out}{outcolor}{116}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([12, 14, 15, 16, 18, 19, 20, 22, 23, 24])
 \end{Verbatim}
@@ -3686,7 +3718,7 @@ array([12, 14, 15, 16, 18, 19, 20, 22, 23, 24])
 the maxima to the \emph{same} plot.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{115}{\boxspacing}
+\prompt{In}{incolor}{117}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Recreate original plot from above}
 \PY{n}{plot\PYZus{}quad}\PY{p}{(}\PY{n}{xgrid}\PY{p}{,} \PY{n}{pvalues}\PY{p}{)}
@@ -3699,14 +3731,14 @@ the maxima to the \emph{same} plot.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{115}{\boxspacing}
+\prompt{Out}{outcolor}{117}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7fcc3c8d6a00>
+<matplotlib.legend.Legend at 0x7f41fbbe1df0>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit6_files/unit6_198_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit6_files/unit6_202_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -3718,7 +3750,7 @@ function. We need to pass the argument \texttt{axis\ =\ 1} as the
 maximum should be computed across all columns for any given row.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{116}{\boxspacing}
+\prompt{In}{incolor}{118}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Find row maxima using np.argmax()}
 
@@ -3728,7 +3760,7 @@ maximum should be computed across all columns for any given row.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{116}{\boxspacing}
+\prompt{Out}{outcolor}{118}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([12, 14, 15, 16, 18, 19, 20, 22, 23, 24])
 \end{Verbatim}
@@ -3739,7 +3771,7 @@ identical. Since the values here are integers, we can directly compare
 them using \texttt{==}.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{117}{\boxspacing}
+\prompt{In}{incolor}{119}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Check that these are the same as what we computed above}
 \PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{ipmax} \PY{o}{==} \PY{n}{ipmax2}\PY{p}{)}
@@ -3747,7 +3779,7 @@ them using \texttt{==}.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{117}{\boxspacing}
+\prompt{Out}{outcolor}{119}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 True
 \end{Verbatim}
@@ -3757,7 +3789,7 @@ True
 NumPy version is approximately 100 times faster!
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{118}{\boxspacing}
+\prompt{In}{incolor}{120}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Time our manual implementation}
 \PY{o}{\PYZpc{}}\PY{k}{timeit} find\PYZus{}max(pvalues)
@@ -3765,11 +3797,11 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-124 µs ± 2.01 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+124 µs ± 2.16 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{119}{\boxspacing}
+\prompt{In}{incolor}{121}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Time NumPy\PYZsq{}s implementation}
 \PY{o}{\PYZpc{}}\PY{k}{timeit} np.argmax(pvalues, axis=1)
@@ -3777,7 +3809,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.42 µs ± 5.76 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+1.47 µs ± 8.52 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
 
