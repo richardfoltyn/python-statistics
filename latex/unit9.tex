@@ -157,7 +157,7 @@
     \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
     % Document parameters
     % Document title
-    \newcommand*{\mytitle}{Unit 9: Input and output}
+    \newcommand*{\mytitle}{Unit 9: Data input and output}
 
     \input{overrides-post}
     
@@ -384,14 +384,14 @@
     
 
     
-    \hypertarget{input-and-output}{%
-\section{Input and output}\label{input-and-output}}
+    \hypertarget{data-input-and-output}{%
+\section{Data input and output}\label{data-input-and-output}}
 
 In this unit we discuss input and output, or I/O for short. We focus
 exclusively on I/O routines used to load and store data from files that
 are relevant for numerical computation and data analysis.
 
-\hypertarget{io-with-numpy}{%
+    \hypertarget{io-with-numpy}{%
 \subsection{I/O with NumPy}\label{io-with-numpy}}
 
 We have already encountered the most basic, and probably most frequently
@@ -403,12 +403,14 @@ important I/O functions to process text data are:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{np.loadtxt()}: load data from a text file.
+  \href{https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html}{\texttt{np.loadtxt()}}:
+  load data from a text file.
 \item
-  \texttt{np.genfromtxt()}: load data from a text file and handle
-  missing data.
+  \href{https://numpy.org/doc/stable/reference/generated/numpy.genfromtxt.html}{\texttt{np.genfromtxt()}}:
+  load data from a text file and handle missing data.
 \item
-  \texttt{np.savetxt()}: save a NumPy array to a text file.
+  \href{https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html}{\texttt{np.savetxt()}}:
+  save a NumPy array to a text file.
 \end{itemize}
 
 There are a few other I/O functions in NumPy, for example to write
@@ -656,7 +658,7 @@ array([('"University of Strathclyde"', '"Scotland"', 1964, 22640,   -1, 3200,
         
     While the CSV file can now be processed without errors, you see that
 NumPy does not remove the double quotes around strings such as the
-university name. Instead of trying to fix this, it is advisable to just
+university names. Instead of trying to fix this, it is advisable to just
 use pandas to load this kind of data which handles all these problems
 automatically. We examine this alternative below.
 
@@ -689,7 +691,7 @@ counterpart to \texttt{np.loadtxt()} which is called
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Saving CSV file to /tmp/tmp7ojr0obz/data.csv
+Saving CSV file to /tmp/tmpdpfcki9d/data.csv
     \end{Verbatim}
 
     The above code creates a \(10 \times 5\) matrix of random floats and
@@ -709,12 +711,23 @@ as follows:
   permissions in any particular folder.
 \item
   We work around this issue by asking the Python runtime to create a
-  writable temporary directory \emph{for the system where the code is
+  writeable temporary directory \emph{for the system where the code is
   being run}.
 \item
-  We use the routines in the \texttt{tempfile} module to create this
-  temporary directory.
+  We use the routines in the
+  \href{https://docs.python.org/3/library/tempfile.html}{\texttt{tempfile}}
+  module to create this temporary directory.
 \end{itemize}
+
+Of course, on your own computer you do not need to use a temporary
+directory, but can instead use any directory where your user has write
+permissions. For example, on Windows you could use something along the
+lines of
+
+\begin{verbatim}
+file = 'C:/Users/Path/to/file.txt'
+np.savetxt(file, data, delimiter=';', fmt='%8.5f')
+\end{verbatim}
 
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -742,16 +755,21 @@ The most important routines are:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{read\_csv()}, \texttt{to\_csv()}: Read or write CSV text files
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html}{\texttt{read\_csv()}},
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html}{\texttt{to\_csv()}}:
+  Read or write CSV text files
 \item
-  \texttt{read\_fwf()}: Read data with fixed field widths, \ie~text
-  data that does not use delimiters to separate fields.
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_fwf.html}{\texttt{read\_fwf()}}:
+  Read data with fixed field widths, i.e.~text data that does not use
+  delimiters to separate fields.
 \item
-  \texttt{read\_excel()}, \texttt{to\_excel()}: Read or write Excel
-  spreadsheets
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html}{\texttt{read\_excel()}},
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_excel.html}{\texttt{to\_excel()}}:
+  Read or write Excel spreadsheets
 \item
-  \texttt{read\_stata()}, \texttt{to\_stata()}: Read or write Stata's
-  \texttt{.dta} files.
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_stata.html}{\texttt{read\_stata()}},
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_stata.html}{\texttt{to\_stata()}}:
+  Read or write Stata's \texttt{.dta} files.
 \end{itemize}
 
 For a complete list of I/O routines, see the
@@ -862,7 +880,7 @@ MS Excel files (or OpenDocument spreadsheets):
 
 Finally, we often encounter text files with fixed field widths, since
 this is a commonly used format in older applications (for example,
-fixed-width files are easy to create in Fortran). For example, the
+fixed-width files are easy to create in Fortran). To illustrate, the
 fixed-width variant of our FRED data looks like this:
 
 \begin{verbatim}
@@ -876,7 +894,7 @@ Year GDP    CPI  UNRATE
 
 You see that the column \texttt{Year} occupies the first 5 characters,
 the \texttt{GDP} column the next 7 characters, and so on. To read such
-files, the width (\ie~the number of characters) has to be explicitly
+files, the width (\ie the number of characters) has to be explicitly
 specified:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -912,11 +930,9 @@ number of characters to be used for each field.
 \subsection{Pickling}\label{pickling}}
 
 A wholly different approach to data I/O is taken by Python's built-in
-\texttt{pickle} module (see
-\href{https://docs.python.org/3/library/pickle.html}{official
-documentation}). Almost any Python object can be dumped into a binary
-file and read back using \texttt{pickle.dump()} and
-\texttt{pickle.load()}.
+\href{https://docs.python.org/3/library/pickle.html}{\texttt{pickle}}
+module. Almost any Python object can be dumped into a binary file and
+read back using \texttt{pickle.dump()} and \texttt{pickle.load()}.
 
 The big advantage over other methods is that hierarchies of objects are
 automatically supported. For example, we can pickle a list containing a
@@ -952,7 +968,7 @@ automatically supported. For example, we can pickle a list containing a
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Pickled data written to /tmp/tmp76ooporv/data.bin
+Pickled data written to /tmp/tmpk5h20em9/data.bin
     \end{Verbatim}
 
     We can then read back the data as follows:
@@ -984,8 +1000,9 @@ far:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  The built-in function \texttt{open()} is used to open files for
-  reading or writing.
+  The built-in function
+  \href{https://docs.python.org/3/library/functions.html\#open}{\texttt{open()}}
+  is used to open files for reading or writing.
 
   \begin{itemize}
   \tightlist
@@ -993,7 +1010,7 @@ far:
     The second argument indicates whether a file should be read-only,
     \texttt{r}, or writeable, \texttt{w}.
   \item
-    The \texttt{b} sets the file mode to \emph{binary}, \ie~its
+    The \texttt{b} sets the file mode to \emph{binary}, \ie its
     contents are \emph{not} human-readable text.
   \end{itemize}
 \item
@@ -1033,7 +1050,7 @@ So why not always use \texttt{pickle} to load and store data?
 
 \texttt{pickle} is great for internal use when you do not need to
 exchange data with others and have complete control over your computing
-environment (\ie~you can enforce a specific version of Python and the
+environment (\ie you can enforce a specific version of Python and the
 libraries you are using). For anything else, you should avoid it.
 
 
