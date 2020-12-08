@@ -392,11 +392,9 @@
 
 So far, we have encountered NumPy arrays as the only way to store
 numerical data (we mostly ignored the built-in containers provided
-directly in Python).
-
-However, while NumPy arrays are great for storing homogenous data
-without any particular structure, they are somewhat limited when we want
-to use them for high-level data analysis.
+directly in Python). However, while NumPy arrays are great for storing
+homogenous data without any particular structure, they are somewhat
+limited when we want to use them for high-level data analysis.
 
 For example, we usually want to process data sets with
 
@@ -485,8 +483,8 @@ analysis, in particular since everything is stored as a generic
   little reason to use structured arrays.
 \end{itemize}
 
-\emph{Pandas} was created to offer more versatile data structures that
-are straightforward to use for storing, manipulating and analysing
+Pandas was created to offer more versatile data structures that are
+straightforward to use for storing, manipulating and analysing
 heterogeneous data:
 
 \begin{enumerate}
@@ -801,7 +799,7 @@ max     1.000000
         
     Note that this automatically ignores the columns \texttt{Institution}
 and \texttt{Country} as they contain strings and computing the mean,
-\etc of a string variable does not make sense.
+etc. of a string variable does not make sense.
 
 To see low-level information about the data type used in each column, we
 call \texttt{info()}:
@@ -996,7 +994,7 @@ manipulate indices are:
   as indices, discarding the current index.
 \item
   \texttt{reset\_index()}: resets the index to its default value, a
-  sequence increasing integers starting at 0.
+  sequence of increasing integers starting at 0.
 \end{itemize}
 
 Both methods return a new \texttt{DataFrame} and leave the original
@@ -1088,7 +1086,8 @@ We can reset the index to its default integer values using the
 \prompt{In}{incolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Reset index labels to default value (integers 0, 1, 2, ...)}
-\PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}       \PY{c+c1}{\PYZsh{} print first 3 rows of new DataFrame}
+\PY{n}{df\PYZus{}new} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}          \PY{c+c1}{\PYZsh{} print first 3 rows of new DataFrame}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1417,7 +1416,7 @@ One big advantage over NumPy is that missing values (represented by
 Applying aggregation functions to the entire \texttt{DataFrame} is
 similar to what we can do with NumPy. The added flexibility of pandas
 becomes obvious once we want to apply these functions to subsets of
-data, \ie groups, which we can define based on values or index labels.
+data, i.e.~groups, which we can define based on values or index labels.
 
 For example, we can easily group our universities by country:
 
@@ -1639,7 +1638,7 @@ pandas:
 
 \PY{c+c1}{\PYZsh{} set institution as label so they automatically show up in plot}
 \PY{n}{df2} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{n}{keys}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
-\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}        \PY{c+c1}{\PYZsh{} same as df2[\PYZsq{}Students\PYZsq{}].plot.bar()}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1683,7 +1682,7 @@ above.
 
 To plot timeseries-like data, we can use the \texttt{plot()} method,
 which optionally accepts arguments to specify which columns should be
-used for the x-axis and which for the y-axis:
+used for the \(x\)-axis and which for the \(y\)-axis:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{34}{\boxspacing}
@@ -1802,15 +1801,1063 @@ NumPy arrays.
 \hypertarget{exercises}{%
 \section{Exercises}\label{exercises}}
 
-TBA
+The following exercises use data files from the \texttt{data/} folder.
+
+    \hypertarget{exercise-1-basic-data-manipulations}{%
+\subsection{Exercise 1: Basic data
+manipulations}\label{exercise-1-basic-data-manipulations}}
+
+In this exercise, we will perform some basic data manipulation and plot
+the results.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Load the CSV file \texttt{FRED\_QTR.csv} (using
+  \texttt{sep=\textquotesingle{},\textquotesingle{}}). Set the columns
+  \texttt{Year} and \texttt{Quarter} as (joint) indices.
+
+  \emph{Hint:} You can do this by specifying these column names in the
+  \texttt{index\_col} argument of
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html}{\texttt{read\_csv()}}.
+  Alternatively, you can cell
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.set_index.html}{\texttt{set\_index()}}
+  once you have loaded the data.
+\item
+  This data comes at a quarterly frequency. Convert it to annual values
+  by computing the average values for each year.
+
+  \emph{Hint:} Group the data by \texttt{Year} using the
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html}{\texttt{groupby()}}
+  function and compute the mean on the grouped data.
+\item
+  Compute two new variables from the annualised data and add them to the
+  \texttt{DataFrame}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Inflation}, defined as the growth rate of \texttt{CPI}
+    (consumer price index)
+  \item
+    \texttt{GDP\_growth}, defined as the growth rate of \texttt{GDP}
+  \end{itemize}
+\item
+  Drop all rows with missing values (these show up as \texttt{NaN}).
+
+  \emph{Hint:} There is no need to manually filter out \texttt{NaN}
+  values, you can use the
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html}{\texttt{dropna()}}
+  method instead.
+\item
+  Plot the columns \texttt{GDP\_growth}, \texttt{Inflation},
+  \texttt{UNRATE} (unemployment rate) and \texttt{LFPART} (labour force
+  participation) using the pandas plotting routines. Use the option
+  \texttt{subplots=True} and \texttt{layout=(2,2)} to create a
+  \(2\times2\) grid. See the documentation for
+  \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html\#pandas.DataFrame.plot}{\texttt{plot()}}
+  for details.
+\end{enumerate}
+
+    \hypertarget{exercise-2-decade-averages}{%
+\subsection{Exercise 2: Decade
+averages}\label{exercise-2-decade-averages}}
+
+Load the FRED data from the CSV file \texttt{FRED\_QTR.csv} (using
+\texttt{sep=\textquotesingle{},\textquotesingle{}}) and perform the
+following tasks:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Compute the quarterly GDP growth rate and inflation, similar to what
+  you did in the previous exercise.
+\item
+  Add the column \texttt{Decade} which contains the decade for every
+  observation. Use 1940 to code the 40s, 1950 for the 50s, etc.
+\item
+  We want to retain only observations for decades for which all 40
+  quarters are present:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Group the data by \texttt{Decade} and count the number of
+    observations using
+    \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.count.html}{\texttt{count()}}.
+  \item
+    A decade should be kept in the data set only if \emph{all} variables
+    have the full 40 observations.
+  \item
+    Drop all observations for which this is not the case.
+  \end{enumerate}
+\item
+  With the remaining observations, compute the decade averages for
+  quarterly GDP growth, inflation and the unemployment rate
+  (\texttt{UNRATE}). Annualise the GDP growth and inflation figures by
+  multiplying them by 4.
+\item
+  Create a bar chart that plots these three variables by decade.
+\end{enumerate}
+
+    \hypertarget{exercise-3-group-averages}{%
+\subsection{Exercise 3: Group
+averages}\label{exercise-3-group-averages}}
+
+Load the universities data from the CSV file \texttt{universities.csv}
+(using \texttt{sep=\textquotesingle{};\textquotesingle{}}) and perform
+the following tasks:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Group the data by Russell Group membership using the indicator
+  variable \texttt{Russell}. For each group, compute the averages of the
+  following ratios using
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.GroupBy.apply.html}{\texttt{apply()}}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The ratio of academic staff (\texttt{Staff}) to students
+    (\texttt{Students})
+  \item
+    The ratio of administrative staff (\texttt{Admin}) to students.
+  \item
+    The budget (\texttt{Budget}) per student in pounds.
+  \end{itemize}
+
+  Additionally, compute the number of universities is each group.
+\item
+  Repeat the task using a different approach:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Compute the above ratios and add them as new columns to the initial
+    \texttt{DataFrame}.
+  \item
+    Group the data by Russell Group membership.
+  \item
+    Compute the mean of each ratio using
+    \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.GroupBy.mean.html}{\texttt{mean()}}.
+  \item
+    Compute the number of universities in each group using
+    \texttt{count()}, and store the result in the column \texttt{Count}
+    in the \texttt{DataFrame} you obtained in the previous step.
+  \end{enumerate}
+\item
+  Create a bar chart, plotting the value for universities in and outside
+  of the Russell Group for each of the four statistics computed above.
+\end{enumerate}
+
+    \hypertarget{exercise-4-grouping-by-multiple-dimensions}{%
+\subsection{Exercise 4: Grouping by multiple
+dimensions}\label{exercise-4-grouping-by-multiple-dimensions}}
+
+Load the universities data from the CSV file \texttt{universities.csv}
+(using \texttt{sep=\textquotesingle{};\textquotesingle{}}) and perform
+the following tasks:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Create an indicator \texttt{Pre1800} which is \texttt{True} for
+  universities founded before the year 1800.
+\item
+  Group the data by \texttt{Country} and the value of \texttt{Pre1800}.
+
+  \emph{Hint:} You need to pass a list of column names to
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html}{\texttt{groupby()}}.
+\item
+  Compute the number of universities for each combination of
+  \texttt{(Country,\ Pre1800)}.
+\item
+  Create a bar chart showing the number of pre- and post-1800
+  universities by country (\ie create four groups of bars, each group
+  showing one bar for pre- and one for post-1800).
+\item
+  Create a bar chart showing the number of universities by country by
+  pre- and post-1800 period (\ie create two groups of bars, each group
+  showing four bars, one for each country.)
+\end{enumerate}
+
+    \hypertarget{exercise-5-okuns-law-advanced}{%
+\subsection{Exercise 5: Okun's law
+(advanced)}\label{exercise-5-okuns-law-advanced}}
+
+In this exercise, we will estimate
+\href{https://en.wikipedia.org/wiki/Okun\%27s_law}{Okun's law} on
+quarterly data for each of the last eight decades.
+
+Okun's law relates unemployment to the output gap. One version (see
+Jones: Macroeconomics, 2019) is stated as follows: \[
+u_t - \overline{u}_{t} = 
+\alpha + \beta \left(\frac{Y_t - \overline{Y}_t}{\overline{Y}_t}\right)
+\] where \(u_t\) is the unemployment rate, \(\overline{u}_{t}\) is the
+natural rate of unemployment, \(Y_t\) is output (GDP) and
+\(\overline{Y}_{t}\) is potential output. We will refer to
+\(u_t-\overline{u}_{t}\) as ``cyclical unemployment'' and to the term in
+parenthesis on the right-hand side as the ``output gap.'' Okun's law
+says that the coefficient \(\beta\) is negative, \ie cyclical
+unemployment is higher when the output gap is low (negative) because the
+economy is in a recession.
+
+Load the FRED data from the CSV file \texttt{FRED\_QTR.csv} (using
+\texttt{sep=\textquotesingle{},\textquotesingle{}}) and perform the
+following tasks:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Compute the output gap and cyclical unemployment rate as defined above
+  and add them as columns to the \texttt{DataFrame}.
+\item
+  Assign each observation to a decade as you did in previous exercises.
+\item
+  Write a function \texttt{regress\_okun()} which accepts a
+  \texttt{DataFrame} containing a decade-spefic sub-sample as the only
+  argument, and estimates the coefficients \(\alpha\) (the intercept)
+  and \(\beta\) (the slope) of the above regression equation.
+
+  This function should return a \texttt{DataFrame} of a single row and
+  two columns which store the intercept and slope.
+
+  \emph{Hint:} Use NumPy's
+  \href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html}{\texttt{lstsq()}}
+  to perform the regression. To regress the dependent variable
+  \texttt{y} on regressors \texttt{X}, you need to call
+  \texttt{lstsq(X,\ y)}. To include the intercept, you will manually
+  have to create \texttt{X} such that the first column contains only
+  ones.
+\item
+  Group the data by decade and call the
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.GroupBy.apply.html}{\texttt{apply()}}
+  method, passing \texttt{regress\_okun} you wrote as the argument.
+\item
+  Plot your results: for each decade, create a scatter plot of the raw
+  data and overlay it with the regression line you estimated.
+\end{enumerate}
 
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{solutions}{%
 \section{Solutions}\label{solutions}}
 
-TBA
+These solutions illustrate \emph{one} possible way to solve the
+exercises. Pandas is extremely flexible (maybe too flexible) and allows
+us to perform these tasks in many different ways, so your implementation
+might look very different.
 
+    \hypertarget{solution-for-exercise-1}{%
+\subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+
+One possible implementation looks as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{38}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{n}{filepath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/FRED\PYZus{}QTR.csv}\PY{l+s+s1}{\PYZsq{}}
+
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quarter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Alternatively, set index columns later}
+\PY{c+c1}{\PYZsh{} df = pd.read\PYZus{}csv(filepath, sep=\PYZsq{},\PYZsq{})}
+\PY{c+c1}{\PYZsh{} df.set\PYZus{}index(keys=[\PYZsq{}Year\PYZsq{}, \PYZsq{}Quarter\PYZsq{}], inplace=True)}
+
+\PY{c+c1}{\PYZsh{} Convert to annual frequency}
+\PY{c+c1}{\PYZsh{} Group by year}
+\PY{n}{grp} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Compute annual data as mean of quarterly values}
+\PY{n}{df\PYZus{}year} \PY{o}{=} \PY{n}{grp}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Alternative ways to perform the same aggregation:}
+\PY{c+c1}{\PYZsh{} df\PYZus{}year = grp.agg(\PYZsq{}mean\PYZsq{})}
+\PY{c+c1}{\PYZsh{} df\PYZus{}year = grp.agg(np.mean)}
+
+\PY{c+c1}{\PYZsh{} Compute CPI and GDP growth rates (in percent)}
+\PY{n}{df\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CPI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{df\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CPI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{100.0}
+\PY{n}{df\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{df\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{100.0}
+
+\PY{c+c1}{\PYZsh{} Drop all rows that contain any NaNs}
+\PY{n}{df\PYZus{}year} \PY{o}{=} \PY{n}{df\PYZus{}year}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Columns to plot}
+\PY{n}{varnames} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNRATE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LFPART}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{df\PYZus{}year}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{varnames}\PY{p}{,} \PY{n}{subplots}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}  
+                  \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+                
+\PY{c+c1}{\PYZsh{} Alternatively, we can call plot() directly, which}
+\PY{c+c1}{\PYZsh{} defaults to generating a line plot:}
+\PY{c+c1}{\PYZsh{}}
+\PY{c+c1}{\PYZsh{} df\PYZus{}year.plot(y=varnames, subplots=True, layout=(2, 2),  }
+\PY{c+c1}{\PYZsh{}              sharex=True, figsize=(10, 10))}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{38}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[<AxesSubplot:xlabel='Year'>, <AxesSubplot:xlabel='Year'>],
+       [<AxesSubplot:xlabel='Year'>, <AxesSubplot:xlabel='Year'>]],
+      dtype=object)
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_85_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    A few comments:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  We can set the index column when loading a CSV file by passing the
+  column names as \texttt{index\_col}:
+
+\begin{verbatim}
+df = pd.read_csv(filepath, sep=',', index_col=['Year', 'Quarter'])
+\end{verbatim}
+
+  Alternatively, we can first load the CSV file and set the index later:
+
+\begin{verbatim}
+df = pd.read_csv(filepath, sep=',')
+df.set_index(keys=['Year', 'Quarter'], inplace=True)
+\end{verbatim}
+\item
+  There are several ways to compute the means of grouped data:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    We can call \texttt{mean()} on the group object directly:
+
+\begin{verbatim}
+df_year = grp.mean()
+\end{verbatim}
+  \item
+    Alternatively, we can call \texttt{agg()} and pass it the
+    aggregation routine that should be applied:
+
+\begin{verbatim}
+df_year = grp.agg('mean')
+df_year = grp.agg(np.mean)
+\end{verbatim}
+
+    Here we again have multiple options: pandas understands
+    \texttt{\textquotesingle{}mean\textquotesingle{}} if passed as a
+    string (which might not be the case for some other functions), or we
+    pass an actual function such as \texttt{np.mean}.
+  \end{enumerate}
+\item
+  The easiest way to compute differences between adjacent rows is to use
+  the
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.diff.html}{\texttt{diff()}}
+  method, which returns \(x_t - x_{t-1}\). Pandas then automatically
+  matches the correct values and sets the first observation to
+  \texttt{NaN} as there is no preceding value to compute the difference.
+
+  To compute a growth rate \((x_t - x_{t-1})/x_{t-1}\), we additionally
+  need to lag a variable to get the correct period in the denominator.
+  In pandas this is achieved using the
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.shift.html}{\texttt{shift()}}
+  method (which defaults to shifting by 1 period).
+\end{enumerate}
+
+    \hypertarget{solution-for-exercise-2}{%
+\subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+
+This time we do not specify \texttt{index\_cols} when reading in the CSV
+data since we need \texttt{Year} as a regular variable, not as the
+index.
+
+We then compute the decade for each year, using the fact that
+\texttt{//} performs division with integer truncation. As an example,
+1951 // 10 is 195, and (1951 // 10) * 10 = 1950, which we use to
+represent the 1950s.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{39}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
+
+\PY{n}{filepath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/FRED\PYZus{}QTR.csv}\PY{l+s+s1}{\PYZsq{}}
+
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Compute GDP growth rates, inflation (in percent)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{100.0}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CPI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CPI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{100.0}
+
+\PY{c+c1}{\PYZsh{} Assign decade using // to truncate division to}
+\PY{c+c1}{\PYZsh{} integer part. So we have 194x // 10 = 194 for any x.}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{10}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
+
+\PY{n}{grp} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Print number of obs. by decade}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{grp}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create series that contains True for each}
+\PY{c+c1}{\PYZsh{} decade if all variables have 40 observations.}
+\PY{n}{use\PYZus{}decade} \PY{o}{=} \PY{p}{(}\PY{n}{grp}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{40}\PY{p}{)}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Convert series to DataFrame, assign column name \PYZsq{}Keep\PYZsq{}}
+\PY{n}{df\PYZus{}decade} \PY{o}{=} \PY{n}{use\PYZus{}decade}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Keep}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} merge into original DataFrame, matching rows on value}
+\PY{c+c1}{\PYZsh{} of column \PYZsq{}Decade\PYZsq{}}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df\PYZus{}decade}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Restrict data only to rows which are part of complete decade}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Keep}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Drop \PYZsq{}Keep\PYZsq{} column}
+\PY{k}{del} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Keep}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+\PY{c+c1}{\PYZsh{} Compute average growth rates and unemployment rate by decade}
+\PY{n}{grp} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{n}{df\PYZus{}avg} \PY{o}{=} \PY{n}{grp}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNRATE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Convert to (approximate) annualised growth rates}
+\PY{n}{df\PYZus{}avg}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*}\PY{o}{=} \PY{l+m+mf}{4.0}
+\PY{n}{df\PYZus{}avg}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*}\PY{o}{=} \PY{l+m+mf}{4.0}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+        Year  Quarter  GDP  CPI  UNRATE  LFPART  GDPPOT  NROU  GDP\_growth  \textbackslash{}
+Decade
+1940       8        8    8    8       8       8       4     4           7
+1950      40       40   40   40      40      40      40    40          40
+1960      40       40   40   40      40      40      40    40          40
+1970      40       40   40   40      40      40      40    40          40
+1980      40       40   40   40      40      40      40    40          40
+1990      40       40   40   40      40      40      40    40          40
+2000      40       40   40   40      40      40      40    40          40
+2010      40       40   40   40      40      40      40    40          40
+
+        Inflation
+Decade
+1940            7
+1950           40
+1960           40
+1970           40
+1980           40
+1990           40
+2000           40
+2010           40
+    \end{Verbatim}
+
+    The tricky part is to keep only observations for ``complete'' decades
+that have 40 quarters of data. We see that this is not the case for the
+1940s:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  We group by \texttt{Decade} and use \texttt{count()} to determine the
+  number of non-missing observations for each variable.
+\item
+  \texttt{count()\ ==\ 40} evaluates to \texttt{True} for some variable
+  if it has 40 observations.
+\item
+  We then use
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.all.html}{\texttt{all()}}
+  to aggregate across all variables, \ie we require 40 observations for
+  every variable to keep the decade.
+\item
+  Finally, we merge the indicator whether a decade should be kept in the
+  data set using
+  \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.merge.html}{\texttt{merge()}},
+  where we match on the value of the column \texttt{Decade}. Note that
+  the argument to \texttt{merge()} must be a \texttt{DataFrame}, so we
+  first have to convert our indicator data.
+\item
+  Finally, we keep only those observations which have a flag that is
+  \texttt{True}.
+\end{enumerate}
+
+The rest of the exercise is straightforward as it just repeats what we
+have done previously. You can create the bar chart directly with pandas
+as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{40}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df\PYZus{}avg}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNRATE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{40}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:xlabel='Decade'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_90_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{solution-for-exercise-3}{%
+\subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+
+We first read in the CSV file, specifying
+\texttt{\textquotesingle{};\textquotesingle{}} as the field separator:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{41}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{c+c1}{\PYZsh{} Load CSV file}
+\PY{n}{filepath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/universities.csv}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    For the first task we use \texttt{apply()} to create a new
+\texttt{Series} object for each ratio of interest.
+
+We compute the ratios for each institution which will result in NaNs if
+either the numerator of denominator is missing. We thus use
+\texttt{np.nanmean()} to compute averages, ignoring any NaNs.
+
+Finally, we combine all \texttt{Series} into a \texttt{DataFrame}. We do
+this by specifying the data passed to \texttt{DataFrame()} as a
+dictionary, since then we can specify the column names as keys.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{42}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Variant 1}
+\PY{c+c1}{\PYZsh{} Compute means using apply()}
+
+\PY{n}{grp} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create Series objects with the desired means}
+\PY{n}{staff} \PY{o}{=} \PY{n}{grp}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\PY{n}{admin} \PY{o}{=} \PY{n}{grp}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Admin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Budget in millions of pounds}
+\PY{n}{budget} \PY{o}{=} \PY{n}{grp}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Convert to pounds}
+\PY{n}{budget} \PY{o}{*}\PY{o}{=} \PY{l+m+mf}{1.0e6}
+\PY{c+c1}{\PYZsh{} Count number of institutions in each group.}
+\PY{c+c1}{\PYZsh{} We can use the \PYZsq{}Russell\PYZsq{} column for this because it has no}
+\PY{c+c1}{\PYZsh{} missing data.}
+\PY{n}{count} \PY{o}{=} \PY{n}{grp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create a new DataFrame. Each column is a Series object.}
+\PY{n}{df\PYZus{}all} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{staff}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Admin\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{admin}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{budget}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{count}\PY{p}{\PYZcb{}}\PY{p}{)}
+
+\PY{n}{df\PYZus{}all}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{42}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+         Staff\_Student  Admin\_Student  Budget\_Student  Count
+Russell
+0             0.096219       0.147762    16847.834366      6
+1             0.155131       0.169079    35406.453649     17
+\end{Verbatim}
+\end{tcolorbox}
+        
+    For the second task, we first insert additional columns which contain
+the ratios of interest for each university.
+
+We then drop all unused columns, group by the \texttt{Russell} indicator
+and compute the means by directly calling \texttt{mean()} on the group
+object.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{43}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Variant 2:}
+\PY{c+c1}{\PYZsh{} Compute ratios first, apply aggregation later}
+
+\PY{c+c1}{\PYZsh{} Create new variables directly in original DataFrame}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Admin\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Admin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{c+c1}{\PYZsh{} Budget in pounds (original Budget is in million pounds)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{l+m+mf}{1.0e6}
+
+\PY{c+c1}{\PYZsh{} Keep only newly constructed ratios}
+\PY{n}{columns\PYZus{}keep} \PY{o}{=} \PY{p}{[}\PY{n}{name} \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}
+                \PY{k}{if} \PY{n}{name}\PY{o}{.}\PY{n}{endswith}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+\PY{c+c1}{\PYZsh{} Also keep Russell indicator}
+\PY{n}{columns\PYZus{}keep} \PY{o}{+}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{columns\PYZus{}keep}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Aggregate by Russell indicator}
+\PY{n}{grp} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Count number of institutions in each group.}
+\PY{c+c1}{\PYZsh{} We can use the \PYZsq{}Russell\PYZsq{} column for this because it has no}
+\PY{c+c1}{\PYZsh{} missing data.}
+\PY{n}{count} \PY{o}{=} \PY{n}{grp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+
+\PY{n}{df\PYZus{}all} \PY{o}{=} \PY{n}{grp}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Add counter}
+\PY{n}{df\PYZus{}all}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{count}
+
+\PY{n}{df\PYZus{}all}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{43}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+         Staff\_Student  Admin\_Student  Budget\_Student  Count
+Russell
+0             0.096219       0.147762    16847.834366      6
+1             0.155131       0.169079    35406.453649     17
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We plot the results using pandas's \texttt{bar()} function. Since the
+data is of vastly different magnitudes, we specify \texttt{sharey=False}
+so that each panel will have its own scaling on the \(y\)-axis.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{44}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Plot results as bar charts, one panel for each variable}
+
+\PY{c+c1}{\PYZsh{} Pretty titles}
+\PY{n}{title} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff/Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Admin/Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget/Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Univ.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{c+c1}{\PYZsh{} Create bar chart using pandas\PYZsq{}s bar() function}
+\PY{n}{df\PYZus{}all}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{sharey}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{subplots}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                \PY{n}{title}\PY{o}{=}\PY{n}{title}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{44}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[<AxesSubplot:title=\{'center':'Staff/Student'\}, xlabel='Russell'>,
+        <AxesSubplot:title=\{'center':'Admin/Student'\}, xlabel='Russell'>],
+       [<AxesSubplot:title=\{'center':'Budget/Student'\}, xlabel='Russell'>,
+        <AxesSubplot:title=\{'center':'Number of Univ.'\}, xlabel='Russell'>]],
+      dtype=object)
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_98_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{solution-for-exercise-4}{%
+\subsection{Solution for exercise 4}\label{solution-for-exercise-4}}
+
+    We create an indicator variable called \texttt{Pre1800} which is set to
+\texttt{True} whenever the founding year in column \texttt{Founded} is
+lower than 1800.
+
+We then group the data by \texttt{Country} and \texttt{Pre1800} and
+count the number of universities in each group using \texttt{count()}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{45}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+
+\PY{c+c1}{\PYZsh{} Load CSV file}
+\PY{n}{filepath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/universities.csv}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create mask for founding period}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pre1800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Founded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1800}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create group by country and founding period;}
+\PY{n}{grp} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pre1800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Number of universities by country and founding period.}
+\PY{c+c1}{\PYZsh{} Since we are grouping by two attributes, which will create a}
+\PY{c+c1}{\PYZsh{} Series with a multi\PYZhy{}level (hierarchical) index}
+\PY{n}{count} \PY{o}{=} \PY{n}{grp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+
+\PY{n}{count}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{45}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Country           Pre1800
+England           False      8
+                  True       5
+Northern Ireland  False      1
+Scotland          False      3
+                  True       4
+Wales             False      2
+Name: Institution, dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The resulting \texttt{Series} only contains values for those
+combinations that are actually present in the data. For example, the
+combination \texttt{(Wales,\ True)} does not show up because there are
+no Welsh universities founded before 1800 in our sample. We will have to
+``complete'' the data and add zero entries in all such cases.
+
+First, we create a \texttt{DataFrame} with countries in rows and the
+number of universities for the pre- and post-1800 periods in columns. To
+accomplish this, we need to pivot the second row index using the
+\href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.unstack.html}{\texttt{unstack()}}
+method. The \texttt{level=-1} argument tells it to use the last row
+index, and \texttt{fill\_value=0} will assign zeros to all elements that
+were not present in the initial \texttt{DataFrame}, such as the
+combination \texttt{(Wales,\ True)}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{46}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} DataFrame with countries in rows, Pre\PYZhy{}1800 indicator in columns}
+
+\PY{c+c1}{\PYZsh{} Pivot inner index level to create separate columns for True/False}
+\PY{c+c1}{\PYZsh{} values of Pre1800 indicator}
+\PY{n}{df\PYZus{}count} \PY{o}{=} \PY{n}{count}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Set name of column index to something pretty: this will}
+\PY{c+c1}{\PYZsh{} be used as the legend title}
+\PY{n}{df\PYZus{}count}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Founding year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Rename columns to get pretty labels in legend}
+\PY{n}{df\PYZus{}count}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{k+kc}{True}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Before 1800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{After 1800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+                \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+
+\PY{n}{df\PYZus{}count}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{46}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Founding year     After 1800  Before 1800
+Country
+England                    8            5
+Northern Ireland           1            0
+Scotland                   3            4
+Wales                      2            0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Whenever we use pandas's built-in plotting functions, these use index
+names and labels to automatically label the graph. We therefore first
+have to assign these objects ``pretty'' names.
+
+We can then generate the bar chart as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{47}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Create bar chart by country}
+\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of universities by founding year}\PY{l+s+s1}{\PYZsq{}}
+\PY{c+c1}{\PYZsh{} pass rot=0 to undo the rotation of x\PYZhy{}tick labels}
+\PY{c+c1}{\PYZsh{} which pandas applies by default}
+\PY{n}{df\PYZus{}count}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rot}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{n}{title}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{47}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:title=\{'center':'Number of universities by founding year'\},
+xlabel='Country'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_105_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Note how the legend title is automatically set to the column index name
+and the legend labels use the column index labels.
+
+We create the second \texttt{DataFrame} with the founding period in rows
+and country names in columns in exactly the same way, but now call
+\texttt{unstack(level=0)} so that the first index level will be pivoted.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{48}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Pivot first row index level to create separate columns for each country}
+\PY{n}{df\PYZus{}count} \PY{o}{=} \PY{n}{count}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Set index name to something pretty}
+\PY{n}{df\PYZus{}count}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Founding year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Rename index labels to get pretty text in legend}
+\PY{n}{df\PYZus{}count}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{p}{\PYZob{}}\PY{k+kc}{True}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Before 1800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{After 1800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+                \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+
+\PY{n}{df\PYZus{}count}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{48}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Country        England  Northern Ireland  Scotland  Wales
+Founding year
+After 1800           8                 1         3      2
+Before 1800          5                 0         4      0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{49}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Create bar chart by founding year}
+\PY{c+c1}{\PYZsh{} pass rot=0 to undo the rotation of x\PYZhy{}tick labels}
+\PY{c+c1}{\PYZsh{} which pandas applies by default}
+\PY{n}{df\PYZus{}count}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{rot}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{n}{title}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{49}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:title=\{'center':'Number of universities by founding year'\},
+xlabel='Founding year'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_108_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{solution-for-exercise-5}{%
+\subsection{Solution for exercise 5}\label{solution-for-exercise-5}}
+
+This exercise is quite involved, so we will discuss it in parts. First,
+we write the function that will be called by \texttt{apply()} to process
+sub-sets of the data which belong to a single decade:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{regress\PYZus{}okun}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} x is a DataFrame, restricted to rows for the current decade}
+
+    \PY{c+c1}{\PYZsh{} Extract dependent and regressor variables}
+    \PY{n}{outcome} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unempl\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}
+    \PY{n}{GDP\PYZus{}gap} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Regressor matrix including intercept}
+    \PY{n}{regr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{GDP\PYZus{}gap}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} overwrite second column with output gap}
+    \PY{n}{regr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{GDP\PYZus{}gap}
+
+    \PY{c+c1}{\PYZsh{} Solve least\PYZhy{}squares problem (pass rcond=None to avoid a warning)}
+    \PY{n}{coefs}\PY{p}{,} \PY{o}{*}\PY{n}{rest} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{lstsq}\PY{p}{(}\PY{n}{regr}\PY{p}{,} \PY{n}{outcome}\PY{p}{,} \PY{n}{rcond}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Construct DataFrame which will be returned to apply()}
+    \PY{c+c1}{\PYZsh{} Convert data to 1 x 2 matrix}
+    \PY{n}{data} \PY{o}{=} \PY{n}{coefs}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]}
+    \PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Const}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+    \PY{n}{df\PYZus{}out} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{columns}\PY{p}{)}
+
+    \PY{k}{return} \PY{n}{df\PYZus{}out}
+\end{Verbatim}
+\end{tcolorbox}
+
+    This function is passed in a single argument which is a
+\texttt{DataFrame} restricted to the sub-sample that is currently being
+processed.
+
+\begin{itemize}
+\item
+  Our task is to perform the required calculations and to return the
+  result as a \texttt{DataFrame}. \texttt{apply()} then glues together
+  all decade-specific DataFrames to form the result of the operation.
+\item
+  We first extract the relevant variables as NumPy arrays, and we create
+  a regressor matrix which has ones in the first column. This column
+  represents the intercept.
+\item
+  We invoke \texttt{lstsq()} to run the regression. \texttt{lstsq()}
+  returns several arguments which we mop up in the tuple \texttt{*rest}
+  since we are only interested in the regression coefficients.
+
+  Note that we wouldn't be using \texttt{lstsq()} to run OLS on a
+  regular basis, but it's sufficient for this use case.
+\item
+  Finally, we build the \texttt{DataFrame} to be returned by this
+  function. It has only one row (since we ran only one regression) and
+  two columns, one for each regression coefficient.
+\end{itemize}
+
+This was the hard part. We now need to perform some standard
+manipulations to prepare the data:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  We construct the output gap (in percent), which we store in the column
+  \texttt{GDP\_gap}.
+\item
+  We construct the cyclical unemployment rate and store it in the column
+  \texttt{unempl\_gap}.
+\item
+  We determine the decade each observation belongs to using the same
+  code as in previous exercises.
+\item
+  We then drop all unused variables from the \texttt{DataFrame} and also
+  all observations which contain missing values.
+\end{enumerate}
+
+Lastly, we can call \texttt{apply()} to run the regression for each
+decade.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{51}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+
+\PY{c+c1}{\PYZsh{} Load CSV file}
+\PY{n}{filepath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/FRED\PYZus{}QTR.csv}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Generate output gap (in percent)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDPPOT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDPPOT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{l+m+mf}{100.0}
+
+\PY{c+c1}{\PYZsh{} Generate deviations of unempl. rate from natural unempl. rate}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unempl\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNRATE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NROU}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+\PY{c+c1}{\PYZsh{} Assign decade using // to truncate division to}
+\PY{c+c1}{\PYZsh{} integer part. So we have 194x // 10 = 194 for any x.}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{10}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
+
+\PY{c+c1}{\PYZsh{} Keep only variables of interest}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unempl\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\PY{c+c1}{\PYZsh{} Drop rows with any missing obs.}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Group by decade}
+\PY{n}{grp} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Apply regression routine to sub\PYZhy{}set of data for each decade}
+\PY{n}{df\PYZus{}reg} \PY{o}{=} \PY{n}{grp}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{regress\PYZus{}okun}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Get rid of second row index introduced by apply()}
+\PY{n}{df\PYZus{}reg} \PY{o}{=} \PY{n}{df\PYZus{}reg}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Display intercept and slope coefficients}
+\PY{c+c1}{\PYZsh{} estimated for each decade.}
+\PY{n}{df\PYZus{}reg}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{51}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+           Const   GDP\_gap
+Decade
+1940   -0.259986 -0.567257
+1950   -0.277104 -0.494637
+1960   -0.331665 -0.467206
+1970   -0.032063 -0.398751
+1980   -0.178001 -0.666688
+1990   -0.102465 -0.489427
+2000   -0.355138 -0.723567
+2010   -0.279333 -0.983768
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The following code creates 8 panels of scatter plots showing the raw
+data and overlays a regression line for each decade.
+
+The code is somewhat more involved than usual because we have 9 panels
+but only 8 sets of data to be plotted, and we want to add axes labels
+only for those panels that are on the left and lower boundaries.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{52}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Number of plots (= number of decades)}
+\PY{n}{Nplots} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}reg}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Fix number of columns, determine rows as needed}
+\PY{n}{ncol} \PY{o}{=} \PY{l+m+mi}{3}
+\PY{n}{nrow} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{Nplots} \PY{o}{/} \PY{n}{ncol}\PY{p}{)}\PY{p}{)}
+
+\PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrow}\PY{p}{,} \PY{n}{ncol}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                         \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+
+\PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{ax} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{axes}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+
+    \PY{c+c1}{\PYZsh{} skip if we are out of data (we have 9 panels, but only 8 decades)}
+    \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{Nplots}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{} Turn off frame, axes, etc.}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}yaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}frame\PYZus{}on}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+        \PY{k}{break}
+
+    \PY{c+c1}{\PYZsh{} decade in current iteration}
+    \PY{n}{decade} \PY{o}{=} \PY{n}{df\PYZus{}reg}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+    \PY{c+c1}{\PYZsh{} restrict DataFrame to decade\PYZhy{}specific data}
+    \PY{n}{dfi} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{decade}\PY{p}{]}
+    \PY{c+c1}{\PYZsh{} Scatter plot of raw data}
+    \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{dfi}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dfi}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unempl\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Raw data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} Extract regression coefficients}
+    \PY{n}{const} \PY{o}{=} \PY{n}{df\PYZus{}reg}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{decade}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Const}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+    \PY{n}{slope} \PY{o}{=} \PY{n}{df\PYZus{}reg}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{decade}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+    \PY{c+c1}{\PYZsh{} plot regression line:}
+    \PY{c+c1}{\PYZsh{} We need to provide two points to define the line to be plotted.}
+    \PY{n}{ax}\PY{o}{.}\PY{n}{axline}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{const}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{const}\PY{o}{+}\PY{n}{slope}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+              \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{2.0}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Regression line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Add label containing the current decade}
+    \PY{n}{ax}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{decade}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{n}{ax}\PY{o}{.}\PY{n}{transAxes}\PY{p}{,}
+            \PY{n}{va}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Add legend in the first panel only}
+    \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{frameon}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Add x\PYZhy{} and y\PYZhy{}labels, but only for those panels}
+    \PY{c+c1}{\PYZsh{} that are on the left/lower boundary of the figure}
+    \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{nrow} \PY{o}{*} \PY{p}{(}\PY{n}{ncol} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Output gap (}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+    \PY{k}{if} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cycl. unempl. rate (}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZhy{}points)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Okun}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s law}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{52}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Text(0.5, 0.98, "Okun's law")
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit8_files/unit8_114_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
 
     % Add a bibliography block to the postdoc
     
