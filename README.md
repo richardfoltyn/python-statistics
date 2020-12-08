@@ -18,7 +18,8 @@ as a static PDF file.
 6.  Advanced NumPy [[PDF](latex/unit6.pdf)]
 7.  Random number generation and statistics [[PDF](latex/unit7.pdf)]
 8.  Handling data with pandas [[PDF](latex/unit8.pdf)]
-9.  Input and output [[PDF](latex/unit9.pdf)]
+9.  Data input and output [[PDF](latex/unit9.pdf)]
+10. Error handling [[PDF](latex/unit10.pdf)]
 
 The the *launch binder* link at the top to start an interactive
 notebook.
