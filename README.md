@@ -51,7 +51,7 @@ with the following packages installed:
 To start the Jupyter notebook server, execute something like this
 
     cd path/to/repository
-    jupyter notebook lectures/index.ipynb
+    jupyter notebook index.ipynb
 
 ## Licence
 
@@ -59,3 +59,8 @@ This material is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/),
 except for the data files contained in the `data/` folder, which
 fall under the terms imposed by the original content creators.
+
+## Credits
+
+Special thanks go to Jonna Olsson for reading through all units and
+suggesting various improvements.
