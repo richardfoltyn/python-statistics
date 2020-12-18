@@ -636,7 +636,7 @@ as follows:
 \tightlist
 \item
   Because we cannot know in advance on which system this code is run
-  (e.g.~the operating system and directory layout), we cannot hard-code
+  (\eg the operating system and directory layout), we cannot hard-code
   a file path.
 \item
   Moreover, we do not know whether the code is run with write
@@ -669,7 +669,6 @@ file = 'file.txt'
 np.savetxt(file, data, delimiter=';', fmt='%8.5f')
 \end{verbatim}
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{io-with-pandas}{%
 \subsection{I/O with pandas}\label{io-with-pandas}}
@@ -700,7 +699,7 @@ The most important routines are:
   Read or write CSV text files
 \item
   \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_fwf.html}{\texttt{read\_fwf()}}:
-  Read data with fixed field widths, i.e.~text data that does not use
+  Read data with fixed field widths, \ie text data that does not use
   delimiters to separate fields.
 \item
   \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html}{\texttt{read\_excel()}},
@@ -864,7 +863,6 @@ specified:
     Here the \texttt{widths} argument accepts a list that contains the
 number of characters to be used for each field.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{pickling}{%
 \subsection{Pickling}\label{pickling}}
