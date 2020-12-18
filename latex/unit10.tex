@@ -462,14 +462,8 @@ ranger produces an \texttt{IndexError}.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{IndexError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-75d6658ee705>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-red}{\# access to out-of-bounds index in a collection}
-\textcolor{ansi-green-intense}{\textbf{      2}} items \textcolor{ansi-blue}{=} \textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{2}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{3}
-\textcolor{ansi-green}{----> 3}\textcolor{ansi-red}{ }items\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{5}\textcolor{ansi-blue}{]}
+\textcolor{ansi-red}{IndexError}\textcolor{ansi-red}{:} tuple index out of range
 
-\textcolor{ansi-red}{IndexError}: tuple index out of range
     \end{Verbatim}
 
     Retrieving a non-existent key in a dictionary raises another type of
@@ -485,14 +479,8 @@ exception, a \texttt{KeyError}.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{KeyError}                                  Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-84b072dc0e31>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-red}{\# Access non-existant dictionary key}
-\textcolor{ansi-green-intense}{\textbf{      2}} dct \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{\{}\textcolor{ansi-blue}{'language'}\textcolor{ansi-blue}{:} \textcolor{ansi-blue}{'Python'}\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{'version'}\textcolor{ansi-blue}{:} \textcolor{ansi-cyan}{3.8}\textcolor{ansi-blue}{\}}
-\textcolor{ansi-green}{----> 3}\textcolor{ansi-red}{ }dct\textcolor{ansi-blue}{[}\textcolor{ansi-blue}{'course'}\textcolor{ansi-blue}{]}
+\textcolor{ansi-red}{KeyError}\textcolor{ansi-red}{:} 'course'
 
-\textcolor{ansi-red}{KeyError}: 'course'
     \end{Verbatim}
 
     Mistakenly trying to access a non-existent attribute will trigger an
@@ -507,13 +495,8 @@ exception, a \texttt{KeyError}.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{AttributeError}                            Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-7bb7836aaf0a>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} value \textcolor{ansi-blue}{=} \textcolor{ansi-cyan}{1.0}
-\textcolor{ansi-green}{----> 2}\textcolor{ansi-red}{ }value\textcolor{ansi-blue}{.}shape
+\textcolor{ansi-red}{AttributeError}\textcolor{ansi-red}{:} 'float' object has no attribute 'shape'
 
-\textcolor{ansi-red}{AttributeError}: 'float' object has no attribute 'shape'
     \end{Verbatim}
 
     When we try to apply an operation to data that does not support that
@@ -528,13 +511,8 @@ particular operation, we get a \texttt{TypeError}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{TypeError}                                 Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-ac055c45dd3e>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} items \textcolor{ansi-blue}{=} \textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{2}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{3}
-\textcolor{ansi-green}{----> 2}\textcolor{ansi-red}{ }items \textcolor{ansi-blue}{+} \textcolor{ansi-cyan}{1}
+\textcolor{ansi-red}{TypeError}\textcolor{ansi-red}{:} can only concatenate tuple (not "int") to tuple
 
-\textcolor{ansi-red}{TypeError}: can only concatenate tuple (not "int") to tuple
     \end{Verbatim}
 
     Division by zero also triggers an exception of type
@@ -548,12 +526,8 @@ particular operation, we get a \texttt{TypeError}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ZeroDivisionError}                         Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-9e1622b385b6>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{/}\textcolor{ansi-cyan}{0}
+\textcolor{ansi-red}{ZeroDivisionError}\textcolor{ansi-red}{:} division by zero
 
-\textcolor{ansi-red}{ZeroDivisionError}: division by zero
     \end{Verbatim}
 
     Attempting to import a module or symbol from within a module that does
@@ -567,12 +541,8 @@ not exist raises an \texttt{ImportError}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ImportError}                               Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-d7647cfd2f6a>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }\textcolor{ansi-green}{from} numpy \textcolor{ansi-green}{import} function\_that\_does\_not\_exist
+\textcolor{ansi-red}{ImportError}\textcolor{ansi-red}{:} cannot import name 'function\_that\_does\_not\_exist' from 'numpy' (/home/richard/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/\_\_init\_\_.py)
 
-\textcolor{ansi-red}{ImportError}: cannot import name 'function\_that\_does\_not\_exist' from 'numpy' (/home/richard/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/\_\_init\_\_.py)
     \end{Verbatim}
 
     Performing an operation on arrays of non-conforming shape produces a
@@ -590,20 +560,30 @@ not exist raises an \texttt{ImportError}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-c4d121264809>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      3}} a \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}arange\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      4}} b \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}arange\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{2}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{----> 5}\textcolor{ansi-red}{ }a \textcolor{ansi-blue}{+} b
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} operands could not be broadcast together with shapes (3,) (2,) 
 
-\textcolor{ansi-red}{ValueError}: operands could not be broadcast together with shapes (3,) (2,) 
     \end{Verbatim}
 
-    Trying to open a non-existing file will raise an \texttt{OSError}.
+    Trying to open a non-existing file will raise an
+\texttt{FileNotFoundError}.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{file\PYZus{}does\PYZus{}not\PYZus{}exists.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
+\textcolor{ansi-red}{FileNotFoundError}\textcolor{ansi-red}{:} [Errno 2] No such file or directory: 'file\_does\_not\_exists.txt'
+
+    \end{Verbatim}
+
+    In other cases, for example when using NumPy's \texttt{loadtxt}, trying
+to open a non-existing file will instead raise a \texttt{OSError}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -612,38 +592,13 @@ not exist raises an \texttt{ImportError}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{OSError}                                   Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-ed79c4c059ee>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-green}{import} numpy \textcolor{ansi-green}{as} np
-\textcolor{ansi-green-intense}{\textbf{      2}} 
-\textcolor{ansi-green}{----> 3}\textcolor{ansi-red}{ }data \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}loadtxt\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'path/to/nonexisting/file.txt'}\textcolor{ansi-blue}{)}
+\textcolor{ansi-red}{OSError}\textcolor{ansi-red}{:} path/to/nonexisting/file.txt not found.
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{loadtxt}\textcolor{ansi-blue}{(fname, dtype, comments, delimiter, converters, skiprows, usecols, unpack, ndmin, encoding, max\_rows)}
-\textcolor{ansi-green-intense}{\textbf{    959}}             fname \textcolor{ansi-blue}{=} os\_fspath\textcolor{ansi-blue}{(}fname\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    960}}         \textcolor{ansi-green}{if} \_is\_string\_like\textcolor{ansi-blue}{(}fname\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{--> 961}\textcolor{ansi-red}{             }fh \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}lib\textcolor{ansi-blue}{.}\_datasource\textcolor{ansi-blue}{.}open\textcolor{ansi-blue}{(}fname\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{'rt'}\textcolor{ansi-blue}{,} encoding\textcolor{ansi-blue}{=}encoding\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    962}}             fencoding \textcolor{ansi-blue}{=} getattr\textcolor{ansi-blue}{(}fh\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{'encoding'}\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{'latin1'}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    963}}             fh \textcolor{ansi-blue}{=} iter\textcolor{ansi-blue}{(}fh\textcolor{ansi-blue}{)}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/\_datasource.py} in \textcolor{ansi-cyan}{open}\textcolor{ansi-blue}{(path, mode, destpath, encoding, newline)}
-\textcolor{ansi-green-intense}{\textbf{    193}} 
-\textcolor{ansi-green-intense}{\textbf{    194}}     ds \textcolor{ansi-blue}{=} DataSource\textcolor{ansi-blue}{(}destpath\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{--> 195}\textcolor{ansi-red}{     }\textcolor{ansi-green}{return} ds\textcolor{ansi-blue}{.}open\textcolor{ansi-blue}{(}path\textcolor{ansi-blue}{,} mode\textcolor{ansi-blue}{,} encoding\textcolor{ansi-blue}{=}encoding\textcolor{ansi-blue}{,} newline\textcolor{ansi-blue}{=}newline\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    196}} 
-\textcolor{ansi-green-intense}{\textbf{    197}} 
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/\_datasource.py} in \textcolor{ansi-cyan}{open}\textcolor{ansi-blue}{(self, path, mode, encoding, newline)}
-\textcolor{ansi-green-intense}{\textbf{    533}}                                       encoding=encoding, newline=newline)
-\textcolor{ansi-green-intense}{\textbf{    534}}         \textcolor{ansi-green}{else}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{--> 535}\textcolor{ansi-red}{             }\textcolor{ansi-green}{raise} IOError\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{"\%s not found."} \textcolor{ansi-blue}{\%} path\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    536}} 
-\textcolor{ansi-green-intense}{\textbf{    537}} 
-
-\textcolor{ansi-red}{OSError}: path/to/nonexisting/file.txt not found.
     \end{Verbatim}
 
-    \hypertarget{handling-errors}{%
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{handling-errors}{%
 \subsection{Handling errors}\label{handling-errors}}
 
 As you just saw, there are numerous types of exceptions raised by Python
@@ -677,7 +632,7 @@ There are other ways to avoid errors.
     Returning to the dictionary example, we could write something like this:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{9}{\boxspacing}
+\prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Access non\PYZhy{}existant dictionary key}
 \PY{n}{dct} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Python}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{version}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{3.8}\PY{p}{\PYZcb{}}
@@ -691,7 +646,7 @@ is not present, we can more elegently use the \texttt{get()} method
 which accepts a default value. No \texttt{if}'s needed:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{10}{\boxspacing}
+\prompt{In}{incolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} access non\PYZhy{}existing key}
 \PY{n}{dct}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{course}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Python course}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -699,7 +654,7 @@ which accepts a default value. No \texttt{if}'s needed:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{10}{\boxspacing}
+\prompt{Out}{outcolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 'The Python course'
 \end{Verbatim}
@@ -708,7 +663,7 @@ which accepts a default value. No \texttt{if}'s needed:
     If a key does exist, the default will of course be ignored:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{11}{\boxspacing}
+\prompt{In}{incolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} access existing key}
 \PY{n}{dct}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Python course}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -716,7 +671,7 @@ which accepts a default value. No \texttt{if}'s needed:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{11}{\boxspacing}
+\prompt{Out}{outcolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 'Python'
 \end{Verbatim}
@@ -727,18 +682,20 @@ hardly ever a reason to attempt retrieving elements at arbitrary
 indices. Usually, we first check the size of a collection:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{12}{\boxspacing}
+\prompt{In}{incolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{items} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}
-\PY{c+c1}{\PYZsh{} Assume we want to access the 1001\PYZhy{}st element.}
+\PY{c+c1}{\PYZsh{} Assume idx was passed as an argument to a function}
+\PY{c+c1}{\PYZsh{} so we need to handle unforeseen cases}
+\PY{n}{idx} \PY{o}{=} \PY{l+m+mi}{1000}
 \PY{c+c1}{\PYZsh{} Enforce valid upper bound in case the index is}
 \PY{c+c1}{\PYZsh{} out of bounds.}
-\PY{n}{items}\PY{p}{[}\PY{n+nb}{min}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{items}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+\PY{n}{items}\PY{p}{[}\PY{n+nb}{min}\PY{p}{(}\PY{n}{idx}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{items}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{12}{\boxspacing}
+\prompt{Out}{outcolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 3
 \end{Verbatim}
@@ -748,7 +705,7 @@ indices. Usually, we first check the size of a collection:
 dimensions first, so there is no risk of accessing an invalid position:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{13}{\boxspacing}
+\prompt{In}{incolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} 
 
@@ -778,7 +735,7 @@ programming. Imagine we want a function that returns the element at
 position \texttt{{[}0,0{]}}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{14}{\boxspacing}
+\prompt{In}{incolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{get\PYZus{}elem}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{k}{return} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
@@ -788,14 +745,14 @@ position \texttt{{[}0,0{]}}:
     Calling this on a matrix works as intended:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{15}{\boxspacing}
+\prompt{In}{incolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{15}{\boxspacing}
+\prompt{Out}{outcolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 1.0
 \end{Verbatim}
@@ -804,23 +761,15 @@ position \texttt{{[}0,0{]}}:
     But what if we pass a nested list or tuple?
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\prompt{In}{incolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{TypeError}                                 Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-65cf63d51c44>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }get\_elem\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{[}\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,}\textcolor{ansi-cyan}{2}\textcolor{ansi-blue}{]}\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{,}\textcolor{ansi-cyan}{4}\textcolor{ansi-blue}{]}\textcolor{ansi-blue}{]}\textcolor{ansi-blue}{)}
+\textcolor{ansi-red}{TypeError}\textcolor{ansi-red}{:} list indices must be integers or slices, not tuple
 
-\textcolor{ansi-green}{<ipython-input-1-f3152bb37c6a>} in \textcolor{ansi-cyan}{get\_elem}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-green}{def} get\_elem\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{----> 2}\textcolor{ansi-red}{     }\textcolor{ansi-green}{return} x\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{,}\textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{]}
-
-\textcolor{ansi-red}{TypeError}: list indices must be integers or slices, not tuple
     \end{Verbatim}
 
     With very little effort, we can make this function more robust by using
@@ -829,7 +778,7 @@ which ensures that its result is at least a 2-dimensional NumPy array
 (it returns higher-dimensional arrays unmodified):
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{17}{\boxspacing}
+\prompt{In}{incolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{get\PYZus{}elem}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{atleast\PYZus{}2d}\PY{p}{(}\PY{n}{x}\PY{p}{)}
@@ -838,14 +787,14 @@ which ensures that its result is at least a 2-dimensional NumPy array
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{18}{\boxspacing}
+\prompt{In}{incolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}\PY{p}{)}        \PY{c+c1}{\PYZsh{} Now works on nested lists}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{18}{\boxspacing}
+\prompt{Out}{outcolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 1
 \end{Verbatim}
@@ -855,7 +804,7 @@ which ensures that its result is at least a 2-dimensional NumPy array
 since it works on all sorts of arguments:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{19}{\boxspacing}
+\prompt{In}{incolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}        \PY{c+c1}{\PYZsh{} simple list}
 \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{)}           \PY{c+c1}{\PYZsh{} scalar}
@@ -863,7 +812,7 @@ since it works on all sorts of arguments:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{19}{\boxspacing}
+\prompt{Out}{outcolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 1.0
 \end{Verbatim}
@@ -887,7 +836,7 @@ To illustrate the benefit of clear error messages, consider the
 following (highly artificial) example:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{get\PYZus{}row}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} restrict to valid row indices}
@@ -906,7 +855,7 @@ admissible range for the given array.
 Let's call this function as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{21}{\boxspacing}
+\prompt{In}{incolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
@@ -915,20 +864,8 @@ Let's call this function as follows:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{IndexError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-ea74baa9d300>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-green}{import} numpy \textcolor{ansi-green}{as} np
-\textcolor{ansi-green-intense}{\textbf{      2}} mat \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}arange\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{6}\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{.}reshape\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{2}\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{----> 3}\textcolor{ansi-red}{ }get\_row\textcolor{ansi-blue}{(}mat\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{1.0}\textcolor{ansi-blue}{)}
+\textcolor{ansi-red}{IndexError}\textcolor{ansi-red}{:} only integers, slices (`:`), ellipsis (`{\ldots}`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
 
-\textcolor{ansi-green}{<ipython-input-1-789c9658e65f>} in \textcolor{ansi-cyan}{get\_row}\textcolor{ansi-blue}{(mat, i)}
-\textcolor{ansi-green-intense}{\textbf{      4}} 
-\textcolor{ansi-green-intense}{\textbf{      5}}     \textcolor{ansi-red}{\# return row}
-\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{     }row \textcolor{ansi-blue}{=} mat\textcolor{ansi-blue}{[}irow\textcolor{ansi-blue}{]}
-\textcolor{ansi-green-intense}{\textbf{      7}}     \textcolor{ansi-green}{return} row
-
-\textcolor{ansi-red}{IndexError}: only integers, slices (`:`), ellipsis (`{\ldots}`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
     \end{Verbatim}
 
     This raises an \texttt{IndexError}, notifying the user that the
@@ -945,7 +882,7 @@ We raise exceptions using the \texttt{raise} statement which is followed
 by an exception:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
+\prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{get\PYZus{}row}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} Check whether i is an integer}
@@ -972,40 +909,29 @@ raised, all execution of the remaining code is halted. We will examine
 the details below.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
+\prompt{In}{incolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{get\PYZus{}row}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}     \PY{c+c1}{\PYZsh{} Call with integer argument; nothing happens.}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{23}{\boxspacing}
+\prompt{Out}{outcolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([2, 3])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{get\PYZus{}row}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{)}   \PY{c+c1}{\PYZsh{} Call with float argument; raises exception}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-2bbbaad8f23b>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }get\_row\textcolor{ansi-blue}{(}mat\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{1.0}\textcolor{ansi-blue}{)}   \textcolor{ansi-red}{\# Call with float argument; raises exception}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} Integer argument required, received 1.0
 
-\textcolor{ansi-green}{<ipython-input-1-ab11029fc5ed>} in \textcolor{ansi-cyan}{get\_row}\textcolor{ansi-blue}{(mat, i)}
-\textcolor{ansi-green-intense}{\textbf{      3}}     \textcolor{ansi-green}{if} \textcolor{ansi-green}{not} isinstance\textcolor{ansi-blue}{(}i\textcolor{ansi-blue}{,} int\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{      4}}         msg \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{f'Integer argument required, received \{i\}'}
-\textcolor{ansi-green}{----> 5}\textcolor{ansi-red}{         }\textcolor{ansi-green}{raise} ValueError\textcolor{ansi-blue}{(}msg\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      6}}     \textcolor{ansi-red}{\# restrict to valid row indices}
-\textcolor{ansi-green-intense}{\textbf{      7}}     irow \textcolor{ansi-blue}{=} min\textcolor{ansi-blue}{(}mat\textcolor{ansi-blue}{.}shape\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{]} \textcolor{ansi-blue}{-} \textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} max\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{,} i\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{)}
-
-\textcolor{ansi-red}{ValueError}: Integer argument required, received 1.0
     \end{Verbatim}
 
     As you see, an exception is raised and a clear error message is returned
@@ -1045,7 +971,7 @@ type of the input; calling \texttt{int()} might therefore work, or it
 might not:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{1.2345}
 \PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)}          \PY{c+c1}{\PYZsh{} Works, float is truncated to integer}
@@ -1053,14 +979,14 @@ might not:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{25}{\boxspacing}
+\prompt{Out}{outcolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 1
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}
 \PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)}          \PY{c+c1}{\PYZsh{} Does not work}
@@ -1068,13 +994,8 @@ might not:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-c233272b1fb2>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} x \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{'abc'}
-\textcolor{ansi-green}{----> 2}\textcolor{ansi-red}{ }int\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}          \textcolor{ansi-red}{\# Does not work}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} invalid literal for int() with base 10: 'abc'
 
-\textcolor{ansi-red}{ValueError}: invalid literal for int() with base 10: 'abc'
     \end{Verbatim}
 
     Calling \texttt{int()} with a string such as
@@ -1083,7 +1004,7 @@ interpreted as an integer will raise a \texttt{ValueError}. We could
 handle such a situation as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{27}{\boxspacing}
+\prompt{In}{incolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}
 
@@ -1108,7 +1029,7 @@ We can have multiple \texttt{except} clauses covering all sorts of
 exceptions:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{28}{\boxspacing}
+\prompt{In}{incolor}{29}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{k}{try}\PY{p}{:}
@@ -1126,7 +1047,7 @@ exceptions:
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{29}{\boxspacing}
+\prompt{In}{incolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{func}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}         \PY{c+c1}{\PYZsh{} ValueError: cannot convert integer}
 \end{Verbatim}
@@ -1137,7 +1058,7 @@ abc cannot be converted to an integer
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
+\prompt{In}{incolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}             \PY{c+c1}{\PYZsh{} ZeroDivisionError}
 \end{Verbatim}
@@ -1154,7 +1075,7 @@ example, this code raises a \texttt{TypeError} which is not specifically
 handled:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{31}{\boxspacing}
+\prompt{In}{incolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{func}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}     \PY{c+c1}{\PYZsh{} TypeError, caught by default clause}
 \end{Verbatim}
@@ -1169,7 +1090,7 @@ occurs, it will be propagated back to the caller as if no error handling
 was present at all:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{32}{\boxspacing}
+\prompt{In}{incolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Define func to only handle ValueError}
 \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
@@ -1184,7 +1105,7 @@ was present at all:
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{33}{\boxspacing}
+\prompt{In}{incolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}         \PY{c+c1}{\PYZsh{} Raises ZeroDivisionError, which is passed to caller}
 \end{Verbatim}
@@ -1195,25 +1116,14 @@ Conversion to integer works!
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ZeroDivisionError}                         Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-5f9bca549f91>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }func\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{)}         \textcolor{ansi-red}{\# Raises ZeroDivisionError, which is passed to caller}
+\textcolor{ansi-red}{ZeroDivisionError}\textcolor{ansi-red}{:} division by zero
 
-\textcolor{ansi-green}{<ipython-input-1-70d22ee64a1d>} in \textcolor{ansi-cyan}{func}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      5}}         print\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'Conversion to integer works!'}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      6}}         \textcolor{ansi-red}{\# Return some value}
-\textcolor{ansi-green}{----> 7}\textcolor{ansi-red}{         }\textcolor{ansi-green}{return} \textcolor{ansi-cyan}{10}\textcolor{ansi-blue}{/}i
-\textcolor{ansi-green-intense}{\textbf{      8}}     \textcolor{ansi-green}{except} ValueError\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{      9}}         print\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{f'\{x\} cannot be converted to an integer'}\textcolor{ansi-blue}{)}
-
-\textcolor{ansi-red}{ZeroDivisionError}: division by zero
     \end{Verbatim}
 
     This even works across multiple levels of the call stack:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{34}{\boxspacing}
+\prompt{In}{incolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} inner function converts to integer}
 \PY{k}{def} \PY{n+nf}{inner}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
@@ -1228,32 +1138,15 @@ Conversion to integer works!
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{35}{\boxspacing}
+\prompt{In}{incolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{outer}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            \PY{c+c1}{\PYZsh{} ValueError raised in inner()}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-7c25c3decd65>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }outer\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'abc'}\textcolor{ansi-blue}{)}            \textcolor{ansi-red}{\# ValueError raised in inner()}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} invalid literal for int() with base 10: 'abc'
 
-\textcolor{ansi-green}{<ipython-input-1-70e0ddbb84ed>} in \textcolor{ansi-cyan}{outer}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      6}} \textcolor{ansi-red}{\# outer function divides by integer value}
-\textcolor{ansi-green-intense}{\textbf{      7}} \textcolor{ansi-green}{def} outer\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{----> 8}\textcolor{ansi-red}{     }i \textcolor{ansi-blue}{=} inner\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      9}}     \textcolor{ansi-green}{return} \textcolor{ansi-cyan}{10} \textcolor{ansi-blue}{/}i
-
-\textcolor{ansi-green}{<ipython-input-1-70e0ddbb84ed>} in \textcolor{ansi-cyan}{inner}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-red}{\# inner function converts to integer}
-\textcolor{ansi-green-intense}{\textbf{      2}} \textcolor{ansi-green}{def} inner\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{----> 3}\textcolor{ansi-red}{     }i \textcolor{ansi-blue}{=} int\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      4}}     \textcolor{ansi-green}{return} i
-\textcolor{ansi-green-intense}{\textbf{      5}} 
-
-\textcolor{ansi-red}{ValueError}: invalid literal for int() with base 10: 'abc'
     \end{Verbatim}
 
     Here we call \texttt{outer()}, which in turn calls \texttt{inner()},
@@ -1261,17 +1154,20 @@ passing on its argument. Conversion to an integer fails in
 \texttt{inner()}, but since \texttt{outer()} does not handle this
 exception, it is automatically passed on the the original call site.
 
-    \hypertarget{exercises}{%
-\section{Exercises}\label{exercises}}
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exercises}{%
+\subsection{Exercises}\label{exercises}}
 
     \hypertarget{exercise-1-sign-function}{%
-\subsection{Exercise 1: Sign function}\label{exercise-1-sign-function}}
+\subsubsection{Exercise 1: Sign
+function}\label{exercise-1-sign-function}}
 
 Revisit the sign function you implemented in Unit 4, Exercise 1. To
 refresh your memory, the suggested solution looks as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{36}{\boxspacing}
+\prompt{In}{incolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1293,49 +1189,27 @@ refresh your memory, the suggested solution looks as follows:
 exceptions when passed non-numeric arguments:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{37}{\boxspacing}
+\prompt{In}{incolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{sign}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}             \PY{c+c1}{\PYZsh{} pass in string}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{TypeError}                                 Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-ec900cf825a1>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }sign\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'abc'}\textcolor{ansi-blue}{)}             \textcolor{ansi-red}{\# pass in string}
+\textcolor{ansi-red}{TypeError}\textcolor{ansi-red}{:} '<' not supported between instances of 'str' and 'float'
 
-\textcolor{ansi-green}{<ipython-input-1-d7e0a9e92dc2>} in \textcolor{ansi-cyan}{sign}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      2}} 
-\textcolor{ansi-green-intense}{\textbf{      3}} \textcolor{ansi-green}{def} sign\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{----> 4}\textcolor{ansi-red}{     }\textcolor{ansi-green}{if} x \textcolor{ansi-blue}{<} \textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{      5}}         \textcolor{ansi-green}{return} \textcolor{ansi-blue}{-}\textcolor{ansi-cyan}{1.0}
-\textcolor{ansi-green-intense}{\textbf{      6}}     \textcolor{ansi-green}{elif} x \textcolor{ansi-blue}{==} \textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{:}
-
-\textcolor{ansi-red}{TypeError}: '<' not supported between instances of 'str' and 'float'
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{38}{\boxspacing}
+\prompt{In}{incolor}{39}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{sign}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}           \PY{c+c1}{\PYZsh{} Pass in NumPy array}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-7d3a4ed6e60f>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }sign\textcolor{ansi-blue}{(}np\textcolor{ansi-blue}{.}array\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{2}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{]}\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{)}           \textcolor{ansi-red}{\# Pass in NumPy array}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
 
-\textcolor{ansi-green}{<ipython-input-1-d7e0a9e92dc2>} in \textcolor{ansi-cyan}{sign}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      2}} 
-\textcolor{ansi-green-intense}{\textbf{      3}} \textcolor{ansi-green}{def} sign\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{----> 4}\textcolor{ansi-red}{     }\textcolor{ansi-green}{if} x \textcolor{ansi-blue}{<} \textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{      5}}         \textcolor{ansi-green}{return} \textcolor{ansi-blue}{-}\textcolor{ansi-cyan}{1.0}
-\textcolor{ansi-green-intense}{\textbf{      6}}     \textcolor{ansi-green}{elif} x \textcolor{ansi-blue}{==} \textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{:}
-
-\textcolor{ansi-red}{ValueError}: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
     \end{Verbatim}
 
     Modify the \texttt{sign()} function such that it only accepts built-in
@@ -1343,13 +1217,13 @@ numerical Python types (integers, floats) and raises a
 \texttt{ValueError} in all other cases
 
     \hypertarget{exercise-2-factorials}{%
-\subsection{Exercise 2: Factorials}\label{exercise-2-factorials}}
+\subsubsection{Exercise 2: Factorials}\label{exercise-2-factorials}}
 
 Consider the \texttt{factorial()} function you wrote in Unit 4, Exercise
 4:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{39}{\boxspacing}
+\prompt{In}{incolor}{40}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{factorial}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
     \PY{k}{if} \PY{n}{n} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
@@ -1364,31 +1238,15 @@ Consider the \texttt{factorial()} function you wrote in Unit 4, Exercise
 for example:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{40}{\boxspacing}
+\prompt{In}{incolor}{41}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{factorial}\PY{p}{(}\PY{l+m+mf}{1.123}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{RecursionError}                            Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-bdb880c86adf>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }factorial\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{1.123}\textcolor{ansi-blue}{)}
+\textcolor{ansi-red}{RecursionError}\textcolor{ansi-red}{:} maximum recursion depth exceeded in comparison
 
-\textcolor{ansi-green}{<ipython-input-1-d831dc1a43ca>} in \textcolor{ansi-cyan}{factorial}\textcolor{ansi-blue}{(n)}
-\textcolor{ansi-green-intense}{\textbf{      4}}     \textcolor{ansi-green}{else}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{      5}}         \textcolor{ansi-red}{\# Use recursion to compute factorial}
-\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{         }\textcolor{ansi-green}{return} n \textcolor{ansi-blue}{*} factorial\textcolor{ansi-blue}{(}n\textcolor{ansi-blue}{-}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{)}
-
-{\ldots} last 1 frames repeated, from the frame below {\ldots}
-
-\textcolor{ansi-green}{<ipython-input-1-d831dc1a43ca>} in \textcolor{ansi-cyan}{factorial}\textcolor{ansi-blue}{(n)}
-\textcolor{ansi-green-intense}{\textbf{      4}}     \textcolor{ansi-green}{else}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{      5}}         \textcolor{ansi-red}{\# Use recursion to compute factorial}
-\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{         }\textcolor{ansi-green}{return} n \textcolor{ansi-blue}{*} factorial\textcolor{ansi-blue}{(}n\textcolor{ansi-blue}{-}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{)}
-
-\textcolor{ansi-red}{RecursionError}: maximum recursion depth exceeded in comparison
     \end{Verbatim}
 
     Modify this function such that it only accepts \emph{numerical}
@@ -1399,12 +1257,12 @@ without loss of data, such as a float \texttt{1.0} or a scalar array
 The function should raise a \texttt{ValueError} for all other inputs.
 
     \hypertarget{exercise-3-bisection}{%
-\subsection{Exercise 3: Bisection}\label{exercise-3-bisection}}
+\subsubsection{Exercise 3: Bisection}\label{exercise-3-bisection}}
 
 Recall the \texttt{bisect()} function from Unit 4, Exercise 5:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{41}{\boxspacing}
+\prompt{In}{incolor}{42}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{bisect}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}6}\PY{p}{,} \PY{n}{xtol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}6}\PY{p}{,} \PY{n}{maxiter}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
 
@@ -1454,11 +1312,13 @@ function and raise a \texttt{ValueError} if any of them is violated:
   integer.
 \end{enumerate}
 
-    \hypertarget{solutions}{%
-\section{Solutions}\label{solutions}}
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{solutions}{%
+\subsection{Solutions}\label{solutions}}
 
     \hypertarget{solution-for-exercise-1}{%
-\subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+\subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
 
     We can use the built-in \texttt{float()} function to determine whether
 something can be represented as a floating-point number.
@@ -1468,7 +1328,7 @@ specification as the code in the \texttt{try} clause raises several
 types of exceptions, depending on the input argument.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{42}{\boxspacing}
+\prompt{In}{incolor}{43}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1495,92 +1355,60 @@ types of exceptions, depending on the input argument.
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{43}{\boxspacing}
+\prompt{In}{incolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{sign}\PY{p}{(}\PY{l+m+mi}{123}\PY{p}{)}           \PY{c+c1}{\PYZsh{} integer argument}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{43}{\boxspacing}
+\prompt{Out}{outcolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 1.0
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{44}{\boxspacing}
+\prompt{In}{incolor}{45}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{sign}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}         \PY{c+c1}{\PYZsh{} string argument}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-5613754af8ce>} in \textcolor{ansi-cyan}{sign}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      5}}         \textcolor{ansi-red}{\# Convert to float, which is more generic than int}
-\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{         }x \textcolor{ansi-blue}{=} float\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      7}}     \textcolor{ansi-green}{except}\textcolor{ansi-blue}{:}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} could not convert string to float: 'abc'
 
-\textcolor{ansi-red}{ValueError}: could not convert string to float: 'abc'
 
 During handling of the above exception, another exception occurred:
 
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-5c677b34ea37>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }sign\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'abc'}\textcolor{ansi-blue}{)}         \textcolor{ansi-red}{\# string argument}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} Numerical argument required!
 
-\textcolor{ansi-green}{<ipython-input-1-5613754af8ce>} in \textcolor{ansi-cyan}{sign}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      8}}         \textcolor{ansi-red}{\# The above statement raises at least two types}
-\textcolor{ansi-green-intense}{\textbf{      9}}         \textcolor{ansi-red}{\# of exceptions: ValueError and TypeError}
-\textcolor{ansi-green}{---> 10}\textcolor{ansi-red}{         }\textcolor{ansi-green}{raise} ValueError\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'Numerical argument required!'}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{     11}} 
-\textcolor{ansi-green-intense}{\textbf{     12}}     \textcolor{ansi-green}{if} x \textcolor{ansi-blue}{<} \textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{:}
-
-\textcolor{ansi-red}{ValueError}: Numerical argument required!
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{45}{\boxspacing}
+\prompt{In}{incolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{sign}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}       \PY{c+c1}{\PYZsh{} NumPy array argument}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{TypeError}                                 Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-5613754af8ce>} in \textcolor{ansi-cyan}{sign}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      5}}         \textcolor{ansi-red}{\# Convert to float, which is more generic than int}
-\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{         }x \textcolor{ansi-blue}{=} float\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      7}}     \textcolor{ansi-green}{except}\textcolor{ansi-blue}{:}
+\textcolor{ansi-red}{TypeError}\textcolor{ansi-red}{:} only size-1 arrays can be converted to Python scalars
 
-\textcolor{ansi-red}{TypeError}: only size-1 arrays can be converted to Python scalars
 
 During handling of the above exception, another exception occurred:
 
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-120b08b4eb20>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }sign\textcolor{ansi-blue}{(}np\textcolor{ansi-blue}{.}array\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{2}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{]}\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{)}       \textcolor{ansi-red}{\# NumPy array argument}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} Numerical argument required!
 
-\textcolor{ansi-green}{<ipython-input-1-5613754af8ce>} in \textcolor{ansi-cyan}{sign}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{      8}}         \textcolor{ansi-red}{\# The above statement raises at least two types}
-\textcolor{ansi-green-intense}{\textbf{      9}}         \textcolor{ansi-red}{\# of exceptions: ValueError and TypeError}
-\textcolor{ansi-green}{---> 10}\textcolor{ansi-red}{         }\textcolor{ansi-green}{raise} ValueError\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'Numerical argument required!'}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{     11}} 
-\textcolor{ansi-green-intense}{\textbf{     12}}     \textcolor{ansi-green}{if} x \textcolor{ansi-blue}{<} \textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{:}
-
-\textcolor{ansi-red}{ValueError}: Numerical argument required!
     \end{Verbatim}
 
     \hypertarget{solution-for-exercise-2}{%
-\subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+\subsubsection{Solution for exercise 2}\label{solution-for-exercise-2}}
 
 One possible solution looks as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{46}{\boxspacing}
+\prompt{In}{incolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{factorial}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
     \PY{k}{try}\PY{p}{:}
@@ -1621,24 +1449,9 @@ One possible solution looks as follows:
 \end{enumerate}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{47}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{factorial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}            \PY{c+c1}{\PYZsh{} integer argument}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{47}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-1
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{factorial}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{)}          \PY{c+c1}{\PYZsh{} not an integer argument, but can be}
-                        \PY{c+c1}{\PYZsh{} represented as an integer.}
+\PY{n}{factorial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}            \PY{c+c1}{\PYZsh{} integer argument}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1652,92 +1465,74 @@ One possible solution looks as follows:
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{49}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{factorial}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{)}          \PY{c+c1}{\PYZsh{} not an integer argument, but can be}
+                        \PY{c+c1}{\PYZsh{} represented as an integer.}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{49}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+1
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{factorial}\PY{p}{(}\PY{l+m+mf}{1.1}\PY{p}{)}          \PY{c+c1}{\PYZsh{} Floating\PYZhy{}point argument that }
                         \PY{c+c1}{\PYZsh{} cannot be represented as an integer}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{AssertionError}                            Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-a354663ec7e9>} in \textcolor{ansi-cyan}{factorial}\textcolor{ansi-blue}{(n)}
-\textcolor{ansi-green-intense}{\textbf{      3}}         i \textcolor{ansi-blue}{=} int\textcolor{ansi-blue}{(}n\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{----> 4}\textcolor{ansi-red}{         }\textcolor{ansi-green}{assert} i \textcolor{ansi-blue}{==} n
-\textcolor{ansi-green-intense}{\textbf{      5}}     \textcolor{ansi-green}{except}\textcolor{ansi-blue}{:}
+\textcolor{ansi-red}{AssertionError}
 
-\textcolor{ansi-red}{AssertionError}: 
 
 During handling of the above exception, another exception occurred:
 
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-27f79227a9de>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }factorial\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{1.1}\textcolor{ansi-blue}{)}          \textcolor{ansi-red}{\# Floating-point argument that}
-\textcolor{ansi-green-intense}{\textbf{      2}}                         \textcolor{ansi-red}{\# cannot be represented as an integer}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} Not an integer argument: 1.1
 
-\textcolor{ansi-green}{<ipython-input-1-a354663ec7e9>} in \textcolor{ansi-cyan}{factorial}\textcolor{ansi-blue}{(n)}
-\textcolor{ansi-green-intense}{\textbf{      4}}         \textcolor{ansi-green}{assert} i \textcolor{ansi-blue}{==} n
-\textcolor{ansi-green-intense}{\textbf{      5}}     \textcolor{ansi-green}{except}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{         }\textcolor{ansi-green}{raise} ValueError\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{f'Not an integer argument: \{n\}'}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      7}} 
-\textcolor{ansi-green-intense}{\textbf{      8}}     \textcolor{ansi-green}{if} i \textcolor{ansi-blue}{==} \textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{:}
-
-\textcolor{ansi-red}{ValueError}: Not an integer argument: 1.1
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{50}{\boxspacing}
+\prompt{In}{incolor}{51}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{factorial}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}          \PY{c+c1}{\PYZsh{} String argument}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{AssertionError}                            Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-a354663ec7e9>} in \textcolor{ansi-cyan}{factorial}\textcolor{ansi-blue}{(n)}
-\textcolor{ansi-green-intense}{\textbf{      3}}         i \textcolor{ansi-blue}{=} int\textcolor{ansi-blue}{(}n\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{----> 4}\textcolor{ansi-red}{         }\textcolor{ansi-green}{assert} i \textcolor{ansi-blue}{==} n
-\textcolor{ansi-green-intense}{\textbf{      5}}     \textcolor{ansi-green}{except}\textcolor{ansi-blue}{:}
+\textcolor{ansi-red}{AssertionError}
 
-\textcolor{ansi-red}{AssertionError}: 
 
 During handling of the above exception, another exception occurred:
 
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-b68ba63f8ab8>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }factorial\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'1'}\textcolor{ansi-blue}{)}          \textcolor{ansi-red}{\# String argument}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} Not an integer argument: 1
 
-\textcolor{ansi-green}{<ipython-input-1-a354663ec7e9>} in \textcolor{ansi-cyan}{factorial}\textcolor{ansi-blue}{(n)}
-\textcolor{ansi-green-intense}{\textbf{      4}}         \textcolor{ansi-green}{assert} i \textcolor{ansi-blue}{==} n
-\textcolor{ansi-green-intense}{\textbf{      5}}     \textcolor{ansi-green}{except}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{         }\textcolor{ansi-green}{raise} ValueError\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{f'Not an integer argument: \{n\}'}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      7}} 
-\textcolor{ansi-green-intense}{\textbf{      8}}     \textcolor{ansi-green}{if} i \textcolor{ansi-blue}{==} \textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{:}
-
-\textcolor{ansi-red}{ValueError}: Not an integer argument: 1
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{51}{\boxspacing}
+\prompt{In}{incolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{factorial}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{)}\PY{p}{)}       \PY{c+c1}{\PYZsh{} Scalar array argument}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{51}{\boxspacing}
+\prompt{Out}{outcolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 3628800
 \end{Verbatim}
 \end{tcolorbox}
         
     \hypertarget{solution-for-exercise-3}{%
-\subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+\subsubsection{Solution for exercise 3}\label{solution-for-exercise-3}}
 
     We modify the function as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{52}{\boxspacing}
+\prompt{In}{incolor}{53}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{bisect}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}6}\PY{p}{,} \PY{n}{xtol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}6}\PY{p}{,} \PY{n}{maxiter}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
 
@@ -1802,7 +1597,7 @@ The remaining checks are performed using the same code as in earlier
 exercises.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{53}{\boxspacing}
+\prompt{In}{incolor}{54}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Function call with valid argument}
 \PY{n}{x0} \PY{o}{=} \PY{n}{bisect}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{4.0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{3.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}3}\PY{p}{)}
@@ -1835,7 +1630,7 @@ Iteration 10: f(mid) = -1.9529e-03
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{54}{\boxspacing}
+\prompt{In}{incolor}{55}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Function call with f(a) and f(b) both positive}
 \PY{n}{x0} \PY{o}{=} \PY{n}{bisect}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{4.0}\PY{p}{,} \PY{l+m+mf}{10.0}\PY{p}{,} \PY{l+m+mf}{20.0}\PY{p}{)}
@@ -1843,24 +1638,12 @@ Iteration 10: f(mid) = -1.9529e-03
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-6b31dc691c41>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-red}{\# Function call with f(a) and f(b) both positive}
-\textcolor{ansi-green}{----> 2}\textcolor{ansi-red}{ }x0 \textcolor{ansi-blue}{=} bisect\textcolor{ansi-blue}{(}\textcolor{ansi-green}{lambda} x\textcolor{ansi-blue}{:} x\textcolor{ansi-blue}{**}\textcolor{ansi-cyan}{2.0} \textcolor{ansi-blue}{-} \textcolor{ansi-cyan}{4.0}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{10.0}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{20.0}\textcolor{ansi-blue}{)}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} Not a bracketing interval [10.0, 20.0]
 
-\textcolor{ansi-green}{<ipython-input-1-af11735b41f7>} in \textcolor{ansi-cyan}{bisect}\textcolor{ansi-blue}{(f, a, b, tol, xtol, maxiter)}
-\textcolor{ansi-green-intense}{\textbf{      5}} 
-\textcolor{ansi-green-intense}{\textbf{      6}}     \textcolor{ansi-green}{if} fa\textcolor{ansi-blue}{*}fb \textcolor{ansi-blue}{>} \textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{----> 7}\textcolor{ansi-red}{         }\textcolor{ansi-green}{raise} ValueError\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{f'Not a bracketing interval [\{a\}, \{b\}]'}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      8}}     \textcolor{ansi-green}{try}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{      9}}         tol \textcolor{ansi-blue}{=} float\textcolor{ansi-blue}{(}tol\textcolor{ansi-blue}{)}
-
-\textcolor{ansi-red}{ValueError}: Not a bracketing interval [10.0, 20.0]
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{55}{\boxspacing}
+\prompt{In}{incolor}{56}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Function call with invalid tolerance criterion}
 \PY{n}{x0} \PY{o}{=} \PY{n}{bisect}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{4.0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{3.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{)}
@@ -1868,30 +1651,13 @@ Iteration 10: f(mid) = -1.9529e-03
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{AssertionError}                            Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-af11735b41f7>} in \textcolor{ansi-cyan}{bisect}\textcolor{ansi-blue}{(f, a, b, tol, xtol, maxiter)}
-\textcolor{ansi-green-intense}{\textbf{      9}}         tol \textcolor{ansi-blue}{=} float\textcolor{ansi-blue}{(}tol\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{---> 10}\textcolor{ansi-red}{         }\textcolor{ansi-green}{assert} tol \textcolor{ansi-blue}{>} \textcolor{ansi-cyan}{0.0}
-\textcolor{ansi-green-intense}{\textbf{     11}}     \textcolor{ansi-green}{except}\textcolor{ansi-blue}{:}
+\textcolor{ansi-red}{AssertionError}
 
-\textcolor{ansi-red}{AssertionError}: 
 
 During handling of the above exception, another exception occurred:
 
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-505fd0b61d10>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-red}{\# Function call with invalid tolerance criterion}
-\textcolor{ansi-green}{----> 2}\textcolor{ansi-red}{ }x0 \textcolor{ansi-blue}{=} bisect\textcolor{ansi-blue}{(}\textcolor{ansi-green}{lambda} x\textcolor{ansi-blue}{:} x\textcolor{ansi-blue}{**}\textcolor{ansi-cyan}{2.0} \textcolor{ansi-blue}{-} \textcolor{ansi-cyan}{4.0}\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{-}\textcolor{ansi-cyan}{3.0}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{,} tol\textcolor{ansi-blue}{=}\textcolor{ansi-cyan}{0.0}\textcolor{ansi-blue}{)}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} Argument tol must be a positive number!
 
-\textcolor{ansi-green}{<ipython-input-1-af11735b41f7>} in \textcolor{ansi-cyan}{bisect}\textcolor{ansi-blue}{(f, a, b, tol, xtol, maxiter)}
-\textcolor{ansi-green-intense}{\textbf{     10}}         \textcolor{ansi-green}{assert} tol \textcolor{ansi-blue}{>} \textcolor{ansi-cyan}{0.0}
-\textcolor{ansi-green-intense}{\textbf{     11}}     \textcolor{ansi-green}{except}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{---> 12}\textcolor{ansi-red}{         }\textcolor{ansi-green}{raise} ValueError\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{'Argument tol must be a positive number!'}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{     13}} 
-\textcolor{ansi-green-intense}{\textbf{     14}}     \textcolor{ansi-green}{try}\textcolor{ansi-blue}{:}
-
-\textcolor{ansi-red}{ValueError}: Argument tol must be a positive number!
     \end{Verbatim}
 
 
