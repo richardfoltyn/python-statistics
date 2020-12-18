@@ -427,7 +427,6 @@ need to import them. The general convention is to use the namespace
 \end{Verbatim}
 \end{tcolorbox}
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{line-plots}{%
 \subsection{Line plots}\label{line-plots}}
@@ -450,7 +449,7 @@ of points.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f7409ab8fa0>]
+[<matplotlib.lines.Line2D at 0x7f93ec048070>]
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -475,7 +474,7 @@ to plot for a given set of \(x\)-values like this:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f74091d4d90>]
+[<matplotlib.lines.Line2D at 0x7f93ddc6f880>]
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -498,8 +497,8 @@ single graph:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f7409136e80>,
- <matplotlib.lines.Line2D at 0x7f7409136eb0>]
+[<matplotlib.lines.Line2D at 0x7f93ddc50970>,
+ <matplotlib.lines.Line2D at 0x7f93ddc509a0>]
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -591,7 +590,7 @@ legends
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{5}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f74090ac310>]
+[<matplotlib.lines.Line2D at 0x7f93ddbbddc0>]
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -615,7 +614,7 @@ explicitly using keywork arguments:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{6}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f7409099ac0>]
+[<matplotlib.lines.Line2D at 0x7f93ddb355b0>]
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -651,7 +650,7 @@ We can write thus rewrite the above code as follows:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f7409000fd0>]
+[<matplotlib.lines.Line2D at 0x7f93ddb1bac0>]
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -687,7 +686,7 @@ similar fashion to line plots:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.collections.PathCollection at 0x7f7408f751c0>
+<matplotlib.collections.PathCollection at 0x7f93dda83c70>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -716,7 +715,7 @@ same style on all points plotted in that particular function call.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.collections.PathCollection at 0x7f7408f4ec10>
+<matplotlib.collections.PathCollection at 0x7f93dd9eb700>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -725,7 +724,6 @@ same style on all points plotted in that particular function call.
     \end{center}
     { \hspace*{\fill} \\}
     
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{plotting-categorical-data}{%
 \subsection{Plotting categorical data}\label{plotting-categorical-data}}
@@ -782,7 +780,6 @@ Text(0.5, 0, 'Population')
     \end{center}
     { \hspace*{\fill} \\}
     
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{adding-labels-and-annotations}{%
 \subsection{Adding labels and
@@ -853,7 +850,6 @@ Text(20, -20, 'Point 2')
     \end{center}
     { \hspace*{\fill} \\}
     
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{plot-limits-ticks-and-tick-labels}{%
 \subsection{Plot limits, ticks and tick
@@ -904,7 +900,6 @@ We adjust the plot limits, ticks and tick labels as follows:
     \end{center}
     { \hspace*{\fill} \\}
     
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{object-oriented-interface}{%
 \subsection{Object-oriented interface}\label{object-oriented-interface}}
@@ -974,7 +969,6 @@ Text(20, -20, 'Point 2')
 \texttt{set\_xxx()} methods of the \texttt{ax} object. For example,
 instead of calling \texttt{xlim()}, we use \texttt{ax.set\_xlim()}.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{working-with-multiple-plots-axes}{%
 \subsection{Working with multiple plots
@@ -1076,7 +1070,7 @@ to plot into individual panels:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-[<matplotlib.lines.Line2D at 0x7f7408d0f340>]
+[<matplotlib.lines.Line2D at 0x7f93dd823850>]
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1149,13 +1143,12 @@ Text(0.5, 1.02, 'Figure title')
     \end{center}
     { \hspace*{\fill} \\}
     
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{exercises}{%
-\section{Exercises}\label{exercises}}
+\subsection{Exercises}\label{exercises}}
 
     \hypertarget{exercise-1-trigonometric-functions}{%
-\subsection{Exercise 1: Trigonometric
+\subsubsection{Exercise 1: Trigonometric
 functions}\label{exercise-1-trigonometric-functions}}
 
 Plot the functions \(\sin(x)\) and \(\cos(x)\) on the interval
@@ -1168,7 +1161,7 @@ functions''.
 \texttt{np.cos()} as well as the value \texttt{np.pi}.
 
     \hypertarget{exercise-2-logarithmic-scaling}{%
-\subsection{Exercise 2: Logarithmic
+\subsubsection{Exercise 2: Logarithmic
 scaling}\label{exercise-2-logarithmic-scaling}}
 
 In economics and finance, we often plot using the \(\log_{10}\) scale if
@@ -1185,7 +1178,7 @@ points. Use the (default) linear scale in the first plot, but apply the
 the object-oriented interface.
 
     \hypertarget{exercise-3-multiple-lines-in-single-plot}{%
-\subsection{Exercise 3: Multiple lines in single
+\subsubsection{Exercise 3: Multiple lines in single
 plot}\label{exercise-3-multiple-lines-in-single-plot}}
 
 In this exercise, we explore yet another alternative to plot multiple
@@ -1236,13 +1229,12 @@ linestyles = ['-', '--', '-.', ':', '-']
   the plot.
 \end{enumerate}
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{solutions}{%
-\section{Solutions}\label{solutions}}
+\subsection{Solutions}\label{solutions}}
 
 \hypertarget{solution-for-exercise-1}{%
-\subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+\subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{21}{\boxspacing}
@@ -1290,7 +1282,7 @@ Text(0.5, 0.98, 'Trigonometric functions')
     { \hspace*{\fill} \\}
     
     \hypertarget{solution-for-exercise-2}{%
-\subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+\subsubsection{Solution for exercise 2}\label{solution-for-exercise-2}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{22}{\boxspacing}
@@ -1323,7 +1315,7 @@ Text(0.5, 1.0, 'Log scale')
     { \hspace*{\fill} \\}
     
     \hypertarget{solution-for-exercise-3}{%
-\subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+\subsubsection{Solution for exercise 3}\label{solution-for-exercise-3}}
 
 First we plot all polynomials in a single call to \texttt{plot()}. For
 this to work, we need to pass the \(y\)-values as a matrix where each
@@ -1361,7 +1353,7 @@ column corresponds to a different line.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f7408eaebe0>
+<matplotlib.legend.Legend at 0x7f93ddcb8eb0>
 \end{Verbatim}
 \end{tcolorbox}
         

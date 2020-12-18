@@ -340,7 +340,7 @@
         % Allow breaks at special characters using \PYG... macros.
         \Wrappedbreaksatspecials
         % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
-        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+        \OriginalVerbatim[#1,fontsize=\small,codes*=\Wrappedbreaksatpunct]%
     }
     \makeatother
 
@@ -480,7 +480,7 @@ interval \([0.0, 1.0)\).
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([0.86573561, 0.92115424, 0.54936897, 0.29891183, 0.576289  ])
+array([0.9287766 , 0.83751462, 0.09279468, 0.48818383, 0.70371565])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -802,7 +802,6 @@ Text(0.5, 1.0, 'Draws from bivariate normal distribution')
     \end{center}
     { \hspace*{\fill} \\}
     
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{more-functions-for-probability-distributions}{%
 \subsection{More functions for probability
@@ -881,7 +880,7 @@ distribution as follows:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f14eac2ca60>
+<matplotlib.legend.Legend at 0x7f97932bdbb0>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -959,7 +958,6 @@ even need to apply the scaling factor \(\frac{1}{F(0)}\):
 \end{Verbatim}
 \end{tcolorbox}
         
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{statistics-functions}{%
 \subsection{Statistics functions}\label{statistics-functions}}
@@ -1143,10 +1141,9 @@ Test statistic: 3.472, p-value: 0.176
     With a p-value of about 0.18 we cannot reject the null hypothesis of
 zero skewness and zero excess kurtosis.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{exercises}{%
-\section{Exercises}\label{exercises}}
+\subsection{Exercises}\label{exercises}}
 
 The following exercises are considerably longer than those in previous
 units. The reason is that they incorporate everything we have covered so
@@ -1156,7 +1153,7 @@ all the time. In this sense, the exercises are starting to resemble
 (simplified) real-world applications.
 
     \hypertarget{exercise-1-histograms-for-increasing-sample-sizes}{%
-\subsection{Exercise 1: Histograms for increasing sample
+\subsubsection{Exercise 1: Histograms for increasing sample
 sizes}\label{exercise-1-histograms-for-increasing-sample-sizes}}
 
 In this exercise, we plot histograms against the actual PDF of a
@@ -1205,7 +1202,7 @@ Perform the following tasks:
 \end{enumerate}
 
     \hypertarget{exercise-2-moments-of-truncated-normal}{%
-\subsection{Exercise 2: Moments of truncated
+\subsubsection{Exercise 2: Moments of truncated
 normal}\label{exercise-2-moments-of-truncated-normal}}
 
 In this exercise, you are asked to compute the second non-central moment
@@ -1290,7 +1287,7 @@ from scipy.stats import truncnorm
 \end{enumerate}
 
     \hypertarget{exercise-3-multi-period-asset-returns}{%
-\subsection{Exercise 3: Multi-period asset
+\subsubsection{Exercise 3: Multi-period asset
 returns}\label{exercise-3-multi-period-asset-returns}}
 
 Consider an investor with initial assets \(a\) and a 2-period investment
@@ -1354,7 +1351,7 @@ with a correlation coefficient \(Corr(r_1,r_2) = \rho\). Let \(a = 1\),
 \end{enumerate}
 
     \hypertarget{exercise-4-standard-error-and-increasing-sample-size}{%
-\subsection{Exercise 4: Standard error and increasing sample
+\subsubsection{Exercise 4: Standard error and increasing sample
 size}\label{exercise-4-standard-error-and-increasing-sample-size}}
 
 Consider a setting in which we draw multiple samples indexed by \(k\)
@@ -1404,7 +1401,8 @@ distributed such that the underlying normal distribution has mean
 \end{enumerate}
 
     \hypertarget{exercise-5-the-jackknife}{%
-\subsection{Exercise 5: The jackknife}\label{exercise-5-the-jackknife}}
+\subsubsection{Exercise 5: The
+jackknife}\label{exercise-5-the-jackknife}}
 
 We continue with the setting from exercise 4, but instead of computing
 the standard error as above, we now use a resampling technique known as
@@ -1437,7 +1435,8 @@ to get the sample mean and its standard error.
 \end{enumerate}
 
     \hypertarget{exercise-6-the-bootstrap}{%
-\subsection{Exercise 6: The bootstrap}\label{exercise-6-the-bootstrap}}
+\subsubsection{Exercise 6: The
+bootstrap}\label{exercise-6-the-bootstrap}}
 
 We continue with the setting from exercises 4 and 5, but now we use the
 \href{https://en.wikipedia.org/wiki/Bootstrapping_(statistics)\#Case_resampling}{bootstrap}
@@ -1488,16 +1487,15 @@ to estimate the confidence intervals of the mean estimate.
   interval.
 \end{enumerate}
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{solutions}{%
-\section{Solutions}\label{solutions}}
+\subsection{Solutions}\label{solutions}}
 
 The solutions are also provided as Python scripts in the
 \href{../lectures/solutions/unit7}{lectures/solutions/unit7/} folder.
 
     \hypertarget{solution-for-exercise-1}{%
-\subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+\subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
 
 In the following solution we create a figure with six panels (axes) and
 iterate over there axes. In each iteration, we
@@ -1607,7 +1605,7 @@ array (since we requested a \(2 \times 3\) layout). We iterate over the
 loops over rows and columns.
 
     \hypertarget{solution-for-exercise-2}{%
-\subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+\subsubsection{Solution for exercise 2}\label{solution-for-exercise-2}}
 
 Computing the second non-central moment using the first three methods is
 straightforward. All you need to do is to make sure that you pass the
@@ -1726,7 +1724,7 @@ the exercise can be found in the
 \href{../lectures/solutions/unit7}{solutions} folder
 
     \hypertarget{solution-for-exercise-3}{%
-\subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+\subsubsection{Solution for exercise 3}\label{solution-for-exercise-3}}
 
 \textbf{Part 1}
 
@@ -1858,7 +1856,7 @@ to plot the histogram and the true PDF.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f14ea3a2fa0>
+<matplotlib.legend.Legend at 0x7f9792875100>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1871,7 +1869,7 @@ to plot the histogram and the true PDF.
 gross return.
 
     \hypertarget{solution-for-exercise-4}{%
-\subsection{Solution for exercise 4}\label{solution-for-exercise-4}}
+\subsubsection{Solution for exercise 4}\label{solution-for-exercise-4}}
 
 We solve the exercise by iterating over all sample sizes, drawing a new
 log-normal sample and computing the sample mean and standard error.
@@ -1948,7 +1946,7 @@ which we then use the generate the plot.
     { \hspace*{\fill} \\}
     
     \hypertarget{solution-for-exercise-5}{%
-\subsection{Solution for exercise 5}\label{solution-for-exercise-5}}
+\subsubsection{Solution for exercise 5}\label{solution-for-exercise-5}}
 
 Much of this solution proceeds in the very same way as in exercise 4.
 Additionally,
@@ -2058,7 +2056,7 @@ resulting confidence intervals look identical to the ones in exercise 4.
     { \hspace*{\fill} \\}
     
     \hypertarget{solution-for-exercise-6}{%
-\subsection{Solution for exercise 6}\label{solution-for-exercise-6}}
+\subsubsection{Solution for exercise 6}\label{solution-for-exercise-6}}
 
 We first define a function \texttt{bootstrap\_means()} which takes as
 given the initial sample, and

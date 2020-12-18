@@ -550,7 +550,6 @@ to additional material include:
   for a list.
 \end{itemize}
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{creating-pandas-data-structures}{%
 \subsection{Creating pandas data
@@ -660,7 +659,6 @@ often convenient to create the \texttt{DataFrame} by passing a
 dictionary as an argument. Each key represents a column name and each
 corresponding value contains the data for that variable.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{viewing-data}{%
 \subsection{Viewing data}\label{viewing-data}}
@@ -834,7 +832,6 @@ example, the number of academic staff is missing for several
 universities, so the number of \emph{non-null} entries reported in the
 table above is less than 23, the overall sample size.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{indexing}{%
 \subsection{Indexing}\label{indexing}}
@@ -1189,68 +1186,8 @@ given \texttt{DataFrame} since the index labels are \texttt{a},
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{TypeError}                                 Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-11cc54301474>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }df\textcolor{ansi-blue}{.}loc\textcolor{ansi-blue}{[}\textcolor{ansi-cyan}{0}\textcolor{ansi-blue}{:}\textcolor{ansi-cyan}{4}\textcolor{ansi-blue}{]}
+\textcolor{ansi-red}{TypeError}\textcolor{ansi-red}{:} cannot do slice indexing on Index with these indexers [0] of type int
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_\_getitem\_\_}\textcolor{ansi-blue}{(self, key)}
-\textcolor{ansi-green-intense}{\textbf{    877}} 
-\textcolor{ansi-green-intense}{\textbf{    878}}             maybe\_callable \textcolor{ansi-blue}{=} com\textcolor{ansi-blue}{.}apply\_if\_callable\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} self\textcolor{ansi-blue}{.}obj\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{--> 879}\textcolor{ansi-red}{             }\textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_getitem\_axis\textcolor{ansi-blue}{(}maybe\_callable\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    880}} 
-\textcolor{ansi-green-intense}{\textbf{    881}}     \textcolor{ansi-green}{def} \_is\_scalar\_access\textcolor{ansi-blue}{(}self\textcolor{ansi-blue}{,} key\textcolor{ansi-blue}{:} Tuple\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_getitem\_axis}\textcolor{ansi-blue}{(self, key, axis)}
-\textcolor{ansi-green-intense}{\textbf{   1086}}         \textcolor{ansi-green}{if} isinstance\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} slice\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{   1087}}             self\textcolor{ansi-blue}{.}\_validate\_key\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{-> 1088}\textcolor{ansi-red}{             }\textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_get\_slice\_axis\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{   1089}}         \textcolor{ansi-green}{elif} com\textcolor{ansi-blue}{.}is\_bool\_indexer\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{   1090}}             \textcolor{ansi-green}{return} self\textcolor{ansi-blue}{.}\_getbool\_axis\textcolor{ansi-blue}{(}key\textcolor{ansi-blue}{,} axis\textcolor{ansi-blue}{=}axis\textcolor{ansi-blue}{)}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexing.py} in \textcolor{ansi-cyan}{\_get\_slice\_axis}\textcolor{ansi-blue}{(self, slice\_obj, axis)}
-\textcolor{ansi-green-intense}{\textbf{   1120}} 
-\textcolor{ansi-green-intense}{\textbf{   1121}}         labels \textcolor{ansi-blue}{=} obj\textcolor{ansi-blue}{.}\_get\_axis\textcolor{ansi-blue}{(}axis\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{-> 1122}\textcolor{ansi-red}{         indexer = labels.slice\_indexer(
-}\textcolor{ansi-green-intense}{\textbf{   1123}}             slice\_obj\textcolor{ansi-blue}{.}start\textcolor{ansi-blue}{,} slice\_obj\textcolor{ansi-blue}{.}stop\textcolor{ansi-blue}{,} slice\_obj\textcolor{ansi-blue}{.}step\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{"loc"}
-\textcolor{ansi-green-intense}{\textbf{   1124}}         )
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{slice\_indexer}\textcolor{ansi-blue}{(self, start, end, step, kind)}
-\textcolor{ansi-green-intense}{\textbf{   4964}}         slice\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{,} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{   4965}}         """
-\textcolor{ansi-green}{-> 4966}\textcolor{ansi-red}{         }start\_slice\textcolor{ansi-blue}{,} end\_slice \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}slice\_locs\textcolor{ansi-blue}{(}start\textcolor{ansi-blue}{,} end\textcolor{ansi-blue}{,} step\textcolor{ansi-blue}{=}step\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{=}kind\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{   4967}} 
-\textcolor{ansi-green-intense}{\textbf{   4968}}         \textcolor{ansi-red}{\# return a slice}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{slice\_locs}\textcolor{ansi-blue}{(self, start, end, step, kind)}
-\textcolor{ansi-green-intense}{\textbf{   5165}}         start\_slice \textcolor{ansi-blue}{=} \textcolor{ansi-green}{None}
-\textcolor{ansi-green-intense}{\textbf{   5166}}         \textcolor{ansi-green}{if} start \textcolor{ansi-green}{is} \textcolor{ansi-green}{not} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{-> 5167}\textcolor{ansi-red}{             }start\_slice \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}get\_slice\_bound\textcolor{ansi-blue}{(}start\textcolor{ansi-blue}{,} \textcolor{ansi-blue}{"left"}\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{   5168}}         \textcolor{ansi-green}{if} start\_slice \textcolor{ansi-green}{is} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{   5169}}             start\_slice \textcolor{ansi-blue}{=} \textcolor{ansi-cyan}{0}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{get\_slice\_bound}\textcolor{ansi-blue}{(self, label, side, kind)}
-\textcolor{ansi-green-intense}{\textbf{   5077}}         \textcolor{ansi-red}{\# For datetime indices label may be a string that has to be converted}
-\textcolor{ansi-green-intense}{\textbf{   5078}}         \textcolor{ansi-red}{\# to datetime boundary according to its resolution.}
-\textcolor{ansi-green}{-> 5079}\textcolor{ansi-red}{         }label \textcolor{ansi-blue}{=} self\textcolor{ansi-blue}{.}\_maybe\_cast\_slice\_bound\textcolor{ansi-blue}{(}label\textcolor{ansi-blue}{,} side\textcolor{ansi-blue}{,} kind\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{   5080}} 
-\textcolor{ansi-green-intense}{\textbf{   5081}}         \textcolor{ansi-red}{\# we need to look up the label}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{\_maybe\_cast\_slice\_bound}\textcolor{ansi-blue}{(self, label, side, kind)}
-\textcolor{ansi-green-intense}{\textbf{   5029}}         \textcolor{ansi-red}{\# this is rejected (generally .loc gets you here)}
-\textcolor{ansi-green-intense}{\textbf{   5030}}         \textcolor{ansi-green}{elif} is\_integer\textcolor{ansi-blue}{(}label\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{-> 5031}\textcolor{ansi-red}{             }self\textcolor{ansi-blue}{.}\_invalid\_indexer\textcolor{ansi-blue}{(}\textcolor{ansi-blue}{"slice"}\textcolor{ansi-blue}{,} label\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{   5032}} 
-\textcolor{ansi-green-intense}{\textbf{   5033}}         \textcolor{ansi-green}{return} label
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/pandas/core/indexes/base.py} in \textcolor{ansi-cyan}{\_invalid\_indexer}\textcolor{ansi-blue}{(self, form, key)}
-\textcolor{ansi-green-intense}{\textbf{   3265}}         Consistent invalid indexer message\textcolor{ansi-blue}{.}
-\textcolor{ansi-green-intense}{\textbf{   3266}}         """
-\textcolor{ansi-green}{-> 3267}\textcolor{ansi-red}{         raise TypeError(
-}\textcolor{ansi-green-intense}{\textbf{   3268}}             \textcolor{ansi-blue}{f"cannot do \{form\} indexing on \{type(self).\_\_name\_\_\} with these "}
-\textcolor{ansi-green-intense}{\textbf{   3269}}             \textcolor{ansi-blue}{f"indexers [\{key\}] of type \{type(key).\_\_name\_\_\}"}
-
-\textcolor{ansi-red}{TypeError}: cannot do slice indexing on Index with these indexers [0] of type int
     \end{Verbatim}
 
     However, we can reset the index to its default value. Then the index
@@ -1354,7 +1291,6 @@ including boolean arrays. See the
 \href{https://pandas.pydata.org/docs/user_guide/indexing.html\#selection-by-position}{official
 documentation} for details.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{aggregation-and-reduction}{%
 \subsection{Aggregation and reduction}\label{aggregation-and-reduction}}
@@ -1416,7 +1352,7 @@ One big advantage over NumPy is that missing values (represented by
 Applying aggregation functions to the entire \texttt{DataFrame} is
 similar to what we can do with NumPy. The added flexibility of pandas
 becomes obvious once we want to apply these functions to subsets of
-data, i.e.~groups, which we can define based on values or index labels.
+data, \ie groups, which we can define based on values or index labels.
 
 For example, we can easily group our universities by country:
 
@@ -1615,7 +1551,6 @@ See the
 \href{https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html}{official
 documentation} for more details.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{visualisation}{%
 \subsection{Visualisation}\label{visualisation}}
@@ -1796,15 +1731,14 @@ how the data looks like. For reusable code or more complex graphs, we'll
 usually want to directly use Matplotlib and pass the data converted to
 NumPy arrays.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{exercises}{%
-\section{Exercises}\label{exercises}}
+\subsection{Exercises}\label{exercises}}
 
 The following exercises use data files from the \texttt{data/} folder.
 
     \hypertarget{exercise-1-basic-data-manipulations}{%
-\subsection{Exercise 1: Basic data
+\subsubsection{Exercise 1: Basic data
 manipulations}\label{exercise-1-basic-data-manipulations}}
 
 In this exercise, we will perform some basic data manipulation and plot
@@ -1860,7 +1794,7 @@ the results.
 \end{enumerate}
 
     \hypertarget{exercise-2-decade-averages}{%
-\subsection{Exercise 2: Decade
+\subsubsection{Exercise 2: Decade
 averages}\label{exercise-2-decade-averages}}
 
 Load the FRED data from the CSV file \texttt{FRED\_QTR.csv} (using
@@ -1903,7 +1837,7 @@ following tasks:
 \end{enumerate}
 
     \hypertarget{exercise-3-group-averages}{%
-\subsection{Exercise 3: Group
+\subsubsection{Exercise 3: Group
 averages}\label{exercise-3-group-averages}}
 
 Load the universities data from the CSV file \texttt{universities.csv}
@@ -1955,7 +1889,7 @@ the following tasks:
 \end{enumerate}
 
     \hypertarget{exercise-4-grouping-by-multiple-dimensions}{%
-\subsection{Exercise 4: Grouping by multiple
+\subsubsection{Exercise 4: Grouping by multiple
 dimensions}\label{exercise-4-grouping-by-multiple-dimensions}}
 
 Load the universities data from the CSV file \texttt{universities.csv}
@@ -1986,7 +1920,7 @@ the following tasks:
 \end{enumerate}
 
     \hypertarget{exercise-5-okuns-law-advanced}{%
-\subsection{Exercise 5: Okun's law
+\subsubsection{Exercise 5: Okun's law
 (advanced)}\label{exercise-5-okuns-law-advanced}}
 
 In this exercise, we will estimate
@@ -2042,10 +1976,9 @@ following tasks:
   data and overlay it with the regression line you estimated.
 \end{enumerate}
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{solutions}{%
-\section{Solutions}\label{solutions}}
+\subsection{Solutions}\label{solutions}}
 
 These solutions illustrate \emph{one} possible way to solve the
 exercises. Pandas is extremely flexible (maybe too flexible) and allows
@@ -2053,7 +1986,7 @@ us to perform these tasks in many different ways, so your implementation
 might look very different.
 
     \hypertarget{solution-for-exercise-1}{%
-\subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+\subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
 
 One possible implementation looks as follows:
 
@@ -2173,7 +2106,7 @@ df_year = grp.agg(np.mean)
 \end{enumerate}
 
     \hypertarget{solution-for-exercise-2}{%
-\subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+\subsubsection{Solution for exercise 2}\label{solution-for-exercise-2}}
 
 This time we do not specify \texttt{index\_cols} when reading in the CSV
 data since we need \texttt{Year} as a regular variable, not as the
@@ -2307,7 +2240,7 @@ as follows:
     { \hspace*{\fill} \\}
     
     \hypertarget{solution-for-exercise-3}{%
-\subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+\subsubsection{Solution for exercise 3}\label{solution-for-exercise-3}}
 
 We first read in the CSV file, specifying
 \texttt{\textquotesingle{};\textquotesingle{}} as the field separator:
@@ -2460,7 +2393,7 @@ array([[<AxesSubplot:title=\{'center':'Staff/Student'\}, xlabel='Russell'>,
     { \hspace*{\fill} \\}
     
     \hypertarget{solution-for-exercise-4}{%
-\subsection{Solution for exercise 4}\label{solution-for-exercise-4}}
+\subsubsection{Solution for exercise 4}\label{solution-for-exercise-4}}
 
     We create an indicator variable called \texttt{Pre1800} which is set to
 \texttt{True} whenever the founding year in column \texttt{Founded} is
@@ -2642,7 +2575,7 @@ xlabel='Founding year'>
     { \hspace*{\fill} \\}
     
     \hypertarget{solution-for-exercise-5}{%
-\subsection{Solution for exercise 5}\label{solution-for-exercise-5}}
+\subsubsection{Solution for exercise 5}\label{solution-for-exercise-5}}
 
 This exercise is quite involved, so we will discuss it in parts. First,
 we write the function that will be called by \texttt{apply()} to process

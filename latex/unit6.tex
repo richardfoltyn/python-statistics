@@ -1,4 +1,6 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{scrartcl}
+
+    \input{overrides-pre}
 
     \usepackage[breakable]{tcolorbox}
     \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
@@ -155,7 +157,10 @@
     \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
     % Document parameters
     % Document title
-    \title{unit6}
+    \newcommand*{\mytitle}{Unit 6: Advanced NumPy}
+
+    \input{overrides-post}
+
     
     
     
@@ -336,7 +341,7 @@
         % Allow breaks at special characters using \PYG... macros.
         \Wrappedbreaksatspecials
         % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
-        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+        \OriginalVerbatim[#1,fontsize=\small,codes*=\Wrappedbreaksatpunct]%
     }
     \makeatother
 
@@ -375,7 +380,8 @@
 \begin{document}
     
     \maketitle
-    
+    \tableofcontents
+
     
 
     
@@ -466,7 +472,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-146 µs ± 783 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+146 µs ± 2.29 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -481,7 +487,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-898 ns ± 8.32 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+919 ns ± 5.6 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     \begin{itemize}
@@ -501,7 +507,6 @@ works in notebooks, but not in regular Python files.
 {[}\href{https://ipython.readthedocs.io/en/stable/interactive/magics.html}{See
 documentation}{]}
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{creating-arrays}{%
 \subsection{Creating arrays}\label{creating-arrays}}
@@ -522,7 +527,7 @@ creation routines:
   \item
     a collection such as a list or tuple
   \item
-    some other iterable object, e.g.~something created by
+    some other iterable object, \eg something created by
     \texttt{range()}
   \end{itemize}
 \item
@@ -659,7 +664,6 @@ array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. ])
 \end{Verbatim}
 \end{tcolorbox}
         
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{array-shape}{%
 \subsection{Array shape}\label{array-shape}}
@@ -721,13 +725,8 @@ built-in type \texttt{float} has neither a \texttt{shape}, nor an
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{AttributeError}                            Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-cebbc052f34b>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} scalar \textcolor{ansi-blue}{=} \textcolor{ansi-cyan}{1.0}
-\textcolor{ansi-green}{----> 2}\textcolor{ansi-red}{ }scalar\textcolor{ansi-blue}{.}shape
+\textcolor{ansi-red}{AttributeError}\textcolor{ansi-red}{:} 'float' object has no attribute 'shape'
 
-\textcolor{ansi-red}{AttributeError}: 'float' object has no attribute 'shape'
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -845,7 +844,6 @@ array([0.])
 \end{Verbatim}
 \end{tcolorbox}
         
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{advanced-indexing}{%
 \subsection{Advanced indexing}\label{advanced-indexing}}
@@ -982,14 +980,8 @@ array([2, 3, 4, 5])
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{TypeError}                                 Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-19bb25c629fe>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} tpl \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{2}\textcolor{ansi-blue}{,} \textcolor{ansi-cyan}{3}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{      2}} mask \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{(}\textcolor{ansi-green}{True}\textcolor{ansi-blue}{,} \textcolor{ansi-green}{False}\textcolor{ansi-blue}{,} \textcolor{ansi-green}{True}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{----> 3}\textcolor{ansi-red}{ }tpl\textcolor{ansi-blue}{[}mask\textcolor{ansi-blue}{]}               \textcolor{ansi-red}{\# error}
+\textcolor{ansi-red}{TypeError}\textcolor{ansi-red}{:} tuple indices must be integers or slices, not tuple
 
-\textcolor{ansi-red}{TypeError}: tuple indices must be integers or slices, not tuple
     \end{Verbatim}
 
     \hypertarget{integer-index-arrays}{%
@@ -1136,7 +1128,6 @@ array([ 2, 10])
 higher-dimensional data can quickly become a mess, and you should be
 extra careful to see if the results make sense.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{numerical-operations}{%
 \subsection{Numerical operations}\label{numerical-operations}}
@@ -1369,15 +1360,8 @@ array([[0, 1, 2],
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-6f2099a69a9c>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green}{----> 1}\textcolor{ansi-red}{ }np\textcolor{ansi-blue}{.}dot\textcolor{ansi-blue}{(}mat\textcolor{ansi-blue}{,} mat\textcolor{ansi-blue}{)}        \textcolor{ansi-red}{\# raises error, cannot multiply 2x3 matrix with}
-\textcolor{ansi-green-intense}{\textbf{      2}}                         \textcolor{ansi-red}{\# 2x3 matrix}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} shapes (2,3) and (2,3) not aligned: 3 (dim 1) != 2 (dim 0)
 
-\textcolor{ansi-green}{<\_\_array\_function\_\_ internals>} in \textcolor{ansi-cyan}{dot}\textcolor{ansi-blue}{(*args, **kwargs)}
-
-\textcolor{ansi-red}{ValueError}: shapes (2,3) and (2,3) not aligned: 3 (dim 1) != 2 (dim 0)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1563,13 +1547,8 @@ array([0, 1])
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-d51c7a88afa4>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      1}} \textcolor{ansi-red}{\# Trying to add matrix to vector fails}
-\textcolor{ansi-green}{----> 2}\textcolor{ansi-red}{ }mat \textcolor{ansi-blue}{+} vec
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} operands could not be broadcast together with shapes (2,3) (2,) 
 
-\textcolor{ansi-red}{ValueError}: operands could not be broadcast together with shapes (2,3) (2,) 
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1701,14 +1680,8 @@ automatically if we want to multiply arrays of shape
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-449a8f607184>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      4}} b \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}arange\textcolor{ansi-blue}{(}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} m\textcolor{ansi-blue}{+}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{)}                   \textcolor{ansi-red}{\# vector of shape (m,)}
-\textcolor{ansi-green-intense}{\textbf{      5}} 
-\textcolor{ansi-green}{----> 6}\textcolor{ansi-red}{ }a \textcolor{ansi-blue}{*} b           \textcolor{ansi-red}{\# will not work!}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} operands could not be broadcast together with shapes (3,2) (3,) 
 
-\textcolor{ansi-red}{ValueError}: operands could not be broadcast together with shapes (3,2) (3,) 
     \end{Verbatim}
 
     We therefore have to explicitly \emph{append} a degenerate axis to
@@ -1803,7 +1776,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.9 µs ± 5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+1.88 µs ± 17.4 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1815,7 +1788,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-6.22 µs ± 99.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+6.52 µs ± 104 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
     \end{Verbatim}
 
     As you see, not only is the second operation more complex and difficult
@@ -1823,7 +1796,6 @@ to read, it also takes approximately three times as long to execute! The
 reason is that \texttt{np.tile()} replicates the data in memory, which
 is expensive. No copying is done when using broadcasting.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{vectorisation}{%
 \subsection{Vectorisation}\label{vectorisation}}
@@ -1880,7 +1852,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-28.6 µs ± 624 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+31.6 µs ± 324 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1892,7 +1864,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-382 ns ± 3.63 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+407 ns ± 32.5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
     We see that the vectorised variant is about 100 times faster! What is
@@ -1959,7 +1931,7 @@ the performance advantage of vectorised code:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-113 µs ± 1.07 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+116 µs ± 2.6 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1970,7 +1942,7 @@ the performance advantage of vectorised code:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-3.67 µs ± 16.3 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+3.81 µs ± 102 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
     \end{Verbatim}
 
     The vectorised version is approximately 25 times faster, despite the
@@ -1999,7 +1971,6 @@ vectorised functions also yields considerable speed-ups.
 As an aside, note that NumPy actually implements \texttt{np.nansum()}
 which drops NaNs, but it does not discard infinite values.
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{copies-and-views-advanced}{%
 \subsection{Copies and views
@@ -2077,8 +2048,8 @@ which we can verify using the built-in \texttt{id()} function:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-139921660367136
-139921690825392
+140504595031584
+140504595032624
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -2157,7 +2128,7 @@ if
 \begin{itemize}
 \tightlist
 \item
-  An array is created from another array via slicing (i.e.~indexing
+  An array is created from another array via slicing (\ie indexing
   using the \texttt{start:stop:step} triplet)
 \end{itemize}
 
@@ -2242,7 +2213,6 @@ array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 \end{Verbatim}
 \end{tcolorbox}
 
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{numpy-data-types-advanced}{%
 \subsection{NumPy data types
@@ -2541,7 +2511,6 @@ dtype('int64')
 \end{Verbatim}
 \end{tcolorbox}
         
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{array-storage-order-advanced}{%
 \subsection{Array storage order
@@ -2632,13 +2601,12 @@ array([3, 4, 5])
 \end{Verbatim}
 \end{tcolorbox}
         
-    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{exercises}{%
-\section{Exercises}\label{exercises}}
+\subsection{Exercises}\label{exercises}}
 
     \hypertarget{exercise-1-broadcasting}{%
-\subsection{Exercise 1: Broadcasting}\label{exercise-1-broadcasting}}
+\subsubsection{Exercise 1: Broadcasting}\label{exercise-1-broadcasting}}
 
 Let \texttt{m\ =\ 2}, \texttt{n\ =\ 3} and \texttt{k\ =\ 4}. Create an
 array \texttt{a} with shape \texttt{(m,n)} like this:
@@ -2671,7 +2639,7 @@ b = np.arange(m*n*k).reshape((m,k,n)) * 10
 \end{enumerate}
 
     \hypertarget{exercise-2-boolean-indexing}{%
-\subsection{Exercise 2: Boolean
+\subsubsection{Exercise 2: Boolean
 indexing}\label{exercise-2-boolean-indexing}}
 
 Let \texttt{m\ =\ 8} and \texttt{n\ =\ 9}. Create an array \texttt{a}
@@ -2704,7 +2672,7 @@ resulting array \texttt{a} will therefore contain integers between 0 and
 \end{enumerate}
 
     \hypertarget{exercise-3-diagonal-matrices}{%
-\subsection{Exercise 3: Diagonal
+\subsubsection{Exercise 3: Diagonal
 matrices}\label{exercise-3-diagonal-matrices}}
 
 In this exercise, we'll create diagonal matrices using integer array
@@ -2754,7 +2722,7 @@ indexing.
 \end{enumerate}
 
     \hypertarget{exercise-4-triangular-matrices}{%
-\subsection{Exercise 4: Triangular
+\subsubsection{Exercise 4: Triangular
 matrices}\label{exercise-4-triangular-matrices}}
 
 Create a matrix of zeros with shape \texttt{(m,n)}, with
@@ -2794,7 +2762,7 @@ upper-triangular matrix instead: \[
 transpose it!
 
     \hypertarget{exercise-5-row-averages-ignoring-nans}{%
-\subsection{Exercise 5: Row averages (ignoring
+\subsubsection{Exercise 5: Row averages (ignoring
 NaNs)}\label{exercise-5-row-averages-ignoring-nans}}
 
 Construct a matrix with shape \texttt{(m,n)} where \texttt{m\ =\ 5} and
@@ -2831,7 +2799,7 @@ Write code to perform the following tasks:
 \end{enumerate}
 
     \hypertarget{exercise-6-locating-maxima-advanced}{%
-\subsection{Exercise 6: Locating maxima
+\subsubsection{Exercise 6: Locating maxima
 (advanced)}\label{exercise-6-locating-maxima-advanced}}
 
 Consider the following quadratic polynomial in \(x\) which is
@@ -2891,11 +2859,12 @@ Perform the following tasks:
   \end{enumerate}
 \end{enumerate}
 
-    \hypertarget{solutions}{%
-\section{Solutions}\label{solutions}}
+
+\hypertarget{solutions}{%
+\subsection{Solutions}\label{solutions}}
 
     \hypertarget{solution-for-exercise-1}{%
-\subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+\subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
 
 To solve this exercise, we need to make sure that the broadcasting rules
 can be applied by inserting an additional axis in either \texttt{a} or
@@ -3013,7 +2982,7 @@ array([[[   0,   10,   40],
 \end{tcolorbox}
         
     \hypertarget{solution-for-exercise-2}{%
-\subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+\subsubsection{Solution for exercise 2}\label{solution-for-exercise-2}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{92}{\boxspacing}
@@ -3094,7 +3063,7 @@ the number of elements that are \texttt{True}:
 \end{tcolorbox}
         
     \hypertarget{solution-for-exercise-3}{%
-\subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+\subsubsection{Solution for exercise 3}\label{solution-for-exercise-3}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{95}{\boxspacing}
@@ -3269,7 +3238,7 @@ array([[0, 1, 0, 0, 0],
 \end{tcolorbox}
         
     \hypertarget{solution-for-exercise-4}{%
-\subsection{Solution for exercise 4}\label{solution-for-exercise-4}}
+\subsubsection{Solution for exercise 4}\label{solution-for-exercise-4}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{100}{\boxspacing}
@@ -3433,7 +3402,7 @@ array([[ 1,  2,  4,  7, 11],
 \end{tcolorbox}
         
     \hypertarget{solution-for-exercise-5}{%
-\subsection{Solution for exercise 5}\label{solution-for-exercise-5}}
+\subsubsection{Solution for exercise 5}\label{solution-for-exercise-5}}
 
 One implementation of \texttt{rowmeans()} could look as follows:
 
@@ -3516,7 +3485,7 @@ array([ 3.83333333, 11.16666667, 19.42857143, 27.5       , 35.57142857])
 which implements the same functionality. Since we are computing row
 averages (and thus compute averages \emph{across} columns), we need to
 pass in the argument \texttt{axis\ =\ 1}: axes are numbered starting at
-0, so \texttt{axis\ =\ 1} refers to the second axis, i.e.~the columns.
+0, so \texttt{axis\ =\ 1} refers to the second axis, \ie the columns.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{108}{\boxspacing}
@@ -3569,7 +3538,7 @@ against NumPy's.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-52.6 µs ± 850 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+53.3 µs ± 913 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -3580,7 +3549,7 @@ against NumPy's.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-26.1 µs ± 154 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+26.3 µs ± 368 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     You may be surprised that \texttt{np.nanmean()} is only twice as fast as
@@ -3592,7 +3561,7 @@ Try increasing the array dimensions to \texttt{(500,800)} instead of
 faster!
 
     \hypertarget{solution-for-exercise-6}{%
-\subsection{Solution for exercise 6}\label{solution-for-exercise-6}}
+\subsubsection{Solution for exercise 6}\label{solution-for-exercise-6}}
 
 We first create the matrix \texttt{pvalues} which contains the all
 polynomials (for all \texttt{m\ =\ 10}) parametrisations evaluated on a
@@ -3733,7 +3702,7 @@ the maxima to the \emph{same} plot.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{117}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f41fbbe1df0>
+<matplotlib.legend.Legend at 0x7fc9c4b3d4f0>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -3797,7 +3766,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-124 µs ± 2.16 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+122 µs ± 2.1 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -3809,7 +3778,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.47 µs ± 8.52 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+1.48 µs ± 28.9 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
     \end{Verbatim}
 
 
