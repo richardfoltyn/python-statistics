@@ -9,17 +9,17 @@ Author: Richard Foltyn, University of Glasgow
 This introductory course consists of several units. Each unit corresponds
 to one interactive Jupyter notebook, which is also available
 as a static PDF file. Alternatively, you can download the entire course as a 
-[single PDF](latex/python-course.pdf).
+**[single PDF](latex/python-course.pdf)**.
 
-1.  Crash course for the impatient [[PDF](latex/unit1.pdf)]
-2.  Language and NumPy basics [[PDF](latex/unit2.pdf)]
-3.  Control flow and list comprehensions [[PDF](latex/unit3.pdf)]
-4.  Reusing code - Functions, modules and packages [[PDF](latex/unit4.pdf)]
-5.  Plotting [[PDF](latex/unit5.pdf)]
-6.  Advanced NumPy [[PDF](latex/unit6.pdf)]
-7.  Random number generation and statistics [[PDF](latex/unit7.pdf)]
-8.  Handling data with pandas [[PDF](latex/unit8.pdf)]
-9.  Data input and output [[PDF](latex/unit9.pdf)]
+1.  Crash course for the impatient [[PDF](latex/unit01.pdf)]
+2.  Language and NumPy basics [[PDF](latex/unit02.pdf)]
+3.  Control flow and list comprehensions [[PDF](latex/unit03.pdf)]
+4.  Reusing code - Functions, modules and packages [[PDF](latex/unit04.pdf)]
+5.  Plotting [[PDF](latex/unit05.pdf)]
+6.  Advanced NumPy [[PDF](latex/unit06.pdf)]
+7.  Random number generation and statistics [[PDF](latex/unit07.pdf)]
+8.  Handling data with pandas [[PDF](latex/unit08.pdf)]
+9.  Data input and output [[PDF](latex/unit09.pdf)]
 10. Error handling [[PDF](latex/unit10.pdf)]
 
 The *launch binder* link at the top to start an interactive
