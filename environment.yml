@@ -8,6 +8,4 @@ dependencies:
   - scipy
   - pandas=1.*
   - matplotlib
-  - statsmodels
-  - ipympl
   - xlrd
