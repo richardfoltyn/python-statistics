@@ -1435,7 +1435,7 @@ c.LatexExporter.extra_template_paths = ['/home/richard/.local/share/jupyter/nbco
 #  ignored and the execution is continued until the end of the notebook. Output
 #  from exceptions is included in the cell output in both cases.
 #  Default: False
-# c.NotebookClient.allow_errors = False
+c.NotebookClient.allow_errors = True
 
 ## An ordered list of preferred output type, the first encountered will usually
 #  be used when converting discarding the others.
