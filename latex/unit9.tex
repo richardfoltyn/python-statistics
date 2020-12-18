@@ -498,42 +498,8 @@ of universities with \texttt{loadtxt()}, we get the following error:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-b1ec39e83237>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{      5}} \textcolor{ansi-red}{\# Try to load CSV data that contains strings}
-\textcolor{ansi-green-intense}{\textbf{      6}} \textcolor{ansi-red}{\# This will result in an error!}
-\textcolor{ansi-green}{----> 7}\textcolor{ansi-red}{ }data \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}loadtxt\textcolor{ansi-blue}{(}file\textcolor{ansi-blue}{,} delimiter\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{';'}\textcolor{ansi-blue}{,} skiprows\textcolor{ansi-blue}{=}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{)}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} could not convert string to float: '"University of Glasgow"'
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{loadtxt}\textcolor{ansi-blue}{(fname, dtype, comments, delimiter, converters, skiprows, usecols, unpack, ndmin, encoding, max\_rows)}
-\textcolor{ansi-green-intense}{\textbf{   1137}}         \textcolor{ansi-red}{\# converting the data}
-\textcolor{ansi-green-intense}{\textbf{   1138}}         X \textcolor{ansi-blue}{=} \textcolor{ansi-green}{None}
-\textcolor{ansi-green}{-> 1139}\textcolor{ansi-red}{         }\textcolor{ansi-green}{for} x \textcolor{ansi-green}{in} read\_data\textcolor{ansi-blue}{(}\_loadtxt\_chunksize\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{   1140}}             \textcolor{ansi-green}{if} X \textcolor{ansi-green}{is} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{   1141}}                 X \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}array\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{,} dtype\textcolor{ansi-blue}{)}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{read\_data}\textcolor{ansi-blue}{(chunk\_size)}
-\textcolor{ansi-green-intense}{\textbf{   1065}} 
-\textcolor{ansi-green-intense}{\textbf{   1066}}             \textcolor{ansi-red}{\# Convert each value according to its column and store}
-\textcolor{ansi-green}{-> 1067}\textcolor{ansi-red}{             }items \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{[}conv\textcolor{ansi-blue}{(}val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{for} \textcolor{ansi-blue}{(}conv\textcolor{ansi-blue}{,} val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{in} zip\textcolor{ansi-blue}{(}converters\textcolor{ansi-blue}{,} vals\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{]}
-\textcolor{ansi-green-intense}{\textbf{   1068}} 
-\textcolor{ansi-green-intense}{\textbf{   1069}}             \textcolor{ansi-red}{\# Then pack it according to the dtype's nesting}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{<listcomp>}\textcolor{ansi-blue}{(.0)}
-\textcolor{ansi-green-intense}{\textbf{   1065}} 
-\textcolor{ansi-green-intense}{\textbf{   1066}}             \textcolor{ansi-red}{\# Convert each value according to its column and store}
-\textcolor{ansi-green}{-> 1067}\textcolor{ansi-red}{             }items \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{[}conv\textcolor{ansi-blue}{(}val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{for} \textcolor{ansi-blue}{(}conv\textcolor{ansi-blue}{,} val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{in} zip\textcolor{ansi-blue}{(}converters\textcolor{ansi-blue}{,} vals\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{]}
-\textcolor{ansi-green-intense}{\textbf{   1068}} 
-\textcolor{ansi-green-intense}{\textbf{   1069}}             \textcolor{ansi-red}{\# Then pack it according to the dtype's nesting}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{floatconv}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{    761}}         \textcolor{ansi-green}{if} \textcolor{ansi-blue}{'0x'} \textcolor{ansi-green}{in} x\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{    762}}             \textcolor{ansi-green}{return} float\textcolor{ansi-blue}{.}fromhex\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
-\textcolor{ansi-green}{--> 763}\textcolor{ansi-red}{         }\textcolor{ansi-green}{return} float\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    764}} 
-\textcolor{ansi-green-intense}{\textbf{    765}}     typ \textcolor{ansi-blue}{=} dtype\textcolor{ansi-blue}{.}type
-
-\textcolor{ansi-red}{ValueError}: could not convert string to float: '"University of Glasgow"'
     \end{Verbatim}
 
     This code fails for two reasons:
@@ -575,42 +541,8 @@ specifies the field names and their data types:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-red}{---------------------------------------------------------------------------}
-\textcolor{ansi-red}{ValueError}                                Traceback (most recent call last)
-\textcolor{ansi-green}{<ipython-input-1-6782620dfdeb>} in \textcolor{ansi-cyan}{<module>}
-\textcolor{ansi-green-intense}{\textbf{     11}}                    ('Budget', 'f8')])           \# float, 8 bytes
-\textcolor{ansi-green-intense}{\textbf{     12}} 
-\textcolor{ansi-green}{---> 13}\textcolor{ansi-red}{ }data \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}loadtxt\textcolor{ansi-blue}{(}file\textcolor{ansi-blue}{,} delimiter\textcolor{ansi-blue}{=}\textcolor{ansi-blue}{';'}\textcolor{ansi-blue}{,} skiprows\textcolor{ansi-blue}{=}\textcolor{ansi-cyan}{1}\textcolor{ansi-blue}{,} dtype\textcolor{ansi-blue}{=}dtypes\textcolor{ansi-blue}{)}
+\textcolor{ansi-red}{ValueError}\textcolor{ansi-red}{:} could not convert string to float: ''
 
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{loadtxt}\textcolor{ansi-blue}{(fname, dtype, comments, delimiter, converters, skiprows, usecols, unpack, ndmin, encoding, max\_rows)}
-\textcolor{ansi-green-intense}{\textbf{   1137}}         \textcolor{ansi-red}{\# converting the data}
-\textcolor{ansi-green-intense}{\textbf{   1138}}         X \textcolor{ansi-blue}{=} \textcolor{ansi-green}{None}
-\textcolor{ansi-green}{-> 1139}\textcolor{ansi-red}{         }\textcolor{ansi-green}{for} x \textcolor{ansi-green}{in} read\_data\textcolor{ansi-blue}{(}\_loadtxt\_chunksize\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{   1140}}             \textcolor{ansi-green}{if} X \textcolor{ansi-green}{is} \textcolor{ansi-green}{None}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{   1141}}                 X \textcolor{ansi-blue}{=} np\textcolor{ansi-blue}{.}array\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{,} dtype\textcolor{ansi-blue}{)}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{read\_data}\textcolor{ansi-blue}{(chunk\_size)}
-\textcolor{ansi-green-intense}{\textbf{   1065}} 
-\textcolor{ansi-green-intense}{\textbf{   1066}}             \textcolor{ansi-red}{\# Convert each value according to its column and store}
-\textcolor{ansi-green}{-> 1067}\textcolor{ansi-red}{             }items \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{[}conv\textcolor{ansi-blue}{(}val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{for} \textcolor{ansi-blue}{(}conv\textcolor{ansi-blue}{,} val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{in} zip\textcolor{ansi-blue}{(}converters\textcolor{ansi-blue}{,} vals\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{]}
-\textcolor{ansi-green-intense}{\textbf{   1068}} 
-\textcolor{ansi-green-intense}{\textbf{   1069}}             \textcolor{ansi-red}{\# Then pack it according to the dtype's nesting}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{<listcomp>}\textcolor{ansi-blue}{(.0)}
-\textcolor{ansi-green-intense}{\textbf{   1065}} 
-\textcolor{ansi-green-intense}{\textbf{   1066}}             \textcolor{ansi-red}{\# Convert each value according to its column and store}
-\textcolor{ansi-green}{-> 1067}\textcolor{ansi-red}{             }items \textcolor{ansi-blue}{=} \textcolor{ansi-blue}{[}conv\textcolor{ansi-blue}{(}val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{for} \textcolor{ansi-blue}{(}conv\textcolor{ansi-blue}{,} val\textcolor{ansi-blue}{)} \textcolor{ansi-green}{in} zip\textcolor{ansi-blue}{(}converters\textcolor{ansi-blue}{,} vals\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{]}
-\textcolor{ansi-green-intense}{\textbf{   1068}} 
-\textcolor{ansi-green-intense}{\textbf{   1069}}             \textcolor{ansi-red}{\# Then pack it according to the dtype's nesting}
-
-\textcolor{ansi-green}{\textasciitilde{}/.conda/envs/py3-default/lib/python3.8/site-packages/numpy/lib/npyio.py} in \textcolor{ansi-cyan}{<lambda>}\textcolor{ansi-blue}{(x)}
-\textcolor{ansi-green-intense}{\textbf{    771}}         \textcolor{ansi-green}{return} np\textcolor{ansi-blue}{.}int64
-\textcolor{ansi-green-intense}{\textbf{    772}}     \textcolor{ansi-green}{if} issubclass\textcolor{ansi-blue}{(}typ\textcolor{ansi-blue}{,} np\textcolor{ansi-blue}{.}integer\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green}{--> 773}\textcolor{ansi-red}{         }\textcolor{ansi-green}{return} \textcolor{ansi-green}{lambda} x\textcolor{ansi-blue}{:} int\textcolor{ansi-blue}{(}float\textcolor{ansi-blue}{(}x\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{)}
-\textcolor{ansi-green-intense}{\textbf{    774}}     \textcolor{ansi-green}{elif} issubclass\textcolor{ansi-blue}{(}typ\textcolor{ansi-blue}{,} np\textcolor{ansi-blue}{.}longdouble\textcolor{ansi-blue}{)}\textcolor{ansi-blue}{:}
-\textcolor{ansi-green-intense}{\textbf{    775}}         \textcolor{ansi-green}{return} np\textcolor{ansi-blue}{.}longdouble
-
-\textcolor{ansi-red}{ValueError}: could not convert string to float: ''
     \end{Verbatim}
 
     However, this still fails because the of a few missing values.
@@ -691,7 +623,7 @@ counterpart to \texttt{np.loadtxt()} which is called
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Saving CSV file to /tmp/tmpe1\_hc5ed/data.csv
+Saving CSV file to /tmp/tmpivokmqsm/data.csv
     \end{Verbatim}
 
     The above code creates a \(10 \times 5\) matrix of random floats and
@@ -726,6 +658,14 @@ lines of
 
 \begin{verbatim}
 file = 'C:/Users/Path/to/file.txt'
+np.savetxt(file, data, delimiter=';', fmt='%8.5f')
+\end{verbatim}
+
+You can even use relative paths. To store a file in the current working
+directory it is sufficient to just pass the file name:
+
+\begin{verbatim}
+file = 'file.txt'
 np.savetxt(file, data, delimiter=';', fmt='%8.5f')
 \end{verbatim}
 
@@ -968,7 +908,7 @@ automatically supported. For example, we can pickle a list containing a
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Pickled data written to /tmp/tmpcyhga8qo/data.bin
+Pickled data written to /tmp/tmp5t6c5z2m/data.bin
     \end{Verbatim}
 
     We can then read back the data as follows:
