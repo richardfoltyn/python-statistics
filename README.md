@@ -8,7 +8,8 @@ Author: Richard Foltyn, University of Glasgow
 
 This introductory course consists of several units. Each unit corresponds
 to one interactive Jupyter notebook, which is also available
-as a static PDF file.
+as a static PDF file. Alternatively, you can download the entire course as a 
+[single PDF](latex/python-course.pdf).
 
 1.  Crash course for the impatient [[PDF](latex/unit1.pdf)]
 2.  Language and NumPy basics [[PDF](latex/unit2.pdf)]
@@ -21,7 +22,7 @@ as a static PDF file.
 9.  Data input and output [[PDF](latex/unit9.pdf)]
 10. Error handling [[PDF](latex/unit10.pdf)]
 
-The the *launch binder* link at the top to start an interactive
+The *launch binder* link at the top to start an interactive
 notebook.
 
 ## Installation
@@ -29,8 +30,9 @@ notebook.
 ### Running without installation
 
 Click on the ![Binder](https://mybinder.org/badge_logo.svg) button
-above to use the notebooks directly the your web browser. No location
-Python environment is required.
+above to use the notebooks directly in your web browser 
+(in might take a while to set up the environment). No local
+Python installation is required.
 
 ### Running locally
 
