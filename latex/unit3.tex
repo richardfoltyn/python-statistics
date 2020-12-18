@@ -460,12 +460,12 @@ Python knows arithmetic!
 var is 1
     \end{Verbatim}
 
-    \hypertarget{conditional-expressions}{%
-\subsubsection{Conditional expressions}\label{conditional-expressions}}
+    \hypertarget{truth-value-testing}{%
+\subsubsection{Truth value testing}\label{truth-value-testing}}
 
 We already encountered \texttt{==} to test whether two values are equal.
 Python offers many more operators that return either \texttt{True} or
-\texttt{False} and can be used as conditional expressions.
+\texttt{False} and can be used to control conditional execution.
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
@@ -701,6 +701,63 @@ Value is zero
 Flag is True
     \end{Verbatim}
 
+    \hypertarget{conditional-expressions}{%
+\subsubsection{Conditional expressions}\label{conditional-expressions}}
+
+A conditional expression can be used to return a value depending on some
+condition. The conditional expression takes three arguments using the
+syntax
+
+\begin{verbatim}
+<value if true> if <condition> else <value if false>
+\end{verbatim}
+
+The value of this expression can be assigned to a variable, passed to a
+function, etc.
+
+To illustrate, imagine we have the following code:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x} \PY{o}{=} \PY{l+m+mi}{1}
+
+\PY{c+c1}{\PYZsh{} Test whether x is divisible by 2 without remainder using}
+\PY{c+c1}{\PYZsh{} the modulo operator \PYZpc{}}
+\PY{k}{if} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+    \PY{n}{var} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{even}\PY{l+s+s1}{\PYZsq{}}
+\PY{k}{else}\PY{p}{:}
+    \PY{n}{var} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odd}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    This code sets the value of \texttt{var} to either
+\texttt{\textquotesingle{}even\textquotesingle{}} or
+\texttt{\textquotesingle{}odd\textquotesingle{}}, depending on whether
+\texttt{x} is an even or odd integer. We can formulate this more
+concisely using a conditional expression:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{var} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{even}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odd}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    We can even directly print the value of this expression!
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x} \PY{o}{=} \PY{l+m+mi}{1}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{even}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+odd
+    \end{Verbatim}
+
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{loops}{%
@@ -714,7 +771,7 @@ ranges.
 The standard use-case is to iterate over a set of integers:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{13}{\boxspacing}
+\prompt{In}{incolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} iterate over 0,...,3 and print each element}
 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
@@ -736,7 +793,7 @@ increment using the more advanced syntax
 \texttt{range(start,stop,step)}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{14}{\boxspacing}
+\prompt{In}{incolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} iterate over 1,3}
 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
@@ -753,7 +810,7 @@ increment using the more advanced syntax
 a collection:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{15}{\boxspacing}
+\prompt{In}{incolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{cities} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Glasgow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Edinburgh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{St. Andrews}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{cities}\PY{p}{:}
@@ -771,7 +828,7 @@ St. Andrews
 corresponding element, but there is no need to:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\prompt{In}{incolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cities}\PY{p}{)}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} print city at index i}
@@ -789,7 +846,7 @@ St. Andrews
 \emph{keys}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{17}{\boxspacing}
+\prompt{In}{incolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{dct} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
 \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dct}\PY{p}{:}
@@ -805,7 +862,7 @@ key2
     We can explicitly choose whether to iterate over keys, values, or both:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{18}{\boxspacing}
+\prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} iterate over keys, same as example above.}
 \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dct}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
@@ -819,7 +876,7 @@ key2
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{19}{\boxspacing}
+\prompt{In}{incolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} iterate over values}
 \PY{k}{for} \PY{n}{value} \PY{o+ow}{in} \PY{n}{dct}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
@@ -833,7 +890,7 @@ value2
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} iterate over keys and value as the same time}
 \PY{c+c1}{\PYZsh{} using the items() method}
@@ -857,7 +914,7 @@ and then we can instead use the \texttt{while} loop with a terminal
 condition:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{21}{\boxspacing}
+\prompt{In}{incolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{z} \PY{o}{=} \PY{l+m+mf}{1.001}
 \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
@@ -884,7 +941,7 @@ keep track of an item's index. We can do this elegantly using the
 \texttt{enumerate()} function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
+\prompt{In}{incolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{cities} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Glasgow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Edinburgh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{St. Andrews}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
@@ -904,7 +961,7 @@ City 2: St. Andrews
 \texttt{continue} and \texttt{break} statements, respectively:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
+\prompt{In}{incolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{cities}\PY{p}{:}
     \PY{k}{if} \PY{n}{city} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Edinburgh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
@@ -920,7 +977,7 @@ St. Andrews
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{cities}\PY{p}{:}
     \PY{k}{if} \PY{n}{city} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Glasgow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
@@ -948,7 +1005,7 @@ For example, imagine we want to create a list of squares of the integers
 \texttt{append()} method:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Initialise empty list}
 \PY{n}{squares} \PY{o}{=} \PY{p}{[}\PY{p}{]}
@@ -962,7 +1019,7 @@ For example, imagine we want to create a list of squares of the integers
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{25}{\boxspacing}
+\prompt{Out}{outcolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [0, 1, 4, 9, 16]
 \end{Verbatim}
@@ -972,7 +1029,7 @@ For example, imagine we want to create a list of squares of the integers
 using a list comprehension:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{29}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{squares} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{]}
 \PY{n}{squares}
@@ -980,7 +1037,7 @@ using a list comprehension:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{26}{\boxspacing}
+\prompt{Out}{outcolor}{29}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [0, 1, 4, 9, 16]
 \end{Verbatim}
@@ -989,7 +1046,7 @@ using a list comprehension:
     If the desired result should be a \texttt{tuple}, we can instead write
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{27}{\boxspacing}
+\prompt{In}{incolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{squares} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{i}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
 \PY{n}{squares}
@@ -997,7 +1054,7 @@ using a list comprehension:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{27}{\boxspacing}
+\prompt{Out}{outcolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (0, 1, 4, 9, 16)
 \end{Verbatim}
@@ -1008,7 +1065,7 @@ the syntax
 \texttt{\{key:\ \textless{}expression\textgreater{}\ for\ ...\}}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{28}{\boxspacing}
+\prompt{In}{incolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{squares} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{i}\PY{p}{:} \PY{n}{i}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{\PYZcb{}}
 \PY{n}{squares}
@@ -1016,7 +1073,7 @@ the syntax
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{28}{\boxspacing}
+\prompt{Out}{outcolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \{0: 0, 1: 1, 2: 4, 3: 9, 4: 16\}
 \end{Verbatim}
@@ -1027,7 +1084,7 @@ almost arbitrarily complex expressions (this doesn't mean that you
 should, though!)
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{29}{\boxspacing}
+\prompt{In}{incolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create incomprehensible list comprehension.}
 \PY{c+c1}{\PYZsh{} The modulo operator in Python is \PYZpc{}}
@@ -1037,7 +1094,7 @@ should, though!)
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{29}{\boxspacing}
+\prompt{Out}{outcolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [0, 2, 0, 4, 8, 12]
 \end{Verbatim}
@@ -1046,7 +1103,7 @@ should, though!)
     Written out as two nested loops, this code is equivalent to
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
+\prompt{In}{incolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{items} \PY{o}{=} \PY{p}{[}\PY{p}{]}
 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
@@ -1058,7 +1115,7 @@ should, though!)
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{30}{\boxspacing}
+\prompt{Out}{outcolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [0, 2, 0, 4, 8, 12]
 \end{Verbatim}
@@ -1067,7 +1124,7 @@ should, though!)
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{exercises}{%
-\section{Exercises}\label{exercises}}
+\subsection{Exercises}\label{exercises}}
 
 These exercises are not meant to demonstrate the most efficient use of
 Python, but to help you practice the material we have studied above. In
@@ -1075,7 +1132,7 @@ fact, you'd most likely \emph{not} want to use the solutions presented
 here in real code!
 
     \hypertarget{exercise-1-approximate-eulers-number}{%
-\subsection{Exercise 1: Approximate Euler's
+\subsubsection{Exercise 1: Approximate Euler's
 number}\label{exercise-1-approximate-eulers-number}}
 
 Euler's number is defined as
@@ -1094,7 +1151,7 @@ Euler's number is defined as
 \end{enumerate}
 
     \hypertarget{exercise-2-approximate-the-sum-of-a-geometric-series}{%
-\subsection{Exercise 2: Approximate the sum of a geometric
+\subsubsection{Exercise 2: Approximate the sum of a geometric
 series}\label{exercise-2-approximate-the-sum-of-a-geometric-series}}
 
 Let \(\alpha \in (0,1)\). The sum of the geometric series
@@ -1110,7 +1167,7 @@ does it take?
 value \(1\times10^{-8}\) is written as \texttt{1e-8}.
 
     \hypertarget{exercise-3-binary-search-advanced}{%
-\subsection{Exercise 3: Binary search
+\subsubsection{Exercise 3: Binary search
 (advanced)}\label{exercise-3-binary-search-advanced}}
 
 The \href{https://en.wikipedia.org/wiki/Bisection_method}{bisection
@@ -1125,7 +1182,7 @@ Assume that we have an array \texttt{x} of 11 increasing real numbers
 given by
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{31}{\boxspacing}
+\prompt{In}{incolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}
@@ -1134,7 +1191,7 @@ given by
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{31}{\boxspacing}
+\prompt{Out}{outcolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([-0.5 , -0.35, -0.2 , -0.05,  0.1 ,  0.25,  0.4 ,  0.55,  0.7 ,
         0.85,  1.  ])
@@ -1167,7 +1224,7 @@ array([-0.5 , -0.35, -0.2 , -0.05,  0.1 ,  0.25,  0.4 ,  0.55,  0.7 ,
 \end{enumerate}
 
     \hypertarget{exercise-4-diagonal-and-band-matrices}{%
-\subsection{Exercise 4: Diagonal and band
+\subsubsection{Exercise 4: Diagonal and band
 matrices}\label{exercise-4-diagonal-and-band-matrices}}
 
 Let \texttt{a} be a matrix of zeros with shape \texttt{(m,n)} and
@@ -1201,7 +1258,7 @@ a = np.zeros((m,n), dtype=int)
 \end{enumerate}
 
     \hypertarget{exercise-5-triangular-matrices}{%
-\subsection{Exercise 5: Triangular
+\subsubsection{Exercise 5: Triangular
 matrices}\label{exercise-5-triangular-matrices}}
 
 Let \texttt{a} be a matrix of zeroes with shape \texttt{(m,n)} and
@@ -1225,13 +1282,13 @@ upper-triangular matrix, where omitted elements are set to zero: \[
     \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{solutions}{%
-\section{Solutions}\label{solutions}}
+\subsection{Solutions}\label{solutions}}
 
     \hypertarget{solution-for-exercise-1}{%
-\subsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+\subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{32}{\boxspacing}
+\prompt{In}{incolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Compute approximation for n = 10, 20,..., 100}
 \PY{n}{euler\PYZus{}approx} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{o}{+}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{i}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{101}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{]}
@@ -1261,14 +1318,14 @@ Approximation error
     \end{Verbatim}
 
     \hypertarget{solution-for-exercise-2}{%
-\subsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+\subsubsection{Solution for exercise 2}\label{solution-for-exercise-2}}
 
 We don't know now many iterations we will need to get to the required
 tolerance of \(1\times10^{-8}\), so this is a good opportunity to use a
 \texttt{while} loop.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{33}{\boxspacing}
+\prompt{In}{incolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Convergence tolerance}
 \PY{n}{tol} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}8}
@@ -1302,7 +1359,7 @@ Number of iterations: 9, approx. sum: 1.11111111
     \end{Verbatim}
 
     \hypertarget{solution-for-exercise-3}{%
-\subsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+\subsubsection{Solution for exercise 3}\label{solution-for-exercise-3}}
 
 To complete the exercise, all you have to do is to translate the
 algorithm given in the exercise into code.
@@ -1312,7 +1369,7 @@ use a \texttt{while} loop that continues as long as \texttt{lbound} and
 \texttt{ubound} are more than 1 apart.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{34}{\boxspacing}
+\prompt{In}{incolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1356,13 +1413,13 @@ Value at upper bound: 0.1
 \(a\) and \(b\) have the same sign whenever \(a \cdot b > 0\).
 
     \hypertarget{solution-for-exercise-4}{%
-\subsection{Solution for exercise 4}\label{solution-for-exercise-4}}
+\subsubsection{Solution for exercise 4}\label{solution-for-exercise-4}}
 
 For the first part, we just need to loop over the diagonal elements and
 overwrite the zeros with ones:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{35}{\boxspacing}
+\prompt{In}{incolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Part 1: create identity matrix}
 
@@ -1380,7 +1437,7 @@ overwrite the zeros with ones:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{35}{\boxspacing}
+\prompt{Out}{outcolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[1, 0, 0, 0],
        [0, 1, 0, 0],
@@ -1393,7 +1450,7 @@ array([[1, 0, 0, 0],
 function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{36}{\boxspacing}
+\prompt{In}{incolor}{39}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{4}
 \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
@@ -1401,7 +1458,7 @@ function:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{36}{\boxspacing}
+\prompt{Out}{outcolor}{39}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[1, 0, 0, 0],
        [0, 1, 0, 0],
@@ -1415,7 +1472,7 @@ check at each position \((i,j)\) whether it is on the main diagonal, or
 on the first upper or lower diagonals.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{37}{\boxspacing}
+\prompt{In}{incolor}{40}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Part 2: create band matrix}
 
@@ -1445,7 +1502,7 @@ on the first upper or lower diagonals.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{37}{\boxspacing}
+\prompt{Out}{outcolor}{40}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[1, 2, 0, 0, 0],
        [3, 1, 2, 0, 0],
@@ -1455,13 +1512,13 @@ array([[1, 2, 0, 0, 0],
 \end{tcolorbox}
         
     \hypertarget{solution-for-exercise-5}{%
-\subsection{Solution for exercise 5}\label{solution-for-exercise-5}}
+\subsubsection{Solution for exercise 5}\label{solution-for-exercise-5}}
 
 We solve this exercise using two nested \texttt{for} loops, the first
 over rows, the second over columns:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{38}{\boxspacing}
+\prompt{In}{incolor}{41}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} 
 
@@ -1486,7 +1543,7 @@ over rows, the second over columns:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{38}{\boxspacing}
+\prompt{Out}{outcolor}{41}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[ 1,  2,  3,  4],
        [ 0,  5,  6,  7],
