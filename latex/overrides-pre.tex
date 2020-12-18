@@ -10,3 +10,14 @@
 
 \addtokomafont{disposition}{\rmfamily}
 \setcounter{tocdepth}{\subsectiontocdepth}
+
+
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\institute}[1]{% add institute to \maketitle
+  \apptocmd{\@author}{\end{tabular}
+    \par
+    \begin{tabular}[t]{c}
+    #1}{}{}
+}
+\makeatother
