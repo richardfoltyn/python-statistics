@@ -17,3 +17,8 @@
 
 3.  Add even simpler `plot()` examples using a `Series` object.
 4.  Use different parameters for normal distributions in box plot.
+
+# Unit 9
+
+1.  Add dependency on openpyxl to read xlsx files, xlrd >= 2.0 now
+    only supports legacy Excel formats
