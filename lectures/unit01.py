@@ -225,7 +225,7 @@ data[:5]
 
 # Split array into separate time series
 # Years are in the first column; convert them to integer values
-years = np.array(data[:, 0], dtype=np.int)
+years = np.array(data[:, 0], dtype=int)
 
 gdp = data[:, 1]    # GDP in column 2
 cpi = data[:, 2]    # CPI in column 3
@@ -289,8 +289,9 @@ fig.savefig('figure4.pdf')
 
 ## Summary statistics
 #
-# We compute some summary statistics for all three time series
-# using the functions np.mean() and np.std():
+# We can compute some summary statistics for all three time series
+# using functions such as np.mean() and np.std(), where the latter
+# computes the standard deviation:
 
 def print_stats(name, x):
     # Define formatting string to print results
