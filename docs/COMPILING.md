@@ -12,6 +12,12 @@ The relevant non-default options are:
     c.ExecutePreprocessor.allow_errors = True
     c.ExecutePreprocessor.enabled = True
 
+Note that a fresh template config file with all default values can 
+be generated via
+    
+    jupyter nbconvert --generate-config 
+
+which will be placed in a default directory.
 
 ### IPython config file
 
@@ -27,9 +33,14 @@ The relevant options in `$HOME/.ipython/profile_default/ipython_config.py` are
     c.InteractiveShell.xmode = 'Minimal'
     c.InlineBackend.figure_formats = {'png', 'pdf'}
 
+A new config file with all the default values can be generated as part
+of a new profile via
+
+    ipython profile create
+
 ## Individual unit PDFs
 
-1.  Generate preliminary LaTeX document:
+1. Generate preliminary LaTeX document:
 
         jupyter nbconvert --to=latex --output-dir=latex lectures/unitXX.ipynb
 
@@ -39,10 +50,13 @@ The relevant options in `$HOME/.ipython/profile_default/ipython_config.py` are
             jupyter nbconvert --to=latex --output-dir=latex ${file}
         done
 
-2.  Fix most issues with generated LaTeX file by running:
+2. Fix most issues with generated LaTeX file by running:
 
         cd latex
-        ../helpers/fix-latex.sh unitXX.sh
+        ../helpers/fix-latex.sh unitXX.tex
+
+3. Use diff view to identify the remaining the commands that need to inserted
+   manually (until someone defines a better template for LaTeX output). 
 
 ## Course book
 
