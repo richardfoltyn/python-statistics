@@ -23,13 +23,16 @@ which will be placed in a default directory.
 
 The IPython config file controls two important aspects:
 
--   The verbosity of stack traces: this should be set to `'Minimal'`
+- The verbosity of stack traces: this should be set to `'Minimal'`
     otherwise the PDFs are full of stack traces for errors we 
     trigger throughout the units.
--   Generating PDF graphs to be included in the static PDF.
+- Generating PDF graphs to be included in the static PDF.
+- Matplotlib graphs need to be shown `inline`, otherwise they don't appear in 
+  the notebook or PDF.
 
 The relevant options in `$HOME/.ipython/profile_default/ipython_config.py` are
 
+    c.InteractiveShellApp.matplotlib = 'inline'
     c.InteractiveShell.xmode = 'Minimal'
     c.InlineBackend.figure_formats = {'png', 'pdf'}
 
