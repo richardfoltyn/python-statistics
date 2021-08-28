@@ -18,9 +18,9 @@ df['Pre1800'] = df['Founded'] < 1800
 grp = df.groupby(['Country', 'Pre1800'])
 
 # Number of universities by country and founding period.
-# Since we are grouping by two attributes, which will create a
+# Since we are grouping by two attributes, this will create a
 # Series with a multi-level (hierarchical) index
-count = grp['Institution'].count()
+count = grp.size()
 
 ###############################################################################
 # DataFrame with countries in rows, Pre-1800 indicator in columns

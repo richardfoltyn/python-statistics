@@ -26,9 +26,8 @@ budget = grp.apply(lambda x: np.nanmean(x['Budget'] / x['Students']))
 budget *= 1.0e6
 
 # Count number of institutions in each group.
-# We can use the 'Russell' column for this because it has no
-# missing data.
-count = grp['Russell'].count()
+# We can accomplish this by calling size() on the group object.
+count = grp.size()
 
 # Create a new DataFrame. Each column is a Series object.
 df_all = pd.DataFrame({'Staff_Student': staff,
@@ -58,9 +57,8 @@ df = df[columns_keep].copy()
 # Aggregate by Russell indicator
 grp = df.groupby(['Russell'])
 # Count number of institutions in each group.
-# We can use the 'Russell' column for this because it has no
-# missing data.
-count = grp['Russell'].count()
+# We can accomplish this by calling size() on the group object.
+count = grp.size()
 
 df_all = grp.mean()
 # Add counter

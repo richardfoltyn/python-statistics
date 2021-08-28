@@ -97,8 +97,8 @@ for i, ax in enumerate(axes.flatten()):
     slope = df_reg.loc[decade, 'GDP_gap']
 
     # plot regression line:
-    # We need to provide two points to define the line to be plotted.
-    ax.axline((0.0, const), (1.0, const+slope), color='red',
+    # We need to provide one point and a slope to define the line to be plotted.
+    ax.axline((0.0, const), slope=slope, color='red',
               lw=2.0, label='Regression line')
 
     # Add label containing the current decade
