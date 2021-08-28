@@ -43,12 +43,12 @@ To clone the repository, run
 You will need a local Python environment (such as [Anaconda](https://www.anaconda.com/products/individual), the packages that come with your Linux distribution, etc.)
 with the following packages installed:
 
--   Python >= 3.7
--   NumPy >= 1.17
+-   Python >= 3.8
+-   NumPy >= 1.20
 -   SciPy
--   pandas
+-   pandas >= 1.3
 -   matplotlib
--   xlrd
+-   openpyxl
 -   Jupyter notebook
 
 To start the Jupyter notebook server, execute something like this
