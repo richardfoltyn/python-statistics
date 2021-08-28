@@ -28,7 +28,7 @@ fig, ax = plt.subplots(2, 3, sharex=True, sharey=True, figsize=(12, 6))
 rng = default_rng(123)
 
 for i, axes in enumerate(ax.flatten()):
-    # draw sample of given size
+    # Sample size to be plotted in current panel
     N = Nobs[i]
     # Draw sample of size N
     data = rng.standard_t(df=df, size=N)
