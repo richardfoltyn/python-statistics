@@ -25,6 +25,8 @@ as a static PDF file. Alternatively, you can download the entire course as a
 The *launch binder* link at the top to start an interactive
 notebook.
 
+***
+
 ## Installation
 
 ### Running without installation
@@ -36,25 +38,51 @@ Python installation is required.
 
 ### Running locally
 
-To clone the repository, run
+#### Download the repository contents
 
-    git clone https://github.com/richardfoltyn/python-statistics.git
+If you are familiar with git, clone the repository:
+```bash
+git clone https://github.com/richardfoltyn/python-statistics.git
+```
+Otherwise, download the contents as a ZIP file by clicking on
+![Code](images/gh-code.png) above.
 
-You will need a local Python environment (such as [Anaconda](https://www.anaconda.com/products/individual), the packages that come with your Linux distribution, etc.)
-with the following packages installed:
+#### Install Anaconda
 
--   Python >= 3.8
--   NumPy >= 1.20
--   SciPy
--   pandas >= 1.3
--   matplotlib
--   openpyxl
--   Jupyter notebook
+On Windows, you need to install a local Python environment such as 
+[Anaconda](https://www.anaconda.com/products/individual). On Linux,
+your distribution comes with Python but the required packages are most likely
+outdated, so it is still recommended installing Anaconda.
 
-To start the Jupyter notebook server, execute something like this
+##### Windows
 
-    cd path/to/repository
-    jupyter notebook index.ipynb
+Once Anaconda is installed, click on _Jupyter Notebook_ in the Start menu
+and navigate to where you extracted the repository contents. Select
+`index.ipynb` to run the main notebook.
+
+![Jupyter Notebook](images/conda-start.png)
+
+##### Linux
+
+You need to create a new Python environment which contains all the 
+required packages. You can use the specification provided in [environment.yml](environment.yml)
+to accomplish that:
+```bash
+conda env create -f environment.yml
+```
+Activate the virtual environment you just created:
+```bash
+conda activate python-statistics
+```
+To start the Jupyter notebook server, navigate to where you extracted
+the repository contents and run
+```bash
+cd path/to/repository
+jupyter notebook index.ipynb
+```
+
+
+***
 
 ## Licence
 
