@@ -10,3 +10,5 @@ dependencies:
   - xlrd
   - openpyxl
   - notebook
+  - scikit-learn
+  - statsmodels
