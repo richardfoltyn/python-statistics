@@ -21,6 +21,7 @@ as a static PDF file. Alternatively, you can download the entire course as a
 8.  Handling data with pandas [[PDF](latex/unit08.pdf)]
 9.  Data input and output [[PDF](latex/unit09.pdf)]
 10. Error handling [[PDF](latex/unit10.pdf)]
+11. Applications: Econometrics [[PDF](latex/unit11.pdf)]
 
 The *launch binder* link at the top to start an interactive
 notebook.
