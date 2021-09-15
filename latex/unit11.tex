@@ -1,0 +1,1195 @@
+\documentclass[10pt]{scrartcl}
+
+    \input{overrides-pre}
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+    \usepackage{iftex}
+    \ifPDFTeX
+    	\usepackage[T1]{fontenc}
+    	\usepackage{mathpazo}
+    \else
+    	\usepackage{fontspec}
+    \fi
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \newcommand*{\mytitle}{Unit 11: Applications -- Econometrics}
+    
+    
+    \input{overrides-post}
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb. 
+    \makeatletter
+        \newbox\Wrappedcontinuationbox 
+        \newbox\Wrappedvisiblespacebox 
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}} 
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}} 
+        \newcommand*\Wrappedcontinuationindent {3ex } 
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox} 
+        % Take advantage of the already applied Pygments mark-up to insert 
+        % potential linebreaks for TeX processing. 
+        %        {, <, #, %, $, ' and ": go to next line. 
+        %        _, }, ^, &, >, - and ~: stay at end of broken line. 
+        % Use of \textquotesingle for straight quote. 
+        \newcommand*\Wrappedbreaksatspecials {% 
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}% 
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}% 
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}% 
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}% 
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}% 
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}% 
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}% 
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}% 
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}% 
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}% 
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}% 
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}% 
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}% 
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}% 
+        } 
+        % Some characters . , ; ? ! / are not pygmentized. 
+        % This macro makes them "active" and they will insert potential linebreaks 
+        \newcommand*\Wrappedbreaksatpunct {% 
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}% 
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}% 
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}% 
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}% 
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}% 
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}% 
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}% 
+            \catcode`\.\active
+            \catcode`\,\active 
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active 
+            \lccode`\~`\~ 	
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+        
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
+        \OriginalVerbatim[#1,fontsize=\small,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+    
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \maketitle
+    \tableofcontents
+
+    
+
+    
+    \hypertarget{applications-econometrics}{%
+\section{Applications: Econometrics}\label{applications-econometrics}}
+
+    \hypertarget{preliminaries-drawing-bivariate-samples}{%
+\subsection{Preliminaries: Drawing bivariate
+samples}\label{preliminaries-drawing-bivariate-samples}}
+
+In most of the exercises below, we'll need to draw a random sample that
+serves as an input. We therefore first define a routine which returns a
+sample drawn from a bivariate normal distribution.
+
+In line with what we learned in unit 10, we check arguments and raise
+and exception if a an invalid value is encountered.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{random} \PY{k+kn}{import} \PY{n}{default\PYZus{}rng}
+
+\PY{k}{def} \PY{n+nf}{draw\PYZus{}bivariate\PYZus{}sample}\PY{p}{(}\PY{n}{mean}\PY{p}{,} \PY{n}{std}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{123}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    Draw a bivariate normal random sample.}
+
+\PY{l+s+sd}{    Parameters}
+\PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+\PY{l+s+sd}{    mean : array\PYZus{}like}
+\PY{l+s+sd}{        Length\PYZhy{}2 array of means}
+\PY{l+s+sd}{    std : array\PYZus{}like}
+\PY{l+s+sd}{        Length\PYZhy{}2 array of standard deviations}
+\PY{l+s+sd}{    rho : float}
+\PY{l+s+sd}{        Correlation parameter}
+\PY{l+s+sd}{    n : int}
+\PY{l+s+sd}{        Sample size}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{k}{if} \PY{o+ow}{not} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{rho} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+        \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Invalid correlation parameter: }\PY{l+s+si}{\PYZob{}}\PY{n}{rho}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+    \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{std}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+        \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Invalid standard deviation: }\PY{l+s+si}{\PYZob{}}\PY{n}{std}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+    \PY{k}{if} \PY{n}{n} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{:}
+        \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Invalid sample size: }\PY{l+s+si}{\PYZob{}}\PY{n}{n}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} initialize default RNG with given seed}
+    \PY{n}{rng} \PY{o}{=} \PY{n}{default\PYZus{}rng}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Unpack standard deviations for each dimension}
+    \PY{n}{std1}\PY{p}{,} \PY{n}{std2} \PY{o}{=} \PY{n}{std}
+
+    \PY{c+c1}{\PYZsh{} Compute covariance}
+    \PY{n}{cov} \PY{o}{=} \PY{n}{rho} \PY{o}{*} \PY{n}{std1} \PY{o}{*} \PY{n}{std2}
+
+    \PY{c+c1}{\PYZsh{} Create variance\PYZhy{}covariance matrix}
+    \PY{n}{vcv} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{std1}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0}\PY{p}{,} \PY{n}{cov}\PY{p}{]}\PY{p}{,}
+                    \PY{p}{[}\PY{n}{cov}\PY{p}{,} \PY{n}{std2}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Draw MVN random numbers:}
+    \PY{c+c1}{\PYZsh{} each row represents one sample draw.}
+    \PY{n}{X} \PY{o}{=} \PY{n}{rng}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{n}{mean}\PY{o}{=}\PY{n}{mean}\PY{p}{,} \PY{n}{cov}\PY{o}{=}\PY{n}{vcv}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{n}\PY{p}{)}
+
+    \PY{k}{return} \PY{n}{X}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{singular-value-decomposition-svd-and-principal-components}{%
+\subsection{Singular value decomposition (SVD) and principal
+components}\label{singular-value-decomposition-svd-and-principal-components}}
+
+Singular value decomposition is a matrix factorisation that is commonly
+use in econometrics and statistics. For example, we can use it to
+implement principal component analysis (PCA), principal component
+regression, OLS or Ridge regression.
+
+Let \(\mathbf{X} \in R^{m\times n}\) be a matrix. For our purposes, we
+will assume that \(m \geq n\) since \(\mathbf{X}\) will be the matrix
+containing the data with observations in rows and variables in column.
+The (compact) SVD of \(\mathbf{X}\) is given by
+\[\mathbf{X} = \mathbf{U} \Sigma \mathbf{V}'\] where
+\(\mathbf{U} \in R^{m\times n}\) and \(\mathbf{V} \in R^{n\times n}\)
+are orthogonal matrices, and \(\Sigma \in R^{n \times n}\) is a diagonal
+matrix \[\Sigma =  \begin{bmatrix} 
+    \sigma_1 & & & & \\
+     & \sigma_2 & & & \\
+     & & \ddots & & \\
+     & & & \sigma_n & 
+\end{bmatrix}\] The elements \(\sigma_i\) are called singular values of
+\(\mathbf{X}\), and \(\Sigma\) is arranged such that
+\(\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_n\). Since
+\(\mathbf{U}\) is not necessarily square, it's not truly orthogonal, but
+its columns are still orthogonal to each other.
+
+These matrices satisfy the following useful properties: \[
+\def\bV{\mathbf{V}}
+\def\bU{\mathbf{U}}
+\def\bI{\mathbf{I}}
+\begin{aligned}
+    \bU' \bU &= \bI_n \\
+    \bV' \bV &= \bV\bV' = \bI_n \\
+    \bV' &= \bV^{-1}
+\end{aligned}
+\]
+
+In Python, we compute the SVD using the
+\href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html}{\texttt{svd()}}
+function from \texttt{numpy.linalg}.
+
+    \hypertarget{example-bivariate-normal}{%
+\subsubsection{Example: Bivariate
+normal}\label{example-bivariate-normal}}
+
+Imagine we construct \(X\) as 10 random draws from a bivariate normal:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{random} \PY{k+kn}{import} \PY{n}{default\PYZus{}rng}
+
+\PY{c+c1}{\PYZsh{} Draw a bivariate normal sample using the function we defined above}
+\PY{n}{mu} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}         \PY{c+c1}{\PYZsh{} Vector of means}
+\PY{n}{sigma} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}      \PY{c+c1}{\PYZsh{} Vector of standard deviations}
+\PY{n}{rho} \PY{o}{=} \PY{l+m+mf}{0.75}              \PY{c+c1}{\PYZsh{} Correlation coefficient}
+\PY{n}{Nobs} \PY{o}{=} \PY{l+m+mi}{200}              \PY{c+c1}{\PYZsh{} Sample size}
+\PY{n}{X} \PY{o}{=} \PY{n}{draw\PYZus{}bivariate\PYZus{}sample}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{Nobs}\PY{p}{)}
+\PY{n}{x1}\PY{p}{,} \PY{n}{x2} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{T}
+
+\PY{c+c1}{\PYZsh{} Scatter plot of sample}
+\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}x\PYZus{}1\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}x\PYZus{}2\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Draws from bivariate normal distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Text(0.5, 1.0, 'Draws from bivariate normal distribution')
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_5_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can now perform the SVD as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k+kn}{import} \PY{n}{svd}
+
+\PY{c+c1}{\PYZsh{} svd() returns transposed V!}
+\PY{c+c1}{\PYZsh{} We use full\PYZus{}matrices=False to get the compact factorisation, otherwise}
+\PY{c+c1}{\PYZsh{} U is 200 x 200.}
+\PY{n}{U}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{Vt} \PY{o}{=} \PY{n}{svd}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{full\PYZus{}matrices}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Check that U\PYZsq{}U is a 2x2 identity matrix}
+\PY{n}{U}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{U}         \PY{c+c1}{\PYZsh{} or np.dot(U.T, U)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 1.00000000e+00, -6.12878704e-17],
+       [-6.12878704e-17,  1.00000000e+00]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Check that V\PYZsq{}V = VV\PYZsq{} is a 2x2 identity matrix}
+\PY{n}{Vt}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{Vt}       \PY{c+c1}{\PYZsh{} or np.dot(Vt.T, Vt)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 1.00000000e+00, -2.26167254e-18],
+       [-2.26167254e-18,  1.00000000e+00]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} svd() does not return S as a matrix but only its diagonal!}
+\PY{n}{S}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([19.73152572,  5.99498933])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} We can convert it to a diagonal matrix using np.diag()}
+\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[19.73152572,  0.        ],
+       [ 0.        ,  5.99498933]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{example-principal-components}{%
+\subsubsection{Example: Principal
+components}\label{example-principal-components}}
+
+We use principal component analysis (PCA) as a dimension reduction
+technique, which allows us to identify an alternate set of axes along
+which the data in \(\mathbf{X}\) varies the most. In machine learning,
+PCA is one of the most basic unsupervised learning techniques.
+
+To perform the PCA, it is recommended to first demean the data:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{X} \PY{o}{=} \PY{n}{draw\PYZus{}bivariate\PYZus{}sample}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{Nobs}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Demean variables in X}
+\PY{n}{Xmean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Matrix Z stores the demeaned variables}
+\PY{n}{Z} \PY{o}{=} \PY{n}{X} \PY{o}{\PYZhy{}} \PY{n}{Xmean}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    We can now use the SVD factorisation to compute the principal
+components. Once we have computed the matrices \(\mathbf{U}\),
+\(\Sigma\) and \(\mathbf{V}\), the matrix of principal components (one
+in each column) is given by \[
+PC = \mathbf{U} \Sigma
+\]
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Apply SVD to standardised values}
+\PY{n}{U}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{Vt} \PY{o}{=} \PY{n}{svd}\PY{p}{(}\PY{n}{Z}\PY{p}{,} \PY{n}{full\PYZus{}matrices}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Compute principal components}
+\PY{n}{PC} \PY{o}{=} \PY{n}{U} \PY{o}{*} \PY{n}{S}          \PY{c+c1}{\PYZsh{} same as U @ np.diag(S)}
+
+\PY{c+c1}{\PYZsh{} Variance of each PC is highest for first component}
+\PY{n}{var\PYZus{}PC} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{PC}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Principal component variances: }\PY{l+s+si}{\PYZob{}}\PY{n}{var\PYZus{}PC}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Principal component variances: [1.17607859 0.09444617]
+    \end{Verbatim}
+
+    We can now plot the principal component axes in the original data space.
+The right column shows the data rotated and rescaled so that each axes
+now corresponds to a principal component. Most of the variation clearly
+occurs along the first axis!
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Plot principal components}
+
+\PY{c+c1}{\PYZsh{} Scatter plot of sample}
+\PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}x\PYZus{}1\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}x\PYZus{}2\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{axline}\PY{p}{(}\PY{n}{Xmean}\PY{p}{,} \PY{n}{Xmean} \PY{o}{+} \PY{n}{Vt}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{axline}\PY{p}{(}\PY{n}{Xmean}\PY{p}{,} \PY{n}{Xmean} \PY{o}{+} \PY{n}{Vt}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+
+\PY{n}{PC\PYZus{}arrows} \PY{o}{=} \PY{n}{Vt} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{var\PYZus{}PC}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]}\PY{p}{)}
+\PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{PC\PYZus{}arrows}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} Scale up arrows by 3 aAso that they are visible!}
+    \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{Xmean} \PY{o}{+} \PY{n}{v}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{Xmean}\PY{p}{,} \PY{n}{arrowprops}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{arrowstyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Plot in principal component coordinate system}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{PC}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{PC}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<matplotlib.lines.Line2D at 0x7f1a402cd580>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_17_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Of course, in real applications we don't need to manually compute the
+principal components, but can use a library such as
+\href{https://scikit-learn.org/stable/}{scikit-learn} to do it for us:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k+kn}{import} \PY{n}{PCA}
+
+\PY{n}{X} \PY{o}{=} \PY{n}{draw\PYZus{}bivariate\PYZus{}sample}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{Nobs}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create PCA with 2 components (which is the max, since we have only two }
+\PY{c+c1}{\PYZsh{} variables)}
+\PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Perform PCA on input data}
+\PY{n}{pca}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} The attribute components\PYZus{} can be used to retrieve the V\PYZsq{} matrix}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Principal components (matrix V}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{components\PYZus{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} The attribute explained\PYZus{}variance\PYZus{} stores the variances of all PCs}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Variance of each PC: }\PY{l+s+si}{\PYZob{}}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Fraction of variance explained by each component:}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fraction of variance of each PC: }\PY{l+s+si}{\PYZob{}}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Principal components (matrix V'):
+[[ 0.38420018  0.92324981]
+ [ 0.92324981 -0.38420018]]
+Variance of each PC: [1.17607859 0.09444617]
+Fraction of variance of each PC: [0.92566365 0.07433635]
+    \end{Verbatim}
+
+    \hypertarget{ordinary-least-squares-ols}{%
+\subsection{Ordinary least squares
+(OLS)}\label{ordinary-least-squares-ols}}
+
+Consider the regression \[
+y_i = x_i' \beta + u_i
+\] where \(x_i\) is a vector of regressors (explanatory variables) that
+is assumed to include a constant. Recall that the OLS estimator
+\(\widehat{\beta}\) is given by \[
+\widehat{\beta} = \left(X'X\right)^{-1}X'y
+\] where \(X\) is the regressor matrix that contains all stacked
+\(x_i'\), and \(y\) contains all observations of the dependent variable.
+
+    \hypertarget{example-1-bivariate-data}{%
+\subsubsection{Example 1: Bivariate
+data}\label{example-1-bivariate-data}}
+
+We first demonstrate how to compute \(\beta\) using bivariate normal
+data, to the regression simplifies to \[
+y_i = \alpha + \beta x_i + u_i
+\] where \(\alpha\) is the intercept and \(\beta\) is the slope
+coefficient. In this special case, the population coefficient \(\beta\)
+can be computed using the formula \[
+\beta = \frac{E[(Y-\overline{Y})(X-\overline{X})]}{E[(X-\overline{X})]}
+ = \frac{Cov(Y,X)}{Var(X)}
+\] there the numerator contains the covariance of the random variables
+\(Y\) and \(X\), and the denominator contains the variance of \(X\).
+Given a sample of values, the estimator \(\widehat{\beta}\) is computed
+using the corresponding sample moments: \[
+\widehat{\beta} = \frac{\widehat{Cov}(y,x)}{\widehat{Var}(x)}
+\]
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+
+\PY{n}{mu} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}                \PY{c+c1}{\PYZsh{} Mean of X and Y}
+\PY{n}{std} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{]}                \PY{c+c1}{\PYZsh{} Std. dev. of X and Y}
+\PY{n}{rho} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}                      \PY{c+c1}{\PYZsh{} Correlation coefficient}
+\PY{n}{Nobs} \PY{o}{=} \PY{l+m+mi}{100}                      \PY{c+c1}{\PYZsh{} Sample size}
+
+\PY{c+c1}{\PYZsh{} We transpose the return value and unpack individual rows into X and Y}
+\PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{draw\PYZus{}bivariate\PYZus{}sample}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{Nobs}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+
+\PY{c+c1}{\PYZsh{} Compute beta (slope coefficient) from distribution moments.}
+\PY{c+c1}{\PYZsh{} This is the true underlying relationship given our data generating process.}
+\PY{n}{cov} \PY{o}{=} \PY{n}{rho} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{n}{std}\PY{p}{)}
+\PY{n}{beta} \PY{o}{=} \PY{n}{cov} \PY{o}{/} \PY{n}{std}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Slope of population regression line: }\PY{l+s+si}{\PYZob{}}\PY{n}{beta}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Compute beta from sample moments}
+\PY{c+c1}{\PYZsh{} Sample variance\PYZhy{}covariance matrix (ddof=1 returns the unbiased estimate)}
+\PY{n}{cov\PYZus{}hat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\PY{n}{var\PYZus{}x\PYZus{}hat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{beta\PYZus{}hat} \PY{o}{=} \PY{n}{cov\PYZus{}hat} \PY{o}{/} \PY{n}{var\PYZus{}x\PYZus{}hat}
+\PY{c+c1}{\PYZsh{} Sample intercept}
+\PY{n}{alpha\PYZus{}hat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{beta\PYZus{}hat} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Slope of sample regression line: }\PY{l+s+si}{\PYZob{}}\PY{n}{beta\PYZus{}hat}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Scatter plot of sample}
+\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}x\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}y\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Draws from bivariate normal distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{axline}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{slope}\PY{o}{=}\PY{n}{beta}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Regression line (population)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{axline}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{alpha\PYZus{}hat}\PY{p}{)}\PY{p}{,} \PY{n}{slope}\PY{o}{=}\PY{n}{beta\PYZus{}hat}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Regression line (sample)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Slope of population regression line: -1.5
+Slope of sample regression line: -1.3889613032802288
+    \end{Verbatim}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<matplotlib.legend.Legend at 0x7f1a0e115df0>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_22_2.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{example-2-ols-using-matrix-algebra}{%
+\subsubsection{Example 2: OLS using matrix
+algebra}\label{example-2-ols-using-matrix-algebra}}
+
+With more than one regressor, we need to use matrix algebra to perform
+the OLS estimation. For demonstration purposes, we continue using the
+bivariate data generated above, but now we write the OLS regression as
+\[
+y_i = \mathbf{x}_i' \gamma + u_i
+\] where \(\gamma = (\alpha, \beta)\), and the regressors now contain a
+constant, \(\mathbf{x_i} = (1, x_i)'\). As stated above, the OLS
+estimator is given by \[
+\widehat{\gamma} = \left(X'X\right)^{-1}X'y
+\]
+
+\hypertarget{naive-solution}{%
+\paragraph{Naive solution}\label{naive-solution}}
+
+You might be tempted to solve the above equation system by explicitly
+computing the inverse of \(X'X\) using NumPy's
+\href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.inv.html}{\texttt{inv()}}
+like this:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k+kn}{import} \PY{n}{inv}
+
+\PY{c+c1}{\PYZsh{} We transpose the return value and unpack individual rows into X and Y}
+\PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{draw\PYZus{}bivariate\PYZus{}sample}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{Nobs}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+
+\PY{c+c1}{\PYZsh{} Create vector of ones (required to estimate the intercept)}
+\PY{n}{ones} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Prepend constant to vector of regressors to create regressor matrix X}
+\PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{ones}\PY{p}{,} \PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\PY{n}{XXinv} \PY{o}{=} \PY{n}{inv}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{X}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Print naive (X\PYZsq{}X)\PYZca{}\PYZhy{}1}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Naive (X}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{X)\PYZca{}(\PYZhy{}1):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{XXinv}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Compute naive estimate of gamma}
+\PY{n}{gamma\PYZus{}naive} \PY{o}{=} \PY{n}{XXinv} \PY{o}{@} \PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{y}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Naive estimate of gamma: }\PY{l+s+si}{\PYZob{}}\PY{n}{gamma\PYZus{}naive}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Naive (X'X)\^{}(-1):
+[[0.05633363 0.04521468]
+ [0.04521468 0.04412275]]
+Naive estimate of gamma: [-0.20352351 -1.3889613 ]
+    \end{Verbatim}
+
+    This might seems like a straightforward way to implement OLS, but in
+practice you should \emph{never} do this. Explicitly taking the inverse
+of a matrix to solve an equation system is rarely a good idea and
+numerically unstable, even though in this particular case it yields the
+same result!
+
+    \hypertarget{solving-as-a-linear-equation-system}{%
+\paragraph{Solving as a linear equation
+system}\label{solving-as-a-linear-equation-system}}
+
+One numerically acceptable way to run OLS is to view it as a linear
+equation system. Recall that a linear equation system can be written in
+matrix notation as \[
+\mathbf{A} \mathbf{x} = \mathbf{b}
+\] where \(\mathbf{A} \in R^{k \times k}\) is a coefficient matrix of
+full rank, \(\mathbf{b} \in R^k\) is a vector, and
+\(\mathbf{x} \in R^k\) is a vector of \(k\) unknows we want to solve
+for. The OLS estimator can be written in this form if we set \[
+\begin{aligned}
+    \mathbf{A} &= \mathbf{X}'\mathbf{X} \\
+    \mathbf{b} &= \mathbf{X}'\mathbf{y} \\
+    \mathbf{z} &= \widehat{\gamma}
+\end{aligned}
+\] so that we have \[
+    (\mathbf{X}'\mathbf{X})\widehat{\gamma} = \mathbf{X}'\mathbf{y}
+\] We can use NumPy's
+\href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html}{\texttt{solve()}}
+to find \(\widehat{\gamma}\):
+
+    Of course, running OLS (or equivalently: solving an overdetermined
+linear equation system) is a common task, so NumPy has the function
+\href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html}{\texttt{solve()}}
+which allows you do to it without explicitly computing
+\(\mathbf{X}'\mathbf{X}\) or \(\mathbf{X}'\mathbf{y}\):
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k+kn}{import} \PY{n}{solve}
+
+\PY{c+c1}{\PYZsh{} Compute X\PYZsq{}X}
+\PY{n}{A} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{X}
+\PY{c+c1}{\PYZsh{} Compute X\PYZsq{}y}
+\PY{n}{b} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{y}
+
+\PY{c+c1}{\PYZsh{} Solve for coefficient vector}
+\PY{n}{gamma\PYZus{}solve} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estimate of gamma using solve(): }\PY{l+s+si}{\PYZob{}}\PY{n}{gamma\PYZus{}solve}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Estimate of gamma using solve(): [-0.20352351 -1.3889613 ]
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k+kn}{import} \PY{n}{lstsq}
+
+\PY{c+c1}{\PYZsh{} Estimate using lstsq(). Pass rcond=None to suppress a warning.}
+\PY{n}{gamma\PYZus{}lstsq}\PY{p}{,} \PY{o}{*}\PY{n}{rest} \PY{o}{=} \PY{n}{lstsq}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{rcond}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estimate of gamma using lstsq(): }\PY{l+s+si}{\PYZob{}}\PY{n}{gamma\PYZus{}lstsq}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Estimate of gamma using lstsq(): [-0.20352351 -1.3889613 ]
+    \end{Verbatim}
+
+    \hypertarget{example-3-implementing-ols-yourself}{%
+\subsubsection{Example 3: Implementing OLS
+yourself}\label{example-3-implementing-ols-yourself}}
+
+NumPy's \texttt{lstsq()} uses SVD to compute the solution. Since we
+covered SVD in a previous exercise, we already have the tools to build
+our own implementation.
+
+Recall that SVD factorises a regressor matrix \(\mathbf{X}\) into three
+matrices, \[
+\mathbf{X} = \mathbf{U} \Sigma \mathbf{V}'
+\] We can use the orthogonality properties of \(\mathbf{U}\) and
+\(\mathbf{V}\) from the previous exercise to transform the OLS
+estimator. Note that we are using the fact that the transpose of
+\(\mathbf{X}\) is \[
+\mathbf{X}' = \mathbf{V} \Sigma' \mathbf{U}' = 
+    \mathbf{V} \Sigma \mathbf{U}'
+\] which follows since \(\Sigma\) is a diagonal (and thus symmetric)
+matrix. The OLS estimator can then be expressed as follows: \[
+\def\bV{\mathbf{V}}
+\def\bX{\mathbf{X}}
+\def\bU{\mathbf{U}}
+\def\bY{\mathbf{y}}
+\def\ident{\mathbf{I}}
+\begin{aligned}
+\widehat{\gamma} &= (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y} \\
+    &= \left(\bV \Sigma \bU' \bU \Sigma \bV' \right)^{-1}
+        \bV \Sigma \bU' \bY \\
+    &= \left(\bV \Sigma \ident_k \Sigma \bV' \right)^{-1}
+        \bV \Sigma \bU' \bY \\
+    &= \left(\bV \Sigma^2 \bV' \right)^{-1}
+        \bV \Sigma \bU' \bY \\
+\end{aligned}
+\] This follows since \(\mathbf{U}'\mathbf{U} = \mathbf{I}_k\) is an
+identity matrix where \(k=2\) is the number of coefficients we are
+estimating. Next, we can compute the inverse using the orthogonality
+properties of \(\mathbf{V}\) which imply that \[
+\def\bV{\mathbf{V}}
+\begin{aligned}
+    \bV\bV' &= \bV'\bV = \mathbf{I} \\
+    \bV' &= \bV^{-1}
+\end{aligned}
+\] Therefore, \[
+\def\bV{\mathbf{V}}
+\begin{aligned}
+    \left(\bV \Sigma^2 \bV' \right)^{-1} =
+    (\bV')^{-1} \Sigma^{-2} \bV^{-1} = \bV \Sigma^{-2} \bV'
+\end{aligned}
+\] Plugging this into the expression for the OLS estimator, we see that
+\[
+\def\bV{\mathbf{V}}
+\def\bU{\mathbf{U}}
+\def\bY{\mathbf{y}}
+\def\ident{\mathbf{I}}
+\begin{aligned}
+\widehat{\gamma} 
+    &= \left(\bV \Sigma^2 \bV' \right)^{-1} \bV \Sigma \bU' \bY \\
+    &= \bV \Sigma^{-2} \bV' \bV \Sigma \bU' \bY \\
+    &= \bV \Sigma^{-2} \ident_k \Sigma \bU' \bY \\
+    &= \bV \Sigma^{-1} \bU' \bY
+\end{aligned}
+\] Why is this preferable to the original expression? Since \(\Sigma\)
+is a diagonal matrix, its inverse is trivially computed as the
+element-wise inverse of its diagonal elements!
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k+kn}{import} \PY{n}{svd}
+
+\PY{c+c1}{\PYZsh{} Request \PYZdq{}compact\PYZdq{} SVD, we don\PYZsq{}t need the full matrix U.}
+\PY{n}{U}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{Vt} \PY{o}{=} \PY{n}{svd}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{full\PYZus{}matrices}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Note that S returned by svd() is a vector that contains the diagonal}
+\PY{c+c1}{\PYZsh{} of the matrix Sigma.}
+\PY{n}{gamma\PYZus{}svd} \PY{o}{=} \PY{n}{Vt}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{S}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{@} \PY{n}{U}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{y}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estimate of gamma using SVD: }\PY{l+s+si}{\PYZob{}}\PY{n}{gamma\PYZus{}svd}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Estimate of gamma using SVD: [-0.20352351 -1.3889613 ]
+    \end{Verbatim}
+
+    \hypertarget{example-4-ols-standard-errors}{%
+\subsubsection{Example 4: OLS standard
+errors}\label{example-4-ols-standard-errors}}
+
+All of the above methods only computed the \emph{point estimates} of the
+coefficient vector. Usually, we are interested in performing inference,
+\ie, testing some hypothesis, for example whether our estimate is
+significantly difference from zero. To this end, we need to compute
+standard errors which reflect the sampling uncertainty of our estimates.
+
+The variance-covariance matrix of the OLS estimator \(\widehat{\gamma}\)
+is given by the expression \[
+\begin{aligned}
+Var(\widehat{\beta}) &= \widehat{\sigma}^2 \left(\mathbf{X}'\mathbf{X}\right)^{-1} \\
+\widehat{\sigma}^2 &= \frac{1}{1-n} \sum_{i=1}^n \widehat{u}_i^2
+\end{aligned}
+\] where \(\widehat{\sigma}^2\) is the sample variance of the residuals
+(recall that we have included an intercept in the model, so the mean of
+\(\widehat{u}_i\) is zero!).
+
+Luckily, we can directly use our insights from the previous section and
+instead of computing \(\left(\mathbf{X}'\mathbf{X}\right)^{-1}\)
+directly (which is numerically undesirable), we can rewrite it using the
+SVD factorisation as follows: \[
+\def\bV{\mathbf{V}}
+\def\bX{\mathbf{X}}
+\def\bU{\mathbf{U}}
+\def\bY{\mathbf{y}}
+\def\ident{\mathbf{I}}
+\begin{aligned}
+(\bX'\bX)^{-1}
+    &= \left(\bV \Sigma \bU' \bU \Sigma \bV' \right)^{-1} \\
+    &= \left(\bV \Sigma \ident_k \Sigma \bV' \right)^{-1} \\
+    &= \left(\bV \Sigma^2 \bV' \right)^{-1} \\
+    &= \bV \Sigma^{-2} \bV'
+\end{aligned}
+\]
+
+Extending the code from above, we can now compute the point estimate and
+the standard errors:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k+kn}{import} \PY{n}{svd}
+
+\PY{c+c1}{\PYZsh{} Request \PYZdq{}compact\PYZdq{} SVD, we don\PYZsq{}t need the full matrix U.}
+\PY{n}{U}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{Vt} \PY{o}{=} \PY{n}{svd}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{full\PYZus{}matrices}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Compute point estimate as before}
+\PY{n}{gamma} \PY{o}{=} \PY{n}{Vt}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{S}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{@} \PY{n}{U}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{y}
+
+\PY{c+c1}{\PYZsh{} Compute (X\PYZsq{}X)\PYZca{}\PYZhy{}1 }
+\PY{n}{XXinv} \PY{o}{=} \PY{n}{Vt}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{S}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{@} \PY{n}{Vt}
+
+\PY{c+c1}{\PYZsh{} Residuals are given as u = y \PYZhy{} X*gamma}
+\PY{n}{residuals} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{X} \PY{o}{@} \PY{n}{gamma}
+
+\PY{c+c1}{\PYZsh{} Variance of residuals}
+\PY{n}{var\PYZus{}u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Variance\PYZhy{}covariance matrix of estimates}
+\PY{n}{var\PYZus{}gamma} \PY{o}{=} \PY{n}{var\PYZus{}u} \PY{o}{*} \PY{n}{XXinv}
+
+\PY{c+c1}{\PYZsh{} Standard errors are square roots of diagonal elements of Var(gamma)}
+\PY{n}{gamma\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{var\PYZus{}gamma}\PY{p}{)}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Point estimate of gamma: }\PY{l+s+si}{\PYZob{}}\PY{n}{gamma}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Standard errors of gamma: }\PY{l+s+si}{\PYZob{}}\PY{n}{gamma\PYZus{}se}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Point estimate of gamma: [-0.20352351 -1.3889613 ]
+Standard errors of gamma: [0.26393279 0.23358274]
+    \end{Verbatim}
+
+    \hypertarget{example-5-complete-ols-estimation-routine}{%
+\subsubsection{Example 5: Complete OLS estimation
+routine}\label{example-5-complete-ols-estimation-routine}}
+
+We can combine all our previous code and encapsulate it in a function
+called \texttt{ols}, which makes sure the input data are NumPy arrays
+and have the same number of observations. We also add the optional
+parameter \texttt{add\_const} which allows callers to automatically
+include a constant in the model.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{ols}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{add\PYZus{}const}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    Run the OLS regression y = X * beta + u}
+\PY{l+s+sd}{    and return the estimated coefficients beta and their variance\PYZhy{}covariance}
+\PY{l+s+sd}{    matrix.}
+
+\PY{l+s+sd}{    Parameters}
+\PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+\PY{l+s+sd}{    X : array\PYZus{}like}
+\PY{l+s+sd}{        Matrix (or vector) of regressors}
+\PY{l+s+sd}{    y : array\PYZus{}like}
+\PY{l+s+sd}{        Vector of observations of dependent variable}
+\PY{l+s+sd}{    add\PYZus{}const : bool, optional}
+\PY{l+s+sd}{        If True, prepend a constant to regressor matrix X.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{c+c1}{\PYZsh{} Make sure we have a regressor matrix even if there is only a single}
+    \PY{c+c1}{\PYZsh{} regressor}
+    \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{atleast\PYZus{}2d}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+    \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{atleast\PYZus{}1d}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Check that arrays are of conformable dimensions, and raise an exception}
+    \PY{c+c1}{\PYZsh{} if that is not the case}
+    \PY{n}{Nobs} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{size}
+    \PY{k}{if} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{n}{Nobs}\PY{p}{:}
+        \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Non\PYZhy{}conformable arrays X and y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Check whether we need to prepend a constant}
+    \PY{k}{if} \PY{n}{add\PYZus{}const}\PY{p}{:}
+        \PY{n}{ones} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{Nobs}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{ones}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Request \PYZdq{}compact\PYZdq{} SVD, we don\PYZsq{}t need the full matrix U.}
+    \PY{n}{U}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{Vt} \PY{o}{=} \PY{n}{svd}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{full\PYZus{}matrices}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Compute point estimate using SVD factorisation}
+    \PY{n}{beta} \PY{o}{=} \PY{n}{Vt}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{S}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{@} \PY{n}{U}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{y}
+
+    \PY{c+c1}{\PYZsh{} Compute (X\PYZsq{}X)\PYZca{}\PYZhy{}1 using SVD factorisation}
+    \PY{n}{XXinv} \PY{o}{=} \PY{n}{Vt}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{S}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{@} \PY{n}{Vt}
+
+    \PY{c+c1}{\PYZsh{} Residuals are given as u = y \PYZhy{} X*beta}
+    \PY{n}{residuals} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{X} \PY{o}{@} \PY{n}{beta}
+
+    \PY{c+c1}{\PYZsh{} Variance of residuals}
+    \PY{n}{var\PYZus{}u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Variance\PYZhy{}covariance matrix of estimates}
+    \PY{n}{var\PYZus{}beta} \PY{o}{=} \PY{n}{var\PYZus{}u} \PY{o}{*} \PY{n}{XXinv}
+
+    \PY{k}{return} \PY{n}{beta}\PY{p}{,} \PY{n}{var\PYZus{}beta}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}
