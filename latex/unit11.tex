@@ -393,8 +393,8 @@ In most of the exercises below, we'll need to draw a random sample that
 serves as an input. We therefore first define a routine which returns a
 sample drawn from a bivariate normal distribution.
 
-In line with what we learned in unit 10, we check arguments and raise
-and exception if a an invalid value is encountered.
+In line with what we learned in unit 10, we check arguments and raise an
+exception if a an invalid value is encountered.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
@@ -448,6 +448,7 @@ and exception if a an invalid value is encountered.
 \end{Verbatim}
 \end{tcolorbox}
 
+
     \hypertarget{singular-value-decomposition-svd-and-principal-components}{%
 \subsection{Singular value decomposition (SVD) and principal
 components}\label{singular-value-decomposition-svd-and-principal-components}}
@@ -457,14 +458,15 @@ use in econometrics and statistics. For example, we can use it to
 implement principal component analysis (PCA), principal component
 regression, OLS or Ridge regression.
 
-Let \(\mathbf{X} \in R^{m\times n}\) be a matrix. For our purposes, we
-will assume that \(m \geq n\) since \(\mathbf{X}\) will be the matrix
-containing the data with observations in rows and variables in column.
-The (compact) SVD of \(\mathbf{X}\) is given by
+Let \(\mathbf{X} \in \mathbb{R}^{m\times n}\) be a matrix. For our
+purposes, we will assume that \(m \geq n\) since \(\mathbf{X}\) will be
+the matrix containing the data with observations in rows and variables
+in column. The (compact) SVD of \(\mathbf{X}\) is given by
 \[\mathbf{X} = \mathbf{U} \Sigma \mathbf{V}'\] where
-\(\mathbf{U} \in R^{m\times n}\) and \(\mathbf{V} \in R^{n\times n}\)
-are orthogonal matrices, and \(\Sigma \in R^{n \times n}\) is a diagonal
-matrix \[\Sigma =  \begin{bmatrix} 
+\(\mathbf{U} \in \mathbb{R}^{m\times n}\) and
+\(\mathbf{V} \in \mathbb{R}^{n\times n}\) are orthogonal matrices, and
+\(\Sigma \in \mathbb{R}^{n \times n}\) is a diagonal matrix
+\[\Sigma =  \begin{bmatrix} 
     \sigma_1 & & & & \\
      & \sigma_2 & & & \\
      & & \ddots & & \\
@@ -494,7 +496,7 @@ function from \texttt{numpy.linalg}.
 \subsubsection{Example: Bivariate
 normal}\label{example-bivariate-normal}}
 
-Imagine we construct \(X\) as 10 random draws from a bivariate normal:
+Imagine we construct \(X\) as 200 random draws from a bivariate normal:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{2}{\boxspacing}
@@ -527,7 +529,7 @@ Text(0.5, 1.0, 'Draws from bivariate normal distribution')
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_5_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_6_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -648,7 +650,7 @@ PC = \mathbf{U} \Sigma
 \PY{c+c1}{\PYZsh{} Compute principal components}
 \PY{n}{PC} \PY{o}{=} \PY{n}{U} \PY{o}{*} \PY{n}{S}          \PY{c+c1}{\PYZsh{} same as U @ np.diag(S)}
 
-\PY{c+c1}{\PYZsh{} Variance of each PC is highest for first component}
+\PY{c+c1}{\PYZsh{} Variance is highest for first component}
 \PY{n}{var\PYZus{}PC} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{PC}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Principal component variances: }\PY{l+s+si}{\PYZob{}}\PY{n}{var\PYZus{}PC}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
@@ -658,10 +660,10 @@ PC = \mathbf{U} \Sigma
 Principal component variances: [1.17607859 0.09444617]
     \end{Verbatim}
 
-    We can now plot the principal component axes in the original data space.
-The right column shows the data rotated and rescaled so that each axes
-now corresponds to a principal component. Most of the variation clearly
-occurs along the first axis!
+    We can plot the principal component axes in the original data space
+(left columns). Moreover, the right column shows the data rotated and
+rescaled so that each axes corresponds to a principal component. Most of
+the variation clearly occurs along the first axis!
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{10}{\boxspacing}
@@ -697,12 +699,12 @@ occurs along the first axis!
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.lines.Line2D at 0x7f1a402cd580>
+<matplotlib.lines.Line2D at 0x7f4cd823d5e0>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_17_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_18_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -715,6 +717,7 @@ principal components, but can use a library such as
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k+kn}{import} \PY{n}{PCA}
 
+\PY{c+c1}{\PYZsh{} Draw the same sample as before}
 \PY{n}{X} \PY{o}{=} \PY{n}{draw\PYZus{}bivariate\PYZus{}sample}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{Nobs}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Create PCA with 2 components (which is the max, since we have only two }
@@ -744,32 +747,36 @@ Variance of each PC: [1.17607859 0.09444617]
 Fraction of variance of each PC: [0.92566365 0.07433635]
     \end{Verbatim}
 
+
     \hypertarget{ordinary-least-squares-ols}{%
 \subsection{Ordinary least squares
 (OLS)}\label{ordinary-least-squares-ols}}
 
 Consider the regression \[
-y_i = x_i' \beta + u_i
-\] where \(x_i\) is a vector of regressors (explanatory variables) that
-is assumed to include a constant. Recall that the OLS estimator
-\(\widehat{\beta}\) is given by \[
-\widehat{\beta} = \left(X'X\right)^{-1}X'y
-\] where \(X\) is the regressor matrix that contains all stacked
-\(x_i'\), and \(y\) contains all observations of the dependent variable.
+y_i = \mathbf{x}_i' \beta + u_i
+\] where \(\mathbf{x}_i\) is a vector of regressors (explanatory
+variables) that is assumed to include a constant. Recall that the OLS
+estimator \(\widehat{\beta}\) is given by \[
+\def\bX{\mathbf{X}}
+\def\bY{\mathbf{y}}
+\widehat{\beta} = \left(\bX'\bX\right)^{-1}\bX'\bY
+\] where \(\mathbf{X}\) is the regressor matrix that contains all
+stacked \(\mathbf{x}_i'\), and \(\mathbf{y}\) contains all observations
+of the dependent variable.
 
     \hypertarget{example-1-bivariate-data}{%
 \subsubsection{Example 1: Bivariate
 data}\label{example-1-bivariate-data}}
 
-We first demonstrate how to compute \(\beta\) using bivariate normal
-data, to the regression simplifies to \[
+We first demonstrate how to run OLS using bivariate normal data. With
+only one regressors, the regression simplifies to \[
 y_i = \alpha + \beta x_i + u_i
 \] where \(\alpha\) is the intercept and \(\beta\) is the slope
 coefficient. In this special case, the population coefficient \(\beta\)
 can be computed using the formula \[
 \beta = \frac{E[(Y-\overline{Y})(X-\overline{X})]}{E[(X-\overline{X})]}
  = \frac{Cov(Y,X)}{Var(X)}
-\] there the numerator contains the covariance of the random variables
+\] where the numerator contains the covariance of the random variables
 \(Y\) and \(X\), and the denominator contains the variance of \(X\).
 Given a sample of values, the estimator \(\widehat{\beta}\) is computed
 using the corresponding sample moments: \[
@@ -825,12 +832,12 @@ Slope of sample regression line: -1.3889613032802288
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f1a0e115df0>
+<matplotlib.legend.Legend at 0x7f4c9e3db8e0>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_22_2.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_24_2.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -846,14 +853,15 @@ y_i = \mathbf{x}_i' \gamma + u_i
 \] where \(\gamma = (\alpha, \beta)\), and the regressors now contain a
 constant, \(\mathbf{x_i} = (1, x_i)'\). As stated above, the OLS
 estimator is given by \[
-\widehat{\gamma} = \left(X'X\right)^{-1}X'y
+\def\bX{\mathbf{X}}
+\widehat{\gamma} = \left(\bX'\bX\right)^{-1}\bX'\mathbf{y}
 \]
 
 \hypertarget{naive-solution}{%
 \paragraph{Naive solution}\label{naive-solution}}
 
 You might be tempted to solve the above equation system by explicitly
-computing the inverse of \(X'X\) using NumPy's
+computing the inverse of \(\mathbf{X}'\mathbf{X}\) using NumPy's
 \href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.inv.html}{\texttt{inv()}}
 like this:
 
@@ -869,10 +877,11 @@ like this:
 \PY{n}{ones} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
 \PY{c+c1}{\PYZsh{} Prepend constant to vector of regressors to create regressor matrix X}
 \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{ones}\PY{p}{,} \PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Compute inverse of X\PYZsq{}X}
 \PY{n}{XXinv} \PY{o}{=} \PY{n}{inv}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{X}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} Print naive (X\PYZsq{}X)\PYZca{}\PYZhy{}1}
-\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Naive (X}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{X)\PYZca{}(\PYZhy{}1):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Explicitly computed (X}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{X)\PYZca{}(\PYZhy{}1):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{XXinv}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Compute naive estimate of gamma}
@@ -882,7 +891,7 @@ like this:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Naive (X'X)\^{}(-1):
+Explicitly computed (X'X)\^{}(-1):
 [[0.05633363 0.04521468]
  [0.04521468 0.04412275]]
 Naive estimate of gamma: [-0.20352351 -1.3889613 ]
@@ -901,11 +910,11 @@ system}\label{solving-as-a-linear-equation-system}}
 One numerically acceptable way to run OLS is to view it as a linear
 equation system. Recall that a linear equation system can be written in
 matrix notation as \[
-\mathbf{A} \mathbf{x} = \mathbf{b}
-\] where \(\mathbf{A} \in R^{k \times k}\) is a coefficient matrix of
-full rank, \(\mathbf{b} \in R^k\) is a vector, and
-\(\mathbf{x} \in R^k\) is a vector of \(k\) unknows we want to solve
-for. The OLS estimator can be written in this form if we set \[
+\mathbf{A} \mathbf{z} = \mathbf{b}
+\] where \(\mathbf{A} \in \mathbb{R}^{k \times k}\) is a coefficient
+matrix of full rank, \(\mathbf{b} \in \mathbb{R}^k\) is a vector, and
+\(\mathbf{z} \in \mathbb{R}^k\) is a vector of \(k\) unknows we want to
+solve for. The OLS estimator can be written in this form if we set \[
 \begin{aligned}
     \mathbf{A} &= \mathbf{X}'\mathbf{X} \\
     \mathbf{b} &= \mathbf{X}'\mathbf{y} \\
@@ -916,12 +925,6 @@ for. The OLS estimator can be written in this form if we set \[
 \] We can use NumPy's
 \href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html}{\texttt{solve()}}
 to find \(\widehat{\gamma}\):
-
-    Of course, running OLS (or equivalently: solving an overdetermined
-linear equation system) is a common task, so NumPy has the function
-\href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html}{\texttt{solve()}}
-which allows you do to it without explicitly computing
-\(\mathbf{X}'\mathbf{X}\) or \(\mathbf{X}'\mathbf{y}\):
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{14}{\boxspacing}
@@ -942,6 +945,12 @@ which allows you do to it without explicitly computing
     \begin{Verbatim}[commandchars=\\\{\}]
 Estimate of gamma using solve(): [-0.20352351 -1.3889613 ]
     \end{Verbatim}
+
+    Of course, running OLS (or equivalently: solving an overdetermined
+linear equation system) is a common task, so NumPy has the function
+\href{https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html}{\texttt{lstsq()}}
+which allows you do to it without explicitly computing
+\(\mathbf{X}'\mathbf{X}\) or \(\mathbf{X}'\mathbf{y}\):
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{15}{\boxspacing}
@@ -971,9 +980,8 @@ Recall that SVD factorises a regressor matrix \(\mathbf{X}\) into three
 matrices, \[
 \mathbf{X} = \mathbf{U} \Sigma \mathbf{V}'
 \] We can use the orthogonality properties of \(\mathbf{U}\) and
-\(\mathbf{V}\) from the previous exercise to transform the OLS
-estimator. Note that we are using the fact that the transpose of
-\(\mathbf{X}\) is \[
+\(\mathbf{V}\) described above to transform the OLS estimator. We will
+be using the fact that the transpose of \(\mathbf{X}\) is \[
 \mathbf{X}' = \mathbf{V} \Sigma' \mathbf{U}' = 
     \mathbf{V} \Sigma \mathbf{U}'
 \] which follows since \(\Sigma\) is a diagonal (and thus symmetric)
@@ -995,7 +1003,7 @@ matrix. The OLS estimator can then be expressed as follows: \[
 \] This follows since \(\mathbf{U}'\mathbf{U} = \mathbf{I}_k\) is an
 identity matrix where \(k=2\) is the number of coefficients we are
 estimating. Next, we can compute the inverse using the orthogonality
-properties of \(\mathbf{V}\) which imply that \[
+properties of \(\mathbf{V}\), \[
 \def\bV{\mathbf{V}}
 \begin{aligned}
     \bV\bV' &= \bV'\bV = \mathbf{I} \\
@@ -1047,21 +1055,26 @@ Estimate of gamma using SVD: [-0.20352351 -1.3889613 ]
 \subsubsection{Example 4: OLS standard
 errors}\label{example-4-ols-standard-errors}}
 
-All of the above methods only computed the \emph{point estimates} of the
-coefficient vector. Usually, we are interested in performing inference,
-\ie, testing some hypothesis, for example whether our estimate is
-significantly difference from zero. To this end, we need to compute
-standard errors which reflect the sampling uncertainty of our estimates.
+All of the above methods only computed the \emph{point estimates}, \ie,
+the coefficient vector. Usually, we are interested in performing
+inference, \ie, testing some hypothesis, for example whether our
+estimate is significantly different from zero. To this end, we need to
+compute standard errors which reflect the sampling uncertainty of our
+estimates.
 
-The variance-covariance matrix of the OLS estimator \(\widehat{\gamma}\)
-is given by the expression \[
+Under the assumption of
+\href{https://en.wikipedia.org/wiki/Homoscedasticity}{homoskedastic}
+errors, the variance-covariance matrix of the OLS estimator
+\(\widehat{\gamma}\) is given by the expression \[
 \begin{aligned}
-Var(\widehat{\beta}) &= \widehat{\sigma}^2 \left(\mathbf{X}'\mathbf{X}\right)^{-1} \\
-\widehat{\sigma}^2 &= \frac{1}{1-n} \sum_{i=1}^n \widehat{u}_i^2
+Var(\widehat{\gamma}) &= \widehat{\sigma}^2 \left(\mathbf{X}'\mathbf{X}\right)^{-1} \\
+\widehat{\sigma}^2 &= \frac{1}{n-k} \sum_{i=1}^n \widehat{u}_i^2
 \end{aligned}
 \] where \(\widehat{\sigma}^2\) is the sample variance of the residuals
 (recall that we have included an intercept in the model, so the mean of
-\(\widehat{u}_i\) is zero!).
+\(\widehat{u}_i\) is zero!). Note the degree-of-freedom correction in
+the denominator for a model with \(k\) parameters (including any
+intercept).
 
 Luckily, we can directly use our insights from the previous section and
 instead of computing \(\left(\mathbf{X}'\mathbf{X}\right)^{-1}\)
@@ -1102,7 +1115,8 @@ the standard errors:
 \PY{n}{residuals} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{X} \PY{o}{@} \PY{n}{gamma}
 
 \PY{c+c1}{\PYZsh{} Variance of residuals}
-\PY{n}{var\PYZus{}u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{k} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\PY{n}{var\PYZus{}u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{n}{k}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Variance\PYZhy{}covariance matrix of estimates}
 \PY{n}{var\PYZus{}gamma} \PY{o}{=} \PY{n}{var\PYZus{}u} \PY{o}{*} \PY{n}{XXinv}
@@ -1117,7 +1131,7 @@ the standard errors:
 
     \begin{Verbatim}[commandchars=\\\{\}]
 Point estimate of gamma: [-0.20352351 -1.3889613 ]
-Standard errors of gamma: [0.26393279 0.23358274]
+Standard errors of gamma: [0.26527596 0.23477147]
     \end{Verbatim}
 
     \hypertarget{example-5-complete-ols-estimation-routine}{%
@@ -1177,8 +1191,11 @@ include a constant in the model.
     \PY{c+c1}{\PYZsh{} Residuals are given as u = y \PYZhy{} X*beta}
     \PY{n}{residuals} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{X} \PY{o}{@} \PY{n}{beta}
 
+    \PY{c+c1}{\PYZsh{} Number of model parameters}
+    \PY{n}{k} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+
     \PY{c+c1}{\PYZsh{} Variance of residuals}
-    \PY{n}{var\PYZus{}u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+    \PY{n}{var\PYZus{}u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{n}{k}\PY{p}{)}
 
     \PY{c+c1}{\PYZsh{} Variance\PYZhy{}covariance matrix of estimates}
     \PY{n}{var\PYZus{}beta} \PY{o}{=} \PY{n}{var\PYZus{}u} \PY{o}{*} \PY{n}{XXinv}
@@ -1186,6 +1203,383 @@ include a constant in the model.
     \PY{k}{return} \PY{n}{beta}\PY{p}{,} \PY{n}{var\PYZus{}beta}
 \end{Verbatim}
 \end{tcolorbox}
+
+
+    \hypertarget{ols-using-housing-data}{%
+\subsection{OLS using housing data}\label{ols-using-housing-data}}
+
+We now proceed to run a more meaningful regression using the
+\texttt{ols()} function developed above. To this end, we use monthly
+observations from the file \texttt{HOUSING.csv} which contains various
+variables related to the US housing market. In particular, we will take
+the number of housing unit construction starts (variable
+\texttt{NHSTART}) in a given month and regress it on the average sales
+price of new homes (variable \texttt{ASPNHS}) lagged by 3, 6 and 12
+months. We run the regression in logs, so the estimated coefficient
+should be interpreted as elasticities.
+
+If you are familiar with Stata, the regression we are trying to run will
+look like this:
+        {\footnotesize
+    \begin{verbatim}
+. regress log_nhstart L3.log_aspnhs L6.log_aspnhs L12.log_aspnhs if year >= 2000
+
+      Source |       SS           df       MS      Number of obs   =       259
+-------------+----------------------------------   F(3, 255)       =     19.27
+       Model |  7.50833492         3  2.50277831   Prob > F        =    0.0000
+    Residual |  33.1247614       255  .129901025   R-squared       =    0.1848
+-------------+----------------------------------   Adj R-squared   =    0.1752
+       Total |  40.6330963       258  .157492621   Root MSE        =    .36042
+
+------------------------------------------------------------------------------
+ log_nhstart |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  log_aspnhs |
+         L3. |   2.293265   .5024764     4.56   0.000     1.303733    3.282797
+         L6. |   .8001798   .5538507     1.44   0.150    -.2905242    1.890884
+        L12. |   -1.94804   .4377757    -4.45   0.000    -2.810156   -1.085924
+             |
+       _cons |  -6.484041   2.783441    -2.33   0.021     -11.9655   -1.002581
+------------------------------------------------------------------------------
+\end{verbatim}
+    }
+    \hypertarget{load-and-visually-inspect-the-data}{%
+\subsubsection{Load and visually inspect the
+data}\label{load-and-visually-inspect-the-data}}
+
+We first load and inspect the data using pandas's
+\href{https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html}{\texttt{read\_csv()}}
+function:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{n}{file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/HOUSING.csv}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{file}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Inspect first and last rows of the DataFrame}
+\PY{n}{df}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+     Year  Month  NHSTART  MORTGAGE30  CSHPRICE  HSN1F    ASPNHS    CPI  \textbackslash{}
+0    1975      1   1032.0         9.4       NaN  416.0   39500.0   52.3
+1    1975      2    904.0         9.1       NaN  422.0   40600.0   52.6
+2    1975      3    993.0         8.9       NaN  477.0   42100.0   52.8
+3    1975      4   1005.0         8.8       NaN  543.0   42000.0   53.0
+4    1975      5   1121.0         8.9       NaN  579.0   43200.0   53.1
+..    {\ldots}    {\ldots}      {\ldots}         {\ldots}       {\ldots}    {\ldots}       {\ldots}    {\ldots}
+554  2021      3   1725.0         3.1     245.5  873.0  414700.0  264.8
+555  2021      4   1514.0         3.1     249.8  796.0  434800.0  266.8
+556  2021      5   1594.0         3.0     254.4  720.0  442500.0  268.6
+557  2021      6   1650.0         3.0     259.0  701.0  429600.0  271.0
+558  2021      7   1534.0         2.9       NaN  708.0  446000.0  272.3
+
+     HSUPPLY
+0        9.9
+1       10.4
+2        8.9
+3        7.2
+4        6.8
+..       {\ldots}
+554      4.2
+555      4.8
+556      5.5
+557      6.0
+558      6.2
+
+[559 rows x 9 columns]
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The data contains several variables which we won't be using in this
+analysis, such as the Case-Shiller house price index (\texttt{CSHPRICE})
+which has missing values for some of the earlier dates (missing values
+are denoted as \texttt{NaN}).
+
+Let's first plot the bivariate relationship between new house starts and
+the (concurrent) average sales price. The price is in current dollars,
+so we first need to deflate it (using the \texttt{CPI}) to make the
+values comparable across this 45-year period.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+
+\PY{c+c1}{\PYZsh{} Convert average selling price to 1982\PYZhy{}1984 dollars.}
+\PY{c+c1}{\PYZsh{} The value of 100 corresponds to the average price level between 1982\PYZhy{}1984.}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CPI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{l+m+mf}{100.0}
+
+\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHSTART}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<AxesSubplot:xlabel='NHSTART', ylabel='ASPNHS'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_44_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This scatter plot looks somewhat unexpected as there seems to be no
+clear relationship between housing supply and house prices. This might
+be because the relationship has not remained stable over the decades
+covered by our data.
+
+To see this more clearly, we bin the time periods into five blocks and
+recreate the plots using different colours:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{21}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Create 5 approximately equally\PYZhy{}sized bins based on the calendar year}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Plot each group of years using a different color}
+\PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}e41a1c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}377eb8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}4daf4a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}984ea3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}ff7f00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+\PY{c+c1}{\PYZsh{} Iterate over bins, plot each one separately}
+\PY{n}{bins} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\PY{k}{for} \PY{n+nb}{bin} \PY{o+ow}{in} \PY{n}{bins}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} Restrict data set to relevant years}
+    \PY{n}{df\PYZus{}i} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{bin}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Extract initial and terminal year of this block}
+    \PY{n}{yfrom}\PY{p}{,} \PY{n}{yto} \PY{o}{=} \PY{n}{df\PYZus{}i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{df\PYZus{}i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}
+
+    \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df\PYZus{}i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHSTART}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df\PYZus{}i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+        \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years }\PY{l+s+si}{\PYZob{}}\PY{n}{yfrom}\PY{l+s+si}{:}\PY{l+s+s1}{.0f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+si}{\PYZob{}}\PY{n}{yto}\PY{l+s+si}{:}\PY{l+s+s1}{.0f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{edgecolors}\PY{o}{=}\PY{n}{colors}\PY{p}{[}\PY{n+nb}{bin}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New housing units started (in thousand)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Avg. new home sales price (in 1982\PYZhy{}84 USD)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+
+\PY{k}{del} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_46_0.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As you see, our suspicion was correct and there are clear changes across
+the sample of 45 years. At this point we could do something more
+elaborate, but for illustrative purposes we just restrict our analysis
+to the period after the year 2000, where we have an upwards-sloping
+relationship.
+
+    \hypertarget{prepare-the-data}{%
+\subsubsection{Prepare the data}\label{prepare-the-data}}
+
+Before we can call the function \texttt{ols()}, we need to pre-process
+the data so that we end up with NumPy arrays (the only type of data our
+function accepts).
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Keep only relevant variables, rest just clutters the DataFrame}
+\PY{n}{varlist} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHSTART}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{varlist}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create YYYY\PYZhy{}MM date index}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{PeriodIndex}\PY{p}{(}\PY{n}{year}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{month}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Create 3\PYZhy{}month, 6\PYZhy{}month and 12\PYZhy{}month lags of house prices}
+\PY{n}{lags} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{12}
+\PY{k}{for} \PY{n}{lag} \PY{o+ow}{in} \PY{n}{lags}\PY{p}{:}
+    \PY{n}{df}\PY{p}{[}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L}\PY{l+s+si}{\PYZob{}}\PY{n}{lag}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{n}{lag}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Restrict data to year \PYZgt{}= 2000}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Drop year, month, these are no longer needed}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Plot first 13 rows, which clearly shows the lagged values}
+\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{13}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                ASPNHS  NHSTART       L3ASPNHS       L6ASPNHS      L12ASPNHS
+Date
+2000-01  118310.691081   1636.0  119095.776324  113437.312537  111050.394657
+2000-02  117176.470588   1737.0  125593.824228  115559.545183  116211.293260
+2000-03  119824.561404   1604.0  119727.488152  116090.584029  114866.504854
+2000-04  121299.005266   1626.0  118310.691081  119095.776324  115852.923448
+2000-05  116822.429907   1575.0  117176.470588  125593.824228  113192.771084
+2000-06  114808.362369   1559.0  119824.561404  119727.488152  116807.228916
+2000-07  117081.644470   1463.0  121299.005266  118310.691081  113437.312537
+2000-08  115923.566879   1541.0  116822.429907  117176.470588  115559.545183
+2000-09  119988.479263   1507.0  114808.362369  119824.561404  116090.584029
+2000-10  123691.776883   1549.0  117081.644470  121299.005266  119095.776324
+2000-11  120952.927669   1551.0  115923.566879  116822.429907  125593.824228
+2000-12  119186.712486   1532.0  119988.479263  114808.362369  119727.488152
+2001-01  119020.501139   1600.0  123691.776883  117081.644470  118310.691081
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Now that we have created all the lagged variables, we drop all rows with
+missing data and convert the relevant columns to NumPy arrays.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} List of variables to include in model}
+\PY{n}{var\PYZus{}X} \PY{o}{=} \PY{p}{[}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L}\PY{l+s+si}{\PYZob{}}\PY{n}{lag}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{lag} \PY{o+ow}{in} \PY{n}{lags}\PY{p}{]}
+\PY{n}{var\PYZus{}y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHSTART}\PY{l+s+s1}{\PYZsq{}}
+
+\PY{c+c1}{\PYZsh{} Restrict to relevant variables}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{var\PYZus{}X} \PY{o}{+} \PY{p}{[}\PY{n}{var\PYZus{}y}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} drop all rows with missing observations}
+\PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Extract raw data from data frame}
+\PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{var\PYZus{}X}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}
+\PY{n}{y} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{var\PYZus{}y}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Estimate as elasticity in logs}
+\PY{n}{log\PYZus{}X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\PY{n}{log\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Print first 5 observations}
+\PY{n}{log\PYZus{}X}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[11.68768329, 11.63900565, 11.61773938],
+       [11.74080836, 11.65754122, 11.66316531],
+       [11.69297351, 11.66212606, 11.65152591],
+       [11.68106942, 11.68768329, 11.66007676],
+       [11.67143637, 11.74080836, 11.63684758]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{estimating-the-model}{%
+\subsubsection{Estimating the model}\label{estimating-the-model}}
+
+We are now ready to run the OLS regression.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Run our own ols() function. This returns the coefficient vector and the}
+\PY{c+c1}{\PYZsh{} variance\PYZhy{}covariance matrix.}
+\PY{n}{coefs}\PY{p}{,} \PY{n}{vcv} \PY{o}{=} \PY{n}{ols}\PY{p}{(}\PY{n}{log\PYZus{}X}\PY{p}{,} \PY{n}{log\PYZus{}y}\PY{p}{,} \PY{n}{add\PYZus{}const}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Compute standard errors from the VCV matrix}
+\PY{n}{se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{vcv}\PY{p}{)}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estimated coefficients: }\PY{l+s+si}{\PYZob{}}\PY{n}{coefs}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Standard errors: }\PY{l+s+si}{\PYZob{}}\PY{n}{se}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of obs: }\PY{l+s+si}{\PYZob{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{log\PYZus{}y}\PY{p}{)}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Estimated coefficients: [-6.48405842  2.2932615   0.80018127 -1.94803646]
+Standard errors: [2.78344134 0.50247618 0.55385034 0.43777545]
+Number of obs: 259
+    \end{Verbatim}
+
+    \hypertarget{running-ols-using-statsmodels}{%
+\subsubsection{Running OLS using
+statsmodels}\label{running-ols-using-statsmodels}}
+
+As you can imagine, estimating an OLS regression is a common task so
+there are packages which already implement this functionality for you.
+One such package is \texttt{statsmodels}, which we will now use to
+verify our results.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+
+\PY{c+c1}{\PYZsh{} Explicitly augment the regressor matrix with a constant}
+\PY{n}{log\PYZus{}X1} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{log\PYZus{}X}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Define the linear model}
+\PY{n}{model} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{log\PYZus{}y}\PY{p}{,} \PY{n}{log\PYZus{}X1}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Estimate the model}
+\PY{n}{result} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Print a summary of the results}
+\PY{n}{result}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<class 'statsmodels.iolib.summary.Summary'>
+"""
+                            OLS Regression Results
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.185
+Model:                            OLS   Adj. R-squared:                  0.175
+Method:                 Least Squares   F-statistic:                     19.27
+Date:                Wed, 15 Sep 2021   Prob (F-statistic):           2.72e-11
+Time:                        20:55:07   Log-Likelihood:                -101.18
+No. Observations:                 259   AIC:                             210.4
+Df Residuals:                     255   BIC:                             224.6
+Df Model:                           3
+Covariance Type:            nonrobust
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -6.4841      2.783     -2.330      0.021     -11.966      -1.003
+x1             2.2933      0.502      4.564      0.000       1.304       3.283
+x2             0.8002      0.554      1.445      0.150      -0.291       1.891
+x3            -1.9480      0.438     -4.450      0.000      -2.810      -1.086
+==============================================================================
+Omnibus:                       31.603   Durbin-Watson:                   0.184
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                9.818
+Skew:                          -0.144   Prob(JB):                      0.00738
+Kurtosis:                       2.090   Cond. No.                     2.55e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly
+specified.
+[2] The condition number is large, 2.55e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+"""
+\end{Verbatim}
+\end{tcolorbox}
+        
+    As you can see, the point estimates and standard errors are exactly the
+same as the ones we computed.
+
+As for the interpretation, the regression says that a 1\% increase in
+the average sales price is associated with a 2.3\% increase in new house
+construction starts in three months time. The elasticity is only 0.8\%
+if we consider a lag of 6 months (albeit not statistically significant),
+and even reverses its sign at a 12-month horizon.
 
 
     % Add a bibliography block to the postdoc
