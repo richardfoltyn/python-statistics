@@ -1,6 +1,6 @@
 """
-Script to import single data series from FRED and process them
-into data sets used for the course.
+Script to import single data series from FRED (or other sources, but identical
+format) and process them into data sets used for the course.
 
 Author: Richard Foltyn
 """
@@ -15,7 +15,7 @@ mypath = os.path.abspath(__file__)
 # Directory of current script file
 basedir = os.path.dirname(mypath)
 
-indir = os.path.join(basedir, 'FRED')
+indir = os.path.join(basedir, 'CSV')
 outdir = os.path.abspath(os.path.join(basedir, '..'))
 
 
@@ -63,7 +63,7 @@ def import_series(path, start=None, stop=None, varname=None, freq=None,
 
     # Filter out unwanted years, if applicable;
     # default: include all data points
-    mask = np.ones(len(date), dtype=np.bool)
+    mask = np.ones(len(date), dtype=bool)
 
     # Apply start year restriction
     if start is not None:
@@ -195,3 +195,29 @@ del df['DATE']
 
 fn = os.path.join(outdir, 'FRED_QTR.csv')
 df.to_csv(fn, index=True, sep=',')
+
+
+################################################################################
+# FRED data related to housing
+
+series = {
+    'NHSTART': 'HOUST',
+    'MORTGAGE30': 'MORTGAGE30US',
+    'CSHPRICE': 'CSUSHPISA',
+    'HSN1F': 'HSN1F',
+    'ASPNHS': 'ASPNHSUS',
+    'CPI': 'CPIAUCSL',
+    'HSUPPLY': 'MSACSR'
+}
+
+df = combine_series(indir, series, start=1975, stop=2021, freq='month')
+
+# Round to 1 decimal digits
+df = df.round(1)
+
+# Drop DATE
+del df['DATE']
+
+fn = os.path.join(outdir, 'HOUSING.csv')
+df.to_csv(fn, index=True, sep=',')
+

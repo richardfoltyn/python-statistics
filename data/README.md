@@ -55,3 +55,27 @@ Variables:
     
 There is a CSV variant (`universities.csv`) using `;`
 as separator and an Excel 2003 variant (`universities.xlsx`). 
+
+## Housing data
+
+Monthly data related to the housing sector taken from FRED.
+
+Variables:
+
+- `Year`: Calendar year
+- `Month`: Calendar month
+- `NHSTART`: New Privately-Owned Housing Units Started: Total Units,
+  thousands of units ([HOUST](https://fred.stlouisfed.org/series/HOUST))
+- `MORTGAGE30`: 30-Year Fixed Rate Mortgage Average in the United States,
+  in percent ([MORTGAGE30US](https://fred.stlouisfed.org/series/MORTGAGE30US))
+- `CSHPRICE`: S&P/Case-Shiller U.S. National Home Price Index,
+   index with January 2000 = 100 ([CSUSHPISA](https://fred.stlouisfed.org/series/CSUSHPISA))
+- `HSN1F`: New One Family Houses Sold: United States, in thousands
+  ([HSN1F](https://fred.stlouisfed.org/series/HSN1F))
+- `ASPNHS`: Average Sales Price for New Houses Sold in the United States,
+  in current USD ([ASPNHSUS](https://fred.stlouisfed.org/series/ASPNHSUS))
+- `HSUPPLY`: Monthly Supply of Houses in the United States, 
+  ratio of houses for sale to houses sold ([MSACSR](https://fred.stlouisfed.org/series/MSACSR))
+- `CPI`: Consumer Price Index for All Urban Consumers: All Items in U.S. City Average
+  ([CPIAUCSL](https://fred.stlouisfed.org/series/CPIAUCSL)).
+  Price level is normalised so that the average in 1982-1984 is 100.
