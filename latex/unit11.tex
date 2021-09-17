@@ -722,7 +722,7 @@ the variation clearly occurs along the first axis!
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.lines.Line2D at 0x7ff5ec0f4430>
+<matplotlib.lines.Line2D at 0x7fc5a4254580>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -855,7 +855,7 @@ Slope of sample regression line: -1.3889613032802288
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7ff5c7733fd0>
+<matplotlib.legend.Legend at 0x7fc5713f1eb0>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1186,14 +1186,20 @@ include a constant in the model.
 \PY{l+s+sd}{        If True, prepend a constant to regressor matrix X.}
 \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
 
-    \PY{c+c1}{\PYZsh{} Make sure we have a regressor matrix even if there is only a single}
-    \PY{c+c1}{\PYZsh{} regressor}
-    \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{atleast\PYZus{}2d}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+    \PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k+kn}{import} \PY{n}{svd}
+
+    \PY{c+c1}{\PYZsh{} Make sure that y is a one\PYZhy{}dimensional array}
     \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{atleast\PYZus{}1d}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Number of obs.}
+    \PY{n}{Nobs} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{size}
+
+    \PY{c+c1}{\PYZsh{} Make sure that X is a matrix and the leading dimension contains the}
+    \PY{c+c1}{\PYZsh{} observations}
+    \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{atleast\PYZus{}2d}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{Nobs}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
 
     \PY{c+c1}{\PYZsh{} Check that arrays are of conformable dimensions, and raise an exception}
     \PY{c+c1}{\PYZsh{} if that is not the case}
-    \PY{n}{Nobs} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{size}
     \PY{k}{if} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{n}{Nobs}\PY{p}{:}
         \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Non\PYZhy{}conformable arrays X and y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
@@ -1226,6 +1232,33 @@ include a constant in the model.
     \PY{k}{return} \PY{n}{beta}\PY{p}{,} \PY{n}{var\PYZus{}beta}
 \end{Verbatim}
 \end{tcolorbox}
+
+    We can now draw our random sample and repeat the OLS estimation using
+only a few lines of code!
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Test our custom OLS function}
+
+\PY{c+c1}{\PYZsh{} Draw random sample, split into x and y}
+\PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{draw\PYZus{}bivariate\PYZus{}sample}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{Nobs}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+
+\PY{c+c1}{\PYZsh{} Call OLS estimator. Note that we don\PYZsq{}t need to manually add a constant!}
+\PY{n}{beta}\PY{p}{,} \PY{n}{vcv} \PY{o}{=} \PY{n}{ols}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{add\PYZus{}const}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Compute standard errors}
+\PY{n}{beta\PYZus{}SE} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{vcv}\PY{p}{)}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Point estimate: }\PY{l+s+si}{\PYZob{}}\PY{n}{beta}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Standard errors: }\PY{l+s+si}{\PYZob{}}\PY{n}{beta\PYZus{}SE}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Point estimate: [-0.20352351 -1.3889613 ]
+Standard errors: [0.26527596 0.23477147]
+    \end{Verbatim}
 
 
     \hypertarget{ols-using-housing-data}{%
@@ -1275,7 +1308,7 @@ We first load and inspect the data using pandas's
 function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
@@ -1289,7 +1322,7 @@ function:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{20}{\boxspacing}
+\prompt{Out}{outcolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
      Year  Month  NHSTART  MORTGAGE30  CSHPRICE  HSN1F    ASPNHS    CPI  \textbackslash{}
 0    1975      1   1032.0         9.4       NaN  416.0   39500.0   52.3
@@ -1332,7 +1365,7 @@ so we first need to deflate it (using the \texttt{CPI}) to make the
 values comparable across this 45-year period.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{21}{\boxspacing}
+\prompt{In}{incolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 
@@ -1345,14 +1378,14 @@ values comparable across this 45-year period.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{21}{\boxspacing}
+\prompt{Out}{outcolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <AxesSubplot:xlabel='NHSTART', ylabel='ASPNHS'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_46_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_48_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1365,7 +1398,7 @@ To see this more clearly, we bin the time periods into five blocks and
 recreate the plots using different colours:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
+\prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create 5 approximately equally\PYZhy{}sized bins based on the calendar year}
 \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
@@ -1396,7 +1429,7 @@ recreate the plots using different colours:
 \end{tcolorbox}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_48_0.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_50_0.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1414,7 +1447,7 @@ the data so that we end up with NumPy arrays (the only type of data our
 function accepts).
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
+\prompt{In}{incolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Keep only relevant variables, rest just clutters the DataFrame}
 \PY{n}{varlist} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHSTART}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
@@ -1441,7 +1474,7 @@ function accepts).
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{23}{\boxspacing}
+\prompt{Out}{outcolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                 ASPNHS  NHSTART       L3ASPNHS       L6ASPNHS      L12ASPNHS
 Date
@@ -1465,7 +1498,7 @@ Date
 missing data and convert the relevant columns to NumPy arrays.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} List of variables to include in model}
 \PY{n}{var\PYZus{}X} \PY{o}{=} \PY{p}{[}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L}\PY{l+s+si}{\PYZob{}}\PY{n}{lag}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ASPNHS}\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{lag} \PY{o+ow}{in} \PY{n}{lags}\PY{p}{]}
@@ -1491,7 +1524,7 @@ missing data and convert the relevant columns to NumPy arrays.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{24}{\boxspacing}
+\prompt{Out}{outcolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[11.68768329, 11.63900565, 11.61773938],
        [11.74080836, 11.65754122, 11.66316531],
@@ -1507,7 +1540,7 @@ array([[11.68768329, 11.63900565, 11.61773938],
 We are now ready to run the OLS regression.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Run our own ols() function. This returns the coefficient vector and the}
 \PY{c+c1}{\PYZsh{} variance\PYZhy{}covariance matrix.}
@@ -1538,7 +1571,7 @@ One such package is \texttt{statsmodels}, which we will now use to
 verify our results.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
 
@@ -1557,7 +1590,7 @@ verify our results.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{26}{\boxspacing}
+\prompt{Out}{outcolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <class 'statsmodels.iolib.summary.Summary'>
 """
@@ -1566,8 +1599,8 @@ verify our results.
 Dep. Variable:                      y   R-squared:                       0.185
 Model:                            OLS   Adj. R-squared:                  0.175
 Method:                 Least Squares   F-statistic:                     19.27
-Date:                Wed, 15 Sep 2021   Prob (F-statistic):           2.72e-11
-Time:                        23:15:10   Log-Likelihood:                -101.18
+Date:                Fri, 17 Sep 2021   Prob (F-statistic):           2.72e-11
+Time:                        15:10:21   Log-Likelihood:                -101.18
 No. Observations:                 259   AIC:                             210.4
 Df Residuals:                     255   BIC:                             224.6
 Df Model:                           3
