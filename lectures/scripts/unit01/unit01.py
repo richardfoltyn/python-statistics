@@ -12,6 +12,17 @@ Author: Richard Foltyn
 """
 
 ################################################################################
+# Set up the environment
+
+# This code sets the directories where data and graphs are located.
+# You can ignore it at this point!
+import os
+# Directory where graphs are stored
+graphdir = os.path.dirname(os.path.abspath(__file__))
+# Directory where data files are located
+datadir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../data'))
+
+################################################################################
 # Built-in data types
 
 # For data analysis, the most important built-in data types are
@@ -143,7 +154,7 @@ ax[2].bar(xvalues, yvalues, 0.09)
 ax[2].set_title('Bar plot')
 
 # Save figure
-fig.savefig('figure1.pdf')
+fig.savefig(os.path.join(graphdir, 'figure1.pdf'))
 
 ################################################################################
 # Functions
@@ -192,7 +203,7 @@ ax.set_xlabel('$x$')
 ax.set_ylabel(r'$p(x; \alpha)$')
 ax.legend()
 
-fig.savefig('figure2.pdf')
+fig.savefig(os.path.join(graphdir, 'figure2.pdf'))
 
 ################################################################################
 # Working with data
@@ -211,7 +222,7 @@ fig.savefig('figure2.pdf')
 # We use the loadtxt() function to read the CSV file into a
 # NumPy array as follows:
 
-filename = '../data/FRED.csv'
+filename = os.path.join(datadir, 'FRED.csv')
 # Load data into NumPy array
 data = np.loadtxt(filename, delimiter=',', skiprows=1)
 # first 5 rows of data
@@ -249,7 +260,7 @@ ax[2].plot(years, unr)
 ax[2].set_title('Unempl. rate')
 ax[2].set_ylabel('Percent')
 
-fig.savefig('figure3.pdf')
+fig.savefig(os.path.join(graphdir, 'figure3.pdf'))
 
 ## Transforming data
 #
@@ -285,7 +296,7 @@ ax.set_title('Growth rates')
 ax.legend()
 ax.grid(linestyle=':', alpha=0.9, linewidth=0.75, zorder=-100)
 
-fig.savefig('figure4.pdf')
+fig.savefig(os.path.join(graphdir, 'figure4.pdf'))
 
 ## Summary statistics
 #
@@ -326,4 +337,4 @@ ax.set_xticklabels(labels)
 ax.set_ylabel('Percent')
 ax.legend(loc='upper left')
 
-fig.savefig('figure5.pdf')
+fig.savefig(os.path.join(graphdir, 'figure5.pdf'))
