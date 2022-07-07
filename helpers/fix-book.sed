@@ -1,7 +1,7 @@
 #!/bin/sed -rf
 
 # Set document class to KOMAScript report
-s/\\documentclass\[11pt\]\{article\}/\\documentclass[10pt]{scrreprt}/
+s/\\documentclass\[11pt\]\{article\}/\\documentclass{scrreprt}/
 
 # Promote headings one level up
 s/\\section\b/\\chapter/

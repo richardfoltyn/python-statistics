@@ -10,7 +10,15 @@ The relevant non-default options are:
 
     c.NbConvertApp.export_format = 'latex'
     c.ExecutePreprocessor.allow_errors = True
+    
+Optionally, adding the following will trigger a notebook to be executed
+before it is exported.
+    
     c.ExecutePreprocessor.enabled = True
+    
+If execution takes a long time, it might be better to avoid this and 
+pass the `--execute` argument to `jupyter nbconvert` as needed. Note that
+changes to Markdown cells correctly detected even without executing the notebook!
 
 Note that a fresh template config file with all default values can 
 be generated via
