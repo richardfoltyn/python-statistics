@@ -1563,7 +1563,7 @@ c.ExecutePreprocessor.allow_errors = True
 # c.ExecutePreprocessor.display_data_priority = ['text/html', 'application/pdf', 'text/latex', 'image/svg+xml', 'image/png', 'image/jpeg', 'text/markdown', 'text/plain']
 
 #  See also: Preprocessor.enabled
-c.ExecutePreprocessor.enabled = True
+# c.ExecutePreprocessor.enabled = True
 
 #  See also: NotebookClient.extra_arguments
 # c.ExecutePreprocessor.extra_arguments = ['--debug']

@@ -10,12 +10,12 @@ The relevant non-default options are:
 
     c.NbConvertApp.export_format = 'latex'
     c.ExecutePreprocessor.allow_errors = True
-    
+
 Optionally, adding the following will trigger a notebook to be executed
 before it is exported.
-    
+
     c.ExecutePreprocessor.enabled = True
-    
+
 If execution takes a long time, it might be better to avoid this and 
 pass the `--execute` argument to `jupyter nbconvert` as needed. Note that
 changes to Markdown cells correctly detected even without executing the notebook!
@@ -35,6 +35,7 @@ The IPython config file controls two important aspects:
     otherwise the PDFs are full of stack traces for errors we 
     trigger throughout the units.
 - Generating PDF graphs to be included in the static PDF.
+- Scale down the default figure size as figures in the PDF are way too large.
 - Matplotlib graphs need to be shown `inline`, otherwise they don't appear in 
   the notebook or PDF.
 
@@ -43,6 +44,7 @@ The relevant options in `$HOME/.ipython/profile_default/ipython_config.py` are
     c.InteractiveShellApp.matplotlib = 'inline'
     c.InteractiveShell.xmode = 'Minimal'
     c.InlineBackend.figure_formats = {'png', 'pdf'}
+    c.InlineBackend.rc = { 'figure.figsize': (4.0, 3.0) }
 
 A new config file with all the default values can be generated as part
 of a new profile via
@@ -61,6 +63,10 @@ of a new profile via
             jupyter nbconvert --to=latex --output-dir=latex ${file}
         done
 
+    Alternatively, if the notebooks should be executed prior to export, run
+
+        jupyter nbconvert --execute --to=latex --output-dir=latex lectures/unitXX.ipynb
+
 2. Fix most issues with generated LaTeX file by running:
 
         cd latex
@@ -71,17 +77,21 @@ of a new profile via
 
 ## Course book
 
-1.  Merge individual notebooks using `nbmerge` which needs to be 
-    installed via `pip`:
+1.  Make sure that `nbmerge` is installed in the local environment. This
+    can be achieved using `pip` by running
+
+        pip install nbmerge
+
+2.  Merge individual notebooks using `nbmerge`:
 
         cd lectures    
         nbmerge preface.ipynb unit*.ipynb -o python-course.ipynb
  
-2.  Generate the preliminary LaTeX document:
+3.  Generate the preliminary LaTeX document:
 
         jupyter nbconvert --to=latex --output-dir=latex lectures/python-course.ipynb 
 
-3.  Fix most issues with the generated LaTeX file by running:
+4.  Fix most issues with the generated LaTeX file by running:
     
         cd latex
         ../helpers/fix-book.sh python-course.tex
