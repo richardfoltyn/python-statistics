@@ -1,4 +1,4 @@
-\documentclass[10pt]{scrartcl}
+\documentclass{scrartcl}
 
     \input{overrides-pre}
 
@@ -6,13 +6,6 @@
     \usepackage[breakable]{tcolorbox}
     \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
     
-    \usepackage{iftex}
-    \ifPDFTeX
-    	\usepackage[T1]{fontenc}
-    	\usepackage{mathpazo}
-    \else
-    	\usepackage{fontspec}
-    \fi
 
     % Basic figure setup, for now with no caption control since it's done
     % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
@@ -40,7 +33,21 @@
     }
     \usepackage{upquote} % Upright quotes for verbatim code
     \usepackage{eurosym} % defines \euro
-    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+
+    \usepackage{iftex}
+    \ifPDFTeX
+        \usepackage[T1]{fontenc}
+        \IfFileExists{alphabeta.sty}{
+              \usepackage{alphabeta}
+          }{
+              \usepackage[mathletters]{ucs}
+              \usepackage[utf8]{inputenc}
+          }
+    \else
+        \usepackage{fontspec}
+        \usepackage{unicode-math}
+    \fi
+
     \usepackage{fancyvrb} % verbatim replacement that allows latex
     \usepackage{grffile} % extends the file name processing of package graphics 
                          % to support a larger range
@@ -69,6 +76,8 @@
     \usepackage{titling}
     \usepackage{longtable} % longtable support required by pandoc >1.10
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
     \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
     \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
                                 % normalem makes italics be italics, not underlines
@@ -179,8 +188,8 @@
 \def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
 
 \@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
-\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
 \@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
@@ -190,31 +199,31 @@
 \@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
 \@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
 \@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
-\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
 \@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
-\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
-\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
-\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
 \@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
 \@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
 \@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
-\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
-\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
-\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
 \@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
 \@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
 \@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
-\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
-\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
 \@namedef{PY@tok@ge}{\let\PY@it=\textit}
 \@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
 \@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
-\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
 \@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
 \@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
 \@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
@@ -240,11 +249,11 @@
 \@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
-\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
 
 \def\PYZbs{\char`\\}
 \def\PYZus{\char`\_}
@@ -381,16 +390,16 @@
     
     \maketitle
     \tableofcontents
-
+    
     
 
     
-    \hypertarget{reusing-code---functions-modules-and-packages}{%
-\section{Reusing code - Functions, modules and
-packages}\label{reusing-code---functions-modules-and-packages}}
+    \hypertarget{reusing-code-functions-modules-and-packages}{%
+\section{Reusing code: Functions, modules and
+packages}\label{reusing-code-functions-modules-and-packages}}
 
-In this unit, we show how to build reusable code with functions. We will
-also briefly discuss modules and packages.
+In this unit, we learn how to build reusable code with functions. We
+will also briefly discuss modules and packages.
 
 \hypertarget{functions}{%
 \subsection{Functions}\label{functions}}
@@ -603,6 +612,30 @@ arguments, so these need not be passed when the function is called:
 6.0
     \end{Verbatim}
 
+    \textbf{Keyword (or named) arguments}
+
+Arguments don't need to be provided in the same order as specified in
+the function signature. We can use argument names to explicitly assign
+values to the corresponding argument.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{arg1}\PY{p}{,} \PY{n}{arg2}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{arg1: }\PY{l+s+si}{\PYZob{}}\PY{n}{arg1}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{, arg2: }\PY{l+s+si}{\PYZob{}}\PY{n}{arg2}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{n}{func}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}              \PY{c+c1}{\PYZsh{} Call using purely positional arguments}
+\PY{n}{func}\PY{p}{(}\PY{n}{arg1}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{arg2}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}    \PY{c+c1}{\PYZsh{} Use argument names to explicitly assign values}
+\PY{n}{func}\PY{p}{(}\PY{n}{arg2}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{arg1}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}    \PY{c+c1}{\PYZsh{} With keyword arguments, the order does not matter!}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+arg1: 1, arg2: 2
+arg1: 1, arg2: 2
+arg1: 1, arg2: 2
+    \end{Verbatim}
+
     \textbf{Arbitrary number of optional arguments}
 
 Python supports functions which accept an arbitrary number of positional
@@ -622,7 +655,7 @@ and keyword arguments. This is accomplished via two special tokens:
 \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{9}{\boxspacing}
+\prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Define function with mandatory, optional, optional positional}
 \PY{c+c1}{\PYZsh{} and optional keyword arguments}
@@ -644,7 +677,7 @@ and keyword arguments. This is accomplished via two special tokens:
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{10}{\boxspacing}
+\prompt{In}{incolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Call only with required argument}
 \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
@@ -657,7 +690,7 @@ Optional argument opt: default
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{11}{\boxspacing}
+\prompt{In}{incolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Call with required and optional arguments}
 \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optional}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -670,7 +703,7 @@ Optional argument opt: optional
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{12}{\boxspacing}
+\prompt{In}{incolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Call with required and optional arguments, and}
 \PY{c+c1}{\PYZsh{} optional positional arguments}
@@ -688,7 +721,7 @@ Optional positional arguments:
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{13}{\boxspacing}
+\prompt{In}{incolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Call with required and optional arguments, and}
 \PY{c+c1}{\PYZsh{} optional positional and keyword arguments}
@@ -713,7 +746,7 @@ the function, except for optional positional arguments, since these have
 no argument names. We can just use the \texttt{name=value} syntax:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{14}{\boxspacing}
+\prompt{In}{incolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} call func() with interchanged argument order}
 \PY{n}{func}\PY{p}{(}\PY{n}{opt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optional value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
@@ -729,17 +762,17 @@ Optional argument opt: optional value
 come first and those passed as \texttt{name=value} pairs last:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{15}{\boxspacing}
+\prompt{In}{incolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{1}
 
-\PY{c+c1}{\PYZsh{} this will not work, cannot specifiy positional arguments last}
+\PY{c+c1}{\PYZsh{} this will not work, cannot specify positional arguments last}
 \PY{n}{func}\PY{p}{(}\PY{n}{opt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optional value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-cyan}{  File }\textcolor{ansi-green}{"<ipython-input-15-329ad3602f54>"}\textcolor{ansi-cyan}{, line }\textcolor{ansi-green}{4}
+\textcolor{ansi-cyan}{  Input }\textcolor{ansi-green}{In [16]}
 \textcolor{ansi-red}{    func(opt='optional value', x)}
                                 \^{}
 \textcolor{ansi-red}{SyntaxError}\textcolor{ansi-red}{:} positional argument follows keyword argument
@@ -750,7 +783,7 @@ come first and those passed as \texttt{name=value} pairs last:
 \texttt{**kwargs}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\prompt{In}{incolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} fails because arguments collected in *args must}
 \PY{c+c1}{\PYZsh{} be specified before arguments collected in **kwargs!}
@@ -760,7 +793,7 @@ come first and those passed as \texttt{name=value} pairs last:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
-\textcolor{ansi-cyan}{  File }\textcolor{ansi-green}{"<ipython-input-16-48f7c34cded9>"}\textcolor{ansi-cyan}{, line }\textcolor{ansi-green}{3}
+\textcolor{ansi-cyan}{  Input }\textcolor{ansi-green}{In [17]}
 \textcolor{ansi-red}{    func(1.0, 'opt', arg1='value1', arg2='value2', 1, 2, 3)}
                                                           \^{}
 \textcolor{ansi-red}{SyntaxError}\textcolor{ansi-red}{:} positional argument follows keyword argument
@@ -792,7 +825,7 @@ Consider first the following attempt to modify a value defined outside
 of the function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{17}{\boxspacing}
+\prompt{In}{incolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{var} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{outer scope}\PY{l+s+s1}{\PYZsq{}}
 
@@ -821,7 +854,7 @@ We need to use the \texttt{global} statement to tell Python to instead
 assign to a variable in the global (outer) scope:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{18}{\boxspacing}
+\prompt{In}{incolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{var}  \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{outer scope}\PY{l+s+s1}{\PYZsq{}}
 
@@ -853,7 +886,7 @@ a global variable has subtle implications. Consider the following
 example of two \emph{nested} functions:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{19}{\boxspacing}
+\prompt{In}{incolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{outer}\PY{p}{(}\PY{p}{)}\PY{p}{:}
     \PY{n}{var} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{outer function}\PY{l+s+s1}{\PYZsq{}}
@@ -890,7 +923,7 @@ another function or the module itself.
 We can use \texttt{nonlocal} to get the desired behaviour:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{outer}\PY{p}{(}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} var is in outer\PYZsq{}s local scope}
@@ -942,7 +975,7 @@ value. This means assigning a different value to an argument (``the
 reference'') within a function has no effect outside of the function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{21}{\boxspacing}
+\prompt{In}{incolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} x now points to something else}
@@ -956,7 +989,7 @@ reference'') within a function has no effect outside of the function:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{21}{\boxspacing}
+\prompt{Out}{outcolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 123
 \end{Verbatim}
@@ -967,7 +1000,7 @@ reference'') within a function has no effect outside of the function:
 that object to modify the object even in the outer scope:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
+\prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} uses reference x to modify list object outside of func()}
@@ -980,7 +1013,7 @@ that object to modify the object even in the outer scope:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{22}{\boxspacing}
+\prompt{Out}{outcolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [1, 2, 3, 4]
 \end{Verbatim}
@@ -991,7 +1024,7 @@ a new value is \emph{assigned} to a named argument, that name then
 references a different object, leaving the original object unmodified:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
+\prompt{In}{incolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} this does not modify object in outer scope,}
@@ -1002,12 +1035,12 @@ references a different object, leaving the original object unmodified:
 \PY{c+c1}{\PYZsh{} pass list, which is mutable and can thus be changed in func()}
 \PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}
 
-\PY{n}{lst} \PY{c+c1}{\PYZsh{} prints [1,2,3]}
+\PY{n}{lst}     \PY{c+c1}{\PYZsh{} prints [1,2,3]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{23}{\boxspacing}
+\prompt{Out}{outcolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [1, 2, 3]
 \end{Verbatim}
@@ -1018,7 +1051,7 @@ function of course cannot be used to modify the object inside the
 function:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{modified in func}\PY{l+s+s1}{\PYZsq{}}
@@ -1037,7 +1070,7 @@ function:
 expected:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{items} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
 
@@ -1048,7 +1081,7 @@ expected:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{25}{\boxspacing}
+\prompt{Out}{outcolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 ['modified in func', 2, 3]
 \end{Verbatim}
@@ -1058,13 +1091,13 @@ expected:
 \subsubsection{Methods}\label{methods}}
 
 Methods are simply functions that perform an action on a particular
-object which they are bound to. We will not write methods in this
-tutorial ourselves (they are part of what's called object-oriented
-programming), but we frequently use them when we invoke actions on
-objects such as lists:
+object which they are bound to. We will not write methods in this course
+ourselves (they are part of what's called object-oriented programming),
+but we frequently use them when we invoke actions on objects such as
+lists:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create a list}
 \PY{n}{lst} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}
@@ -1077,7 +1110,7 @@ objects such as lists:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{26}{\boxspacing}
+\prompt{Out}{outcolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [1, 2, 3, 4]
 \end{Verbatim}
@@ -1102,7 +1135,7 @@ perform various operations with them:
 \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{27}{\boxspacing}
+\prompt{In}{incolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{func1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{func1 called with argument }\PY{l+s+si}{\PYZob{}}\PY{n}{x}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -1127,7 +1160,7 @@ func2 called with argument foo
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{28}{\boxspacing}
+\prompt{In}{incolor}{29}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Pass one function as argument to another function}
 \PY{n}{func1}\PY{p}{(}\PY{n}{func2}\PY{p}{)}
@@ -1135,7 +1168,7 @@ func2 called with argument foo
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-func1 called with argument <function func2 at 0x7f635d00d940>
+func1 called with argument <function func2 at 0x7ff523485ea0>
     \end{Verbatim}
 
     \hypertarget{lambda-expressions}{%
@@ -1179,7 +1212,7 @@ operation to its arguments, and the operation can be flexibly defined by
 the caller.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{29}{\boxspacing}
+\prompt{In}{incolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{items}\PY{p}{,} \PY{n}{operation}\PY{o}{=}\PY{k}{lambda} \PY{n}{z}\PY{p}{:} \PY{n}{z} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} default operation: increment value by 1}
@@ -1193,14 +1226,14 @@ the caller.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{29}{\boxspacing}
+\prompt{Out}{outcolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [2.0, 3.0, 4.0]
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
+\prompt{In}{incolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} We can also use lambda expressions to specify}
 \PY{c+c1}{\PYZsh{} an alternative operation directly in the call!}
@@ -1210,7 +1243,7 @@ the caller.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{30}{\boxspacing}
+\prompt{Out}{outcolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [1.0, 4.0, 9.0]
 \end{Verbatim}
@@ -1268,7 +1301,7 @@ import the module \texttt{unit04\_mod} using the \texttt{import}
 statement:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{31}{\boxspacing}
+\prompt{In}{incolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{unit04\PYZus{}mod}
 \end{Verbatim}
@@ -1283,7 +1316,7 @@ search path} used by Python.
 To fix this, check the module search path as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{32}{\boxspacing}
+\prompt{In}{incolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{sys}
 \PY{n}{sys}\PY{o}{.}\PY{n}{path}
@@ -1291,17 +1324,16 @@ To fix this, check the module search path as follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{32}{\boxspacing}
+\prompt{Out}{outcolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 ['/home/richard/repos/python-statistics/lectures',
- '/home/richard/.conda/envs/py3-default/lib/python39.zip',
- '/home/richard/.conda/envs/py3-default/lib/python3.9',
- '/home/richard/.conda/envs/py3-default/lib/python3.9/lib-dynload',
+ '/home/richard/.conda/envs/py3-default/lib/python310.zip',
+ '/home/richard/.conda/envs/py3-default/lib/python3.10',
+ '/home/richard/.conda/envs/py3-default/lib/python3.10/lib-dynload',
  '',
- '/home/richard/.conda/envs/py3-default/lib/python3.9/site-packages',
- '/home/richard/.conda/envs/py3-default/lib/python3.9/site-
-packages/IPython/extensions',
- '/home/richard/.ipython']
+ '/home/richard/.conda/envs/py3-default/lib/python3.10/site-packages',
+ '/home/richard/.conda/envs/py3-default/lib/python3.10/site-
+packages/PyQt5\_sip-12.11.0-py3.10-linux-x86\_64.egg']
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1310,7 +1342,7 @@ can add it manually. For example, this notebook is executed in the git
 repository's root directory, you need to exectute
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{33}{\boxspacing}
+\prompt{In}{incolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{sys}
 \PY{c+c1}{\PYZsh{} add lectures/ directory using a relative path}
@@ -1338,7 +1370,7 @@ imported. We can do this in several ways:
 The first variant looks like this:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{34}{\boxspacing}
+\prompt{In}{incolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{unit04\PYZus{}mod}
 
@@ -1360,7 +1392,7 @@ to make it accessible without the \texttt{unit04\_mod} prefix. This is
 the second variant:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{35}{\boxspacing}
+\prompt{In}{incolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{unit04\PYZus{}mod} \PY{k+kn}{import} \PY{n}{var}\PY{p}{,} \PY{n}{func}
 
@@ -1382,7 +1414,7 @@ would overwrite the reference to the one imported from
 \texttt{unit04\_mod}, as in the following example?
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{36}{\boxspacing}
+\prompt{In}{incolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{unit04\PYZus{}mod} \PY{k+kn}{import} \PY{n}{func}
 
@@ -1407,7 +1439,7 @@ func in notebook called
 \texttt{as}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{37}{\boxspacing}
+\prompt{In}{incolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{unit04\PYZus{}mod} \PY{k+kn}{import} \PY{n}{func} \PY{k}{as} \PY{n}{imported\PYZus{}func}     \PY{c+c1}{\PYZsh{} The function formerly known}
                                                  \PY{c+c1}{\PYZsh{} as func is now imported\PYZus{}func}
@@ -1432,7 +1464,7 @@ func in module unit04\_mod called
 widely used modules such as \texttt{numpy}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{38}{\boxspacing}
+\prompt{In}{incolor}{39}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{unit04\PYZus{}mod} \PY{k}{as} \PY{n+nn}{u4m}
 
@@ -1445,7 +1477,7 @@ func in module unit04\_mod called
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{39}{\boxspacing}
+\prompt{In}{incolor}{40}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} universal convention to import numpy like this}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
@@ -1456,10 +1488,10 @@ func in module unit04\_mod called
 \subsubsection{Packages}\label{packages}}
 
 Packages are roughly speaking collections of modules and a little magic
-on top. We will not be creating packages in this tutorial, but we have
-already been using them: basically everything besides the built-in
-functions is defined in some package. For example, the NumPy library is
-a collection of packages.
+on top. We will not be creating packages, but we have already been using
+them: basically everything besides the built-in functions is defined in
+some package. For example, the NumPy library is a collection of
+packages.
 
 
 \hypertarget{exercises}{%
@@ -1623,7 +1655,7 @@ interval \([-3,0]\), which has a (unique) root at \(x_0 = -2\).
 \subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{40}{\boxspacing}
+\prompt{In}{incolor}{41}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1665,7 +1697,7 @@ declare an \texttt{*args} argument.
 One possible implementation of \texttt{my\_sum()} looks as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{41}{\boxspacing}
+\prompt{In}{incolor}{42}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{my\PYZus{}sum}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} Initialise sum to 0}
@@ -1692,7 +1724,7 @@ One possible implementation of \texttt{my\_sum()} looks as follows:
 \texttt{sum()}, or preferably the NumPy variant \texttt{np.sum()}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{42}{\boxspacing}
+\prompt{In}{incolor}{43}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
@@ -1713,7 +1745,7 @@ One possible implementation of \texttt{my\_sum()} looks as follows:
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{42}{\boxspacing}
+\prompt{Out}{outcolor}{43}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 0.0
 \end{Verbatim}
@@ -1725,7 +1757,7 @@ One possible implementation of \texttt{my\_sum()} looks as follows:
 The recursive definition of \texttt{fibonacci(i)} could look like this:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{43}{\boxspacing}
+\prompt{In}{incolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{fibonacci}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}
     \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
@@ -1749,7 +1781,7 @@ The recursive definition of \texttt{fibonacci(i)} could look like this:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{43}{\boxspacing}
+\prompt{Out}{outcolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 \end{Verbatim}
@@ -1764,7 +1796,7 @@ function recursively arbitrarily many times. You can find out what this
 limit is as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{44}{\boxspacing}
+\prompt{In}{incolor}{45}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{sys}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{getrecursionlimit}\PY{p}{(}\PY{p}{)}\PY{p}{)}
@@ -1782,7 +1814,7 @@ The following code shows a function computing the factorial \(n!\) using
 recursion:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{45}{\boxspacing}
+\prompt{In}{incolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{factorial}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
     \PY{k}{if} \PY{n}{n} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
@@ -1797,7 +1829,7 @@ recursion:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{45}{\boxspacing}
+\prompt{Out}{outcolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)
 \end{Verbatim}
@@ -1808,7 +1840,7 @@ recursion:
 numbers:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{46}{\boxspacing}
+\prompt{In}{incolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{n}{fact10} \PY{o}{=}  \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
@@ -1817,7 +1849,7 @@ numbers:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{46}{\boxspacing}
+\prompt{Out}{outcolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (1.0, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)
 \end{Verbatim}
@@ -1828,7 +1860,7 @@ numbers:
 argument passed to \texttt{np.prod()} for \texttt{n=0}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{47}{\boxspacing}
+\prompt{In}{incolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{0}
 \PY{c+c1}{\PYZsh{} We have to embed range() in an expression that forces the Python}
@@ -1838,7 +1870,7 @@ argument passed to \texttt{np.prod()} for \texttt{n=0}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{47}{\boxspacing}
+\prompt{Out}{outcolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 ()
 \end{Verbatim}
@@ -1854,32 +1886,11 @@ You can get around this by explicitly specifying the data type using the
 \texttt{dtype} argument, which is accepted by many NumPy functions.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{48}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-\PY{c+c1}{\PYZsh{} Force result to be of integer type}
-\PY{n}{fact10} \PY{o}{=}  \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
-\PY{n}{fact10}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{48}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-(1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)
-\end{Verbatim}
-\end{tcolorbox}
-        
-    Alternatively, we can use \texttt{np.arange()} instead of
-\texttt{range()} as the former by default returns integer arrays, even
-if they are empty:
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{49}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{c+c1}{\PYZsh{} Force result to be of integer type}
-\PY{n}{fact10} \PY{o}{=}  \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\PY{n}{fact10} \PY{o}{=}  \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
 \PY{n}{fact10}
 \end{Verbatim}
 \end{tcolorbox}
@@ -1891,12 +1902,33 @@ if they are empty:
 \end{Verbatim}
 \end{tcolorbox}
         
+    Alternatively, we can use \texttt{np.arange()} instead of
+\texttt{range()} as the former by default returns integer arrays, even
+if they are empty:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{c+c1}{\PYZsh{} Force result to be of integer type}
+\PY{n}{fact10} \PY{o}{=}  \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\PY{n}{fact10}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)
+\end{Verbatim}
+\end{tcolorbox}
+        
     Finally, you of course would not need to implement the factorial
 function yourself, as there is one in the \texttt{math} module shipped
 with Python:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{50}{\boxspacing}
+\prompt{In}{incolor}{51}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{math}
 \PY{n}{fact10} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{factorial}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
@@ -1905,7 +1937,7 @@ with Python:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{50}{\boxspacing}
+\prompt{Out}{outcolor}{51}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)
 \end{Verbatim}
@@ -1943,7 +1975,7 @@ permissible number of iterations as an optional argument
 \texttt{maxiter}.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{51}{\boxspacing}
+\prompt{In}{incolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{bisect}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}6}\PY{p}{,} \PY{n}{xtol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}6}\PY{p}{,} \PY{n}{maxiter}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
 
@@ -2029,7 +2061,7 @@ Iteration 20: f(mid) = -1.9073e-06
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{51}{\boxspacing}
+\prompt{Out}{outcolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 -2.000000238418579
 \end{Verbatim}
