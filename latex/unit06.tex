@@ -1,17 +1,10 @@
-\documentclass[10pt]{scrartcl}
+\documentclass{scrartcl}
 
     \input{overrides-pre}
 
     \usepackage[breakable]{tcolorbox}
     \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
     
-    \usepackage{iftex}
-    \ifPDFTeX
-    	\usepackage[T1]{fontenc}
-    	\usepackage{mathpazo}
-    \else
-    	\usepackage{fontspec}
-    \fi
 
     % Basic figure setup, for now with no caption control since it's done
     % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
@@ -39,7 +32,21 @@
     }
     \usepackage{upquote} % Upright quotes for verbatim code
     \usepackage{eurosym} % defines \euro
-    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+
+    \usepackage{iftex}
+    \ifPDFTeX
+        \usepackage[T1]{fontenc}
+        \IfFileExists{alphabeta.sty}{
+              \usepackage{alphabeta}
+          }{
+              \usepackage[mathletters]{ucs}
+              \usepackage[utf8]{inputenc}
+          }
+    \else
+        \usepackage{fontspec}
+        \usepackage{unicode-math}
+    \fi
+
     \usepackage{fancyvrb} % verbatim replacement that allows latex
     \usepackage{grffile} % extends the file name processing of package graphics 
                          % to support a larger range
@@ -61,13 +68,15 @@
 
     % The hyperref package gives us a pdf with properly built
     % internal navigation ('pdf bookmarks' for the table of contents,
-    % internal cross-reference links, web links for URLs, etc.)
+    % internal cross-reference links, web links for URLs, \etc)
     \usepackage{hyperref}
     % The default LaTeX title has an obnoxious amount of whitespace. By default,
     % titling removes some of it. It also provides customization options.
     \usepackage{titling}
     \usepackage{longtable} % longtable support required by pandoc >1.10
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
     \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
     \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
                                 % normalem makes italics be italics, not underlines
@@ -179,8 +188,8 @@
 \def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
 
 \@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
-\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
 \@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
@@ -190,31 +199,31 @@
 \@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
 \@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
 \@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
-\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
 \@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
-\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
-\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
-\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
 \@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
 \@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
 \@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
-\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
-\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
-\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
 \@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
 \@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
 \@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
-\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
-\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
 \@namedef{PY@tok@ge}{\let\PY@it=\textit}
 \@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
 \@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
-\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
 \@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
 \@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
 \@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
@@ -240,11 +249,11 @@
 \@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
-\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
 
 \def\PYZbs{\char`\\}
 \def\PYZus{\char`\_}
@@ -381,7 +390,7 @@
     
     \maketitle
     \tableofcontents
-
+    
     
 
     
@@ -472,7 +481,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-217 µs ± 1.74 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+166 µs ± 855 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -487,7 +496,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.28 µs ± 119 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+936 ns ± 11.7 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
     \end{Verbatim}
 
     \begin{itemize}
@@ -523,12 +532,12 @@ creation routines:
   \begin{itemize}
   \tightlist
   \item
-    a scalar
+    a scalar;
   \item
-    a collection such as a list or tuple
+    a collection such as a list or tuple;
   \item
     some other iterable object, \eg something created by
-    \texttt{range()}
+    \texttt{range()}.
   \end{itemize}
 \item
   \texttt{np.empty()} allocates memory for a given array shape, but does
@@ -743,7 +752,8 @@ built-in type \texttt{float} has neither a \texttt{shape}, nor an
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([0.0e+000, 4.9e-324, 9.9e-324, 1.5e-323, 2.0e-323])
+array([4.67284692e-310, 0.00000000e+000, 4.67284654e-310, 4.67284652e-310,
+       6.92496736e-310])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1213,7 +1223,7 @@ numerous functions defined in NumPy, such as
   \texttt{np.exp}, \texttt{np.log}, \texttt{np.log10}: exponential and
   logarithmic functions
 \item
-  \texttt{np.sin}, \texttt{np.cos}, etc.: trigonometric functions
+  \texttt{np.sin}, \texttt{np.cos}, \etc: trigonometric functions
 \end{itemize}
 
     You can find a complete list of mathematical functions in the NumPy
@@ -1613,15 +1623,16 @@ array([[0, 1, 2],
 change the overall size of the array!).
 
 For more examples, see the official NumPy
-\href{https://numpy.org/doc/stable/user/theory.broadcasting.html}{tutorial}
+\href{https://numpy.org/doc/stable/user/basics.broadcasting.html}{tutorial}
 on broadcasting.
 
-\textbf{Technical details}
+    \textbf{Technical details}
 
 We are now ready to look at the technical details underlying
 broadcasting. The NumPy
-\href{https://numpy.org/doc/stable/reference/ufuncs.html\#broadcasting}{documentation}
-is quite helpful, so we will just summarise the points made there.
+\href{https://numpy.org/doc/stable/user/basics.broadcasting.html}{documentation}
+on broadcasting is quite comprehensive, so we will just summarise the
+points made there.
 
 Broadcasting is applied in four steps:
 
@@ -1753,7 +1764,7 @@ array with a (1-dimensional) vector:
 \end{tcolorbox}
 
     We can manually expand the vector to have the same shape as the array
-\texttt{a} using \texttt{np.tile()} which creates: \texttt{k\ *\ m}
+\texttt{a} using \texttt{np.tile()} which creates \texttt{k\ *\ m}
 copies of the \texttt{n} elements in \texttt{b}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1784,7 +1795,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-3.05 µs ± 460 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+2.1 µs ± 19.5 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1796,7 +1807,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-8.59 µs ± 242 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+6.2 µs ± 54.6 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
     \end{Verbatim}
 
     As you see, not only is the second operation more complex and difficult
@@ -1860,7 +1871,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-31.9 µs ± 3.05 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+22.1 µs ± 26.9 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1872,7 +1883,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-533 ns ± 56.6 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+388 ns ± 2.05 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
     \end{Verbatim}
 
     We see that the vectorised variant is about 100 times faster! What is
@@ -1941,7 +1952,7 @@ the performance advantage of vectorised code:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-157 µs ± 10.6 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+132 µs ± 982 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1952,7 +1963,7 @@ the performance advantage of vectorised code:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-6.02 µs ± 156 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+4.43 µs ± 14.8 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
     \end{Verbatim}
 
     The vectorised version is approximately 25 times faster, despite the
@@ -2058,8 +2069,8 @@ which we can verify using the built-in \texttt{id()} function:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-139769263918800
-139769263918704
+140162396193968
+140162396194256
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -2250,7 +2261,7 @@ keyword argument, NumPy by default behaves as follows:
   \texttt{np.array()}.
 \item
   Arrays that are implicitly created as a result of an operation
-  (addition, etc.) are assigned the most suitable type to represent the
+  (addition, \etc) are assigned the most suitable type to represent the
   result.
 
   For example, when adding a floating-point and an integer array, the
@@ -2415,9 +2426,9 @@ common types are:
 
 You can find a complete list of NumPy data types
 \href{https://numpy.org/doc/stable/user/basics.types.html}{here} and
-\href{https://numpy.org/doc/stable/reference/arrays.scalars.html#sized-aliases}{here}.
+\href{https://numpy.org/doc/stable/reference/arrays.scalars.html\#sized-aliases}{here}.
 
-Would we ever want to use anything other than the default data types,
+    Would we ever want to use anything other than the default data types,
 which in most cases are either \texttt{np.float64} and
 \texttt{np.int64}? These, after all, support the largest range and
 highest precision. This is true in general, but there are special cases
@@ -2453,7 +2464,7 @@ where other data types need to be used:
   code.
 \end{enumerate}
 
-\emph{Examples:}
+    \emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{79}{\boxspacing}
@@ -2906,7 +2917,7 @@ can be applied by inserting an additional axis in either \texttt{a} or
 \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{4}
 
 \PY{c+c1}{\PYZsh{} Create array a}
-\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+\PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
 \PY{n}{a}
 \end{Verbatim}
 \end{tcolorbox}
@@ -2924,7 +2935,7 @@ array([[0, 1, 2],
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Task 1}
 \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
-\PY{c+c1}{\PYZsh{} Broadcasing works as is, axis will be prepended to b}
+\PY{c+c1}{\PYZsh{} Broadcasting works as is, axis will be prepended to b}
 \PY{n}{c} \PY{o}{=} \PY{n}{a} \PY{o}{*} \PY{n}{b}
 
 \PY{c+c1}{\PYZsh{} If we really want, we can prepend new axis manually:}
@@ -2946,7 +2957,7 @@ array([[  0,  10,  40],
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Task 2}
 \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}
-\PY{c+c1}{\PYZsh{} Manually append new axis to b to make broadcasing work}
+\PY{c+c1}{\PYZsh{} Manually append new axis to b to make broadcasting work}
 \PY{n}{c} \PY{o}{=} \PY{n}{a} \PY{o}{*} \PY{n}{b}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
 \PY{n}{c}
 \end{Verbatim}
@@ -2987,7 +2998,7 @@ array([[[  0,  10,  20],
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{91}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Need to insert new axis inbetween existing axes in a}
+\PY{c+c1}{\PYZsh{} Need to insert new axis in between existing axes in a}
 \PY{n}{c} \PY{o}{=} \PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]} \PY{o}{*} \PY{n}{b}
 \PY{n}{c}
 \end{Verbatim}
@@ -3204,13 +3215,13 @@ the cases \texttt{m\ \textless{}\ n}, \texttt{m\ =\ n} and
 \PY{c+c1}{\PYZsh{} Create matrix of zeros}
 \PY{n}{mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} Row indices: this is the min. of the number of rows,}
+\PY{c+c1}{\PYZsh{} Row indices: this is the minimum of the number of rows,}
 \PY{c+c1}{\PYZsh{}       and the number of cols\PYZhy{}1, since the first col}
 \PY{c+c1}{\PYZsh{}       is newer included.}
 \PY{n}{irow} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} Col indices: array needs to have same length as}
-\PY{c+c1}{\PYZsh{} row indices. First col is omitted so we }
+\PY{c+c1}{\PYZsh{} Column indices: array needs to have same length as}
+\PY{c+c1}{\PYZsh{} row indices. First column is omitted so we }
 \PY{c+c1}{\PYZsh{} need to shift all indices by 1.}
 \PY{n}{icol} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{irow}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
 
@@ -3277,7 +3288,7 @@ array([[0, 1, 0, 0, 0],
 \PY{n}{irow} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{m}\PY{p}{)}
 \PY{n}{icol} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} Use broadcasting to idetify all upper\PYZhy{}triangular elements}
+\PY{c+c1}{\PYZsh{} Use broadcasting to identify all upper\PYZhy{}triangular elements}
 \PY{n}{mask} \PY{o}{=} \PY{n}{icol}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{irow}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
 \PY{n}{mask}
 \end{Verbatim}
@@ -3442,6 +3453,7 @@ One implementation of \texttt{rowmeans()} could look as follows:
     \PY{c+c1}{\PYZsh{} Number of rows and columns in x}
     \PY{n}{m}\PY{p}{,} \PY{n}{n} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{shape}
 
+    \PY{c+c1}{\PYZsh{} Array to store results}
     \PY{n}{means} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{m}\PY{p}{)}
 
     \PY{c+c1}{\PYZsh{} Loop over rows}
@@ -3565,7 +3577,7 @@ against NumPy's.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-76.5 µs ± 8.64 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+60.6 µs ± 313 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -3576,7 +3588,7 @@ against NumPy's.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-38.3 µs ± 4.57 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+22.2 µs ± 383 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     You may be surprised that \texttt{np.nanmean()} is only twice as fast as
@@ -3653,7 +3665,7 @@ of copy-pasting it again and again!
 \end{tcolorbox}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_198_0.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_201_0.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -3729,12 +3741,12 @@ the maxima to the \emph{same} plot.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{117}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f1e91d73dc0>
+<matplotlib.legend.Legend at 0x7f79fe8f4c70>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_203_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_206_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -3793,7 +3805,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-130 µs ± 2.33 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+96.7 µs ± 762 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -3805,7 +3817,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-3.28 µs ± 312 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+1.34 µs ± 20.5 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
     \end{Verbatim}
 
 
