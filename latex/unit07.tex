@@ -1,17 +1,10 @@
-\documentclass[10pt]{scrartcl}
+\documentclass{scrartcl}
 
     \input{overrides-pre}
 
     \usepackage[breakable]{tcolorbox}
     \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
     
-    \usepackage{iftex}
-    \ifPDFTeX
-    	\usepackage[T1]{fontenc}
-    	\usepackage{mathpazo}
-    \else
-    	\usepackage{fontspec}
-    \fi
 
     % Basic figure setup, for now with no caption control since it's done
     % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
@@ -39,7 +32,21 @@
     }
     \usepackage{upquote} % Upright quotes for verbatim code
     \usepackage{eurosym} % defines \euro
-    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+
+    \usepackage{iftex}
+    \ifPDFTeX
+        \usepackage[T1]{fontenc}
+        \IfFileExists{alphabeta.sty}{
+              \usepackage{alphabeta}
+          }{
+              \usepackage[mathletters]{ucs}
+              \usepackage[utf8]{inputenc}
+          }
+    \else
+        \usepackage{fontspec}
+        \usepackage{unicode-math}
+    \fi
+
     \usepackage{fancyvrb} % verbatim replacement that allows latex
     \usepackage{grffile} % extends the file name processing of package graphics 
                          % to support a larger range
@@ -68,6 +75,8 @@
     \usepackage{titling}
     \usepackage{longtable} % longtable support required by pandoc >1.10
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
     \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
     \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
                                 % normalem makes italics be italics, not underlines
@@ -178,8 +187,8 @@
 \def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
 
 \@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
-\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
 \@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
@@ -189,31 +198,31 @@
 \@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
 \@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
 \@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
-\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
 \@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
-\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
-\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
-\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
 \@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
 \@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
 \@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
-\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
-\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
-\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
 \@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
 \@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
 \@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
-\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
-\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
 \@namedef{PY@tok@ge}{\let\PY@it=\textit}
 \@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
 \@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
-\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
 \@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
 \@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
 \@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
@@ -239,11 +248,11 @@
 \@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
-\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
-\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
 
 \def\PYZbs{\char`\\}
 \def\PYZus{\char`\_}
@@ -380,7 +389,7 @@
     
     \maketitle
     \tableofcontents
-
+    
     
 
     
@@ -402,7 +411,7 @@ Currently, there are several ways to draw random numbers in Python:
 \def\labelenumi{\arabic{enumi}.}
 \item
   The \emph{new} programming interface implemented in NumPy, introduced
-  in version 1.17 (the current version as of this writing is 1.21)
+  in version 1.17 (the current version as of this writing is 1.23)
   {[}\href{https://numpy.org/doc/stable/reference/random/generator.html}{official
   documentation}{]}.
 \item
@@ -417,7 +426,7 @@ Currently, there are several ways to draw random numbers in Python:
 \item
   The Python standard library itself also includes random number
   generators in the \texttt{random} module
-  {[}\href{https://docs.python.org/dev/library/random.html\#random.random}{official
+  {[}\href{https://docs.python.org/3/library/random.html\#random.random}{official
   documentation}{]}.
 
   We won't be using this implementation at all, since for our purposes
@@ -437,7 +446,7 @@ Computers usually cannot draw truly random numbers, so we often talk
 about \emph{pseudo-random number generators} (PRNG). Given an initial
 seed, these PRNGs will always produce the same sequence of ``random''
 numbers, at least if run on the same machine, using the same underlying
-algorithm, etc. For scientific purposes this is actually desirable as it
+algorithm, \etc For scientific purposes this is actually desirable as it
 allows us to create reproducible results. For simplicity, we will
 nevertheless be using the terms ``random number'' and ``random number
 generator'' (RNG), omitting the ``pseudo'' prefix.
@@ -480,7 +489,7 @@ interval \([0.0, 1.0)\).
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([0.33312977, 0.55586131, 0.62845847, 0.68924574, 0.90067705])
+array([0.77762789, 0.71255835, 0.26631059, 0.84538324, 0.49831726])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -668,7 +677,7 @@ array([1, 1, 0, 1, 0])
 \end{tcolorbox}
         
     The legacy interface defines global functions \texttt{seed},
-\texttt{random\_sample}, etc. within the \texttt{numpy.random} module,
+\texttt{random\_sample}, \etc within the \texttt{numpy.random} module,
 which are implicitly associated with a global RNG object. This implicit
 association has been removed in the new programming model and you now
 have to obtain an RNG instance explicitly, for example by using the
@@ -837,7 +846,7 @@ distribution dependent. See the
 \href{https://docs.scipy.org/doc/scipy/reference/stats.html}{official
 documentation} for details.
 
-\emph{Examples:}
+    \emph{Examples:}
 
 We can overlay the histogram of normal draws with the actual normal PDF
 using SciPy's
@@ -880,12 +889,12 @@ distribution as follows:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f0112826850>
+<matplotlib.legend.Legend at 0x7fe64d0f5360>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_28_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_29_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -893,7 +902,7 @@ distribution as follows:
 \texttt{hist()} plotting function so that the result is rescaled to be
 comparable to the actual PDF.
 
-Sometimes we need to compute the expectation of a function \(g(x)\) with
+    Sometimes we need to compute the expectation of a function \(g(x)\) with
 respect to a given distribution with PDF \(f(x)\) on some interval
 \((a,b)\):
 
@@ -1009,7 +1018,7 @@ have a look at the
 documentation} if you need to perform statistical analysis of your
 sample data.
 
-\emph{Examples:}
+    \emph{Examples:}
 
 To compute the pairwise correlations of a sample drawn from a
 multivariate normal distribution we proceed as follows:
@@ -1358,7 +1367,7 @@ Consider a setting in which we draw multiple samples indexed by \(k\)
 such that these samples are increasing in the sample size \(N_k\), given
 by \(N_k\) = 10, 50, 100, 500, 1000, 5000, 10000, 50000 and 100000.
 
-The data for the \(k\)-th sample are \((x_{ki})_{i=1}^{N_k}\) where
+The data for the \(k\)-th sample are \((x_{ik})_{i=1}^{N_k}\) where
 \(i\) indexes some draw within the \(k\)-th sample. Assume that the data
 are
 \href{https://en.wikipedia.org/wiki/Log-normal_distribution}{log-normally}
@@ -1376,12 +1385,12 @@ distributed such that the underlying normal distribution has mean
   reminder, the standard error of the \(k\)-th sample mean
   \(\overline{x}_k\) is defined as
 
-  \[se(\overline{x}_k) = \sqrt{\frac{\widehat{\sigma}_{ku}^2}{N_k}}\]
+  \[se(\overline{x}_k) = \sqrt{\frac{\widehat{\sigma}_{k}^2}{N_k}}\]
 
-  where \(\widehat{\sigma}_{ku}^2\) is the variance of residuals
-  \(u_{ki} = x_{ki} - \overline{x}_k\) for each sample \(k\),
+  where \(\widehat{\sigma}_{k}^2\) is the variance of residuals
+  \(u_{ik} = x_{ik} - \overline{x}_k\) for each sample \(k\),
 
-  \[\widehat{\sigma}_{ku}^2 = \frac{1}{N_k-1}\sum_{i=1}^{N_k} u_{ki}^2\]
+  \[\widehat{\sigma}_{k}^2 = \frac{1}{N_k-1}\sum_{i=1}^{N_k} u_{ik}^2\]
 \item
   Plot the sample means for all samples, using the sample size on the
   \(x\)-axis and the estimated mean on the \(y\)-axis. Use the
@@ -1414,20 +1423,33 @@ to get the sample mean and its standard error.
 \tightlist
 \item
   For each sample \(k\), compute \(N_k\) sample means
-  \(\overline{x}_{ki}\) which are obtained by leaving out the \(i\)-th
+  \(\overline{x}_{-i,k}\) which are obtained by leaving out the \(i\)-th
   observation: \[
-  \overline{x}_{ki} = \frac{1}{N_k-1}\sum_{j = 1, j \neq i}^{N_k} x_{kj} 
+  \overline{x}_{-i,k} = \frac{1}{N_k-1}\sum_{j = 1, j \neq i}^{N_k} x_{jk} 
   \qquad i = 1,\dots,N_k
-  \] where \(x_{kj}\) is the \(j\)-th draw in the \(k\)-th sample.
+  \] where \(x_{jk}\) is the \(j\)-th draw in the \(k\)-th sample.
 \item
-  Compute the estimate of the sample mean as the average of these
-  sub-sample means: \[
-  \overline{x}_k = \frac{1}{N_k}\sum_{i=1}^{N_k} \overline{x}_{ki}
+  Compute the jackknife estimate of the sample mean as the average of
+  these sub-sample means: \[
+  \overline{x}_{k,jack} = \frac{1}{N_k}\sum_{i=1}^{N_k} \overline{x}_{-i,k}
+  \] For the special case of a sample mean, it is straightforward to
+  show that this is just the regular sample mean computed on the whole
+  sample, \(\overline{x}_{k,jack} = \overline{x}_k\), where \[
+  \overline{x}_k = \frac{1}{N_k}\sum_{i=1}^{N_k} x_{ik}
   \]
 \item
-  The jackknife estimate of the standard error for sample size \(N_k\)
+  The jackknife estimate of the error variance for sample size \(N_k\)
   is then given by \[
-  se(\overline{x}_k) = \frac{1}{N_k(N_k-1)} \sum_{i=1}^{N_k}(x_{ki}-\overline{x}_k)^2
+  \begin{aligned}
+  \widehat{var}(\overline{x}_k) 
+      &= \frac{N_k - 1}{N_k} \sum_{i=1}^{N_k}\left(
+              \overline{x}_{-i,k} - \overline{x}_{jack,k}\right)^2 \\
+      &= \frac{1}{N_k(N_k-1)} \sum_{i=1}^{N_k}(x_{ik}-\overline{x}_k)^2
+  \end{aligned}
+  \] where the second line again follows as a special case if we are
+  estimating the sample mean. The standard error of the sample mean is
+  thus \[
+  se(\overline{x}_k) = \sqrt{\widehat{var}(\overline{x}_k)}
   \]
 \item
   Recreate the plot from exercise 4, but now use the jackknife estimate
@@ -1463,8 +1485,8 @@ to estimate the confidence intervals of the mean estimate.
   \item
     For each ``resample'', compute the sample mean. Say we have the
     \(j\)-th resample which consists of the draws
-    \((x_{ki}^j)_{i=1}^{N_k}\), so we compute the \(j\)-th mean \[
-    \overline{x}_{k}^j = \frac{1}{N_k} \sum_{i=1}^{N_k} x_{ki}^j
+    \((x_{ik}^j)_{i=1}^{N_k}\), so we compute the \(j\)-th mean \[
+    \overline{x}_{k}^j = \frac{1}{N_k} \sum_{i=1}^{N_k} x_{ik}^j
     \]
   \item
     Repeat steps 2 and 3 \(N_{bs} = 999\) times.
@@ -1576,7 +1598,7 @@ Text(0.5, 1.05, 'Draws from the standard-t distribution')
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_50_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_53_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1737,7 +1759,9 @@ by
 
 \[\mu_{rr} = E[r_1 + r_2] = 2\mu \]
 
-\[\sigma^2_{rr} = Var(r_1+r_2) = 2\sigma^2 + 2\rho\sigma^2 \]
+\[
+\sigma^2_{rr} = Var(r_1+r_2) = Var(r_1) + Var(r_2) + 2\cdot Cov(r_1,r_2) = 2\sigma^2 + 2\rho\sigma^2 
+\]
 
 This is even simpler than the usual formulas since both per-period log
 returns have the same mean and variance.
@@ -1844,8 +1868,8 @@ to plot the histogram and the true PDF.
 \PY{n}{pdf} \PY{o}{=} \PY{n}{lognorm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{n}{sigma\PYZus{}rr}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{n}{mu\PYZus{}rr}\PY{p}{)}
 \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xvalues}\PY{p}{,} \PY{n}{pdf}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PDF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} Add line with true expexted value}
-\PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{exp\PYZus{}exact}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Add line with true expected value}
+\PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{exp\PYZus{}exact}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total gross return \PYZdl{}R\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -1856,12 +1880,12 @@ to plot the histogram and the true PDF.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f0110cacaf0>
+<matplotlib.legend.Legend at 0x7fe64c7ed660>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_64_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_67_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1941,7 +1965,7 @@ which we then use the generate the plot.
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_67_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_70_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1967,7 +1991,9 @@ considerable time to loop over all observations in the larger samples.
 
 Note that the jackknife is rarely used these days as it has been
 replaced by other resampling methods such as the bootstrap. The
-resulting confidence intervals look identical to the ones in exercise 4.
+resulting confidence intervals look identical to the ones in exercise 4
+since we have established earlier that for the sample mean the jackknife
+estimate of the variance is in fact identical to the standard approach.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{29}{\boxspacing}
@@ -2007,15 +2033,13 @@ resulting confidence intervals look identical to the ones in exercise 4.
         \PY{n}{x\PYZus{}j} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{subsample}\PY{p}{)}
         \PY{n}{mean\PYZus{}subsample}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}j}
 
-    \PY{c+c1}{\PYZsh{} compute sample mean estimate as average of}
+    \PY{c+c1}{\PYZsh{} compute sample jackknife mean estimate as average of}
     \PY{c+c1}{\PYZsh{} sub\PYZhy{}sample means}
     \PY{n}{x\PYZus{}k} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{mean\PYZus{}subsample}\PY{p}{)}
 
-    \PY{c+c1}{\PYZsh{} Compute variance of mean estimate}
-    \PY{n}{resid} \PY{o}{=} \PY{n}{data} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}k}
-    \PY{c+c1}{\PYZsh{} variance of mean estimate}
-    \PY{n}{var} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{resid} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{2.0}\PY{p}{)} \PY{o}{/} \PY{n}{N} \PY{o}{/} \PY{p}{(}\PY{n}{N} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
-    \PY{c+c1}{\PYZsh{} std. err. of mean estimate}
+    \PY{c+c1}{\PYZsh{} Compute variance of jackknife mean estimate}
+    \PY{n}{var} \PY{o}{=} \PY{p}{(}\PY{n}{N}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n}{N} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{mean\PYZus{}subsample} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}k}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{2.0}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} jackknife std. err. of mean estimate}
     \PY{n}{se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{var}\PY{p}{)}
 
     \PY{c+c1}{\PYZsh{} store sample estimates in array}
@@ -2051,7 +2075,7 @@ resulting confidence intervals look identical to the ones in exercise 4.
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_69_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_72_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -2183,7 +2207,7 @@ list \texttt{means\_all} which we use below to create the histograms.
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_73_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_76_1.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -2219,7 +2243,7 @@ for larger sample sizes are much closer together.
 \end{tcolorbox}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_75_0.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit07_files/unit07_78_0.pdf}
     \end{center}
     { \hspace*{\fill} \\}
     
