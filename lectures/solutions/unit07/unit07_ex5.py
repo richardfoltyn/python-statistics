@@ -44,10 +44,8 @@ for k, N in enumerate(sample_sizes):
     # sub-sample means
     x_k = np.mean(mean_subsample)
 
-    # Compute variance of mean estimate
-    resid = data - x_k
-    # variance of mean estimate
-    var = np.sum(resid ** 2.0) / N / (N - 1)
+    # Compute variance of jackknife mean estimate
+    var = (N-1)/N * np.sum((mean_subsample - x_k) ** 2.0)
     # std. err. of mean estimate
     se = np.sqrt(var)
 
