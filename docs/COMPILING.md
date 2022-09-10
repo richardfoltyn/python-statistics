@@ -44,7 +44,11 @@ The relevant options in `$HOME/.ipython/profile_default/ipython_config.py` are
     c.InteractiveShellApp.matplotlib = 'inline'
     c.InteractiveShell.xmode = 'Minimal'
     c.InlineBackend.figure_formats = {'png', 'pdf'}
-    c.InlineBackend.rc = { 'figure.figsize': (4.0, 3.0) }
+    c.InlineBackend.rc = { 
+            'figure.figsize': (4.0, 3.0),
+            'font.size': 8,
+            'font.family': 'serif'
+    }
 
 A new config file with all the default values can be generated as part
 of a new profile via
