@@ -4,6 +4,10 @@
 
 Author: Richard Foltyn, University of Glasgow
 
+***
+**NOTE:** This repository is no longer being maintained. Please use the material hosted [here](https://github.com/richardfoltyn/MLFP-ECON5130) instead which was prepared for a more recent, similar course.
+***
+
 ## Units
 
 This introductory course consists of several units. Each unit corresponds
