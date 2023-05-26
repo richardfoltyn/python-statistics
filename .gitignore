@@ -29,6 +29,7 @@ cache/
 
 .ipynb_checkpoints/
 latex/*/*.png
+latex/*_files/
 
 # Compiled Python bytecode
 *.py[cod]
